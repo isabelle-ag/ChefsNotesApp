@@ -1,6 +1,6 @@
 # ChefsNotes
 
-ChefsNotes is a new way to store your favourite recipes with a focus on helping you perfect your recipes.
+ChefsNotes is a new way to store your favourite recipes and plan out meals with a focus on helping you perfect your recipes.
 
 Anyone who likes cooking or baking and wants to store and track their favourite recipes will love ChefsNotes. Chefs of all skill levels can utilize this app to not only keep their recipes organized, but perfect them as their abilities grow. Whether you’re looking for a safer and easier way to store your family recipes, a way to categorize and organize your recipes, a way to modify and rate your recipes, or an easy way to group recipes by meal, ChefsNotes has something for every Chef!
 
