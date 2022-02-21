@@ -1,4 +1,6 @@
 public interface DBMSTools{
+    // Any DBMS implementing this interface are required to implement
+    // a copy of the methods listed below.
 
     // ===== Recipe Methods =====
 
