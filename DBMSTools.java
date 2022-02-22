@@ -52,8 +52,7 @@ public interface DBMSTools{
     // returns null if not found
     String getIngredient(String recipe, String ingName);
 
-    // adds the ingredient specified. If the ingredient already exists,
-    // the new amount is added to the old amount. Fails if units mismatch.
+    // adds the ingredient specified. 
     // Fails if amount <= 0. Fails if recipe DNE
     // returns true on success, false on failure
     boolean addIngredient(String recipe, String ingName, int amount, String units);
