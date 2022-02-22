@@ -40,4 +40,10 @@ public class Quantity {
 
         return result;
     }
+
+    public String toString(){
+        String result = "";
+        result = amount + " " + unit;
+        return result;
+    }
 }
