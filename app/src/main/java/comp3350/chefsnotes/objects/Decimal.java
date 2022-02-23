@@ -52,6 +52,11 @@ public class Decimal extends QuantityNum {
     }
 
     @Override
+    public boolean needPlural() {
+        return this.value != 1;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if(this == other)
             return true;

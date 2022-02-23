@@ -1,14 +1,10 @@
 package comp3350.chefsnotes.objects;
 
-import android.icu.util.Freezable;
-import android.os.Build;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import java.util.Locale;
 
-public class Fraction extends QuantityNum{
+class Fraction extends QuantityNum{
     int numerator;
     int denominator;
 
@@ -71,6 +67,11 @@ public class Fraction extends QuantityNum{
     }
 
     @Override
+    public boolean needPlural() {
+        return this.doubleValue() > 1 || this.doubleValue() == 0;
+    }
+
+    @Override
     public int hashCode() {
         return this.numerator << 8 + this.denominator;
     }
@@ -103,5 +104,7 @@ public class Fraction extends QuantityNum{
         else
             return gcd(small, big % small);
     }
+
+
 
 }

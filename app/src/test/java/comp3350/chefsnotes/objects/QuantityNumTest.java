@@ -17,7 +17,8 @@ public class QuantityNumTest {
     }
 
     @Test
-    public void fracEquality() {
+    public void testfracEquality() {
+
         Fraction f1 = new Fraction(1, 4);
         Fraction f2 = new Fraction(2, 8);
         Fraction f3 = new Fraction(3, 8);
@@ -33,7 +34,7 @@ public class QuantityNumTest {
     }
 
     @Test
-    public void fracMath() {
+    public void testfracMath() {
         Fraction f1 = new Fraction(1, 4);
         Fraction f2 = new Fraction(2, 8);
         Fraction f3 = new Fraction(8, 8);
@@ -50,7 +51,7 @@ public class QuantityNumTest {
     }
 
     @Test
-    public void fracString() {
+    public void testfracString() {
         assertEquals(new Fraction(1, 3).toString(), "1/3");
         assertEquals(new Fraction(9, 6).toString(), "3/2");
         assertEquals(new Fraction(8, 2).toString(), "4");
@@ -58,7 +59,7 @@ public class QuantityNumTest {
     }
 
     @Test
-    public void fracValues() {
+    public void testfracValues() {
         assertEquals(new Fraction(1, 3).doubleValue(), 1d/3d, EPSILON);
         assertEquals(new Fraction(1, 7).floatValue(), 1f/7f, EPSILON);
         assertEquals(new Fraction(5, 2).intValue(), 5/2);
@@ -67,7 +68,7 @@ public class QuantityNumTest {
 
 
     @Test
-    public void decString() {
+    public void testdecString() {
         assertEquals(new Decimal(10.5).toString(), "10.5");
         assertEquals(new Decimal(10.050).toString(), "10.05");
         assertEquals(new Decimal(0.1).toString(), "0.1");
@@ -75,7 +76,7 @@ public class QuantityNumTest {
     }
 
     @Test
-    public void decValues() {
+    public void testdecValues() {
         assertEquals(new Decimal(10.5).doubleValue(), 10.5d, EPSILON);
         assertEquals(new Decimal(10.050).floatValue(), 10.05f, EPSILON);
         assertEquals(new Decimal(0.1).intValue(), 0);
@@ -84,7 +85,7 @@ public class QuantityNumTest {
     }
 
     @Test
-    public void decMath() {
+    public void testdecMath() {
         Decimal d1 = new Decimal(0.5);
         Decimal d2 = new Decimal(1.5);
         Decimal d3 = new Decimal(2.5);
@@ -96,7 +97,7 @@ public class QuantityNumTest {
     }
 
     @Test
-    public void decEquality() {
+    public void testdecEquality() {
         Decimal d1 = new Decimal(0.5);
         Decimal d2 = new Decimal(0.50);
 
@@ -104,6 +105,21 @@ public class QuantityNumTest {
         assertEquals(d1, d2);
 
         assertEquals(new Decimal(0.10), new Decimal(0.1));
+
+    }
+
+    @Test
+    public void testpluralize() {
+        assertFalse(new Fraction(1, 2).needPlural());
+        assertFalse(new Fraction(2, 2).needPlural());
+        assertTrue(new Fraction(5).needPlural());
+        assertTrue(new Fraction(3, 2).needPlural());
+        assertTrue(new Fraction(0, 4).needPlural());
+
+        assertTrue(new Decimal(5).needPlural());
+        assertTrue(new Decimal(0.5).needPlural());
+        assertFalse(new Decimal(1).needPlural());
+        assertTrue(new Decimal(1.2).needPlural());
 
     }
 
