@@ -12,19 +12,25 @@ public class Fraction extends QuantityNum{
     int numerator;
     int denominator;
 
+    public Fraction(int numerator) {
+        this.numerator = numerator;
+        this.denominator = 1;
+    }
+
     public Fraction(int numerator, int denominator)
     {
         if(denominator == 0)
             throw new ArithmeticException("Fractions cannot have a denominator of 0!");
-        this.numerator = numerator;
-        this.denominator = denominator;
+        //into canonical form
+        int gcd = getGCD(numerator, denominator);
+        this.numerator = numerator / gcd;
+        this.denominator = denominator / gcd;
     }
 
     @NonNull
     public String toString()
     {
-        Fraction canon = canonical(this);
-        if(canon.denominator > 1)
+        if(this.denominator > 1)
             return String.format(Locale.CANADA, "%d/%d", numerator, denominator);
         else
             return String.format(Locale.CANADA, "%d", numerator);
@@ -56,18 +62,17 @@ public class Fraction extends QuantityNum{
 
     public Fraction multiplyBy(int value)
     {
-        return canonical(new Fraction(this.numerator * value, this.denominator));
+        return new Fraction(this.numerator * value, this.denominator);
     }
 
     public Fraction divideBy(int value)
     {
-        return canonical(new Fraction(this.numerator, this.denominator * value));
+        return new Fraction(this.numerator, this.denominator * value);
     }
 
     @Override
     public int hashCode() {
-        Fraction c = canonical(this);
-        return c.numerator << 8 + c.denominator;
+        return this.numerator << 8 + this.denominator;
     }
 
     public boolean equals(Object other) {
@@ -76,14 +81,8 @@ public class Fraction extends QuantityNum{
         if(! (other instanceof Fraction))
             return false;
 
-        Fraction c1 = canonical(this);
-        Fraction c2 = canonical((Fraction)other);
-        return c1.denominator == c2.denominator && c1.numerator == c2.numerator;
-    }
-
-    private static Fraction canonical(Fraction given) {
-        int gcd = Fraction.getGCD(given.numerator, given.denominator);
-        return new Fraction(given.numerator / gcd, given.denominator / gcd);
+        Fraction that = (Fraction)other;
+        return this.denominator == that.denominator && this.numerator == that.numerator;
     }
 
     public static int getGCD (int numerator, int denominator)

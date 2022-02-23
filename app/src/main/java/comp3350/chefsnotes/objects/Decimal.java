@@ -3,6 +3,8 @@ package comp3350.chefsnotes.objects;
 import androidx.annotation.NonNull;
 
 public class Decimal extends QuantityNum {
+    private static double compareEpsilon = 0.000001d;
+
     double value;
 
     public Decimal(double value) {
@@ -13,7 +15,10 @@ public class Decimal extends QuantityNum {
     @Override
     public String toString()
     {
-        return Double.toString(value);
+        if(value == Math.floor(value)) //no decimal part
+            return Integer.toString((int) value);
+        else
+            return Double.toString(value);
     }
 
     @Override
@@ -53,7 +58,7 @@ public class Decimal extends QuantityNum {
         if(! (other instanceof Decimal))
             return false;
         Decimal that = (Decimal) other;
-        return this.value == that.value;
+        return (Math.abs(this.value - that.value) < compareEpsilon);
     }
 
     @Override
