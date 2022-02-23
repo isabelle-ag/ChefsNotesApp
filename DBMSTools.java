@@ -5,18 +5,21 @@ public interface DBMSTools{
     // ===== Recipe Methods =====
 
     // UNSURE: will be either all recipes as full json,
-    //         or all recipe jsons as the browser cue cards
+    //         or all recipe jsons as the browser cue cards,
+    //         or array of Recipe objects...
+    // might not use.
     String getAllRecipes();
 
-    // returns a comma-separated list of all recipe names
-    String getRecipeNames();
+    // returns array of all recipe names
+    String[] getRecipeNames();
 
-    // returns full json of recipe info
+    // returns full json of recipe info, or Recipe object
+    // might not use.
     String getRecipe(String recipe);
 
-    // returns list of recipes with names that contain <partial> in them
-    // Will either be a list of names or full jsons (probably just csv list)
-    String searchRecipe(String partial);
+    // returns array of recipes with names that contain <partial> in them
+    // returns null if no recipes match
+    String[] searchRecipe(String partial);
 
     // creates new recipe with given name
     // fails if name already exists
@@ -36,21 +39,23 @@ public interface DBMSTools{
     // creates a deep copy of the target recipe, with newName as its title. 
     // if newName = null, default is <oldName> + " - copy" + <copyNum>
     // returns the name of the new recipe
+    // returns null if it somehow fails
     String duplicateRecipe(String recipe, String newName);
 
 
     // ===== Ingredient Methods =====
 
-    // returns comma-seperated list of all ingredients in recipe
-    String ingredientList(String recipe);
+    // returns array of all ingredient NAMES in recipe
+    String[] ingredientList(String recipe);
 
-    // returns json format of full ingredient list with Quantities
+    // returns array of all Ingredients in recipe
     // returns null if none exists
-    String getIngredients(String recipe);
+    Ingredient[] getIngredients(String recipe);
 
-    // returns json format of a specific ingredient and its Quantity
+    // returns a specific Ingredient
     // returns null if not found
-    String getIngredient(String recipe, String ingName);
+    // might be changed to return array of all whose names match?
+    Ingredient getIngredient(String recipe, String ingName);
 
     // adds the ingredient specified. 
     // Fails if amount <= 0. Fails if recipe DNE
@@ -72,14 +77,16 @@ public interface DBMSTools{
 
     // ===== Directions Methods =====
 
-    // returns full json of all directions
-    String getDirections(String recipe);
+    // returns array of all directions
+    Direction[] getDirections(String recipe);
 
-    // returns json of single direction # dnum
-    String getDirection(String recipe, int dnum);
+    // returns single direction via step number
+    // returns null if out of bounds
+    Direction getDirection(String recipe, int dnum);
 
-    // returns json of single direction with title dname
-    String getDirection(String recipe, String dname);
+    // returns single direction via title dname
+    // returns null if DNE
+    Direction getDirection(String recipe, String dname);
 
     // names the direction "Direction <num>" by default
     // returns new direction's number, -1 on failure
