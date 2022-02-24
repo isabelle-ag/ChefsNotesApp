@@ -57,10 +57,15 @@ public interface DBMSTools{
     // might be changed to return array of all whose names match?
     Ingredient getIngredient(String recipe, String ingName);
 
-    // adds the ingredient specified. 
+    // adds the ingredient specified as a decimal. 
     // Fails if amount <= 0. Fails if recipe DNE
     // returns true on success, false on failure
-    boolean addIngredient(String recipe, String ingName, int amount, String units);
+    boolean addIngredient(String recipe, String ingName, double amount, String units);
+
+    // adds the ingredient specified as a fraction. 
+    // Fails if amount <= 0. Fails if recipe DNE
+    // returns true on success, false on failure
+    boolean addIngredient(String recipe, String ingName, int numer, int denom, String units);
 
     // returns true on success, false on failure
     boolean deleteIngredient(String recipe, String ingName);
