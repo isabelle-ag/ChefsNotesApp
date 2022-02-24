@@ -62,7 +62,7 @@ public class Recipe {
         int i = 0;
 
         for(Ingredient curr : this.ingredients){
-            result[i] = curr;
+            result[i] = curr.getName();
             i++;
         }
 
@@ -157,10 +157,10 @@ public class Recipe {
         // try to add the Direction
         if(tmp != null){
             try{
-                this.directions.add(tmp, newNum);
+                this.directions.add(newNum, tmp);
             } catch (IndexOutOfBoundsException ioobe){ // return it to old position on failure
                 System.out.println("That target location is out of bounds.");
-                this.directions.add(tmp, oldNum);
+                this.directions.add(oldNum, tmp);
                 result = false;
             }
         }
