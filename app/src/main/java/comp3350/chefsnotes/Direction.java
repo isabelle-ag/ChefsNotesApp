@@ -32,7 +32,7 @@ public class Direction {
     }
 
     public String getText(){
-        return this.txt;
+        return this.text;
     }
 
     public void setText(String newTxt){
