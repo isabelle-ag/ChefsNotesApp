@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 // DO NOT REFER TO THIS CLASS EXPLICITLY
 // instances of comp3350.chefsnotes.objects.Recipe will be created and managed
-// by a DBMS implementing comp3350.chefsnotes.objects.DBMSTools.java. Refer
-// to the comp3350.chefsnotes.objects.DBMSTools.java interface file to understand
+// by a DBMS implementing comp3350.chefsnotes.persistance.DBMSTools.java. Refer
+// to the comp3350.chefsnotes.persistance.DBMSTools.java interface file to understand
 // how to use a DBMS to perform operations on a comp3350.chefsnotes.objects.Recipe.
 
 public class Recipe {
