@@ -1,3 +1,5 @@
+package comp3350.chefsnotes.objects;
+
 public class Direction {
     private String name;
     private String text;

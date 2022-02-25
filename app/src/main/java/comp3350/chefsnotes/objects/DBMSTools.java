@@ -1,19 +1,21 @@
+package comp3350.chefsnotes.objects;
+
 public interface DBMSTools{
     // Any DBMS implementing this interface are required to implement
     // a copy of the methods listed below.
 
-    // ===== Recipe Methods =====
+    // ===== comp3350.chefsnotes.objects.Recipe Methods =====
 
     // UNSURE: will be either all recipes as full json,
     //         or all recipe jsons as the browser cue cards,
-    //         or array of Recipe objects...
+    //         or array of comp3350.chefsnotes.objects.Recipe objects...
     // might not use.
     String getAllRecipes();
 
     // returns array of all recipe names
     String[] getRecipeNames();
 
-    // returns full json of recipe info, or Recipe object
+    // returns full json of recipe info, or comp3350.chefsnotes.objects.Recipe object
     // might not use.
     String getRecipe(String recipe);
 
@@ -43,7 +45,7 @@ public interface DBMSTools{
     String duplicateRecipe(String recipe, String newName);
 
 
-    // ===== Ingredient Methods =====
+    // ===== comp3350.chefsnotes.objects.Ingredient Methods =====
 
     // returns array of all ingredient NAMES in recipe
     String[] ingredientList(String recipe);
@@ -52,7 +54,7 @@ public interface DBMSTools{
     // returns null if none exists
     Ingredient[] getIngredients(String recipe);
 
-    // returns a specific Ingredient
+    // returns a specific comp3350.chefsnotes.objects.Ingredient
     // returns null if not found
     // might be changed to return array of all whose names match?
     Ingredient getIngredient(String recipe, String ingName);
@@ -80,7 +82,7 @@ public interface DBMSTools{
     // returns null if out of bounds
     Direction getDirection(String recipe, int dnum);
 
-    // names the direction "Direction <num>" by default
+    // names the direction "comp3350.chefsnotes.objects.Direction <num>" by default
     // returns new direction's number, -1 on failure
     int addDirection(String recipe, String text);
 
@@ -93,10 +95,10 @@ public interface DBMSTools{
     // reorders Directions. Target direction is moved to the new number,
     // and all other Directions are shifted linearly.
     // 0 < newNum < directionCount
-    // returns false if the Direction DNE or the number is out of bounds
+    // returns false if the comp3350.chefsnotes.objects.Direction DNE or the number is out of bounds
     boolean moveDirection(String recipe, int dnum, int newNum);
 
-    // deletes the Direction numbered dnum
+    // deletes the comp3350.chefsnotes.objects.Direction numbered dnum
     // returns true on success, false if DNE
     boolean deleteDirection(String recipe, int dnum);
 

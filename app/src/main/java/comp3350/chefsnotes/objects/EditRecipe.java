@@ -1,4 +1,4 @@
-package comp3350.chefsnotes;
+package comp3350.chefsnotes.objects;
 
 import android.app.Activity;
 

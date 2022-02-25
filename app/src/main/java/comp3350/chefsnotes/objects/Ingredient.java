@@ -1,3 +1,5 @@
+package comp3350.chefsnotes.objects;
+
 public class Ingredient {
     private String name;
     private Quantity amount;
@@ -40,6 +42,7 @@ public class Ingredient {
 
     public boolean setUnit(String newUnit){
         this.amount.setUnit(newUnit);
+        return true;
     }
 
     public String toString(){

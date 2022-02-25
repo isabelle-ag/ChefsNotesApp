@@ -1,10 +1,12 @@
+package comp3350.chefsnotes.objects;
+
 import java.util.ArrayList;
 
 // DO NOT REFER TO THIS CLASS EXPLICITLY
-// instances of Recipe will be created and managed
-// by a DBMS implementing DBMSTools.java. Refer
-// to the DBMSTools.java interface file to understand
-// how to use a DBMS to perform operations on a Recipe.
+// instances of comp3350.chefsnotes.objects.Recipe will be created and managed
+// by a DBMS implementing comp3350.chefsnotes.objects.DBMSTools.java. Refer
+// to the comp3350.chefsnotes.objects.DBMSTools.java interface file to understand
+// how to use a DBMS to perform operations on a comp3350.chefsnotes.objects.Recipe.
 
 public class Recipe {
     
@@ -118,7 +120,7 @@ public class Recipe {
         try{
             result = this.directions.get(dnum);
         } catch (IndexOutOfBoundsException ioobe){
-            System.out.println("That Direction number does not exist.");
+            System.out.println("That comp3350.chefsnotes.objects.Direction number does not exist.");
         }
 
         return result;
@@ -131,30 +133,30 @@ public class Recipe {
             this.directions.remove(dnum);
             result = true;
         } catch (IndexOutOfBoundsException ioobe){
-            System.out.println("That Direction number does not exist.");
+            System.out.println("That comp3350.chefsnotes.objects.Direction number does not exist.");
             result = false;
         }
 
         return result;
     }
 
-    // attempts to move a Direction from its current position to a new one.
-    // position corresponds to index of Direction in the array returned
+    // attempts to move a comp3350.chefsnotes.objects.Direction from its current position to a new one.
+    // position corresponds to index of comp3350.chefsnotes.objects.Direction in the array returned
     // from directionList()
     public boolean moveDirection(int oldNum, int newNum){
         boolean result = true;
         Direction tmp = null;
 
-        // try to remove the Direction
+        // try to remove the comp3350.chefsnotes.objects.Direction
         try{
             tmp = this.directions.remove(oldNum);
         } catch (IndexOutOfBoundsException ioobe){
-            System.out.println("That Direction number does not exist.");
+            System.out.println("That comp3350.chefsnotes.objects.Direction number does not exist.");
             tmp = null;
             result = false;
         }
 
-        // try to add the Direction
+        // try to add the comp3350.chefsnotes.objects.Direction
         if(tmp != null){
             try{
                 this.directions.add(newNum, tmp);

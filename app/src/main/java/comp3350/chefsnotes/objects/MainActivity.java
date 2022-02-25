@@ -1,9 +1,11 @@
-package comp3350.chefsnotes;
+package comp3350.chefsnotes.objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+
+import comp3350.chefsnotes.R;
 
 public class MainActivity extends AppCompatActivity {
 
