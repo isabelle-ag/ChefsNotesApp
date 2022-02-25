@@ -43,6 +43,7 @@
             </TableRow>
 
             <TableRow
+                android:id="@+id/IngredientField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -59,15 +60,17 @@
                         android:inputType="number"
                         android:maxWidth="75dp"
                         android:maxLines="1"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                     <ImageButton
-                        android:id="@+id/imageButton2"
+                        android:id="@+id/AddIngredient"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:translationX="25dp"
                         android:translationY="60dp"
-                        app:srcCompat="@android:drawable/ic_input_add" />
+                        app:srcCompat="@android:drawable/ic_input_add"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                     <EditText
                         android:id="@+id/IngredientName"
@@ -81,24 +84,58 @@
                         android:translationX="160dp" />
 
                     <ImageButton
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/MeasurementDropDown"
                         android:layout_width="71dp"
                         android:layout_height="wrap_content"
                         android:translationX="80dp"
-                        app:srcCompat="@android:drawable/btn_dropdown" />
+                        app:srcCompat="@android:drawable/btn_dropdown"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                 </androidx.cardview.widget.CardView>
 
             </TableRow>
 
             <TableRow
+                android:id="@+id/InstructionField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" />
+                android:orientation="vertical" >
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="193dp">
+
+                    <ImageButton
+                        android:id="@+id/AddStep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:translationX="25dp"
+                        android:translationY="120dp"
+                        app:srcCompat="@android:drawable/ic_input_add"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <EditText
+                        android:id="@+id/Instructions"
+                        android:layout_width="377dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:gravity="start|top"
+                        android:inputType="textMultiLine"
+                        android:minLines="4"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <EditText
+                        android:id="@+id/TimeEstimate"
+                        android:layout_width="97dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:translationX="400dp"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
         </TableLayout>
     </ScrollView>
 
