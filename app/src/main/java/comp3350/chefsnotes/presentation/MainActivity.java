@@ -1,4 +1,4 @@
-package comp3350.chefsnotes.objects;
+package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
