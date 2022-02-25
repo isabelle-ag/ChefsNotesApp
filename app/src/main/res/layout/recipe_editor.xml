@@ -8,8 +8,9 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -78,7 +79,7 @@
                         android:layout_height="56dp"
                         android:ems="10"
                         android:inputType="textPersonName"
-                        android:text="Name"
+                        android:text="Ingredient"
                         android:textAlignment="textStart"
                         android:textSize="20sp"
                         android:translationX="160dp" />
@@ -99,40 +100,57 @@
                 android:id="@+id/InstructionField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="193dp">
-
-                    <ImageButton
-                        android:id="@+id/AddStep"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:translationX="25dp"
-                        android:translationY="120dp"
-                        app:srcCompat="@android:drawable/ic_input_add"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/Instructions"
                         android:layout_width="377dp"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="59dp"
                         android:ems="10"
                         android:gravity="start|top"
                         android:inputType="textMultiLine"
-                        android:minLines="4"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                        android:minLines="3"
+                        android:translationY="10dp" />
 
                     <EditText
                         android:id="@+id/TimeEstimate"
                         android:layout_width="97dp"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="179dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_toEndOf="@+id/editTextTextPersonName5"
                         android:ems="10"
                         android:inputType="number"
-                        android:translationX="400dp"
-                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-                </androidx.cardview.widget.CardView>
+                        android:translationX="0dp" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Instructions"
+                        android:layout_marginTop="12dp"
+                        android:translationX="25dp"
+                        android:translationY="10dp"
+                        app:srcCompat="@android:drawable/ic_input_add" />
+
+                    <EditText
+                        android:id="@+id/editTextTextPersonName5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="9dp"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Name" />
+
+                </RelativeLayout>
 
             </TableRow>
 
