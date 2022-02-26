@@ -19,6 +19,7 @@
             android:layout_height="wrap_content">
 
             <TableRow
+                android:id="@+id/TitleField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -43,116 +44,9 @@
                     app:flow_wrapMode="aligned" />
             </TableRow>
 
-            <TableRow
-                android:id="@+id/IngredientField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            <include layout="@layout/ingredient_field" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="121dp">
-
-                    <EditText
-                        android:id="@+id/IngredientAmount"
-                        android:layout_width="75dp"
-                        android:layout_height="58dp"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:maxWidth="75dp"
-                        android:maxLines="1"
-                        android:textAlignment="center"
-                        tools:ignore="SpeakableTextPresentCheck" />
-
-                    <ImageButton
-                        android:id="@+id/AddIngredient"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:translationX="25dp"
-                        android:translationY="60dp"
-                        app:srcCompat="@android:drawable/ic_input_add"
-                        tools:ignore="SpeakableTextPresentCheck" />
-
-                    <EditText
-                        android:id="@+id/IngredientName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="56dp"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Ingredient"
-                        android:textAlignment="textStart"
-                        android:textSize="20sp"
-                        android:translationX="160dp" />
-
-                    <ImageButton
-                        android:id="@+id/MeasurementDropDown"
-                        android:layout_width="71dp"
-                        android:layout_height="wrap_content"
-                        android:translationX="80dp"
-                        app:srcCompat="@android:drawable/btn_dropdown"
-                        tools:ignore="SpeakableTextPresentCheck" />
-
-                </androidx.cardview.widget.CardView>
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/InstructionField"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/Instructions"
-                        android:layout_width="377dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="59dp"
-                        android:ems="10"
-                        android:gravity="start|top"
-                        android:inputType="textMultiLine"
-                        android:minLines="3"
-                        android:translationY="10dp" />
-
-                    <EditText
-                        android:id="@+id/TimeEstimate"
-                        android:layout_width="97dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="179dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_toEndOf="@+id/editTextTextPersonName5"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:translationX="0dp" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/Instructions"
-                        android:layout_marginTop="12dp"
-                        android:translationX="25dp"
-                        android:translationY="10dp"
-                        app:srcCompat="@android:drawable/ic_input_add" />
-
-                    <EditText
-                        android:id="@+id/editTextTextPersonName5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="9dp"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-
-                </RelativeLayout>
-
-            </TableRow>
+            <include layout="@layout/instruction_field" />
 
         </TableLayout>
     </ScrollView>

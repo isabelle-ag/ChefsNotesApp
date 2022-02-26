@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/IngredientField"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:showIn="@layout/recipe_editor">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="121dp">
+
+        <EditText
+            android:id="@+id/IngredientAmount"
+            android:layout_width="75dp"
+            android:layout_height="58dp"
+            android:ems="10"
+            android:inputType="number"
+            android:maxWidth="75dp"
+            android:maxLines="1"
+            android:textAlignment="center"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/AddIngredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="25dp"
+            android:translationY="60dp"
+            app:srcCompat="@android:drawable/ic_input_add"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/IngredientName"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Ingredient"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            android:translationX="160dp" />
+
+        <ImageButton
+            android:id="@+id/MeasurementDropDown"
+            android:layout_width="71dp"
+            android:layout_height="wrap_content"
+            android:translationX="80dp"
+            app:srcCompat="@android:drawable/btn_dropdown"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </androidx.cardview.widget.CardView>
+
+</TableRow>
