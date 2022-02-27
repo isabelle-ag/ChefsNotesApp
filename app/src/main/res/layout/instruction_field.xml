@@ -9,8 +9,19 @@
     tools:showIn="@layout/recipe_editor">
 
     <RelativeLayout
+        android:id="@+id/Instruction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextTextPersonName5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="9dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
 
         <EditText
             android:id="@+id/Instructions"
@@ -22,7 +33,8 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:minLines="3"
-            android:translationY="10dp" />
+            android:translationY="10dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
             android:id="@+id/TimeEstimate"
@@ -34,7 +46,8 @@
             android:layout_toEndOf="@+id/editTextTextPersonName5"
             android:ems="10"
             android:inputType="number"
-            android:translationX="0dp" />
+            android:translationX="0dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/imageButton6"
@@ -42,19 +55,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Instructions"
             android:layout_marginTop="12dp"
+            android:onClick="addInstruction"
             android:translationX="25dp"
             android:translationY="10dp"
-            app:srcCompat="@android:drawable/ic_input_add" />
-
-        <EditText
-            android:id="@+id/editTextTextPersonName5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="9dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            app:srcCompat="@android:drawable/ic_input_add"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </RelativeLayout>
 

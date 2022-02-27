@@ -44,9 +44,23 @@
                     app:flow_wrapMode="aligned" />
             </TableRow>
 
-            <include layout="@layout/ingredient_field" />
+            <LinearLayout
+                android:id="@+id/IngredientContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <include layout="@layout/instruction_field" />
+                <include layout="@layout/ingredient_field" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/InstructionContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/instruction_field" />
+            </LinearLayout>
 
         </TableLayout>
     </ScrollView>
