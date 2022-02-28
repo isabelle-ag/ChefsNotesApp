@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 // DO NOT CREATE THIS CLASS EXPLICITLY
 // methods with names that begin with "_" should only be called by the DBMS
-// instances of comp3350.chefsnotes.objects.Recipe will be created and managed
+// instances of will be created and managed
 // by a DBMS implementing comp3350.chefsnotes.persistance.DBMSTools.java. Refer
 // to the comp3350.chefsnotes.persistance.DBMSTools.java interface file to understand
-// how to use a DBMS to perform operations on a comp3350.chefsnotes.objects.Recipe.
+// how to use a DBMS to perform operations on a Recipe.
 
 public class Recipe {
     
