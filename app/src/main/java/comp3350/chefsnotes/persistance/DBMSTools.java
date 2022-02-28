@@ -9,37 +9,38 @@ public interface DBMSTools{
 
     // ===== comp3350.chefsnotes.objects.Recipe Methods =====
 
-    // UNSURE: will be either all recipes as full json,
-    //         or all recipe jsons as the browser cue cards,
-    //         or array of comp3350.chefsnotes.objects.Recipe objects...
-    // might not use.
-    String getAllRecipes();
+    // returns array of all Recipe object
+    Recipe[] getAllRecipes();
 
     // returns array of all recipe names
     String[] getRecipeNames();
 
-    // returns full json of recipe info, or comp3350.chefsnotes.objects.Recipe object
-    // might not use.
-    String getRecipe(String recipe);
+    // returns specified Recipe object with exact-match name
+    Recipe getRecipe(String recipeName);
 
     // returns array of recipes with names that contain <partial> in them
     // returns null if no recipes match
-    String[] searchRecipe(String partial);
+    String[] searchRecipeNames(String partial);
 
     // creates new recipe with given name
     // fails if name already exists
     // returns true on success, false on failure
-    boolean createRecipe(String name);
+    boolean createRecipe(String recipeName);
 
     // deletes recipe with given name
     // fails if recipe DNE
     // returns true on deletion, false otherwise
-    boolean deleteRecipe(String recipe);
+    boolean deleteRecipe(String recipeName);
     
     // updates a recipe to have a new name
-    // fails if recipe DNE
+    // fails if recipe DNE, fails if another recipe has that name
     // returns true on success, false on failure
     boolean updateRecipeName(String recipe, String newName);
+
+    // updates a recipe to have a new name
+    // fails if recipe no longer in DB, fails if another recipe has that name
+    // returns true on success, false on failure
+    boolean updateRecipeName(Recipe recipe, String newName);
 
     // creates a deep copy of the target recipe, with newName as its title. 
     // if newName = null, default is <oldName> + " - copy" + <copyNum>
