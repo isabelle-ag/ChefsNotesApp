@@ -2,6 +2,8 @@ package comp3350.chefsnotes.persistence;
 
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
+import comp3350.chefsnotes.objects.Recipe;
+
 public interface DBMSTools{
     // Any DBMS implementing this interface are required to implement
     // a copy of the methods listed below.
