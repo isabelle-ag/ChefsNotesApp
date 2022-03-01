@@ -23,6 +23,12 @@ public class Direction {
         this.time = 0;
     }
 
+    public Direction(String txt){
+        this.name = "";
+        this.text = txt;
+        this.time = 0;
+    }
+
     public String getName(){
         return this.name;
     }

@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout instructionContainer = (LinearLayout) findViewById(R.id.InstructionContainer);
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
         instructionContainer.addView(child);
-        System.out.println(instructionContainer.getChildCount());
     }
 
     public void addIngredient(View view)
