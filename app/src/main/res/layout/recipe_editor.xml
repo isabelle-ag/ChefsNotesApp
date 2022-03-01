@@ -98,7 +98,7 @@
                     android:layout_height="55dp"
                     android:onClick="addIngredient"
                     app:srcCompat="@android:drawable/ic_input_add"
-                    tools:ignore="SpeakableTextPresentCheck"/>
+                    tools:ignore="SpeakableTextPresentCheck" />
             </TableRow>
 
 
