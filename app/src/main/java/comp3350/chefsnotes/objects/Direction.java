@@ -1,7 +1,5 @@
 package comp3350.chefsnotes.objects;
 
-import android.annotation.SuppressLint;
-
 import androidx.annotation.NonNull;
 
 public class Direction {
@@ -76,7 +74,6 @@ public class Direction {
     {
         return this.name.hashCode() * 10000 + this.text.hashCode() * 100 + this.time;
     }
-
     @Override
     @NonNull
     public String toString() {
