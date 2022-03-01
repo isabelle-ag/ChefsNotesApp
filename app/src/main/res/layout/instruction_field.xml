@@ -46,6 +46,7 @@
             android:layout_toEndOf="@+id/editTextTextPersonName5"
             android:ems="10"
             android:inputType="number"
+            android:textAlignment="center"
             android:translationX="0dp"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -59,6 +60,17 @@
             android:translationX="25dp"
             android:translationY="10dp"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TimeEstimate"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="93dp"
+            android:text="Time For Step"
+            android:textAlignment="center" />
 
     </RelativeLayout>
 
