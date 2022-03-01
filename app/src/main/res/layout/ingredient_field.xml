@@ -34,15 +34,18 @@
             android:text="Ingredient"
             android:textAlignment="textStart"
             android:textSize="20sp"
-            android:translationX="160dp" />
+            android:translationX="200dp" />
 
-        <ImageButton
-            android:id="@+id/MeasurementDropDown"
-            android:layout_width="71dp"
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:entries="@array/units"
+            android:spinnerMode="dropdown"
             android:translationX="80dp"
-            app:srcCompat="@android:drawable/btn_dropdown"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:translationY="5dp"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     </androidx.cardview.widget.CardView>
 

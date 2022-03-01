@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import comp3350.chefsnotes.business.Units;
 
 import comp3350.chefsnotes.R;
 
@@ -33,5 +37,10 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.IngredientContainer);
         View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
         ingredientContainer.addView(child);
+    }
+
+    public void openUnits(View view)
+    {
+
     }
 }
