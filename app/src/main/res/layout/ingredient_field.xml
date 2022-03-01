@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/Ingredient"
         android:layout_width="match_parent"
-        android:layout_height="121dp">
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/IngredientAmount"
@@ -24,15 +24,6 @@
             android:textAlignment="center"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <ImageButton
-            android:id="@+id/AddIngredient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="addIngredient"
-            android:translationX="25dp"
-            android:translationY="60dp"
-            app:srcCompat="@android:drawable/ic_input_add"
-            tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
             android:id="@+id/IngredientName"
