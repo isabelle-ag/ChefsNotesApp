@@ -90,15 +90,15 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <ImageButton
                     android:id="@+id/AddIngredient"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:onClick="addIngredient"
                     app:srcCompat="@android:drawable/ic_input_add"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="SpeakableTextPresentCheck"/>
             </TableRow>
 
 
@@ -147,12 +147,12 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <ImageButton
                     android:id="@+id/imageButton6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:layout_below="@+id/Instructions"
                     android:layout_marginTop="12dp"
                     android:onClick="addInstruction"
