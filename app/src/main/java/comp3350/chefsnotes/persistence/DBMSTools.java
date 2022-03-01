@@ -43,6 +43,11 @@ public interface DBMSTools{
     // returns true on success, false on failure
     boolean updateRecipeName(Recipe recipe, String newName);
 
+    // saves changes made to modified via Recipe mutator methods
+    // fails if modified no longer in DB
+    // returns true on success, false on failure
+    boolean commitChanges(Recipe modified);
+
     // creates a deep copy of the target recipe, with newName as its title. 
     // if newName = null, default is <oldName> + " - copy" + <copyNum>
     // returns the name of the new recipe
