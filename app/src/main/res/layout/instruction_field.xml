@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/InstructionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -43,7 +43,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="179dp"
             android:layout_marginTop="6dp"
-            android:layout_toEndOf="@+id/editTextTextPersonName5"
+            android:layout_toEndOf="@+id/InstructionName"
             android:ems="10"
             android:inputType="number"
             android:textAlignment="center"
@@ -51,7 +51,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Space
-            android:id="@+id/imageButton6"
+            android:id="@+id/AddInstruction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Instructions"
@@ -62,7 +62,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/TimeEstimateLabel"
             android:layout_width="99dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/TimeEstimate"

@@ -1,5 +1,7 @@
 package comp3350.chefsnotes.objects;
 
+import androidx.annotation.NonNull;
+
 public class Direction {
     private String name;
     private String text;
@@ -56,4 +58,26 @@ public class Direction {
         this.time = newTime;
         return result;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if(this == other)
+            return true;
+        if(! (other instanceof Direction ) )
+            return false;
+        Direction that = (Direction) other;
+        return (this.name.equals(that.name) && this.text.equals(that.text) && this.time == that.time);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.name.hashCode() * 10000 + this.text.hashCode() * 100 + this.time;
+    }
+    @Override
+    @NonNull
+    public String toString() {
+        return String.format("%s: %s - %d min", name, text, time);
+    }
+
 }

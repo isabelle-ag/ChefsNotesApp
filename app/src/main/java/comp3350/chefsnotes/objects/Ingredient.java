@@ -1,5 +1,7 @@
 package comp3350.chefsnotes.objects;
 
+import androidx.annotation.NonNull;
+
 public class Ingredient {
     private String name;
     private Quantity amount;
@@ -45,9 +47,27 @@ public class Ingredient {
         return true;
     }
 
+    @Override
+    @NonNull
     public String toString(){
         String result = "";
         result = amount.toString() + " " + this.name;
         return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if(this == other)
+            return true;
+        if(! (other instanceof Ingredient ) )
+            return false;
+        Ingredient that = (Ingredient) other;
+        return (this.amount.equals(that.amount) && this.name.equals(that.name));
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.amount.hashCode() * this.name.hashCode();
     }
 }

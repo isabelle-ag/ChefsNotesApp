@@ -273,6 +273,9 @@ public class Recipe {
     } 
 
 
+    boolean equals(Recipe target){
+        return (this.name.equals(target.getName()));
+    }
 
 
 }
