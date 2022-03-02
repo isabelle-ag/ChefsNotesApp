@@ -1,4 +1,4 @@
-import comp3350.chefsnotes.objects.*;
+import comp3350.chefsnotes.objects.Recipe;
 
 class FakeDBMS implements DBMSTools{
 
