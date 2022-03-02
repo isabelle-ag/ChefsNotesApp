@@ -131,15 +131,11 @@ public class Recipe {
     // deletes ingredient at specified index
     // fails if out of bounds
     // returns true on success, false on failure
-    public boolean deleteIngredient(int index){
+    public boolean deleteIngredient(int index) throws IndexOutOfBoundsException{
         Object factCheck = null;
         boolean result = false;
 
-        try{
-            factCheck = ingredients.remove(index);
-        } catch (IndexOutOfBoundsException ioobe){
-            System.out.println("That comp3350.chefsnotes.objects.Ingredient number does not exist.");
-        }
+        factCheck = ingredients.remove(index); // can throw exception
 
         if(factCheck != null){
             result = true;
@@ -210,28 +206,23 @@ public class Recipe {
 
     // returns single direction via step number
     // returns null if out of bounds
-    public Direction getDirection(int dnum){
+    public Direction getDirection(int dnum) throws IndexOutOfBoundsException{
         Direction result = null;
         
-        try{
-            result = this.directions.get(dnum);
-        } catch (IndexOutOfBoundsException ioobe){
-            System.out.println("That comp3350.chefsnotes.objects.Direction number does not exist.");
-        }
+        result = this.directions.get(dnum); // can throw exception        
 
         return result;
     }
 
     // deletes the Direction at index dnum
     // returns false if DNE
-    public boolean deleteDirection(int dnum){
-        boolean result = false;
+    public boolean deleteDirection(int dnum) throws IndexOutOfBoundsException{
+        boolean result = true;
+        Object test = null;
+        
+        test = this.directions.remove(dnum); // can throw exception    
 
-        try{
-            this.directions.remove(dnum);
-            result = true;
-        } catch (IndexOutOfBoundsException ioobe){
-            System.out.println("That comp3350.chefsnotes.objects.Direction number does not exist.");
+        if(test == null){
             result = false;
         }
 
