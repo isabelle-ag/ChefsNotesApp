@@ -1,4 +1,4 @@
-package comp3350.chefsnotes.persistance;
+package comp3350.chefsnotes.persistence;
 
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
@@ -42,6 +42,11 @@ public interface DBMSTools{
     // fails if recipe no longer in DB, fails if another recipe has that name
     // returns true on success, false on failure
     boolean updateRecipeName(Recipe recipe, String newName);
+
+    // saves changes made to modified via Recipe mutator methods
+    // fails if modified no longer in DB
+    // returns true on success, false on failure
+    boolean commitChanges(Recipe modified);
 
     // creates a deep copy of the target recipe, with newName as its title. 
     // if newName = null, default is <oldName> + " - copy" + <copyNum>
