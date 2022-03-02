@@ -1,3 +1,5 @@
+package comp3350.chefsnotes.persistence;
+
 import comp3350.chefsnotes.objects.Recipe;
 
 class FakeDBMS implements DBMSTools{
