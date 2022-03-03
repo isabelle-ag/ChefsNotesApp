@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Chefsnotes</string>
     <string name="create_recipe">Create Recipe</string>
+    <string name="view_recipe">View Recipe</string>
+    <string name="chefsnotes">ChefsNotes</string>
+    <string name="logo">ChefsNotes Logo</string>
+    <string name="recipe_title">Recipe Title</string>
+    <string name="directions">Directions</string>
+    <string name="ingredients">Ingredients</string>
     <string-array name="units">
         <item> </item>
         <item>mL</item>
