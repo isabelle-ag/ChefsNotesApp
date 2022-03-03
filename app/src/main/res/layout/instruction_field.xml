@@ -2,19 +2,31 @@
 <TableRow xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/InstructionField"
+    android:id="@+id/DirectionField"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:showIn="@layout/recipe_editor">
 
     <RelativeLayout
-        android:id="@+id/Instruction"
+        android:id="@+id/Direction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageButton
+            android:id="@+id/DirectionDeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TimeEstimateLabel"
+            android:layout_marginStart="83dp"
+            android:layout_marginTop="25dp"
+            android:layout_toEndOf="@+id/Directions"
+            android:onClick="removeDirection"
+            app:srcCompat="@android:drawable/ic_delete"
+            tools:ignore="SpeakableTextPresentCheck" />
+
         <EditText
-            android:id="@+id/InstructionName"
+            android:id="@+id/DirectionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -24,7 +36,7 @@
             android:text="Name" />
 
         <EditText
-            android:id="@+id/Instructions"
+            android:id="@+id/Directions"
             android:layout_width="377dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -43,7 +55,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="217dp"
             android:layout_marginTop="0dp"
-            android:layout_toEndOf="@+id/InstructionName"
+            android:layout_toEndOf="@+id/DirectionName"
             android:ems="10"
             android:inputType="number"
             android:textAlignment="center"
@@ -62,10 +74,10 @@
             android:textAlignment="center" />
 
         <Space
-            android:id="@+id/AddInstruction"
+            android:id="@+id/AddDirectionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Instructions"
+            android:layout_below="@+id/Directions"
             android:layout_marginTop="50dp"
             android:onClick="addInstruction"
             android:translationX="25dp"

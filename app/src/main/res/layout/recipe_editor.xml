@@ -97,6 +97,7 @@
                     android:id="@+id/AddIngredientButton"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
+                    android:onClick="addIngredient"
                     app:srcCompat="@android:drawable/ic_input_add"
                     tools:ignore="SpeakableTextPresentCheck" />
             </TableRow>
@@ -142,11 +143,12 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/AddInstructionButton"
+                    android:id="@+id/AddDirectionButton"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:layout_below="@+id/Instructions"
+                    android:layout_below="@+id/Directions"
                     android:layout_marginTop="12dp"
+                    android:onClick="addDirection"
                     app:srcCompat="@android:drawable/ic_input_add"
                     tools:ignore="SpeakableTextPresentCheck" />
             </TableRow>
