@@ -29,13 +29,13 @@ public class EditRecipe extends AppCompatActivity {
 
         ImageButton saveButton = findViewById(R.id.save_button);
         View addIngredientButton = findViewById(R.id.AddIngredientButton);
-        View addInstructionButton = findViewById(R.id.AddInstructionButton);
+        View addInstructionButton = findViewById(R.id.AddDirectionButton);
         View deleteIngredientButton = findViewById(R.id.IngredientDeleteButton);
 
         saveButton.setOnClickListener(v -> {
             String title = getTitle(v);
             ArrayList<Ingredient> ingredients = getIngredients(v);
-            ArrayList<Direction> directions = getInstructions(v);
+            ArrayList<Direction> directions = getDirections(v);
 
             if(ingredients != null && directions != null)
             {
@@ -54,13 +54,13 @@ public class EditRecipe extends AppCompatActivity {
             }
         });
 
-        addInstructionButton.setOnClickListener(this::addInstruction);
+        addInstructionButton.setOnClickListener(this::addDirection);
         addIngredientButton.setOnClickListener(this::addIngredient);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
 
     }
 
-    public void addInstruction(View view)
+    public void addDirection(View view)
     {
         LinearLayout instructionContainer = findViewById(R.id.InstructionContainer);
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
@@ -121,7 +121,7 @@ public class EditRecipe extends AppCompatActivity {
         return ingredients;
     }
 
-    private ArrayList<Direction> getInstructions(View view)
+    private ArrayList<Direction> getDirections(View view)
     {
         ArrayList<Direction> directions = new ArrayList<>();
         Direction current;
@@ -133,11 +133,11 @@ public class EditRecipe extends AppCompatActivity {
             currRow = ingredients.getChildAt(i);
 
             String instructionName =
-                    ((EditText)currRow.findViewById(R.id.InstructionName))
+                    ((EditText)currRow.findViewById(R.id.DirectionName))
                             .getText().toString();
 
             String instructions =
-                    ((EditText)currRow.findViewById(R.id.Instructions))
+                    ((EditText)currRow.findViewById(R.id.Directions))
                             .getText().toString();
 
             String timeEstimate =
@@ -167,7 +167,7 @@ public class EditRecipe extends AppCompatActivity {
         return directions;
     }
     
-    public void removeInstruction(View view)
+    public void removeDirection(View view)
     {
         LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.InstructionContainer);
         ingredientContainer.removeView((View) view.getParent().getParent());
