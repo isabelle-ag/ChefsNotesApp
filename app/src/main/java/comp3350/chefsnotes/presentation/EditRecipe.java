@@ -29,4 +29,16 @@ public class EditRecipe extends AppCompatActivity {
         View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
         ingredientContainer.addView(child);
     }
+
+    public void removeInstruction(View view)
+    {
+        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.InstructionContainer);
+        ingredientContainer.removeView((View) view.getParent().getParent());
+    }
+
+    public void removeIngredient(View view)
+    {
+        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.IngredientContainer);
+        ingredientContainer.removeView((View) view.getParent().getParent());
+    }
 }
