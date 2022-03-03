@@ -14,9 +14,11 @@ Use one or two paragraphs which can have point-form within them.
 Exceptional code
 ----------------
 
-Provide a link to a test of exceptional code. In a few sentences,
+Provide a [link to a test of exceptional code](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/blob/7b8de7044f48e15d8585fe03cdeb437f8a010c68/app/src/test/java/comp3350/chefsnotes/business/IRecipeManagerTest.java#L66). In a few sentences,
 provide an explanation of why the exception is handled or thrown
 in the code you are testing.
+
+Currently, our application works on an assumption that all recipe names in the db are unique, so this recipe-in-db-renaming code both A: makes sure that the recipe you're asking to rename is in the db. and B: makes sure that you aren't trying to rename it to something else. If either is the case, it throws the RecipeExistenceException so that the presentation layer can tell the user what they did wrong
 
 Branching
 ----------
