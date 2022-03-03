@@ -1,8 +1,9 @@
 package comp3350.chefsnotes.persistence;
 
 import comp3350.chefsnotes.objects.Recipe;
+import java.util.ArrayList;
 
-class FakeDBMS implements DBMSTools{
+public class FakeDBMS implements DBMSTools{
 
     ArrayList<Recipe> recipes;
 
@@ -30,7 +31,7 @@ class FakeDBMS implements DBMSTools{
     private boolean _addRecipe(Recipe newRecipe){
         boolean result = false;
 
-        if(getRecipe(recipeName) == null){
+        if(getRecipe(newRecipe.getTitle()) == null){
             result = recipes.add(newRecipe);
         }
 
@@ -62,7 +63,7 @@ class FakeDBMS implements DBMSTools{
         if(recipes.size() > 0){
             for( int i=0; i<recipes.size(); i++ ){
                 Recipe curr = recipes.get(i);
-                if(curr.getTitle().equals(target)){
+                if(curr.getTitle().equals(recipeName)){
                     result = curr;
                 }
             }
@@ -74,7 +75,7 @@ class FakeDBMS implements DBMSTools{
 
     // returns full array of every recipe object
     // returns array of size 
-    Recipe[] getAllRecipes(){
+    public Recipe[] getAllRecipes(){
         Recipe[] result = new Recipe[recipes.size()];
         int i=0;
         
@@ -89,7 +90,7 @@ class FakeDBMS implements DBMSTools{
 
     // returns array of each Recipe name that contains the partial String passed to it
     // returns empty array if no matches
-    String[] searchRecipeNames(String partial){
+    public String[] searchRecipeNames(String partial){
         ArrayList<String> searches = new ArrayList<String>();
 
         for( Recipe curr : recipes ){
@@ -109,10 +110,15 @@ class FakeDBMS implements DBMSTools{
     // returns true on success, false on failure
     public boolean deleteRecipe(String recipeName){
         boolean result = false;
+        Recipe removeTest = null;
+        Recipe target = getRecipe(recipeName); 
 
-        if(Recipe target = getRecipe(recipeName) != null){
+        if(target != null){
             int location = recipes.indexOf(target);
-            result = recipes.remove(location);
+            removeTest = recipes.remove(location);
+            if(removeTest != null){
+                result = true;
+            }
         }
 
         return result;
@@ -127,7 +133,7 @@ class FakeDBMS implements DBMSTools{
         Recipe test = getRecipe(newName);       // should not exist
 
         if(target != null && test == null){
-            target._setName(newName);
+            target._setTitle(newName);
             result = true;
         }
 
