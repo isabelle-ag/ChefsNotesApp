@@ -50,18 +50,6 @@
             android:translationX="0dp"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <ImageButton
-            android:id="@+id/InstructionDeleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/TimeEstimateLabel"
-            android:layout_marginStart="68dp"
-            android:layout_marginTop="36dp"
-            android:layout_toEndOf="@+id/Instructions"
-            android:onClick="removeInstruction"
-            app:srcCompat="@android:drawable/ic_delete"
-            tools:ignore="SpeakableTextPresentCheck" />
-
         <TextView
             android:id="@+id/TimeEstimateLabel"
             android:layout_width="99dp"
