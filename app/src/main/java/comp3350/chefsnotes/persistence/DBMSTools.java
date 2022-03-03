@@ -1,4 +1,4 @@
-package comp3350.chefsnotes.persistance;
+package comp3350.chefsnotes.persistence;
 
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
