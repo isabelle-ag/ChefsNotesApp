@@ -51,7 +51,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
-            android:id="@+id/DeleteButton"
+            android:id="@+id/InstructionDeleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/TimeEstimateLabel"
