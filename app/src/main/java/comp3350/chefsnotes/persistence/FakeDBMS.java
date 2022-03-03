@@ -1,6 +1,7 @@
 package comp3350.chefsnotes.persistence;
 
 import comp3350.chefsnotes.objects.Recipe;
+import java.util.ArrayList;
 
 class FakeDBMS implements DBMSTools{
 
@@ -109,8 +110,9 @@ class FakeDBMS implements DBMSTools{
     // returns true on success, false on failure
     public boolean deleteRecipe(String recipeName){
         boolean result = false;
+        Recipe target = getRecipe(recipeName); 
 
-        if(Recipe target = getRecipe(recipeName) != null){
+        if(target != null){
             int location = recipes.indexOf(target);
             result = recipes.remove(location);
         }
@@ -127,7 +129,7 @@ class FakeDBMS implements DBMSTools{
         Recipe test = getRecipe(newName);       // should not exist
 
         if(target != null && test == null){
-            target._setName(newName);
+            target._setTitle(newName);
             result = true;
         }
 
