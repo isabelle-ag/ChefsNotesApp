@@ -41,14 +41,37 @@
             android:layout_width="97dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="179dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginStart="217dp"
+            android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/InstructionName"
             android:ems="10"
             android:inputType="number"
             android:textAlignment="center"
             android:translationX="0dp"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/DeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TimeEstimateLabel"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="36dp"
+            android:layout_toEndOf="@+id/Instructions"
+            android:onClick="removeInstruction"
+            app:srcCompat="@android:drawable/ic_delete"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/TimeEstimateLabel"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TimeEstimate"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-1dp"
+            android:layout_marginEnd="55dp"
+            android:text="Time For Step"
+            android:textAlignment="center" />
 
         <Space
             android:id="@+id/AddInstruction"
@@ -60,17 +83,6 @@
             android:translationX="25dp"
             android:translationY="10dp"
             tools:ignore="SpeakableTextPresentCheck" />
-
-        <TextView
-            android:id="@+id/TimeEstimateLabel"
-            android:layout_width="99dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/TimeEstimate"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="93dp"
-            android:text="Time For Step"
-            android:textAlignment="center" />
 
     </RelativeLayout>
 
