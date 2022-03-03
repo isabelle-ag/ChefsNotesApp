@@ -20,4 +20,9 @@ public class MainActivity extends AppCompatActivity {
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
         startActivity(switchActivityIntent);
     }
+
+    public void viewRecipe(View view) {
+        Intent switchActivityIntent = new Intent(this, ViewRecipe.class);
+        startActivity(switchActivityIntent);
+    }
 }
