@@ -273,7 +273,7 @@ public class Recipe {
 
         if(other instanceof Recipe){
             Recipe casted = (Recipe) other;
-            result = this.title.equals(other.getTitle());
+            result = this.title.equals(casted.getTitle());
         }
 
         return result;
