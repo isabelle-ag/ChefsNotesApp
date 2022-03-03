@@ -39,7 +39,6 @@ id recipeName
 id recipeTitle
 id scrollView2
 id spinner1
-id tableLayout
 id textView
 id textView2
 id textView6

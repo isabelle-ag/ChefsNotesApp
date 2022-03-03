@@ -26,67 +26,66 @@
 18-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:9:9-54
 19        android:supportsRtl="true"
 19-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:10:9-35
-20        android:testOnly="true"
-21        android:theme="@style/Theme.Chefsnotes" >
-21-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:11:9-48
-22        <activity
-22-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:12:9-14:40
-23            android:name="comp3350.chefsnotes.presentation.ViewRecipe"
-23-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:13:13-52
-24            android:exported="false" />
-24-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:14:13-37
-25        <activity
-25-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:15:9-23:20
-26            android:name="comp3350.chefsnotes.presentation.MainActivity"
-26-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:16:13-54
-27            android:exported="true" >
-27-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:17:13-36
-28            <intent-filter>
-28-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:18:13-22:29
-29                <action android:name="android.intent.action.MAIN" />
-29-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:19:17-69
-29-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:19:25-66
-30
-31                <category android:name="android.intent.category.LAUNCHER" />
-31-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:21:17-77
-31-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:21:27-74
-32            </intent-filter>
-33        </activity>
-34        <activity
-34-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:24:9-30:20
-35            android:name="comp3350.chefsnotes.presentation.EditRecipe"
-35-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:25:13-52
-36            android:exported="true" >
-36-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:26:13-36
-37            <intent-filter>
-37-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:27:13-29:29
-38                <action android:name="android.intent.action.DEFAULT" />
-38-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:28:17-72
-38-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:28:25-69
-39            </intent-filter>
-40        </activity>
-41
-42        <provider
-42-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
-43            android:name="androidx.startup.InitializationProvider"
-43-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:27:13-67
-44            android:authorities="comp3350.chefsnotes.androidx-startup"
-44-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:28:13-68
-45            android:exported="false" >
-45-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:29:13-37
-46            <meta-data
-46-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
-47                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-47-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:32:17-75
-48                android:value="androidx.startup" />
-48-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:33:17-49
-49            <meta-data
-49-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/belle/.gradle/caches/transforms-3/7c2b991ffee7d4db452bfe70f5605b71/transformed/lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
-50                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-50-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/belle/.gradle/caches/transforms-3/7c2b991ffee7d4db452bfe70f5605b71/transformed/lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
-51                android:value="androidx.startup" />
-51-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/belle/.gradle/caches/transforms-3/7c2b991ffee7d4db452bfe70f5605b71/transformed/lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
-52        </provider>
-53    </application>
-54
-55</manifest>
+20        android:theme="@style/Theme.Chefsnotes" >
+20-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:11:9-48
+21        <activity
+21-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:12:9-14:40
+22            android:name="comp3350.chefsnotes.presentation.ViewRecipe"
+22-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:13:13-52
+23            android:exported="false" />
+23-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:14:13-37
+24        <activity
+24-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:15:9-23:20
+25            android:name="comp3350.chefsnotes.presentation.MainActivity"
+25-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:16:13-54
+26            android:exported="true" >
+26-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:17:13-36
+27            <intent-filter>
+27-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:18:13-22:29
+28                <action android:name="android.intent.action.MAIN" />
+28-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:19:17-69
+28-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:19:25-66
+29
+30                <category android:name="android.intent.category.LAUNCHER" />
+30-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:21:17-77
+30-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:21:27-74
+31            </intent-filter>
+32        </activity>
+33        <activity
+33-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:24:9-30:20
+34            android:name="comp3350.chefsnotes.presentation.EditRecipe"
+34-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:25:13-52
+35            android:exported="true" >
+35-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:26:13-36
+36            <intent-filter>
+36-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:27:13-29:29
+37                <action android:name="android.intent.action.DEFAULT" />
+37-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:28:17-72
+37-->/Users/belle/Documents/University/Comp3350/chefsnotes/app/src/main/AndroidManifest.xml:28:25-69
+38            </intent-filter>
+39        </activity>
+40
+41        <provider
+41-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
+42            android:name="androidx.startup.InitializationProvider"
+42-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:27:13-67
+43            android:authorities="comp3350.chefsnotes.androidx-startup"
+43-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:28:13-68
+44            android:exported="false" >
+44-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:29:13-37
+45            <meta-data
+45-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
+46                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+46-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:32:17-75
+47                android:value="androidx.startup" />
+47-->[androidx.emoji2:emoji2:1.0.0] /Users/belle/.gradle/caches/transforms-3/7a8fe7a0d27e6111d8f26a88e3f3f946/transformed/emoji2-1.0.0/AndroidManifest.xml:33:17-49
+48            <meta-data
+48-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/belle/.gradle/caches/transforms-3/7c2b991ffee7d4db452bfe70f5605b71/transformed/lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
+49                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+49-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/belle/.gradle/caches/transforms-3/7c2b991ffee7d4db452bfe70f5605b71/transformed/lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
+50                android:value="androidx.startup" />
+50-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/belle/.gradle/caches/transforms-3/7c2b991ffee7d4db452bfe70f5605b71/transformed/lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
+51        </provider>
+52    </application>
+53
+54</manifest>
