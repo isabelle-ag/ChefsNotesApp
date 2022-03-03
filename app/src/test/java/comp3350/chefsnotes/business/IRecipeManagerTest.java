@@ -6,6 +6,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
+import comp3350.chefsnotes.objects.Direction;
+import comp3350.chefsnotes.objects.Ingredient;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
@@ -82,6 +86,37 @@ public class IRecipeManagerTest {
 
     @Test
     public void testSaveButton() {
-        //TODO
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        ArrayList<Direction> directions = new ArrayList<Direction>();
+
+        ingredients.add(new Ingredient("testIng1", 0.5, "testUnit1"));
+        ingredients.add(new Ingredient("testIng2", 1, 4, "testUnit2"));
+
+        directions.add(new Direction("dir1", 1));
+        directions.add(new Direction("dir2", 4));
+        directions.add(new Direction("dir3", "dir3b", 2));
+
+        try {
+            manager.saveButton("testSave", ingredients, directions);
+        }
+        catch (RecipeExistenceException e){fail();};
+
+        Recipe myRecipe = db.getRecipe("testSave");
+        assertNotNull(myRecipe);
+
+        //ensure that every ingredient in myRecipe is in the ingredient list we passed
+        for (Ingredient i : myRecipe.getIngredients()) {
+            assertTrue(ingredients.remove(i));
+        }
+        //ensure that every ingredient we passed was in myRecpie
+        assertTrue(ingredients.isEmpty());
+
+        //ditto for directions
+        for (Direction d : myRecipe.getDirections()) {
+            assertTrue(directions.remove(d));
+        }
+        assertTrue(directions.isEmpty());
+
+
     }
 }

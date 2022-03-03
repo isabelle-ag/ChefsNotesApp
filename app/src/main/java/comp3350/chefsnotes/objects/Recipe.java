@@ -39,6 +39,10 @@ public class Recipe {
         this.title = newTitle;
     }
 
+    public void addIngredient(Ingredient i) {
+        this.ingredients.add(i);
+    }
+
     // adds the ingredient specified as a decimal. 
     // Fails if amount <= 0. 
     // returns true on success, false on failure
@@ -143,7 +147,19 @@ public class Recipe {
 
         return result;
     }
-    
+
+    public int addDirection(Direction d) {
+        int result = -1;
+
+        boolean test = this.directions.add(d);
+
+        if(test = true){
+            result = this.directions.size()-1;
+        }
+
+        return result;
+    }
+
     // names the direction "Direction <num>" by default
     // returns new direction's number, -1 on failure
     public int addDirection(String txt){

@@ -8,7 +8,7 @@ import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
 
-public class RecipeManager {
+public class RecipeManager implements IRecipeManager {
     private DBMSTools db;
 
     RecipeManager(DBMSTools db) {
@@ -19,7 +19,7 @@ public class RecipeManager {
     {
         if(db.getRecipe(name) != null)
         {
-            throw new RecipeExistenceException("recipe '%s' already exists in db".format(name));
+            throw new RecipeExistenceException("recipe names must be unique, and '%s' already exists".format(name));
         }
         else
         {
@@ -33,7 +33,7 @@ public class RecipeManager {
         String name = R.getTitle();
         if(db.getRecipe(name) == null)
         {
-            throw new RecipeExistenceException("recipe '%s' does not exist in db".format(name));
+            throw new RecipeExistenceException("recipe '%s' does not exist".format(name));
         }
         else
         {
@@ -46,11 +46,11 @@ public class RecipeManager {
         String name = R.getTitle();
         if(db.getRecipe(name) == null)
         {
-            throw new RecipeExistenceException("recipe '%s' does not exist in db".format(name));
+            throw new RecipeExistenceException("recipe '%s' has not been saved yet".format(name));
         }
         if(db.getRecipe(newName) != null)
         {
-            throw new RecipeExistenceException("recipe '%s' already exists in db".format(newName));
+            throw new RecipeExistenceException("recipe names must be unique, and '%s' already exists".format(newName));
         }
         else
         {
@@ -61,7 +61,13 @@ public class RecipeManager {
     public void saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions) throws RecipeExistenceException
     {
         Recipe myRecipe = this.newRecipe(name);
-        //TODO
+        for(Ingredient i:ingredients) {
+            myRecipe.addIngredient(i);
+        }
+        for (Direction d:directions) {
+            myRecipe.addDirection(d);
+        }
+        db.commitChanges(myRecipe);
     }
 
 }
