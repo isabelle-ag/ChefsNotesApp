@@ -264,8 +264,19 @@ public class Recipe {
     } 
 
 
-    boolean equals(Recipe target){
-        return (this.name.equals(target.getName()));
+    boolean equals(Object other){
+        boolean result = false;
+
+        if(this == other){
+            result = true;
+        }
+
+        if(other instanceof Recipe){
+            Recipe casted = (Recipe) other;
+            result = this.title.equals(other.getTitle());
+        }
+
+        return result;
     }
 
 
