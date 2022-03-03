@@ -264,7 +264,7 @@ public class Recipe {
     } 
 
 
-    boolean equals(Object other){
+    public boolean equals(Object other){
         boolean result = false;
 
         if(this == other){
