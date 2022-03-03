@@ -29,7 +29,6 @@ id TitleField
 id ViewRecipeButton
 id directionListView
 id divider
-id divider2
 id editTextTextPersonName
 id editTextTextPersonName2
 id editTextTextPersonName5

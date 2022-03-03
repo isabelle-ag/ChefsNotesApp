@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#3375CEDA"
     tools:context=".presentation.MainActivity">
 
@@ -24,7 +24,7 @@
 
             <Space
                 android:layout_width="wrap_content"
-                android:layout_height="100dp" />
+                android:layout_height="80dp" />
         </TableRow>
 
         <TableRow
@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
                 android:gravity="center"
+                android:paddingBottom="20dp"
                 android:text="@string/chefsnotes"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="#000"
@@ -48,83 +49,64 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="80dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="210dp"
-                android:layout_height="wrap_content"
+                android:layout_height="400dp"
                 android:contentDescription="@string/logo"
-                android:gravity="center"
-                android:rotationX="0"
-                android:rotationY="0"
-                android:scaleX="2"
-                android:scaleY="2"
+                android:scaleX="1"
+                android:scaleY="1"
                 app:srcCompat="@drawable/logo" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="144dp">
+
+            <RelativeLayout
+                android:layout_width="422dp"
+                android:layout_height="149dp"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/CreateRecipeButton"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#071355"
+                    android:onClick="makeRecipe"
+                    android:padding="5dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:text="@string/create_recipe"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:typeface="serif"
+                    tools:layout_marginLeft="50dp" />
+
+                <Button
+                    android:id="@+id/ViewRecipeButton"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="76dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_toEndOf="@+id/CreateRecipeButton"
+                    android:backgroundTint="#071355"
+                    android:onClick="viewRecipe"
+                    android:padding="5dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:text="@string/view_recipe"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </TableRow>
+
     </TableLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="88dp"
-        android:layout_marginBottom="50dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="horizontal"
-        android:showDividers="middle|beginning"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/CreateRecipeButton"
-            android:layout_width="121dp"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:backgroundTint="#071355"
-            android:onClick="makeRecipe"
-            android:padding="5dp"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            android:text="@string/create_recipe"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:typeface="serif" />
-
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="?android:attr/listDivider"
-            android:visibility="invisible"
-            tools:visibility="invisible" />
-
-        <Button
-            android:id="@+id/ViewRecipeButton"
-            android:layout_width="121dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:backgroundTint="#071355"
-            android:onClick="viewRecipe"
-            android:padding="5dp"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            android:text="@string/view_recipe"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
