@@ -50,17 +50,6 @@
             android:translationX="0dp"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <Space
-            android:id="@+id/AddInstruction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Instructions"
-            android:layout_marginTop="50dp"
-            android:onClick="addInstruction"
-            android:translationX="25dp"
-            android:translationY="10dp"
-            tools:ignore="SpeakableTextPresentCheck" />
-
         <TextView
             android:id="@+id/TimeEstimateLabel"
             android:layout_width="99dp"
