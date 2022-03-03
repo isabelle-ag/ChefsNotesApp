@@ -149,4 +149,16 @@ public class EditRecipe extends AppCompatActivity {
 
         return directions;
     }
+    
+    public void removeInstruction(View view)
+    {
+        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.InstructionContainer);
+        ingredientContainer.removeView((View) view.getParent().getParent());
+    }
+
+    public void removeIngredient(View view)
+    {
+        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.IngredientContainer);
+        ingredientContainer.removeView((View) view.getParent().getParent());
+    }
 }
