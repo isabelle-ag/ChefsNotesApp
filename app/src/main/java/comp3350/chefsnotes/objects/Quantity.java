@@ -49,4 +49,16 @@ public class Quantity {
         else
             return String.format(Locale.CANADA, "%s", amt.toString()); //for stuff not measured in units - causes grammatical issues e.g.: 2 onion, but that would be tricky to resolve (consider "X large onion(s), in slices"). Yikes.
     }
+
+    @NonNull
+    @Override
+    public boolean equals(Object other) {
+        if(this == other)
+            return true;
+        if(! (other instanceof Quantity ) )
+            return false;
+        Quantity that = (Quantity) other;
+        return (this.amount.equals(that.amount) && this.name.equals(that.name));
+    }
+
 }
