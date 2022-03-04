@@ -115,7 +115,7 @@ public class Recipe {
         int n = ingArray.length;
         String[] strArray = new String[n];
         for (int i = 0; i < n; i++) {
-            strArray[i] = ingArray[i].getAmtString() + "\t"+"\t"+ingArray[i].getName();
+            strArray[i] = ingArray[i].getAmtString() + "\t\t\t\t"+ingArray[i].getName();
         }
         return strArray;
     }
@@ -247,7 +247,7 @@ public class Recipe {
         String[] strArray = new String[n+1];
         int totalTime = 0;
         for(int i=0; i<n; i++){
-            strArray[i+1]= "Step " + (i+1) + "\t" +"\t"+"\t"+"\t"+"\t" + dirArray[i].getName() + "\n" +"Time: " + dirArray[i].getTime() + " minutes\n" + dirArray[i].getText();
+            strArray[i+1]= "Step " + (i+1) + "\t" +"\t"+"\t"+"\t" + dirArray[i].getName() + "\n" +"Time: " + dirArray[i].getTime() + " minutes\n" + dirArray[i].getText();
             totalTime += dirArray[i].getTime();
         }
         strArray[0] = totalTime + " minutes";
