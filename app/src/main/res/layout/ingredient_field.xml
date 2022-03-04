@@ -51,6 +51,7 @@
             android:id="@+id/IngredientDeleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="removeIngredient"
             android:translationX="450dp"
             app:srcCompat="@android:drawable/ic_delete" />
 
