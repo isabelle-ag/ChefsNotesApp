@@ -31,8 +31,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="9dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Direction Title"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/Directions"
