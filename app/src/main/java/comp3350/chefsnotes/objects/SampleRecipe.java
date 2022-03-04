@@ -1,7 +1,7 @@
 package comp3350.chefsnotes.objects;
 
-public class OtherRecipeExample extends Recipe{
-    public OtherRecipeExample(){
+public class SampleRecipe extends Recipe{
+    public SampleRecipe(){
         super("Fairy Pie");
         this.setup();
     }

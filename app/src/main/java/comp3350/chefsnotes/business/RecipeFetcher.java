@@ -1,9 +1,8 @@
 package comp3350.chefsnotes.business;
 
-import comp3350.chefsnotes.objects.OtherRecipeExample;
+import comp3350.chefsnotes.objects.SampleRecipe;
 import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.objects.Recipe;
-import comp3350.chefsnotes.objects.OtherRecipeExample;
 
 public class RecipeFetcher implements IRecipeFetcher{
     private final DBMSTools db;
@@ -24,7 +23,7 @@ public class RecipeFetcher implements IRecipeFetcher{
     }
 
     public Recipe getRecentRecipe(String s){
-        Recipe recipe = new OtherRecipeExample();
+        Recipe recipe = new SampleRecipe();
         return recipe;
     }
 
