@@ -2,6 +2,7 @@ package comp3350.chefsnotes.persistence;
 
 import comp3350.chefsnotes.objects.Recipe;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FakeDBMS implements DBMSTools{
 
@@ -18,7 +19,7 @@ public class FakeDBMS implements DBMSTools{
     public boolean createRecipe(String recipeName){
         boolean result = false;
 
-        if(getRecipe(recipeName) == null){
+        if(recipeName != null && getRecipe(recipeName) == null){
             result = recipes.add(new Recipe(recipeName));
         }
 
@@ -31,7 +32,7 @@ public class FakeDBMS implements DBMSTools{
     private boolean _addRecipe(Recipe newRecipe){
         boolean result = false;
 
-        if(getRecipe(newRecipe.getTitle()) == null){
+        if(newRecipe != null && getRecipe(newRecipe.getTitle()) == null){
             result = recipes.add(newRecipe);
         }
 
@@ -60,7 +61,7 @@ public class FakeDBMS implements DBMSTools{
     public Recipe getRecipe(String recipeName){
         Recipe result = null;
 
-        if(recipes.size() > 0){
+        if(recipeName != null && recipes.size() > 0){
             for( int i=0; i<recipes.size(); i++ ){
                 Recipe curr = recipes.get(i);
                 if(curr.getTitle().equals(recipeName)){
@@ -89,13 +90,16 @@ public class FakeDBMS implements DBMSTools{
 
 
     // returns array of each Recipe name that contains the partial String passed to it
+    // case-insensitive
     // returns empty array if no matches
     public String[] searchRecipeNames(String partial){
         ArrayList<String> searches = new ArrayList<String>();
 
-        for( Recipe curr : recipes ){
-            if(curr.getTitle().contains(partial)){
-                searches.add(curr.getTitle());
+        if(partial != null) {
+            for (Recipe curr : recipes) {
+                if (curr.getTitle().toLowerCase().contains(partial.toLowerCase())) {
+                    searches.add(curr.getTitle());
+                }
             }
         }
 
@@ -110,14 +114,18 @@ public class FakeDBMS implements DBMSTools{
     // returns true on success, false on failure
     public boolean deleteRecipe(String recipeName){
         boolean result = false;
-        Recipe removeTest = null;
-        Recipe target = getRecipe(recipeName); 
+        Recipe removeTest;
+        Recipe target;
 
-        if(target != null){
-            int location = recipes.indexOf(target);
-            removeTest = recipes.remove(location);
-            if(removeTest != null){
-                result = true;
+        if(recipeName != null) {
+            target = getRecipe(recipeName);
+
+            if (target != null) {
+                int location = recipes.indexOf(target);
+                removeTest = recipes.remove(location);
+                if (removeTest != null) {
+                    result = true;
+                }
             }
         }
 
@@ -129,12 +137,20 @@ public class FakeDBMS implements DBMSTools{
     // returns true on success, false on failure
     public boolean updateRecipeName(String recipe, String newName){
         boolean result = false;
-        Recipe target = getRecipe(recipe);  // should exist
-        Recipe test = getRecipe(newName);       // should not exist
+        Recipe target;
+        Recipe test;
 
-        if(target != null && test == null){
-            target._setTitle(newName);
+        if(recipe.equals(newName)){ // since no change but no need to fail
             result = true;
+
+        } else if(recipe != null && newName != null) {
+            target = getRecipe(recipe);  // should exist
+            test = getRecipe(newName);       // should not exist
+
+            if (target != null && test == null) {
+                target._setTitle(newName);
+                result = true;
+            }
         }
 
         return result;
@@ -152,12 +168,16 @@ public class FakeDBMS implements DBMSTools{
     // returns true on success, false on failure
     public boolean commitChanges(Recipe modified){
         boolean result = false;
-        Recipe target = getRecipe(modified.getTitle()); // should already exist
+        Recipe target;
 
-        if(target != null){
-            boolean tryDelete = deleteRecipe(modified.getTitle()); // delete old version
-            if(tryDelete){
-                result = _addRecipe(modified);              // save new version
+        if(modified != null) {
+            target = getRecipe(modified.getTitle()); // should already exist
+
+            if (target != null) {
+                boolean tryDelete = deleteRecipe(modified.getTitle()); // delete old version
+                if (tryDelete) {
+                    result = _addRecipe(modified);              // save new version
+                }
             }
         }
 
