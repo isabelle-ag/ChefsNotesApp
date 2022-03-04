@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/IngredientField"
-    android:layout_width="match_parent"
+    android:layout_width="550dp"
     android:layout_height="wrap_content"
+    android:background="#00FFFFFF"
     android:orientation="vertical"
     tools:showIn="@layout/recipe_editor">
 
@@ -12,7 +13,9 @@
         android:id="@+id/Ingredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/transparent">
+        android:layout_weight="0"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp">
 
 
         <EditText
@@ -23,7 +26,8 @@
             android:layout_marginBottom="30dp"
             android:autofillHints=""
             android:ems="10"
-            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
             android:maxWidth="75dp"
             android:maxLines="1"
             android:textAlignment="center"
@@ -36,6 +40,7 @@
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/ingredient"
+            android:imeOptions="actionDone"
             android:inputType="textPersonName"
             android:textAlignment="textStart"
             android:textSize="20sp"
@@ -43,7 +48,7 @@
 
         <Spinner
             android:id="@+id/unitList"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
             android:entries="@array/units"
@@ -66,15 +71,6 @@
             android:translationX="430dp"
             android:translationY="10dp"
             app:srcCompat="@drawable/delete_ico" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#0075CEDA"
-            android:padding="2dp"
-            android:translationX="520dp"
-            app:srcCompat="@drawable/add_icon" />
 
     </androidx.cardview.widget.CardView>
 

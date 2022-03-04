@@ -3,12 +3,9 @@ package comp3350.chefsnotes.presentation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -36,11 +33,6 @@ public class EditRecipe extends AppCompatActivity {
         View addInstructionButton = findViewById(R.id.AddDirectionButton);
         View deleteIngredientButton = findViewById(R.id.IngredientDeleteButton);
         View deleteDirectionButton = findViewById(R.id.DirectionDeleteButton);
-
-        Spinner spinner = (Spinner) findViewById(R.id.unitList);
-//        spinner.setAdapter(ArrayAdapter.createFromResource(spinner.getContext(),
-//                R.array.units,
-//                android.R.layout.simple_spinner_dropdown_item));
 
         saveButton.setOnClickListener(v -> {
             String title = getTitle(v);
@@ -70,22 +62,6 @@ public class EditRecipe extends AppCompatActivity {
         deleteDirectionButton.setOnClickListener(this::removeDirection);
 
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view,
-                                       int position, long id) {
-                hideKeyboard();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-
 
     }
 
@@ -109,9 +85,6 @@ public class EditRecipe extends AppCompatActivity {
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
     }
 
-    public void hideKeyboard(){
-        hideSoftKeyboard(this);
-    }
 
     private String getTitle(View view)
     {
@@ -202,7 +175,7 @@ public class EditRecipe extends AppCompatActivity {
 
         return directions;
     }
-    
+
     public void removeDirection(View view)
     {
         LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.InstructionContainer);
@@ -214,13 +187,7 @@ public class EditRecipe extends AppCompatActivity {
         LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.IngredientContainer);
         ingredientContainer.removeView((View) view.getParent().getParent());
     }
+    
 
-    public void hideSoftKeyboard(Activity activity) {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-        }
-    }
+}
 
