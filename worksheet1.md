@@ -45,3 +45,7 @@ Write a paragraph about any plans that were changed. Did you
 'push' any features to iteration 2? Did you change the description
 of any Features or User Stories? Have links to any changed or pushed Features
 or User Stories.
+
+Oh yeah: plans changed a lot. We ended up having to push back half the features we were intending to implement for this iteration. We were hoping to get recipe creation, recipe viewing, a browser, and an editor all done.... but we bit off more than we could chew.
+So we had to push back the [recipe browser](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/issues/4) and [recipe editor](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/issues/3) features (and [associated](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/issues/18) [user](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/issues/16) [stories](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/issues/17)) to [iteration 2](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/milestones/2#tab-issues), as well as a [copy recipe](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/issues/19) user story.
+Some feature/user story descriptions were changed during the iteration, but they were mostly for minor clarifications as opposed to sweeping design changes.
