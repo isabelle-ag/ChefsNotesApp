@@ -247,8 +247,11 @@ public class Recipe {
         String[] strArray = new String[n+1];
         int totalTime = 0;
         for(int i=0; i<n; i++){
-            strArray[i+1]= "Step " + (i+1) + "\t" +"\t"+"\t"+"\t" + dirArray[i].getName() + "\n"  + dirArray[i].getText() +"\nTime: " + dirArray[i].getTime() + " minutes";
-            totalTime += dirArray[i].getTime();
+            strArray[i+1]= "Step " + (i+1) + "\t" +"\t"+"\t"+"\t" + dirArray[i].getName() + "\n"  + dirArray[i].getText();
+            if(dirArray[i].getTime()>0) {
+                totalTime += dirArray[i].getTime();
+                strArray[i + 1] += "\nTime: " + dirArray[i].getTime() + " minutes";
+            }
         }
         strArray[0] = totalTime + " minutes";
         return strArray;
