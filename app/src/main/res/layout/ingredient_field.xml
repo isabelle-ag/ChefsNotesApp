@@ -1,49 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/IngredientField"
-    android:layout_width="match_parent"
+    android:layout_width="550dp"
     android:layout_height="wrap_content"
+    android:background="#00FFFFFF"
     android:orientation="vertical"
     tools:showIn="@layout/recipe_editor">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/Ingredient"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp">
+
 
         <EditText
             android:id="@+id/IngredientAmount"
-            android:layout_width="75dp"
+            android:layout_width="50dp"
             android:layout_height="58dp"
+            android:layout_marginBottom="30dp"
+            android:autofillHints=""
             android:ems="10"
-            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
             android:maxWidth="75dp"
             android:maxLines="1"
             android:textAlignment="center"
-            tools:ignore="SpeakableTextPresentCheck" />
-
+            tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
         <EditText
             android:id="@+id/IngredientName"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
+            android:autofillHints=""
             android:ems="10"
+            android:hint="@string/ingredient"
+            android:imeOptions="actionDone"
             android:inputType="textPersonName"
-            android:text="Ingredient"
             android:textAlignment="textStart"
             android:textSize="20sp"
-            android:translationX="200dp" />
+            android:translationX="185dp" />
 
         <Spinner
-            android:id="@+id/UnitList"
+            android:id="@+id/unitList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
             android:entries="@array/units"
+            android:gravity="end"
             android:spinnerMode="dropdown"
-            android:translationX="80dp"
+            android:textSize="12sp"
+            android:translationX="55dp"
             android:translationY="5dp"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
@@ -51,9 +62,16 @@
             android:id="@+id/IngredientDeleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/delete_button"
             android:onClick="removeIngredient"
-            android:translationX="450dp"
-            app:srcCompat="@android:drawable/ic_delete" />
+            android:padding="2dp"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            android:translationX="430dp"
+            android:translationY="10dp"
+            app:srcCompat="@drawable/delete_ico" />
 
     </androidx.cardview.widget.CardView>
 

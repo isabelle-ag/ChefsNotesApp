@@ -46,19 +46,33 @@
 
         <ListView
             android:id="@+id/ingredientListView"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="250dp"
+            android:layout_gravity="right|left"
             android:choiceMode="singleChoice"
             tools:ignore="DuplicateSpeakableTextCheck">
 
         </ListView>
+
+        <ImageView
+            android:id="@+id/recipePicture"
+            android:layout_width="280dp"
+            android:layout_height="250dp"
+            android:layout_marginLeft="290dp"
+            android:layout_marginTop="-395dp"
+            android:layout_marginBottom="180dp"
+            app:srcCompat="@drawable/fairy_pie" />
+            <!--   251dp marginTop for in line with ingredients     -->
+            android:rotation="0"
+            android:rotationX="0"
+            android:rotationY="0"
+            app:srcCompat="@drawable/fairy_pie" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20sp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
             android:background="#071355" />
@@ -68,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/directions"
             android:textColor="#000000"
             android:textSize="20sp"

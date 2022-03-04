@@ -107,7 +107,7 @@ public class EditRecipe extends AppCompatActivity {
                             .getText().toString();
 
             String ingredientUnit =
-                    ((Spinner)currRow.findViewById(R.id.UnitList))
+                    ((Spinner)currRow.findViewById(R.id.unitList))
                             .getSelectedItem().toString();
 
             if(!ingredientName.equals("") && !ingredientCount.equals("") && !ingredientUnit.equals(""))
