@@ -58,7 +58,7 @@ public class Quantity {
         if(! (other instanceof Quantity ) )
             return false;
         Quantity that = (Quantity) other;
-        return (this.amount.equals(that.amount) && this.name.equals(that.name));
+        return (this.amt.equals(that.amt) && this.unit.equals(that.unit));
     }
 
 }
