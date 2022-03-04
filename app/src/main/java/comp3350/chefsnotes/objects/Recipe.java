@@ -127,12 +127,19 @@ public class Recipe {
         int target = 0;
         Object factCheck = null;
         boolean result = false;
+        boolean found = false;
 
         for(Ingredient curr : this.ingredients){
             if(curr.getName().equals(ingName)){
-                factCheck = ingredients.remove(target);
+                found = true;
+                break;
+            } else {
+                target++;
             }
-            target++;
+        }
+
+        if(found) {
+            factCheck = ingredients.remove(target);
         }
 
         if(factCheck != null){
