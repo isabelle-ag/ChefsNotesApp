@@ -163,7 +163,7 @@ public class Recipe {
 
         boolean test = this.directions.add(d);
 
-        if(test = true){
+        if(test == true){
             result = this.directions.size()-1;
         }
 
@@ -177,7 +177,7 @@ public class Recipe {
 
         boolean test = this.directions.add(new Direction(txt, ""));
 
-        if(test = true){
+        if(test == true){
             result = this.directions.size()-1;
         }
 
@@ -190,7 +190,7 @@ public class Recipe {
 
         boolean test = this.directions.add(new Direction(txt, n, t));
 
-        if(test = true){
+        if(test == true){
             result = this.directions.size()-1;
         }
 
@@ -203,7 +203,7 @@ public class Recipe {
 
         boolean test = this.directions.add(new Direction(txt, "Direction "+this.directions.size(), t));
 
-        if(test = true){
+        if(test == true){
             result = this.directions.size()-1;
         }
 
@@ -216,7 +216,7 @@ public class Recipe {
 
         boolean test = this.directions.add(new Direction(txt, n));
 
-        if(test = true){
+        if(test == true){
             result = this.directions.size()-1;
         }
 
