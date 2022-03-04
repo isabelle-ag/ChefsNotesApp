@@ -47,7 +47,7 @@
             android:background="#071355" />
 
         <ListView
-            android:id="@+id/IngredientListView"
+            android:id="@+id/ingredientListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:choiceMode="singleChoice" />

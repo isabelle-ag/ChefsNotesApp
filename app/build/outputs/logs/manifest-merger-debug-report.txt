@@ -8,6 +8,7 @@ MERGED from [com.google.android.material:material:1.5.0] /Users/belle/.gradle/ca
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.3] /Users/belle/.gradle/caches/transforms-3/6c26fb9b62a1bb0fcdae9434e1ae5467/transformed/constraintlayout-2.1.3/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat:1.4.1] /Users/belle/.gradle/caches/transforms-3/02e0bd612fca2a22099e175f45d3c7d6/transformed/appcompat-1.4.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.gridlayout:gridlayout:1.0.0] /Users/belle/.gradle/caches/transforms-3/7e6809380c6dc80033ffc70b71ff9cd6/transformed/gridlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/belle/.gradle/caches/transforms-3/c4c44633242d28092407c962a2312420/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/belle/.gradle/caches/transforms-3/b90d62104035c390ce795a5678489037/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.3.6] /Users/belle/.gradle/caches/transforms-3/381c3d1d8983f6ae70117b7dabc2bc42/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.2.4] /Users/belle/.gradle/caches/transforms-3/4ade25847014e20c9525ac8a782d0f68/transformed/activity-1.2.4/AndroidManifest.xml:17:1-24:12
@@ -21,8 +22,9 @@ MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/belle/.gra
 MERGED from [androidx.transition:transition:1.2.0] /Users/belle/.gradle/caches/transforms-3/0f0951a46932f404b724b23d844aa899/transformed/transition-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/belle/.gradle/caches/transforms-3/0dcfa1cd4aa507d228d98096990059cb/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/belle/.gradle/caches/transforms-3/a5fb3efea6bb885b0723d20d650071de/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/belle/.gradle/caches/transforms-3/8380bed6daadbbe3a8cba9c5f06b0b1a/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] /Users/belle/.gradle/caches/transforms-3/02cfcd4197ec28df4ed5b6369f2bc6ba/transformed/media-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/belle/.gradle/caches/transforms-3/26d9bf60f45e9aae9e5cbc6c55121aa1/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/belle/.gradle/caches/transforms-3/8380bed6daadbbe3a8cba9c5f06b0b1a/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.loader:loader:1.0.0] /Users/belle/.gradle/caches/transforms-3/7081a5a2bcd9405b3ad58308f65cfb76/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/belle/.gradle/caches/transforms-3/b65ee519c743ab43ae5bda839e4b4688/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/belle/.gradle/caches/transforms-3/0b2fc5bd1050fc1caaf78d971be42282/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -141,6 +143,8 @@ MERGED from [androidx.appcompat:appcompat:1.4.1] /Users/belle/.gradle/caches/tra
 MERGED from [androidx.appcompat:appcompat:1.4.1] /Users/belle/.gradle/caches/transforms-3/02e0bd612fca2a22099e175f45d3c7d6/transformed/appcompat-1.4.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.gridlayout:gridlayout:1.0.0] /Users/belle/.gradle/caches/transforms-3/7e6809380c6dc80033ffc70b71ff9cd6/transformed/gridlayout-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.gridlayout:gridlayout:1.0.0] /Users/belle/.gradle/caches/transforms-3/7e6809380c6dc80033ffc70b71ff9cd6/transformed/gridlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/belle/.gradle/caches/transforms-3/c4c44633242d28092407c962a2312420/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/belle/.gradle/caches/transforms-3/c4c44633242d28092407c962a2312420/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/belle/.gradle/caches/transforms-3/b90d62104035c390ce795a5678489037/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/belle/.gradle/caches/transforms-3/b90d62104035c390ce795a5678489037/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.6] /Users/belle/.gradle/caches/transforms-3/381c3d1d8983f6ae70117b7dabc2bc42/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
@@ -167,10 +171,12 @@ MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/belle
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/belle/.gradle/caches/transforms-3/0dcfa1cd4aa507d228d98096990059cb/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/belle/.gradle/caches/transforms-3/a5fb3efea6bb885b0723d20d650071de/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/belle/.gradle/caches/transforms-3/a5fb3efea6bb885b0723d20d650071de/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/belle/.gradle/caches/transforms-3/8380bed6daadbbe3a8cba9c5f06b0b1a/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/belle/.gradle/caches/transforms-3/8380bed6daadbbe3a8cba9c5f06b0b1a/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/belle/.gradle/caches/transforms-3/02cfcd4197ec28df4ed5b6369f2bc6ba/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/belle/.gradle/caches/transforms-3/02cfcd4197ec28df4ed5b6369f2bc6ba/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/belle/.gradle/caches/transforms-3/26d9bf60f45e9aae9e5cbc6c55121aa1/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/belle/.gradle/caches/transforms-3/26d9bf60f45e9aae9e5cbc6c55121aa1/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/belle/.gradle/caches/transforms-3/8380bed6daadbbe3a8cba9c5f06b0b1a/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/belle/.gradle/caches/transforms-3/8380bed6daadbbe3a8cba9c5f06b0b1a/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] /Users/belle/.gradle/caches/transforms-3/7081a5a2bcd9405b3ad58308f65cfb76/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] /Users/belle/.gradle/caches/transforms-3/7081a5a2bcd9405b3ad58308f65cfb76/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/belle/.gradle/caches/transforms-3/b65ee519c743ab43ae5bda839e4b4688/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41

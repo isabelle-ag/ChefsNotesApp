@@ -37,7 +37,7 @@
             android:translationX="200dp" />
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/UnitList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
@@ -46,6 +46,13 @@
             android:translationX="80dp"
             android:translationY="5dp"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/IngredientDeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="450dp"
+            app:srcCompat="@android:drawable/ic_delete" />
 
     </androidx.cardview.widget.CardView>
 
