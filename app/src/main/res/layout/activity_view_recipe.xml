@@ -36,10 +36,20 @@
             android:id="@+id/ingredients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:text="@string/ingredients"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/ingredientListView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:choiceMode="singleChoice" >
+
+        </ListView>
 
         <View
             android:id="@+id/divider"
@@ -51,16 +61,11 @@
             android:layout_marginBottom="20dp"
             android:background="#071355" />
 
-        <ListView
-            android:id="@+id/ingredientListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:choiceMode="singleChoice" />
-
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/directions"
             android:textColor="#000000"
             android:textSize="20sp"

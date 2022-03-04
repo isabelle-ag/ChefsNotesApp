@@ -115,7 +115,7 @@ public class Recipe {
         int n = ingArray.length;
         String[] strArray = new String[n];
         for (int i = 0; i < n; i++) {
-            strArray[i] = ingArray[i].toString();
+            strArray[i] = ingArray[i].getAmtString() + "\t"+"\t"+ingArray[i].getName();
         }
         return strArray;
     }
@@ -175,7 +175,7 @@ public class Recipe {
     public int addDirection(String txt){
         int result = -1;
 
-        boolean test = this.directions.add(new Direction(txt, "Direction "+this.directions.size()));
+        boolean test = this.directions.add(new Direction(txt, ""));
 
         if(test = true){
             result = this.directions.size()-1;
@@ -244,10 +244,10 @@ public class Recipe {
     public String[] getDirectionStrings(){
         Direction[] dirArray = getDirections();
         int n = dirArray.length;
-        String[] strArray = new String[n];
+        String[] strArray = new String[n+1];
         int totalTime = 0;
-        for(int i=1; i<n+1; i++){
-            strArray[i]= "Step " + i + " " + dirArray[i].getName() + "\t" + "Time: " + dirArray[i].getTime() + "\n" + dirArray[i].getText();
+        for(int i=0; i<n; i++){
+            strArray[i+1]= "Step " + (i+1) + "\t" +"\t"+"\t"+"\t"+"\t" + dirArray[i].getName() + "\n" +"Time: " + dirArray[i].getTime() + " minutes\n" + dirArray[i].getText();
             totalTime += dirArray[i].getTime();
         }
         strArray[0] = totalTime + " minutes";

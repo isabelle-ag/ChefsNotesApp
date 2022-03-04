@@ -13,6 +13,8 @@ import comp3350.chefsnotes.persistence.FakeDBMS;
 
 import android.widget.ArrayAdapter;
 
+import java.util.Arrays;
+
 public class ViewRecipe extends AppCompatActivity {
     private RecipeFetcher recipeFetcher = new RecipeFetcher(new FakeDBMS());
     private Recipe recipe;
@@ -27,9 +29,12 @@ public class ViewRecipe extends AppCompatActivity {
     }
 
     private void fillViewer(){
-        String[] directions = recipe.getDirectionStrings();
+        String[] directionsTemp = recipe.getDirectionStrings();
         String[] ingredients = recipe.getIngredientStrings();
         String title = recipe.getTitle();
+        String time = directionsTemp[0];
+
+        String[] directions = Arrays.copyOfRange(directionsTemp, 1, directionsTemp.length);
 
         ((TextView)findViewById(R.id.recipeName)).setText(title);
 
@@ -43,9 +48,9 @@ public class ViewRecipe extends AppCompatActivity {
         ArrayAdapter<String> dirAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, directions);
         ListView dirView = (ListView) findViewById(R.id.directionListView);
-        dirView.setAdapter(ingAdapter);
+        dirView.setAdapter(dirAdapter);
 
-        ((TextView)findViewById(R.id.totalTimeView)).setText(directions[0]);
+        ((TextView)findViewById(R.id.totalTimeView)).setText(time);
 
 
     }

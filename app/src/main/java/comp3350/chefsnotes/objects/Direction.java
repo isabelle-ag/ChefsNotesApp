@@ -7,7 +7,7 @@ public class Direction {
     private String text;
     private int time;
 
-    public Direction(String txt, String n, int t){
+    public Direction(String n, String txt, int t){
         this.name = n;
         this.text = txt;
         this.time = t;
