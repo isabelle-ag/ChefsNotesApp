@@ -31,6 +31,7 @@ public class EditRecipe extends AppCompatActivity {
         View addIngredientButton = findViewById(R.id.AddIngredientButton);
         View addInstructionButton = findViewById(R.id.AddDirectionButton);
         View deleteIngredientButton = findViewById(R.id.IngredientDeleteButton);
+        View deleteDirectionButton = findViewById(R.id.DirectionDeleteButton);
 
         saveButton.setOnClickListener(v -> {
             String title = getTitle(v);
@@ -57,6 +58,7 @@ public class EditRecipe extends AppCompatActivity {
         addInstructionButton.setOnClickListener(this::addDirection);
         addIngredientButton.setOnClickListener(this::addIngredient);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
+        deleteDirectionButton.setOnClickListener(this::removeDirection);
 
     }
 
@@ -65,6 +67,9 @@ public class EditRecipe extends AppCompatActivity {
         LinearLayout instructionContainer = findViewById(R.id.InstructionContainer);
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
         instructionContainer.addView(child);
+
+        View deleteDirectionButton = child.findViewById(R.id.DirectionDeleteButton);
+        deleteDirectionButton.setOnClickListener(this::removeDirection);
     }
 
     public void addIngredient(View view)
