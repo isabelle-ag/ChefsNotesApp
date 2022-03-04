@@ -7,7 +7,8 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({
         QuantityNumTest.class,
-        IngredientTest.class
+        IngredientTest.class,
+        RecipeTest.class
 })
 
 public class _ObjectsTestSuite {
