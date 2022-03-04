@@ -142,7 +142,7 @@ public class EditRecipe extends AppCompatActivity {
                             .getText().toString();
 
             String instructions =
-                    ((EditText)currRow.findViewById(R.id.Directions))
+                    ((EditText)currRow.findViewById(R.id.textbox))
                             .getText().toString();
 
             String timeEstimate =
