@@ -11,5 +11,5 @@ import org.junit.runners.Suite;
         IRecipeFetcherTest.class
 })
 
-public class BusinessTestSuite {
+public class _BusinessTestSuite {
 }

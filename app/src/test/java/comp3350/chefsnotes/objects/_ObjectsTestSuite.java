@@ -6,8 +6,9 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-        QuantityNumTest.class
+        QuantityNumTest.class,
+        IngredientTest.class
 })
 
-public class ObjectsTestSuite {
+public class _ObjectsTestSuite {
 }
