@@ -8,31 +8,33 @@ import android.widget.TextView;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.business.RecipeFetcher;
+import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.persistence.FakeDBMS;
 
 import android.widget.ArrayAdapter;
 
+import java.util.Arrays;
+
 public class ViewRecipe extends AppCompatActivity {
     private RecipeFetcher recipeFetcher = new RecipeFetcher(new FakeDBMS());
+    private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
-        recipeFetcher.setRecentRecipe();
-        if(recipeFetcher.validRecipe()) {
-            fillViewer();
-        }
-        else{
-            errorScreen();
-        }
 
+        recipe = recipeFetcher.getRecentRecipe("Use Test Recipe");
+        fillViewer();
     }
 
     private void fillViewer(){
-        String [] directions = recipeFetcher.getDirections();
-        String [] ingredients = recipeFetcher.getIngredients();
-        String title = recipeFetcher.getRecipeName();
+        String[] directionsTemp = recipe.getDirectionStrings();
+        String[] ingredients = recipe.getIngredientStrings();
+        String title = recipe.getTitle();
+        String time = directionsTemp[0];
+
+        String[] directions = Arrays.copyOfRange(directionsTemp, 1, directionsTemp.length);
 
         ((TextView)findViewById(R.id.recipeName)).setText(title);
 
@@ -46,9 +48,9 @@ public class ViewRecipe extends AppCompatActivity {
         ArrayAdapter<String> dirAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, directions);
         ListView dirView = (ListView) findViewById(R.id.directionListView);
-        dirView.setAdapter(ingAdapter);
+        dirView.setAdapter(dirAdapter);
 
-        ((TextView)findViewById(R.id.totalTimeView)).setText(directions[0]);
+        ((TextView)findViewById(R.id.totalTimeView)).setText(time);
 
 
     }

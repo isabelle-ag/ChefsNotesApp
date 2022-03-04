@@ -6,9 +6,5 @@ public interface IRecipeFetcher {
 
     public Recipe getRecentRecipe();
     public Recipe getRecipeByName(String name);
-    public String[] getIngredients();
-    public String[] getDirections();
-    public String getRecipeName();
-    public void setRecentRecipe();
-    public boolean validRecipe();
+
 }

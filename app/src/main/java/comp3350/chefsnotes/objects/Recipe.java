@@ -110,6 +110,16 @@ public class Recipe {
         return result;
     }
 
+    public String[] getIngredientStrings() {
+        Ingredient[] ingArray = getIngredients();
+        int n = ingArray.length;
+        String[] strArray = new String[n];
+        for (int i = 0; i < n; i++) {
+            strArray[i] = ingArray[i].getAmtString() + "\t\t\t\t"+ingArray[i].getName();
+        }
+        return strArray;
+    }
+
     // deletes first ingredient with matching name
     // fails if ingredient DNE
     // returns true on success, false on failure
@@ -165,7 +175,7 @@ public class Recipe {
     public int addDirection(String txt){
         int result = -1;
 
-        boolean test = this.directions.add(new Direction(txt, "Direction "+this.directions.size()));
+        boolean test = this.directions.add(new Direction(txt, ""));
 
         if(test = true){
             result = this.directions.size()-1;
@@ -228,6 +238,20 @@ public class Recipe {
         result = this.directions.get(dnum); // can throw exception        
 
         return result;
+    }
+
+    //For ViewerUI, needs to be an array of strings
+    public String[] getDirectionStrings(){
+        Direction[] dirArray = getDirections();
+        int n = dirArray.length;
+        String[] strArray = new String[n+1];
+        int totalTime = 0;
+        for(int i=0; i<n; i++){
+            strArray[i+1]= "Step " + (i+1) + "\t" +"\t"+"\t"+"\t" + dirArray[i].getName() + "\n"  + dirArray[i].getText() +"\nTime: " + dirArray[i].getTime() + " minutes";
+            totalTime += dirArray[i].getTime();
+        }
+        strArray[0] = totalTime + " minutes";
+        return strArray;
     }
 
     // deletes the Direction at index dnum
