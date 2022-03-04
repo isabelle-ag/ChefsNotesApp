@@ -26,8 +26,9 @@ public class IngredientTest {
 
     @Test
     public void testNameMethods(){
-        assertEquals(testIngredientDecimal.getName(), fractionName);
-        assertEquals(testIngredientFraction.getName(), decimalName);
+        assertEquals(testIngredientDecimal.getName(), decimalName);
+        assertEquals(testIngredientFraction.getName(), fractionName);
+        assertNotEquals(testIngredientDecimal.getName(), fractionName);
 
         String newName = "water";
 
