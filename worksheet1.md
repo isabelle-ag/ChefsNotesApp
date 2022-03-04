@@ -11,6 +11,10 @@ that was used complete the feature.
 
 Use one or two paragraphs which can have point-form within them.
 
+The story of [Recipe Creation](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/issues/1):
+
+Long story short, we had no idea what we were doing at the start of this, and more-or-less floundered trying to get our ducks in a row. There were a number of merges of backend stuff like the [DBMS interface](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/merge_requests/7), [DSOs](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/merge_requests/2), and even, well, realizing we had to [initialize](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/merge_requests/1) the android project. After all that was done, we were able to ~~horribly procrastinate~~ get working on the presentation aspects, though it would take a [number](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/merge_requests/9) [of](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/merge_requests/11) [merges](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/merge_requests/29) for it to be done, including needing to make some [business layer code](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/merge_requests/21) and [associated tests](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-/merge_requests/21/diffs?commit_id=7b8de7044f48e15d8585fe03cdeb437f8a010c68).
+
 Exceptional code
 ----------------
 
