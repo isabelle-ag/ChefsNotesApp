@@ -49,9 +49,12 @@ public class RecipeFetcher implements IRecipeFetcher {
         Direction[] dirArray = currentRecipe.getDirections();
         int n = dirArray.length;
         String[] strArray = new String[n];
-        for(int i=0; i<n; i++){
-            strArray[i]= "Step " + i + " " + dirArray[i].getName() + "\n" + dirArray[i].getText();
+        int totalTime = 0;
+        for(int i=1; i<n+1; i++){
+            strArray[i]= "Step " + i + " " + dirArray[i].getName() + "\t" + "Time: " + dirArray[i].getTime() + "\n" + dirArray[i].getText();
+            totalTime += dirArray[i].getTime();
         }
+        strArray[0] = totalTime + " minutes";
         return strArray;
     }
     public String getRecipeName(){

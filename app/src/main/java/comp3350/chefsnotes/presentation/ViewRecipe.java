@@ -9,7 +9,6 @@ import android.widget.TextView;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.persistence.FakeDBMS;
-import comp3350.chefsnotes.objects.Recipe;
 
 import android.widget.ArrayAdapter;
 
@@ -48,6 +47,9 @@ public class ViewRecipe extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, directions);
         ListView dirView = (ListView) findViewById(R.id.directionListView);
         dirView.setAdapter(ingAdapter);
+
+        ((TextView)findViewById(R.id.totalTimeView)).setText(directions[0]);
+
 
     }
 

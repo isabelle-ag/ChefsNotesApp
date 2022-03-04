@@ -46,6 +46,7 @@ id recipeTitle
 id save_button
 id textView2
 id textView6
+id totalTimeView
 layout activity_main
 layout activity_view_recipe
 layout ingredient_field

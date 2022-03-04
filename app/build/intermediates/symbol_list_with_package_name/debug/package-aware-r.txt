@@ -3016,6 +3016,7 @@ id title_template
 id toggle
 id top
 id topPanel
+id totalTimeView
 id touch_outside
 id transitionToEnd
 id transitionToStart
