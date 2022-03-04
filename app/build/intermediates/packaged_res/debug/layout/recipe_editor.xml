@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_save"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+    <ScrollView
+        android:id="@+id/MainView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:clickable="true"
+        android:translationY="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:id="@+id/TitleField"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/recipeTitle"
+                    android:layout_width="580dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:breakStrategy="simple"
+                    android:clickable="true"
+                    android:editable="true"
+                    android:ems="10"
+                    android:inputType="textShortMessage|textLongMessage|none|textMultiLine"
+                    android:longClickable="true"
+                    android:minHeight="48dp"
+                    android:singleLine="true"
+                    android:text="Recipe Title"
+                    android:textAlignment="center"
+                    android:textIsSelectable="true"
+                    android:textSize="48sp"
+                    app:flow_wrapMode="aligned" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/IngredientHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ingredients"
+                        android:textAlignment="center"
+                        android:textSize="34sp"
+                        android:translationY="50dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/IngredientContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/ingredient_field" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/AddIngredientButton"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:onClick="addIngredient"
+                    app:srcCompat="@android:drawable/ic_input_add"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/InstructionHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Instructions"
+                        android:textAlignment="center"
+                        android:textSize="34sp"
+                        android:translationY="50dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/InstructionContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/instruction_field" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/AddDirectionButton"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_below="@+id/Directions"
+                    android:layout_marginTop="12dp"
+                    android:onClick="addDirection"
+                    app:srcCompat="@android:drawable/ic_input_add"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Space
+                    android:id="@+id/Buffer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp" />
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

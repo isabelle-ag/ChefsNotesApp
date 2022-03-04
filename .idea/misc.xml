@@ -3,19 +3,32 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android-Studio/chefsnotes/app/src/main/res/layout/ingredient_field.xml" value="0.15780141843971632" />
-        <entry key="..\:/Android-Studio/chefsnotes/app/src/main/res/layout/instruction_field.xml" value="0.15780141843971632" />
-        <entry key="..\:/Android-Studio/chefsnotes/app/src/main/res/layout/recipe_editor.xml" value="0.17831813576494426" />
-        <entry key="..\:/Users/erane/StudioProjects/COMP3350/app/src/main/res/layout/activity_main.xml" value="0.10333333333333333" />
-        <entry key="..\:/Users/erane/StudioProjects/COMP3350/app/src/main/res/layout/ingredient_field.xml" value="0.264" />
-        <entry key="..\:/Users/erane/StudioProjects/COMP3350/app/src/main/res/layout/instruction_field.xml" value="0.264" />
-        <entry key="..\:/Users/erane/StudioProjects/COMP3350/app/src/main/res/layout/recipe_editor.xml" value="0.264" />
         <entry key="..\:/Users/erane/StudioProjects/chefsnotes/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/erane/StudioProjects/chefsnotes/app/src/main/res/layout/recipe_editor.xml" value="0.264" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable/spacer.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/spacer_medium.xml" value="0.2855" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_view_recipe.xml" value="0.17940826416015626" />
+        <entry key="app/src/main/res/layout/content_view_recipe.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/fragment_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/ingredient_field.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/ingredient_list.xml" value="0.19655797101449277" />
+        <entry key="app/src/main/res/layout/instruction_field.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/recipe_editor.xml" value="0.160931396484375" />
+        <entry key="app/src/main/res/layout/recipe_viewer.xml" value="0.28125" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="/Library/Java/JavaVirtualMachine/jdk.1.7.0_79.jdk/Contents/Home" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2367758186397985" />
+      </ProjectState>
+    </option>
   </component>
 </project>

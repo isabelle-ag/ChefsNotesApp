@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/IngredientField"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:showIn="@layout/recipe_editor">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Ingredient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/IngredientAmount"
+            android:layout_width="75dp"
+            android:layout_height="58dp"
+            android:ems="10"
+            android:inputType="number"
+            android:maxWidth="75dp"
+            android:maxLines="1"
+            android:textAlignment="center"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <EditText
+            android:id="@+id/IngredientName"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Ingredient"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            android:translationX="200dp" />
+
+        <Spinner
+            android:id="@+id/UnitList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:entries="@array/units"
+            android:spinnerMode="dropdown"
+            android:translationX="80dp"
+            android:translationY="5dp"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/IngredientDeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="removeIngredient"
+            android:translationX="450dp"
+            app:srcCompat="@android:drawable/ic_delete" />
+
+    </androidx.cardview.widget.CardView>
+
+</TableRow>
