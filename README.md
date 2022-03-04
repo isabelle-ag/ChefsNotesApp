@@ -13,3 +13,8 @@ Unlike other recipe applications, ChefsNotes is focused on making you a better C
 ChefsNotes will be considered successful if Play Store user ratings are above 3.5/5 by 6 months, and user retention is above 50% in the first 6 months. To be successful, the project will also need a total of at least 1000 downloads.
 
 ---
+
+### Links:
+[Iteration 1 Worksheet](worksheet1.md)
+
+[Architecture diagram](ARCHITECTURE.md)
