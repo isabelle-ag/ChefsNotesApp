@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/Direction"
         android:layout_width="wrap_content"
-        android:layout_height="139dp">
+        android:layout_height="175dp">
 
         <ImageButton
             android:id="@+id/DirectionDeleteButton"
@@ -36,8 +36,8 @@
             android:backgroundTint="#000000"
             android:ems="10"
             android:hint="Direction Title"
-            android:imeOptions="actionDone"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            tools:imeOptions="actionDone" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/Directions"
@@ -50,9 +50,11 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textbox"
                 android:layout_width="380dp"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:background="@android:drawable/editbox_background"
-                android:hint="Direction" />
+                android:hint="Direction"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
@@ -70,7 +72,8 @@
             android:textAlignment="center"
             android:textSize="18sp"
             android:translationX="0dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:imeOptions="actionDone" />
 
         <Space
             android:id="@+id/AddDirectionButton"
