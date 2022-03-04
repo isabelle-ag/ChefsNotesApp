@@ -20,9 +20,8 @@
 
         <EditText
             android:id="@+id/IngredientAmount"
-            android:layout_width="75dp"
+            android:layout_width="50dp"
             android:layout_height="58dp"
-            android:layout_marginStart="20sp"
             android:layout_marginBottom="30dp"
             android:autofillHints=""
             android:ems="10"
@@ -44,24 +43,26 @@
             android:inputType="textPersonName"
             android:textAlignment="textStart"
             android:textSize="20sp"
-            android:translationX="200dp" />
+            android:translationX="185dp" />
 
         <Spinner
             android:id="@+id/unitList"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
             android:entries="@array/units"
+            android:gravity="end"
             android:spinnerMode="dropdown"
-            android:translationX="95dp"
+            android:textSize="12sp"
+            android:translationX="55dp"
             android:translationY="5dp"
-            android:verticalScrollbarPosition="defaultPosition"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/IngredientDeleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/delete_button"
             android:onClick="removeIngredient"
