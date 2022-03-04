@@ -46,10 +46,11 @@
 
         <ListView
             android:id="@+id/ingredientListView"
-            android:layout_width="280dp"
+            android:layout_width="wrap_content"
             android:layout_height="250dp"
-            android:layout_gravity="right|left"
             android:choiceMode="singleChoice"
+            android:divider="@android:color/black"
+            android:dividerHeight="-15sp"
             tools:ignore="DuplicateSpeakableTextCheck">
 
         </ListView>
@@ -94,7 +95,7 @@
             android:layout_height="match_parent"
             android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"
-            android:dividerHeight="10sp">
+            android:dividerHeight="15sp">
 
         </ListView>
     </LinearLayout>
