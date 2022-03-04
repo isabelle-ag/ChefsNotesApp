@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chefsnotes</string>
+    <string name="app_name">ChefsNotes</string>
     <string name="create_recipe">Create Recipe</string>
     <string name="view_recipe">View Recipe</string>
     <string name="chefsnotes">ChefsNotes</string>
