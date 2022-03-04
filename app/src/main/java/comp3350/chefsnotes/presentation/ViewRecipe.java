@@ -25,7 +25,12 @@ public class ViewRecipe extends AppCompatActivity {
         setContentView(R.layout.activity_view_recipe);
 
         recipe = recipeFetcher.getRecentRecipe("Use Test Recipe");
-        fillViewer();
+        if(recipe != null) {
+            fillViewer();
+        }
+        else{
+            errorScreen();
+        }
     }
 
     private void fillViewer(){
