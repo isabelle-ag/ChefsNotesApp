@@ -12,10 +12,15 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
+import comp3350.chefsnotes.objects.RecipeExistenceException;
+import comp3350.chefsnotes.persistence.DBMSTools;
+import comp3350.chefsnotes.persistence.FakeDBMS;
 
 public class EditRecipe extends AppCompatActivity {
+    private RecipeManager recipeManager = new RecipeManager(new FakeDBMS());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +39,14 @@ public class EditRecipe extends AppCompatActivity {
 
             if(ingredients != null && directions != null)
             {
-                System.out.println("Saving " + title + "...");
+                try {
+                    System.out.println("Saving " + title + "...");
+                    recipeManager.saveButton(title, ingredients, directions);
+                }
+                catch(RecipeExistenceException e) {
+                    System.out.println("Saving failed!");
+                    System.out.println(e);
+                }
             }
             else
             {

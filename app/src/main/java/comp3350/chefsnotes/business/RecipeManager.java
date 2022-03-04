@@ -11,7 +11,7 @@ import comp3350.chefsnotes.persistence.DBMSTools;
 public class RecipeManager implements IRecipeManager {
     private DBMSTools db;
 
-    RecipeManager(DBMSTools db) {
+    public RecipeManager(DBMSTools db) {
         this.db = db;
     }
 
