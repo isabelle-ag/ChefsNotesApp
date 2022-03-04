@@ -83,7 +83,9 @@
                     android:text="@string/view_recipe"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold" />
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
             </RelativeLayout>
         </androidx.gridlayout.widget.GridLayout>
 
