@@ -62,26 +62,6 @@ public class EditRecipe extends AppCompatActivity {
 
     }
 
-    public void addDirection(View view)
-    {
-        LinearLayout instructionContainer = findViewById(R.id.InstructionContainer);
-        View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
-        instructionContainer.addView(child);
-
-        View deleteDirectionButton = child.findViewById(R.id.DirectionDeleteButton);
-        deleteDirectionButton.setOnClickListener(this::removeDirection);
-    }
-
-    public void addIngredient(View view)
-    {
-        LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
-        View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
-        ingredientContainer.addView(child);
-
-        View deleteIngredientButton = child.findViewById(R.id.IngredientDeleteButton);
-        deleteIngredientButton.setOnClickListener(this::removeIngredient);
-    }
-
     private String getTitle(View view)
     {
         return ((EditText) findViewById(R.id.recipeTitle)).getText().toString();
@@ -171,7 +151,29 @@ public class EditRecipe extends AppCompatActivity {
 
         return directions;
     }
-    
+
+    public void addDirection(View view)
+    {
+        LinearLayout instructionContainer = findViewById(R.id.InstructionContainer);
+        View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
+        instructionContainer.addView(child);
+
+        View deleteDirectionButton = child.findViewById(R.id.DirectionDeleteButton);
+        deleteDirectionButton.setOnClickListener(this::removeDirection);
+    }
+
+    public void addIngredient(View view)
+    {
+        LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
+        View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
+        ingredientContainer.addView(child);
+
+        View deleteIngredientButton = child.findViewById(R.id.IngredientDeleteButton);
+        deleteIngredientButton.setOnClickListener(this::removeIngredient);
+    }
+
+
+
     public void removeDirection(View view)
     {
         LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.InstructionContainer);
