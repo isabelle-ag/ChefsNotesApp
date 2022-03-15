@@ -11,16 +11,16 @@
     <RelativeLayout
         android:id="@+id/Direction"
         android:layout_width="wrap_content"
-        android:layout_height="175dp">
+        android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/DirectionDeleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/TimeEstimate"
-            android:layout_marginStart="68dp"
-            android:layout_marginTop="24dp"
-            android:layout_toEndOf="@+id/Directions"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="45dp"
+            android:layout_toEndOf="@+id/textbox"
             android:background="#00FFFFFF"
             android:scaleX=".8"
             android:scaleY=".8"
@@ -39,23 +39,17 @@
             android:inputType="textPersonName"
             tools:imeOptions="actionDone" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Directions"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textbox"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:elevation="0dp"
-            app:boxStrokeWidth="0dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textbox"
-                android:layout_width="380dp"
-                android:layout_height="80dp"
-                android:background="@android:drawable/editbox_background"
-                android:hint="Direction"
-                android:imeOptions="actionDone"
-                android:inputType="textMultiLine" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_below="@+id/DirectionName"
+            android:layout_marginTop="32dp"
+            android:background="@android:drawable/editbox_background"
+            android:hint="Direction"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            android:minLines="3" />
 
         <EditText
             android:id="@+id/TimeEstimate"
