@@ -72,4 +72,9 @@ public class Decimal extends QuantityNum {
         return Double.valueOf(value).hashCode();
     }
 
+    public Decimal clone()
+    {
+        return new Decimal(this.value);
+    }
+
 }

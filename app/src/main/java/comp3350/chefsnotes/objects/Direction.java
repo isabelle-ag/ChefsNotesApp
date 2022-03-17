@@ -80,4 +80,8 @@ public class Direction {
         return String.format("%s: %s - %d min", name, text, time);
     }
 
+    public Direction clone()
+    {
+        return new Direction(this.name, this.text, this.time);
+    }
 }
