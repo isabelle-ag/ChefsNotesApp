@@ -29,8 +29,10 @@ public class ViewRecipe extends AppCompatActivity {
         setContentView(R.layout.activity_view_recipe);
 
         ImageButton editButton = findViewById(R.id.edit_button);
+        ImageButton copyButton = findViewById(R.id.copy_button);//somehow set save to only do save as?
 
         editButton.setOnClickListener(this::editRecipe);
+        copyButton.setOnClickListener(this::editRecipe);
 
         recipe = recipeFetcher.getRecentRecipe("Use Test Recipe");
         if(recipe != null) {

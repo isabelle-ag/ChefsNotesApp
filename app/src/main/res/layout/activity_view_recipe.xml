@@ -30,10 +30,18 @@
             android:textSize="50sp" />
 
         <ImageButton
+            android:id="@+id/copy_button"
+            android:layout_width="103dp"
+            android:layout_height="58dp"
+            android:translationX="450dp"
+            android:translationY="-17dp"
+            app:srcCompat="?attr/actionModeCopyDrawable" />
+
+        <ImageButton
             android:id="@+id/edit_button"
-            android:layout_width="95dp"
-            android:layout_height="wrap_content"
-            android:translationX="400dp"
+            android:layout_width="103dp"
+            android:layout_height="58dp"
+            android:translationX="350dp"
             android:translationY="-75dp"
             app:srcCompat="@android:drawable/ic_menu_edit"
             tools:ignore="SpeakableTextPresentCheck" />
