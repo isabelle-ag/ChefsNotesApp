@@ -14,8 +14,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/recipeName"
@@ -26,6 +28,16 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="50sp" />
+
+        <ImageButton
+            android:id="@+id/edit_button"
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:translationX="400dp"
+            android:translationY="-75dp"
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            tools:ignore="SpeakableTextPresentCheck" />
+<!--        has temporary image-->
 
         <TextView
             android:id="@+id/totalTimeView"
@@ -63,11 +75,11 @@
             android:layout_marginTop="-395dp"
             android:layout_marginBottom="180dp"
             app:srcCompat="@drawable/fairy_pie" />
-            <!--   251dp marginTop for in line with ingredients     -->
-            android:rotation="0"
-            android:rotationX="0"
-            android:rotationY="0"
-            app:srcCompat="@drawable/fairy_pie" />
+        <!--   251dp marginTop for in line with ingredients     -->
+        android:rotation="0"
+        android:rotationX="0"
+        android:rotationY="0"
+        app:srcCompat="@drawable/fairy_pie" />
 
         <View
             android:id="@+id/divider"

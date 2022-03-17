@@ -62,11 +62,13 @@ public class EditRecipe extends AppCompatActivity {
 
     }
 
+    //put retrieval methods in separate class?
     private String getTitle(View view)
     {
         return ((EditText) findViewById(R.id.recipeTitle)).getText().toString();
     }
 
+    //put retrieval methods in separate class?
     private ArrayList<Ingredient> getIngredients(View view)
     {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
@@ -106,6 +108,7 @@ public class EditRecipe extends AppCompatActivity {
         return ingredients;
     }
 
+    //put retrieval methods in separate class?
     private ArrayList<Direction> getDirections(View view)
     {
         ArrayList<Direction> directions = new ArrayList<>();

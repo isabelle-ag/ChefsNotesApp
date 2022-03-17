@@ -1,7 +1,11 @@
 package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +28,10 @@ public class ViewRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
 
+        ImageButton editButton = findViewById(R.id.edit_button);
+
+        editButton.setOnClickListener(this::editRecipe);
+
         recipe = recipeFetcher.getRecentRecipe("Use Test Recipe");
         if(recipe != null) {
             fillViewer();
@@ -31,6 +39,12 @@ public class ViewRecipe extends AppCompatActivity {
         else{
             errorScreen();
         }
+    }
+
+    private void editRecipe(View view) {
+        //perform action to populate recipe - must be added somewhere
+        Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        startActivity(switchActivityIntent);
     }
 
     private void fillViewer(){
