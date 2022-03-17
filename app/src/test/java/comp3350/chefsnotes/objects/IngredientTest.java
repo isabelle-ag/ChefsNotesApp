@@ -80,4 +80,12 @@ public class IngredientTest {
         assertFalse(dummy.equals(testIngredientFraction));
     }
 
+    @Test
+    public void testClone(){
+        assertEquals(testIngredientDecimal, testIngredientDecimal.clone());
+        assertFalse(testIngredientDecimal == testIngredientDecimal.clone());
+        assertEquals(testIngredientFraction, testIngredientFraction.clone());
+        assertFalse(testIngredientFraction == testIngredientFraction.clone());
+    }
+
 }

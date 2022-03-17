@@ -11,5 +11,6 @@ abstract class QuantityNum extends Number implements Serializable {
 
     public abstract boolean equals(Object other);
     public abstract int hashCode();
+    public abstract QuantityNum clone();
 
 }

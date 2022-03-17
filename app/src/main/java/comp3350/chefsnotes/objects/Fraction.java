@@ -105,6 +105,9 @@ class Fraction extends QuantityNum{
             return gcd(small, big % small);
     }
 
-
+    public Fraction clone()
+    {
+        return new Fraction(this.numerator, this.denominator);
+    }
 
 }
