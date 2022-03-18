@@ -1,5 +1,6 @@
 package comp3350.chefsnotes.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 // DO NOT CREATE THIS CLASS EXPLICITLY
@@ -9,7 +10,8 @@ import java.util.ArrayList;
 // to the comp3350.chefsnotes.persistance.DBMSTools.java interface file to understand
 // how to use a DBMS to perform operations on a Recipe.
 
-public class Recipe {
+public class Recipe implements Serializable {
+    private static final long serialVersionUID = 202203171213L;
     
     private String title;
     private ArrayList<Ingredient> ingredients;
