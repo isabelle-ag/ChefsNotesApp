@@ -1,2 +1,4 @@
-package comp3350.chefsnotes.persistence;public class TagPersistence {
+package comp3350.chefsnotes.persistence;
+
+public class TagPersistence implements TagDBMSTools{
 }
