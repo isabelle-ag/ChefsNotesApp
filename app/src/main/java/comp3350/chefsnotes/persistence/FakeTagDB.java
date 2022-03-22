@@ -1,2 +1,4 @@
-package comp3350.chefsnotes.persistence;public class FakeTagDB {
+package comp3350.chefsnotes.persistence;
+
+public class FakeTagDB implements TagDBMSTools{
 }

@@ -1,8 +1,23 @@
 package comp3350.chefsnotes.persistence;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import comp3350.chefsnotes.objects.Recipe;
 
 public class RecipePersistence implements DBMSTools{
+
+    private final String dbPath;    // location of db
+
+    public RecipePersistence(final String dbp){
+        this.dbPath = dbp;
+    }
+
+    private Connection connection() throws SQLException{
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+    }
+
     @Override
     public Recipe[] getAllRecipes() {
         return new Recipe[0];
