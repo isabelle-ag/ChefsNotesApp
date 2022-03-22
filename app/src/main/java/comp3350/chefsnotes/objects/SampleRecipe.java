@@ -16,7 +16,7 @@ public class SampleRecipe extends Recipe{
         this.addIngredient(new Ingredient("Freshly Ground Fairies", 3, "cup"));
         this.addIngredient(new Ingredient("Powdered Fairy Wings", 3, "tbsp"));
         this.addIngredient(new Ingredient("Salt", 2, "tsp"));
-        this.addIngredient("Fairy Blood", .75, "cup");
+        this.addIngredient("Fairy Blood", 3,4, "cup");
         this.addIngredient(new Ingredient("Lemon Juice", 1, "tbsp"));
         this.addIngredient(new Ingredient("Fairy Dust", 3, "tbsp"));
 
