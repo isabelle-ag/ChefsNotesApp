@@ -65,6 +65,13 @@ public class RecipeTest {
 
     }
 
+    @Test
+    public void testClone() {
+        Recipe exampleClone = example.clone();
+        assertEquals(example , exampleClone);
+        assertFalse(example == exampleClone);
+    }
+
 }
 
 

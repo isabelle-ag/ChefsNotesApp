@@ -16,6 +16,12 @@ public class Ingredient {
         this.amount = new Quantity(numer, denom, unit);
     }
 
+    private Ingredient(String iName, Quantity quant)
+    {
+        this.name = iName;
+        this.amount = quant;
+    }
+
     public String getName(){
         return this.name;
     }
@@ -69,5 +75,10 @@ public class Ingredient {
     public int hashCode()
     {
         return this.amount.hashCode() * this.name.hashCode();
+    }
+
+    public Ingredient clone()
+    {
+        return new Ingredient(this.name, this.amount.clone());
     }
 }

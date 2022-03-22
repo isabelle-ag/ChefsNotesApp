@@ -18,6 +18,12 @@ public class Quantity {
         this.unit = unit;
     }
 
+    private Quantity(QuantityNum quant, String unit)
+    {
+        this.amt = quant;
+        this.unit = unit;
+    }
+
     public void setUnit(String unit) {
         this.unit = unit;
     }
@@ -59,6 +65,11 @@ public class Quantity {
             return false;
         Quantity that = (Quantity) other;
         return (this.amt.equals(that.amt) && this.unit.equals(that.unit));
+    }
+
+    public Quantity clone()
+    {
+        return new Quantity(this.amt.clone(), this.unit);
     }
 
 }

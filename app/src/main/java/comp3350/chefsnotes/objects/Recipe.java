@@ -329,6 +329,19 @@ public class Recipe {
         return result;
     }
 
+    public Recipe clone()
+    {
+        Recipe out = new Recipe(this.title);
+        for (Ingredient i: this.ingredients)
+        {
+            out.ingredients.add(i.clone());
+        }
+        for (Direction d: this.directions)
+        {
+            out.directions.add(d.clone());
+        }
+        return out;
+    }
 
 }
 
