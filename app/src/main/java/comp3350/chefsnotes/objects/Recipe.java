@@ -281,30 +281,36 @@ public class Recipe implements Serializable {
         return result;
     }
 
-    // attempts to move a comp3350.chefsnotes.objects.Direction from its current position to a new one.
-    // position corresponds to index of comp3350.chefsnotes.objects.Direction in the array returned
+    // attempts to move a Direction from its current position to a new one.
+    // position corresponds to index of Direction in the array returned
     // from directionList()
     // reorders Directions. Target direction is moved to the new number,
     // and all other Directions are shifted linearly.
     // 0 < newNum < directionCount
-    // returns false if the comp3350.chefsnotes.objects.Direction DNE or the number is out of bounds
+    // returns false if the Direction DNE or the number is out of bounds
     public boolean moveDirection(int oldNum, int newNum){
         boolean result = true;
         Direction tmp = null;
 
-        // try to remove the comp3350.chefsnotes.objects.Direction
+        // try to remove the Direction
         try{
             tmp = this.directions.remove(oldNum);
         } catch (IndexOutOfBoundsException ioobe){
-            System.out.println("That comp3350.chefsnotes.objects.Direction number does not exist.");
+            System.out.println("That Direction number does not exist.");
             tmp = null;
             result = false;
         }
 
-        // try to add the comp3350.chefsnotes.objects.Direction
+        // try to add the Direction
         if(tmp != null){
             try{
                 this.directions.add(newNum, tmp);
+                try { // successful add. check name if a number needing change
+                    if (Integer.parseInt(Character.toString(tmp.getName().charAt(tmp.getName().length() - 1))) == oldNum) {
+                        tmp.setName("Direction " + newNum);
+                    }
+                } catch (NumberFormatException nfe){
+                }
             } catch (IndexOutOfBoundsException ioobe){ // return it to old position on failure
                 System.out.println("That target location is out of bounds.");
                 this.directions.add(oldNum, tmp);
