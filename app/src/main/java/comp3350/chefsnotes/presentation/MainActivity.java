@@ -1,3 +1,5 @@
+// includes adaptations from SampleProject's HomeActivity.java
+
 package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
 
-        } catch (final IOException ioe) { //Messages import?
-            //Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
+        } catch (final IOException ioe) {
+            Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
         }
     }
 

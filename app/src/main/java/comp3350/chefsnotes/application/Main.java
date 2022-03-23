@@ -2,7 +2,7 @@ package comp3350.chefsnotes.application;
 
 public class Main {
 
-    private static String dbName = "SC";
+    private static String dbName = "CNDB";
 
     public static void main(String[] args){
         System.out.println("main method ran by mistake.");
