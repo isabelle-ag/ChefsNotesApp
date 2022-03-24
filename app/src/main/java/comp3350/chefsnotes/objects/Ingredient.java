@@ -1,7 +1,5 @@
 package comp3350.chefsnotes.objects;
 
-import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 
 public class Ingredient implements Serializable {
@@ -58,7 +56,6 @@ public class Ingredient implements Serializable {
     }
 
     @Override
-    @NonNull
     public String toString(){
         String result = "";
         result = amount.toString() + " " + this.name;
