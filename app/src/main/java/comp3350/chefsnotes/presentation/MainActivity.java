@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void makeRecipe(View view) {
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        switchActivityIntent.putExtra("title", (String) null);
         startActivity(switchActivityIntent);
     }
 

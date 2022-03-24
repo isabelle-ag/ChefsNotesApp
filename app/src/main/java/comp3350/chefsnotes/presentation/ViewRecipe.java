@@ -13,6 +13,7 @@ import android.widget.TextView;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.objects.Recipe;
+import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.persistence.FakeDBMS;
 
 import android.widget.ArrayAdapter;
@@ -20,8 +21,10 @@ import android.widget.ArrayAdapter;
 import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
-    private RecipeFetcher recipeFetcher = new RecipeFetcher(new FakeDBMS());
+    private DBMSTools database = new FakeDBMS();
+    private RecipeFetcher recipeFetcher = new RecipeFetcher(database);
     private Recipe recipe;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class ViewRecipe extends AppCompatActivity {
         ImageButton copyButton = findViewById(R.id.copy_button);//somehow set save to only do save as?
 
         editButton.setOnClickListener(this::editRecipe);
-        copyButton.setOnClickListener(this::editRecipe);
+        copyButton.setOnClickListener(this::copyRecipe);
 
         recipe = recipeFetcher.getRecentRecipe("Use Test Recipe");
         if(recipe != null) {
@@ -46,6 +49,15 @@ public class ViewRecipe extends AppCompatActivity {
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        switchActivityIntent.putExtra("title", recipe.getTitle());
+        startActivity(switchActivityIntent);
+    }
+    private void copyRecipe(View view) {
+        //perform action to populate recipe - must be added somewhere
+        String title;
+        Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        title = database.duplicateRecipe(recipe.getTitle(), null);
+        switchActivityIntent.putExtra("title", title);
         startActivity(switchActivityIntent);
     }
 

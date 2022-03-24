@@ -2,6 +2,7 @@ package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,14 +13,18 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
+import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.persistence.FakeDBMS;
 
 public class EditRecipe extends AppCompatActivity {
+    private DBMSTools database = new FakeDBMS();
+    private RecipeFetcher recipeFetcher = new RecipeFetcher(database);
     private RecipeManager recipeManager = new RecipeManager(new FakeDBMS());
 
     @Override
@@ -32,6 +37,13 @@ public class EditRecipe extends AppCompatActivity {
         View addInstructionButton = findViewById(R.id.AddDirectionButton);
         View deleteIngredientButton = findViewById(R.id.IngredientDeleteButton);
         View deleteDirectionButton = findViewById(R.id.DirectionDeleteButton);
+
+        Intent thisIntent = getIntent();
+
+        if(thisIntent.getStringExtra("Title") != null)//if a new recipe is being created (blank), Title = null
+        {
+            populateRecipe(thisIntent.getStringExtra("Title"));
+        }
 
         saveButton.setOnClickListener(v -> {
             String title = getTitle(v);
@@ -155,7 +167,14 @@ public class EditRecipe extends AppCompatActivity {
         return directions;
     }
 
-    public void addDirection(View view)
+    public void populateRecipe(String title)
+    {
+        //get recipe from db
+        //for each ingredient, id = ingredient.addIngredient(), findViewById(id).addText
+        Recipe populator = database.getRecipe(title);//use to populate fields
+    }
+
+    public int addDirection(View view)
     {
         LinearLayout instructionContainer = findViewById(R.id.InstructionContainer);
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
@@ -163,9 +182,11 @@ public class EditRecipe extends AppCompatActivity {
 
         View deleteDirectionButton = child.findViewById(R.id.DirectionDeleteButton);
         deleteDirectionButton.setOnClickListener(this::removeDirection);
+
+        return child.getId();
     }
 
-    public void addIngredient(View view)
+    public int addIngredient(View view)
     {
         LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
         View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
@@ -173,8 +194,10 @@ public class EditRecipe extends AppCompatActivity {
 
         View deleteIngredientButton = child.findViewById(R.id.IngredientDeleteButton);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
-    }
 
+        //return id for population?
+        return child.getId();
+    }
 
 
     public void removeDirection(View view)
