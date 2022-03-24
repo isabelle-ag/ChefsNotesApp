@@ -2,9 +2,12 @@ package comp3350.chefsnotes.objects;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.Locale;
 
-public class Quantity {
+public class Quantity implements Serializable {
+    private static final long serialVersionUID = 202203171140L;
+
     private QuantityNum amt;
     private String unit;
 

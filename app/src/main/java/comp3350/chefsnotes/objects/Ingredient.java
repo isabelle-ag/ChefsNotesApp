@@ -2,7 +2,11 @@ package comp3350.chefsnotes.objects;
 
 import androidx.annotation.NonNull;
 
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
+    private static final long serialVersionUID = 202203171146L;
+
     private String name;
     private Quantity amount;
 
