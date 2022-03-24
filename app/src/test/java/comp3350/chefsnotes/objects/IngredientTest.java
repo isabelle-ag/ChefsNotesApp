@@ -1,7 +1,7 @@
 package comp3350.chefsnotes.objects;
 
 import comp3350.chefsnotes.business.Units;
-import comp3350.chefsnotes.objects.Ingredient;
+
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,6 +1,5 @@
 package comp3350.chefsnotes.objects;
 
-import androidx.annotation.NonNull;
 
 public class Direction {
     private String name;
@@ -14,21 +13,15 @@ public class Direction {
     }
 
     public Direction(String txt, int t){
-        this.name = "";
-        this.text = txt;
-        this.time = t;
+        this("", txt, t);
     }
 
     public Direction(String txt, String n){
-        this.name = n;
-        this.text = txt;
-        this.time = 0;
+        this(n, txt, 0);
     }
 
     public Direction(String txt){
-        this.name = "";
-        this.text = txt;
-        this.time = 0;
+        this("", txt, 0);
     }
 
     public String getName(){
@@ -75,7 +68,6 @@ public class Direction {
         return this.name.hashCode() * 10000 + this.text.hashCode() * 100 + this.time;
     }
     @Override
-    @NonNull
     public String toString() {
         return String.format("%s: %s - %d min", name, text, time);
     }
