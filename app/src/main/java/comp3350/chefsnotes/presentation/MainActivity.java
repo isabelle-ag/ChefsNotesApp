@@ -17,14 +17,20 @@ import java.io.InputStreamReader;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Main;
+import comp3350.chefsnotes.application.Services;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final boolean DB_MODE = Services.MODE_FAKE; // set flag for real/fakse databases
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         copyDatabaseToDevice();
+        // instantiate databases
+        Services.getRecipePersistence(DB_MODE);
+        Services.getTagPersistence(DB_MODE);
     }
 
     public void makeRecipe(View view) {
