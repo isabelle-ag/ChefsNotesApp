@@ -35,7 +35,7 @@ public class RecipeTest {
         assertEquals(example.ingredientCount(),prevCount+1);
 
         prevCount = example.ingredientCount();
-        assertTrue(example.addIngredient("Sprinkles",3,4,Units.CUP));
+        assertTrue(example.addIngredient("Sprinkles",3,4, Units.CUP));
         assertEquals(example.ingredientCount(), prevCount+1);
 
         prevCount = example.directionCount(); // count is highest index+1

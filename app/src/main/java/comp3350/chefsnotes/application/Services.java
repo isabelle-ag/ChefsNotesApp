@@ -6,6 +6,7 @@ import comp3350.chefsnotes.persistence.FakeTagDB;
 import comp3350.chefsnotes.persistence.RecipePersistence;
 import comp3350.chefsnotes.persistence.TagDBMSTools;
 import comp3350.chefsnotes.persistence.TagPersistence;
+import comp3350.chefsnotes.presentation.MainActivity;
 
 public class Services {
     public static final boolean MODE_FAKE = false;
@@ -27,6 +28,10 @@ public class Services {
         return recipePersistence;
     }
 
+    public static synchronized DBMSTools getRecipePersistence(){
+        return getRecipePersistence(MainActivity.DB_MODE);
+    }
+
     // mode only matters on the first call
     public static synchronized TagDBMSTools getTagPersistence(boolean mode){    // brr dependency injection
         if(tagPersistence == null){
@@ -38,6 +43,10 @@ public class Services {
         }
 
         return tagPersistence;
+    }
+
+    public static synchronized TagDBMSTools getTagPersistence(){
+        return getTagPersistence(MainActivity.DB_MODE);
     }
 
 }
