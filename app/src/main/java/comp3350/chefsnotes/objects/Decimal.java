@@ -1,7 +1,5 @@
 package comp3350.chefsnotes.objects;
 
-import androidx.annotation.NonNull;
-
 public class Decimal extends QuantityNum {
     private static double compareEpsilon = 0.000001d;
 
@@ -11,11 +9,10 @@ public class Decimal extends QuantityNum {
         this.value = value;
     }
 
-    @NonNull
     @Override
     public String toString()
     {
-        if(value == Math.floor(value)) //no decimal part
+        if(Math.abs(value - Math.floor(value)) < compareEpsilon) //no decimal part
             return Integer.toString((int) value);
         else
             return Double.toString(value);

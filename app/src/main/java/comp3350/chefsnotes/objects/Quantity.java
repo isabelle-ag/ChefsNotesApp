@@ -1,7 +1,5 @@
 package comp3350.chefsnotes.objects;
 
-import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -51,7 +49,6 @@ public class Quantity implements Serializable {
         amt = new Decimal(value);
     }
 
-    @NonNull
     public String toString() {
         if(!unit.equals(""))
             return String.format(Locale.CANADA, "%s %s%s", amt.toString(), unit, amt.needPlural() ? "s" : "");
@@ -59,7 +56,6 @@ public class Quantity implements Serializable {
             return String.format(Locale.CANADA, "%s", amt.toString()); //for stuff not measured in units - causes grammatical issues e.g.: 2 onion, but that would be tricky to resolve (consider "X large onion(s), in slices"). Yikes.
     }
 
-    @NonNull
     @Override
     public boolean equals(Object other) {
         if(this == other)
