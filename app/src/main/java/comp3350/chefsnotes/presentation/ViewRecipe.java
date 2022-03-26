@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.persistence.DBMSTools;
@@ -21,8 +22,7 @@ import android.widget.ArrayAdapter;
 import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
-    private DBMSTools database = new FakeDBMS();
-    private RecipeFetcher recipeFetcher = new RecipeFetcher(database);
+    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
 
 
@@ -56,7 +56,7 @@ public class ViewRecipe extends AppCompatActivity {
         //perform action to populate recipe - must be added somewhere
         String title;
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
-        title = database.duplicateRecipe(recipe.getTitle(), null);
+        title = Services.getRecipePersistence().duplicateRecipe(recipe.getTitle(), null);
         switchActivityIntent.putExtra("title", title);
         startActivity(switchActivityIntent);
     }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -13,19 +14,17 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
-import comp3350.chefsnotes.persistence.DBMSTools;
-import comp3350.chefsnotes.persistence.FakeDBMS;
 
 public class EditRecipe extends AppCompatActivity {
-    private DBMSTools database = new FakeDBMS();
-    private RecipeFetcher recipeFetcher = new RecipeFetcher(database);
-    private RecipeManager recipeManager = new RecipeManager(new FakeDBMS());
+    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
+    private RecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());//refactor to use services natively
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class EditRecipe extends AppCompatActivity {
 
         Intent thisIntent = getIntent();
 
-        if(thisIntent.getStringExtra("Title") != null)//if a new recipe is being created (blank), Title = null
+        if(thisIntent.getStringExtra("title") != null)//if a new recipe is being created (blank), Title = null
         {
             populateRecipe(thisIntent.getStringExtra("Title"));
         }
@@ -125,7 +124,7 @@ public class EditRecipe extends AppCompatActivity {
     {
         ArrayList<Direction> directions = new ArrayList<>();
         Direction current;
-        LinearLayout ingredients = findViewById(R.id.InstructionContainer);
+        LinearLayout ingredients = findViewById(R.id.DirectionContainer);
         View currRow;
 
         for(int i = 0; i < ingredients.getChildCount(); i++)
@@ -167,16 +166,37 @@ public class EditRecipe extends AppCompatActivity {
         return directions;
     }
 
-    public void populateRecipe(String title)
+    public void populateRecipe(String title)//cannot test until ViewRecipe uses real recipes, or sample recipe is stored in db
     {
         //get recipe from db
         //for each ingredient, id = ingredient.addIngredient(), findViewById(id).addText
-        Recipe populator = database.getRecipe(title);//use to populate fields
+        Recipe populator = recipeFetcher.getRecipeByName(title);//use to populate fields
+        ViewGroup curIng = findViewById(R.id.Ingredient);
+        ViewGroup curDir = findViewById(R.id.Direction);
+        for(Ingredient ing:populator.getIngredients())
+        {
+            EditText name = (EditText) curIng.findViewById(R.id.IngredientName);
+            name.setText(ing.getName());
+            EditText amount = (EditText) curIng.findViewById(R.id.IngredientAmount);
+            amount.setText(ing.getAmt().getAmtStr());
+
+            curIng = findViewById(this.addIngredient(findViewById(R.id.IngredientContainer)));
+        }
+        for(Direction dir:populator.getDirections())
+        {
+            EditText name = (EditText) curDir.findViewById(R.id.DirectionName);
+            name.setText(dir.getName());
+            EditText time = (EditText) curDir.findViewById(R.id.TimeEstimate);
+            time.setText(dir.getTime());
+            EditText contents = (EditText) curDir.findViewById(R.id.textbox);
+            contents.setText(dir.getText());
+            curDir = findViewById(this.addDirection(findViewById(R.id.DirectionContainer)));
+        }
     }
 
     public int addDirection(View view)
     {
-        LinearLayout instructionContainer = findViewById(R.id.InstructionContainer);
+        LinearLayout instructionContainer = findViewById(R.id.DirectionContainer);
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
         instructionContainer.addView(child);
 
@@ -202,7 +222,7 @@ public class EditRecipe extends AppCompatActivity {
 
     public void removeDirection(View view)
     {
-        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.InstructionContainer);
+        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.DirectionContainer);
         ingredientContainer.removeView((View) view.getParent().getParent());
     }
 
