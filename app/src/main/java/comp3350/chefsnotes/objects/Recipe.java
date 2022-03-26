@@ -351,5 +351,11 @@ public class Recipe implements Serializable {
         return out;
     }
 
+    public Recipe duplicateRecipe(String dupName){
+        Recipe out = this.clone();
+        out._setTitle(dupName);
+        return out;
+    }
+
 }
 
