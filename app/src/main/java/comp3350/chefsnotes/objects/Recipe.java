@@ -16,11 +16,28 @@ public class Recipe implements Serializable {
     private String title;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Direction> directions;
+    private ArrayList<String> tags;
     
     public Recipe(String t){
         title = t;
         ingredients = new ArrayList<Ingredient>();
         directions = new ArrayList<Direction>();
+        tags = new ArrayList<String>();
+    }
+
+    public void addTag(String tag)
+    {
+        tags.add(tag);
+    }
+
+    public void removeTag(String tag)
+    {
+        tags.remove(tag);
+    }
+
+    public ArrayList<String> getTags()
+    {
+        return tags;
     }
 
     public int ingredientCount(){
