@@ -56,4 +56,28 @@ public class IRecipeFetcherTest {
         assertTrue(fetched.contains(db.getRecipe("barfoo")));
         assertFalse(fetched.contains(db.getRecipe("bar")));
     }
+
+    @Test
+    public void testFilterRecipesByTag() {
+        Recipe foo = db.getRecipe("foo");
+        Recipe barfoo = db.getRecipe("barfoo");
+        Recipe bar = db.getRecipe("bar");
+
+        String[] included = {"fooTag"};
+        String[] excluded = {"barTag"};
+
+
+        bar.addTag("barTag");
+        foo.addTag("fooTag");
+        barfoo.addTag("barTag");
+        barfoo.addTag("fooTag");
+
+        ArrayList<Recipe> fetched = new ArrayList<Recipe>(Arrays.asList(fetcher.filterRecipesByTags(included, excluded)));
+        System.out.println(fetched);
+        assertTrue(fetched.contains(db.getRecipe("foo")));
+        assertFalse(fetched.contains(db.getRecipe("barfoo")));
+        assertFalse(fetched.contains(db.getRecipe("bar")));
+
+
+    }
 }
