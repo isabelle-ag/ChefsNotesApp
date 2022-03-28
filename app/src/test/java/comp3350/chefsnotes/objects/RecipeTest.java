@@ -72,6 +72,14 @@ public class RecipeTest {
         assertFalse(example == exampleClone);
     }
 
+    @Test
+    public void testTags() {
+        example.addTag("foo");
+        assertTrue(example.getTags().contains("foo"));
+        example.removeTag("foo");
+        assertFalse(example.getTags().contains("foo"));
+    }
+
 }
 
 
