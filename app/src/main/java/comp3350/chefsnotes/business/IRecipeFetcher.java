@@ -6,5 +6,9 @@ public interface IRecipeFetcher {
 
     public Recipe getRecentRecipe();
     public Recipe getRecipeByName(String name);
+    public Recipe[] filterRecipesByTags(String[] included, String[] excluded);
+    public Recipe[] filterRecipesByTags(String[] included, String[] excluded, Recipe[] searchSpace);
+
+    public Recipe[] getRecipesByText(String name);
 
 }
