@@ -15,7 +15,7 @@ public class FakeDBMS implements DBMSTools{
     // creates Recipe with name recipeName
     // fails if that name is taken
     // returns true on success, false on failure
-    public boolean createRecipe(String recipeName){
+    public boolean createRecipe(String recipeName) /* throws RecipeExistenceException */ {
         boolean result = false;
 
         if(recipeName != null && getRecipe(recipeName) == null){

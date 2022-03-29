@@ -21,7 +21,7 @@ import comp3350.chefsnotes.application.Services;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final boolean DB_MODE = Services.MODE_FAKE; // set flag for real/fakse databases
+    public static final boolean DB_MODE = Services.MODE_FAKE; // set flag for real/false databases
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
