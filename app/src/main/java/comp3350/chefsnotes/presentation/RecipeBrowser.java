@@ -7,13 +7,19 @@ import androidx.core.view.ViewCompat;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import org.w3c.dom.Text;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
@@ -38,9 +44,26 @@ public class RecipeBrowser extends AppCompatActivity {
         db = Services.getRecipePersistence();
         tagDB = Services.getTagPersistence();
 
-        populateTags();
-        populateRecipes();
+        EditText searchBox = (EditText) findViewById(R.id.searchRecipeName);
 
+        searchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                populateRecipes(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        populateTags();
+        populateRecipes("");
 
         }
 
@@ -49,9 +72,17 @@ public class RecipeBrowser extends AppCompatActivity {
     }
 
 
-    private void populateRecipes(){
+    private void populateRecipes(String searchTerm){
+        String[] recipeList;
+
         ListView searchResults = (ListView) findViewById(R.id.results);
-        String[] recipeList = db.getRecipeNames();
+        if (searchTerm == "") {
+            recipeList = db.getRecipeNames();
+        }
+        else {
+            recipeList = db.searchRecipeNames(searchTerm);
+        }
+
 
         ArrayAdapter<String> rAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, recipeList);
