@@ -61,8 +61,8 @@ public class RecipeBrowser extends AppCompatActivity {
             b.setMinimumHeight(20);
             b.setMinWidth(50);
             b.setMinimumWidth(50);
+            b.setMaxWidth(150);
             b.setPadding(10,5,10,5);
-            b.setM
 
 
 
@@ -73,9 +73,12 @@ public class RecipeBrowser extends AppCompatActivity {
             ViewCompat.setBackground(b, drawable);
 
             //b.setBackground(getResources().getDrawable(R.drawable.togglebutton_selector));
-            b.setLayoutParams(new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT));
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMarginStart(8);
+            params.setMarginEnd(8);
+            b.setLayoutParams(params);
             // LinearLayout.LayoutParams bParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
             // b.setLayoutParams(bParams);
 
