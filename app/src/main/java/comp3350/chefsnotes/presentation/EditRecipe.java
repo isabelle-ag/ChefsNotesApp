@@ -177,6 +177,9 @@ public class EditRecipe extends AppCompatActivity {
 
     public void populateRecipe(String title)//cannot test until ViewRecipe uses real recipes, or sample recipe is stored in db
     {
+        EditText name;
+        EditText amount;
+        EditText time;
         //get recipe from db
         //for each ingredient, id = ingredient.addIngredient(), findViewById(id).addText
         EditText recipeTitle = (EditText) findViewById(R.id.recipeTitle);
@@ -186,9 +189,9 @@ public class EditRecipe extends AppCompatActivity {
         ViewGroup curDir = findViewById(R.id.Direction);
         for(Ingredient ing:populator.getIngredients())
         {
-            EditText name = (EditText) curIng.findViewById(R.id.IngredientName);
+            name = (EditText) curIng.findViewById(R.id.IngredientName);
             name.setText(ing.getName());
-            EditText amount = (EditText) curIng.findViewById(R.id.IngredientAmount);
+            amount = (EditText) curIng.findViewById(R.id.IngredientAmount);
             amount.setText(ing.getAmt().getAmtStr());
             //figure out how to get the unit used by the current amount, and compare it to spinner values.
             curIng = findViewById(this.addIngredient(findViewById(R.id.IngredientContainer)));
@@ -196,10 +199,10 @@ public class EditRecipe extends AppCompatActivity {
         }
         for(Direction dir:populator.getDirections())
         {
-            EditText name = (EditText) curDir.findViewById(R.id.DirectionName);
+            name = (EditText) curDir.findViewById(R.id.DirectionName);
             name.setText(dir.getName());
-            // time = (EditText) curDir.findViewById(R.id.TimeEstimate);
-            //time.setText(dir.getTime());
+            time = (EditText) curDir.findViewById(R.id.TimeEstimate);
+            time.setText(dir.getTime() + "");//Java is dumb
             EditText contents = (EditText) curDir.findViewById(R.id.textbox);
             contents.setText(dir.getText());
             curDir = findViewById(this.addDirection(findViewById(R.id.DirectionContainer)));
@@ -224,7 +227,7 @@ public class EditRecipe extends AppCompatActivity {
         LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
         View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
         ingredientContainer.addView(child);
-        child.setId(1000000 + child.getId() + ingredientContainer.getChildCount());
+        child.setId(1000000 + child.getId() + ingredientContainer.getChildCount());//set a unique id for the new child because Android Studio is too dumb to.
 
         View deleteIngredientButton = child.findViewById(R.id.IngredientDeleteButton);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
