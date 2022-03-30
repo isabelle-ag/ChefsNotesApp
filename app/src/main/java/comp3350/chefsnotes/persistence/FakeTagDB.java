@@ -29,7 +29,7 @@ public class FakeTagDB implements TagDBMSTools{
     public boolean removeTag(String tagname) throws TagExistenceException {
         boolean result = false;
 
-        if(!tagList.contains(tagname)){
+        if(tagList.contains(tagname)){
             tagList.remove(tagname);
             result = true;
         } else {
