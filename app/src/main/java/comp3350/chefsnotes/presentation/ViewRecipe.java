@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.objects.Recipe;
+import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.persistence.FakeDBMS;
 
 import android.widget.ArrayAdapter;
@@ -20,13 +22,14 @@ import android.widget.ArrayAdapter;
 import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
-    private RecipeFetcher recipeFetcher = new RecipeFetcher(new FakeDBMS());
+    private DBMSTools db;
     private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
+        db = Services.getRecipePersistence();
 
         ImageButton editButton = findViewById(R.id.edit_button);
         ImageButton copyButton = findViewById(R.id.copy_button);//somehow set save to only do save as?
@@ -34,14 +37,28 @@ public class ViewRecipe extends AppCompatActivity {
         editButton.setOnClickListener(this::editRecipe);
         copyButton.setOnClickListener(this::editRecipe);
 
-        recipe = recipeFetcher.getRecentRecipe("Use Test Recipe");
+        String recipeName = "";
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            recipeName = extras.getString("recipeName");
+        }
+        recipe = db.getRecipe(recipeName);
         if(recipe != null) {
             fillViewer();
         }
         else{
             errorScreen();
         }
+
+//        recipe = recipeFetcher.getRecentRecipe("Use Test Recipe");
+//        if(recipe != null) {
+//            fillViewer();
+//        }
+//        else{
+//            errorScreen();
+//        }
     }
+
 
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
@@ -72,8 +89,6 @@ public class ViewRecipe extends AppCompatActivity {
         dirView.setAdapter(dirAdapter);
 
         ((TextView)findViewById(R.id.totalTimeView)).setText(time);
-
-
     }
 
     private void errorScreen(){
