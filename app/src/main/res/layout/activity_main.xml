@@ -54,7 +54,7 @@
 
                 <Button
                     android:id="@+id/CreateRecipeButton"
-                    android:layout_width="120dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#071355"
                     android:gravity="center"
@@ -69,33 +69,24 @@
                     android:typeface="serif" />
 
                 <Button
-                    android:id="@+id/ViewRecipeButton"
-                    android:layout_width="120dp"
+                    android:id="@+id/BrowseRecipeButton"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="100dp"
                     android:layout_toEndOf="@+id/CreateRecipeButton"
                     android:backgroundTint="#071355"
                     android:gravity="center|center_horizontal"
-                    android:onClick="viewRecipe"
+                    android:onClick="browseRecipes"
                     android:padding="5dp"
                     android:scaleX="1.5"
                     android:scaleY="1.5"
-                    android:text="@string/view_recipe"
+                    android:text="@string/browse_recipes"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/CreateRecipeButton"
-                    android:layout_marginTop="-48dp"
-                    android:onClick="browseRecipes"
-                    android:text="Browser"
-                    android:translationY="50dp" />
             </RelativeLayout>
         </androidx.gridlayout.widget.GridLayout>
 

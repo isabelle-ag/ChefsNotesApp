@@ -47,7 +47,7 @@ public class RecipeBrowser extends AppCompatActivity {
     private void setFilterCondition(View v){
 
     }
-    
+
 
     private void populateRecipes(){
         ListView searchResults = (ListView) findViewById(R.id.results);
@@ -61,7 +61,7 @@ public class RecipeBrowser extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 String recipeName = (String) parent.getItemAtPosition(position);
                 Intent i = new Intent(RecipeBrowser.this, ViewRecipe.class);
-                i.putExtra("recipeName","");
+                i.putExtra("recipeKey",recipeName);
                 startActivity(i);
             }
         });

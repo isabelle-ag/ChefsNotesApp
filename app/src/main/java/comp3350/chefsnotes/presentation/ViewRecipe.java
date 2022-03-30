@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -40,7 +41,7 @@ public class ViewRecipe extends AppCompatActivity {
         String recipeName = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            recipeName = extras.getString("recipeName");
+            recipeName = extras.getString("recipeKey");
         }
         recipe = db.getRecipe(recipeName);
         if(recipe != null) {
