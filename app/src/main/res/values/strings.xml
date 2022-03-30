@@ -7,24 +7,6 @@
     <string name="recipe_title">Recipe Title</string>
     <string name="directions">Directions</string>
     <string name="ingredients">Ingredients</string>
-    <string-array name="units">
-        <item> </item>
-        <item>mL</item>
-        <item>L</item>
-        <item>fl. oz</item>
-        <item>dash</item>
-        <item>tsp</item>
-        <item>tbsp</item>
-        <item>cup</item>
-        <item>pint</item>
-        <item>quart</item>
-        <item>gallon</item>
-        <item>piece</item>
-        <item>unit</item>
-        <item>lbs</item>
-        <item>g</item>
-        <item>kg</item>
-    </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ingredient">Ingredient</string>
     <string name="delete_button">Delete Button</string>
