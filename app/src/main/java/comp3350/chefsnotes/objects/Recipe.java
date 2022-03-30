@@ -196,59 +196,6 @@ public class Recipe implements Serializable {
         return result;
     }
 
-    // names the direction "Direction <num>" by default
-    // returns new direction's number, -1 on failure
-    public int addDirection(String txt){
-        int result = -1;
-
-        boolean test = this.directions.add(new Direction(txt, ""));
-
-        if(test == true){
-            result = this.directions.size()-1;
-        }
-
-        return result;
-    }
-
-    // addDirection with all fields
-    public int addDirection(String txt, String n, int t){
-        int result = -1;
-
-        boolean test = this.directions.add(new Direction(txt, n, t));
-
-        if(test == true){
-            result = this.directions.size()-1;
-        }
-
-        return result;
-    }
-
-    // addDirection with time field
-    public int addDirection(String txt, int t){
-        int result = -1;
-
-        boolean test = this.directions.add(new Direction(txt, "Direction "+this.directions.size(), t));
-
-        if(test == true){
-            result = this.directions.size()-1;
-        }
-
-        return result;
-    }
-
-    // addDirection but with a direction name
-    public int addDirection(String txt, String n){
-        int result = -1;
-
-        boolean test = this.directions.add(new Direction(txt, n));
-
-        if(test == true){
-            result = this.directions.size()-1;
-        }
-
-        return result;
-    }
-
     // returns array of all directions
     public Direction[] getDirections(){
         Direction[] result = this.directions.toArray(new Direction[0]);
