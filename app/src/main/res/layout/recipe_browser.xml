@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ListView
+        <comp3350.chefsnotes.presentation.FullListView
             android:id="@+id/results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

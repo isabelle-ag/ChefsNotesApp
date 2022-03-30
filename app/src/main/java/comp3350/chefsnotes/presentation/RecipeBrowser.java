@@ -28,18 +28,21 @@ public class RecipeBrowser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_browser);
 
+
         LinearLayout tags = findViewById(R.id.filterTagLayout);
 
-        String[] = tagList();
         ArrayList<ToggleButton> ab = new ArrayList<ToggleButton>();
         for(int i=0;i<5;i++){
             ab.add(new ToggleButton(this));
         }
         for (ToggleButton b : ab) {
-            tags.addView(b);
+
             b.setTextOn("Hi");
             b.setTextOff("Hi");
-            b.setTextSize(11);
+            b.setTextSize(15);
+
+
+            b.setId(b.generateViewId());
 
             Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
             ViewCompat.setBackground(b, drawable);
@@ -50,12 +53,16 @@ public class RecipeBrowser extends AppCompatActivity {
                     LinearLayout.LayoutParams.MATCH_PARENT));
             // LinearLayout.LayoutParams bParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
             // b.setLayoutParams(bParams);
+
+
+            tags.addView(b);
             b.setOnClickListener(v -> setFilterCondition(v));
+
+
         }
-
-
     }
 
-    public void setFilterCondition(View view) {
-    }
+    private void setFilterCondition(View v){};
+
+
 }
