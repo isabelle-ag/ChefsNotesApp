@@ -39,10 +39,10 @@ public class RecipeTest {
         assertEquals(example.ingredientCount(), prevCount+1);
 
         prevCount = example.directionCount(); // count is highest index+1
-        assertEquals(example.addDirection("Set to cool for 20 minutes",20),prevCount); // returns index
+        assertEquals(example.addDirection(new Direction("Set to cool for 20 minutes",20)),prevCount); // returns index
 
         prevCount = example.directionCount();
-        assertEquals(example.addDirection("Serve and enjoy!","Final step"),prevCount);
+        assertEquals(example.addDirection(new Direction("Serve and enjoy!","Final step")),prevCount);
     }
 
     @Test
