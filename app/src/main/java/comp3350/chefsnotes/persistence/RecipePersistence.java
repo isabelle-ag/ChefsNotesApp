@@ -88,6 +88,7 @@ public class RecipePersistence implements DBMSTools{
         return result;
     }
 
+    // great for checking if a Recipe exists in the db
     @Override
     public Recipe getRecipe(String recipeName) {
         Recipe result = null;
@@ -117,14 +118,19 @@ public class RecipePersistence implements DBMSTools{
 
     @Override
     public boolean createRecipe(String recipeName) /* throws RecipeExistenceException */ {
+        return insertRecipe(recipeName, new Recipe(recipeName));
+    }
+
+    // private helper for storing a whole recipe object
+    private boolean insertRecipe(String recipeName, Recipe recipeObj){
         boolean result = false;
         Recipe testOut = getRecipe(recipeName);
         if(testOut == null){    // ensure Recipe does not exist
             try (final Connection c = connection()) {   // establish conexion
                 // prepare statement
                 final PreparedStatement pst = c.prepareStatement(createQry);
-                pst.setString(1,recipeName);               // add name
-                pst.setObject(2, new Recipe(recipeName));  // initialize with empty object
+                pst.setString(1, recipeName); // add name
+                pst.setObject(2, recipeObj);  // initialize with empty object
 
                 int attempt = pst.executeUpdate();  // execute query
 
@@ -137,30 +143,84 @@ public class RecipePersistence implements DBMSTools{
                 }
 
             } catch (final SQLException e) {
-                System.out.println("Unable to create the Recipe.");
+                System.out.println("Unable to insert the Recipe.");
             }
         }
         return result;
     }
 
-    @Override // IMPLEMENT
+    @Override
     public boolean deleteRecipe(String recipeName) {
-        return false;
+        boolean result = false;
+        Recipe testOut = getRecipe(recipeName);
+        if(testOut != null){    // ensure Recipe exists
+            try (final Connection c = connection()) {   // establish conexion
+                // prepare statement
+                final PreparedStatement pst = c.prepareStatement(deleteQry);
+                pst.setString(1, recipeName); // set name to target
+
+                int attempt = pst.executeUpdate();  // execute query
+
+                pst.close();
+
+                // verify success
+                testOut = getRecipe(recipeName);
+                if(attempt>0 && testOut == null){
+                    result = true;
+                }
+
+            } catch (final SQLException e) {
+                System.out.println("Unable to delete the Recipe.");
+            }
+        }
+        return result;
     }
 
-    @Override // IMPLEMENT
+    @Override
     public boolean updateRecipeName(String recipe, String newName) {
-        return false;
+        boolean result = false;
+        Recipe testOut = getRecipe(recipe);
+        if(testOut != null){    // ensure Recipe exists
+            try (final Connection c = connection()) {   // establish conexion
+                // prepare statement
+                final PreparedStatement pst = c.prepareStatement(updateNameQry);
+                pst.setString(1, newName); // set new name
+                pst.setString(2, recipe);  // search for old name
+
+                int attempt = pst.executeUpdate();  // execute query
+
+                pst.close();
+
+                // verify success
+                testOut = getRecipe(newName);
+                if(attempt>0 && testOut != null && testOut.getTitle().equals(newName)){
+                    result = true;
+                }
+
+            } catch (final SQLException e) {
+                System.out.println("Unable to update the Recipe name.");
+            }
+        }
+        return result;
     }
 
-    @Override // IMPLEMENT
+    @Override
     public boolean updateRecipeName(Recipe recipe, String newName) {
-        return false;
+        return updateRecipeName(recipe.getTitle(), newName);
     }
 
-    @Override // IMPLEMENT
+    @Override
     public boolean commitChanges(Recipe modified) {
-        return false;
+        boolean result = false;
+        Recipe testOut = getRecipe(modified.getTitle());
+        if(testOut != null){
+            boolean testDelete = deleteRecipe(modified.getTitle());
+
+            if(testDelete && insertRecipe(modified.getTitle(), modified) ){ // bias prevents insert
+                result = true;
+            }
+        }
+        return result;
     }
 
     @Override // IMPLEMENT
