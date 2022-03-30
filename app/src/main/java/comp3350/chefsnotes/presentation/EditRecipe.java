@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -191,13 +192,14 @@ public class EditRecipe extends AppCompatActivity {
             amount.setText(ing.getAmt().getAmtStr());
             //figure out how to get the unit used by the current amount, and compare it to spinner values.
             curIng = findViewById(this.addIngredient(findViewById(R.id.IngredientContainer)));
+            Log.d("id", "" + curIng.getId());
         }
         for(Direction dir:populator.getDirections())
         {
             EditText name = (EditText) curDir.findViewById(R.id.DirectionName);
             name.setText(dir.getName());
-            EditText time = (EditText) curDir.findViewById(R.id.TimeEstimate);
-            time.setText(dir.getTime());
+            // time = (EditText) curDir.findViewById(R.id.TimeEstimate);
+            //time.setText(dir.getTime());
             EditText contents = (EditText) curDir.findViewById(R.id.textbox);
             contents.setText(dir.getText());
             curDir = findViewById(this.addDirection(findViewById(R.id.DirectionContainer)));
@@ -209,6 +211,7 @@ public class EditRecipe extends AppCompatActivity {
         LinearLayout instructionContainer = findViewById(R.id.DirectionContainer);
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
         instructionContainer.addView(child);
+        child.setId(1000000 + child.getId() + instructionContainer.getChildCount());
 
         View deleteDirectionButton = child.findViewById(R.id.DirectionDeleteButton);
         deleteDirectionButton.setOnClickListener(this::removeDirection);
@@ -221,6 +224,7 @@ public class EditRecipe extends AppCompatActivity {
         LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
         View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
         ingredientContainer.addView(child);
+        child.setId(1000000 + child.getId() + ingredientContainer.getChildCount());
 
         View deleteIngredientButton = child.findViewById(R.id.IngredientDeleteButton);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
