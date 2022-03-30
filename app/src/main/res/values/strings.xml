@@ -30,6 +30,7 @@
     <string name="delete_button">Delete Button</string>
     <string name="add_ingredient">Add Ingredient</string>
     <string name="padding">15dp</string>
-    <string name="search_hint">Search by keywords...</string>
+    <string name="search_hint">Search by keywords…</string>
     <string name="toggleButton">ToggleButton</string>
+    <string name="search_by_recipe_name">Search by recipe name</string>
 </resources>

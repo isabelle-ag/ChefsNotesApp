@@ -86,6 +86,16 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/CreateRecipeButton"
+                    android:layout_marginTop="-48dp"
+                    android:onClick="browseRecipes"
+                    android:text="Browser"
+                    android:translationY="50dp" />
             </RelativeLayout>
         </androidx.gridlayout.widget.GridLayout>
 

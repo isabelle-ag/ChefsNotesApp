@@ -17,15 +17,18 @@
         <entry key="app/src/main/res/drawable/button_press.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.286" />
         <entry key="app/src/main/res/drawable/ingredient_list_divider.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_button_toggled.xml" value="0.102" />
         <entry key="app/src/main/res/drawable/spacer.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/tags.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/togglebutton_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_view_recipe.xml" value="0.20079193115234378" />
         <entry key="app/src/main/res/layout/ingredient_field.xml" value="0.335" />
         <entry key="app/src/main/res/layout/instruction_field.xml" value="0.335" />
         <entry key="app/src/main/res/layout/recipe_browser.xml" value="0.26853011110995684" />
         <entry key="app/src/main/res/layout/recipe_editor.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/recipe_search.xml" value="0.28764784792636305" />
+        <entry key="app/src/main/res/layout/recipe_search.xml" value="0.45" />
       </map>
     </option>
   </component>
