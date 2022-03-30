@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.objects.Recipe;
+import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.persistence.FakeDBMS;
 
 import android.widget.ArrayAdapter;
@@ -20,8 +23,9 @@ import android.widget.ArrayAdapter;
 import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
-    private RecipeFetcher recipeFetcher = new RecipeFetcher(new FakeDBMS());
+    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +33,12 @@ public class ViewRecipe extends AppCompatActivity {
         setContentView(R.layout.activity_view_recipe);
 
         ImageButton editButton = findViewById(R.id.edit_button);
-        ImageButton copyButton = findViewById(R.id.copy_button);//somehow set save to only do save as?
+        ImageButton copyButton = findViewById(R.id.copy_button);
 
         editButton.setOnClickListener(this::editRecipe);
-        copyButton.setOnClickListener(this::editRecipe);
+        copyButton.setOnClickListener(this::copyRecipe);
 
-        recipe = recipeFetcher.getRecentRecipe("Use Test Recipe");
+        recipe = recipeFetcher.getRecipeByName("Fairy Pie");
         if(recipe != null) {
             fillViewer();
         }
@@ -46,6 +50,15 @@ public class ViewRecipe extends AppCompatActivity {
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        switchActivityIntent.putExtra("title", recipe.getTitle());
+        startActivity(switchActivityIntent);
+    }
+    private void copyRecipe(View view) {
+        //perform action to populate recipe - must be added somewhere
+        String title;
+        Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        title = Services.getRecipePersistence().duplicateRecipe(recipe.getTitle(), null);
+        switchActivityIntent.putExtra("title", title);
         startActivity(switchActivityIntent);
     }
 
