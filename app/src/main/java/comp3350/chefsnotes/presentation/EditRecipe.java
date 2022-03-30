@@ -2,8 +2,12 @@ package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -12,15 +16,18 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.application.Services;
+import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
+import comp3350.chefsnotes.business.Units;
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
+import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
-import comp3350.chefsnotes.persistence.DBMSTools;
-import comp3350.chefsnotes.persistence.FakeDBMS;
 
 public class EditRecipe extends AppCompatActivity {
-    private RecipeManager recipeManager = new RecipeManager(new FakeDBMS());
+    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
+    private RecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());//refactor to use services natively
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,19 @@ public class EditRecipe extends AppCompatActivity {
         View addInstructionButton = findViewById(R.id.AddDirectionButton);
         View deleteIngredientButton = findViewById(R.id.IngredientDeleteButton);
         View deleteDirectionButton = findViewById(R.id.DirectionDeleteButton);
+
+        //set dropdown menu to array being used - can be used in the future for filtering units by metric, imperial, etc.
+        Spinner ingDrop = findViewById(R.id.unitList);
+        ArrayAdapter<String> units = new ArrayAdapter<String>(EditRecipe.this, android.R.layout.simple_spinner_item, Units.unitList());
+        units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ingDrop.setAdapter(units);
+
+        Intent thisIntent = getIntent();
+
+        if(thisIntent.getStringExtra("title") != null)//if a new recipe is being created (blank), Title = null
+        {
+            populateRecipe(thisIntent.getStringExtra("title"), units);
+        }
 
         saveButton.setOnClickListener(v -> {
             String title = getTitle(v);
@@ -113,7 +133,7 @@ public class EditRecipe extends AppCompatActivity {
     {
         ArrayList<Direction> directions = new ArrayList<>();
         Direction current;
-        LinearLayout ingredients = findViewById(R.id.InstructionContainer);
+        LinearLayout ingredients = findViewById(R.id.DirectionContainer);
         View currRow;
 
         for(int i = 0; i < ingredients.getChildCount(); i++)
@@ -155,31 +175,79 @@ public class EditRecipe extends AppCompatActivity {
         return directions;
     }
 
-    public void addDirection(View view)
+    public void populateRecipe(String title, ArrayAdapter<String> units)//cannot test until ViewRecipe uses real recipes, or sample recipe is stored in db
     {
-        LinearLayout instructionContainer = findViewById(R.id.InstructionContainer);
+        EditText name;
+        EditText amount;
+        EditText time;
+        Spinner unitList;
+        //get recipe from db
+        //for each ingredient, id = ingredient.addIngredient(), findViewById(id).addText
+        EditText recipeTitle = (EditText) findViewById(R.id.recipeTitle);
+        recipeTitle.setText(title);
+        Recipe populator = recipeFetcher.getRecipeByName(title);//use to populate fields
+        ViewGroup curIng = findViewById(R.id.Ingredient);
+        ViewGroup curDir = findViewById(R.id.Direction);
+        for(Ingredient ing:populator.getIngredients())
+        {
+            name = (EditText) curIng.findViewById(R.id.IngredientName);
+            name.setText(ing.getName());
+            amount = (EditText) curIng.findViewById(R.id.IngredientAmount);
+            amount.setText(ing.getAmt().getAmtStr());
+            //figure out how to get the unit used by the current amount, and compare it to spinner values.
+            unitList = (Spinner) curIng.findViewById(R.id.unitList);
+            unitList.setSelection(units.getPosition(ing.getAmt().getUnit()));
+            curIng = findViewById(this.addIngredient(findViewById(R.id.IngredientContainer)));
+            Log.d("id", "" + curIng.getId());
+        }
+        for(Direction dir:populator.getDirections())
+        {
+            name = (EditText) curDir.findViewById(R.id.DirectionName);
+            name.setText(dir.getName());
+            time = (EditText) curDir.findViewById(R.id.TimeEstimate);
+            time.setText(dir.getTime() + "");//Java is dumb
+            EditText contents = (EditText) curDir.findViewById(R.id.textbox);
+            contents.setText(dir.getText());
+            curDir = findViewById(this.addDirection(findViewById(R.id.DirectionContainer)));
+        }
+    }
+
+    public int addDirection(View view)
+    {
+        LinearLayout instructionContainer = findViewById(R.id.DirectionContainer);
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
         instructionContainer.addView(child);
+        child.setId(1000000 + child.getId() + instructionContainer.getChildCount());
 
         View deleteDirectionButton = child.findViewById(R.id.DirectionDeleteButton);
         deleteDirectionButton.setOnClickListener(this::removeDirection);
+
+        return child.getId();
     }
 
-    public void addIngredient(View view)
+    public int addIngredient(View view)
     {
         LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
         View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
         ingredientContainer.addView(child);
+        child.setId(1000000 + child.getId() + ingredientContainer.getChildCount());//set a unique id for the new child because Android Studio is too dumb to.
 
         View deleteIngredientButton = child.findViewById(R.id.IngredientDeleteButton);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
-    }
 
+        Spinner ingDrop = child.findViewById(R.id.unitList);
+        ArrayAdapter<String> units = new ArrayAdapter<String>(EditRecipe.this, android.R.layout.simple_spinner_item, Units.unitList());
+        units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ingDrop.setAdapter(units);
+
+        //return id for population?
+        return child.getId();
+    }
 
 
     public void removeDirection(View view)
     {
-        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.InstructionContainer);
+        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.DirectionContainer);
         ingredientContainer.removeView((View) view.getParent().getParent());
     }
 

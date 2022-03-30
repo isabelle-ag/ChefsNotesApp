@@ -23,8 +23,11 @@ import android.widget.ArrayAdapter;
 import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
-    private DBMSTools db;
+
+    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
+
     private Recipe recipe;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +36,19 @@ public class ViewRecipe extends AppCompatActivity {
         db = Services.getRecipePersistence();
 
         ImageButton editButton = findViewById(R.id.edit_button);
-        ImageButton copyButton = findViewById(R.id.copy_button);//somehow set save to only do save as?
+        ImageButton copyButton = findViewById(R.id.copy_button);
 
         editButton.setOnClickListener(this::editRecipe);
-        copyButton.setOnClickListener(this::editRecipe);
+        copyButton.setOnClickListener(this::copyRecipe);
 
         String recipeName = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             recipeName = extras.getString("recipeKey");
         }
-        recipe = db.getRecipe(recipeName);
+
+        recipe = recipeFetcher.getRecipeByName(recipeName);
+
         if(recipe != null) {
             fillViewer();
         }
@@ -64,6 +69,15 @@ public class ViewRecipe extends AppCompatActivity {
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        switchActivityIntent.putExtra("title", recipe.getTitle());
+        startActivity(switchActivityIntent);
+    }
+    private void copyRecipe(View view) {
+        //perform action to populate recipe - must be added somewhere
+        String title;
+        Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        title = Services.getRecipePersistence().duplicateRecipe(recipe.getTitle(), null);
+        switchActivityIntent.putExtra("title", title);
         startActivity(switchActivityIntent);
     }
 

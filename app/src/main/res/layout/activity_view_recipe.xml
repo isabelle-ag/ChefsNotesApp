@@ -36,7 +36,8 @@
             android:contentDescription='"Duplicate Recipe"'
             android:translationX="450dp"
             android:translationY="-17dp"
-            app:srcCompat="?attr/actionModeCopyDrawable" />
+            app:srcCompat="?attr/actionModeCopyDrawable"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/edit_button"
