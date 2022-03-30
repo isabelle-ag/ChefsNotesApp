@@ -25,7 +25,6 @@ import java.util.Arrays;
 public class ViewRecipe extends AppCompatActivity {
 
     private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
-
     private Recipe recipe;
 
 
@@ -33,7 +32,6 @@ public class ViewRecipe extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
-        db = Services.getRecipePersistence();
 
         ImageButton editButton = findViewById(R.id.edit_button);
         ImageButton copyButton = findViewById(R.id.copy_button);
@@ -56,13 +54,6 @@ public class ViewRecipe extends AppCompatActivity {
             errorScreen();
         }
 
-//        recipe = recipeFetcher.getRecentRecipe("Use Test Recipe");
-//        if(recipe != null) {
-//            fillViewer();
-//        }
-//        else{
-//            errorScreen();
-//        }
     }
 
 
