@@ -19,9 +19,12 @@ import android.widget.ToggleButton;
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.objects.TagExistenceException;
+import comp3350.chefsnotes.persistence.FakeTagDB;
 import comp3350.chefsnotes.persistence.TagDBMSTools;
 
 public class RecipeBrowser extends AppCompatActivity {
+    TagDBMSTools tagDB = new FakeTagDB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +34,37 @@ public class RecipeBrowser extends AppCompatActivity {
 
         LinearLayout tags = findViewById(R.id.filterTagLayout);
 
-        ArrayList<ToggleButton> ab = new ArrayList<ToggleButton>();
-        for(int i=0;i<5;i++){
-            ab.add(new ToggleButton(this));
-        }
-        for (ToggleButton b : ab) {
 
-            b.setTextOn("Hi");
-            b.setTextOff("Hi");
-            b.setTextSize(15);
+        for(int i=0;i<5;i++){
+            try {
+                tagDB.addTag("Asian");
+                tagDB.addTag("American");
+                tagDB.addTag("Fusion");
+                tagDB.addTag("Vegan");
+                tagDB.addTag("Mexican");
+            } catch (TagExistenceException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        String[] tagList = tagDB.tagList();
+
+        for (String s : tagList) {
+
+            ToggleButton b = new ToggleButton(this);
+            b.setTextSize(11);
+            b.setText(s);
+            b.setTextOff(s);
+            b.setTextOn(s);
+            b.setMinHeight(20);
+            b.setMinimumHeight(20);
+            b.setMinWidth(50);
+            b.setMinimumWidth(50);
+            b.setPadding(10,5,10,5);
+            b.setM
+
+
 
 
             b.setId(b.generateViewId());
