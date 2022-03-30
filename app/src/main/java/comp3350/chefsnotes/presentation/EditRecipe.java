@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
+import comp3350.chefsnotes.business.Units;
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
 import comp3350.chefsnotes.objects.Recipe;
@@ -37,11 +39,17 @@ public class EditRecipe extends AppCompatActivity {
         View deleteIngredientButton = findViewById(R.id.IngredientDeleteButton);
         View deleteDirectionButton = findViewById(R.id.DirectionDeleteButton);
 
+        //set dropdown menu to array being used - can be used in the future for filtering units by metric, imperial, etc.
+        Spinner ingDrop = findViewById(R.id.unitList);
+        ArrayAdapter<String> units = new ArrayAdapter<String>(EditRecipe.this, android.R.layout.simple_spinner_item, Units.unitList());
+        units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ingDrop.setAdapter(units);
+
         Intent thisIntent = getIntent();
 
         if(thisIntent.getStringExtra("title") != null)//if a new recipe is being created (blank), Title = null
         {
-            populateRecipe(thisIntent.getStringExtra("Title"));
+            populateRecipe(thisIntent.getStringExtra("title"));
         }
 
         saveButton.setOnClickListener(v -> {
@@ -170,6 +178,8 @@ public class EditRecipe extends AppCompatActivity {
     {
         //get recipe from db
         //for each ingredient, id = ingredient.addIngredient(), findViewById(id).addText
+        EditText recipeTitle = (EditText) findViewById(R.id.recipeTitle);
+        recipeTitle.setText(title);
         Recipe populator = recipeFetcher.getRecipeByName(title);//use to populate fields
         ViewGroup curIng = findViewById(R.id.Ingredient);
         ViewGroup curDir = findViewById(R.id.Direction);
@@ -179,7 +189,7 @@ public class EditRecipe extends AppCompatActivity {
             name.setText(ing.getName());
             EditText amount = (EditText) curIng.findViewById(R.id.IngredientAmount);
             amount.setText(ing.getAmt().getAmtStr());
-
+            //figure out how to get the unit used by the current amount, and compare it to spinner values.
             curIng = findViewById(this.addIngredient(findViewById(R.id.IngredientContainer)));
         }
         for(Direction dir:populator.getDirections())
@@ -214,6 +224,11 @@ public class EditRecipe extends AppCompatActivity {
 
         View deleteIngredientButton = child.findViewById(R.id.IngredientDeleteButton);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
+
+        Spinner ingDrop = child.findViewById(R.id.unitList);
+        ArrayAdapter<String> units = new ArrayAdapter<String>(EditRecipe.this, android.R.layout.simple_spinner_item, Units.unitList());
+        units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ingDrop.setAdapter(units);
 
         //return id for population?
         return child.getId();
