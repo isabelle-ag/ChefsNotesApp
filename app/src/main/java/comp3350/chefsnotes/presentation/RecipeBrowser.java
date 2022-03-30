@@ -7,30 +7,19 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.view.ViewCompat;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-
-import comp3350.chefsnotes.R;
-import comp3350.chefsnotes.business.RecipeFetcher;
-import comp3350.chefsnotes.objects.Direction;
-import comp3350.chefsnotes.objects.Ingredient;
-import comp3350.chefsnotes.objects.Recipe;
-import comp3350.chefsnotes.persistence.FakeDBMS;
-
-import android.widget.ArrayAdapter;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
+
+import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.persistence.TagDBMSTools;
 
 public class RecipeBrowser extends AppCompatActivity {
 
@@ -39,6 +28,30 @@ public class RecipeBrowser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_browser);
 
+        LinearLayout tags = findViewById(R.id.filterTagLayout);
+
+        String[] = tagList();
+        ArrayList<ToggleButton> ab = new ArrayList<ToggleButton>();
+        for(int i=0;i<5;i++){
+            ab.add(new ToggleButton(this));
+        }
+        for (ToggleButton b : ab) {
+            tags.addView(b);
+            b.setTextOn("Hi");
+            b.setTextOff("Hi");
+            b.setTextSize(11);
+
+            Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
+            ViewCompat.setBackground(b, drawable);
+
+            //b.setBackground(getResources().getDrawable(R.drawable.togglebutton_selector));
+            b.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT));
+            // LinearLayout.LayoutParams bParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+            // b.setLayoutParams(bParams);
+            b.setOnClickListener(v -> setFilterCondition(v));
+        }
 
 
     }

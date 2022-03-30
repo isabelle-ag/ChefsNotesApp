@@ -20,5 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <ListView
+            android:id="@+id/results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_column="0"
+            app:layout_row="1" />
+
     </androidx.gridlayout.widget.GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
