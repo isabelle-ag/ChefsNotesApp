@@ -50,7 +50,7 @@ public class EditRecipe extends AppCompatActivity {
 
         if(thisIntent.getStringExtra("title") != null)//if a new recipe is being created (blank), Title = null
         {
-            populateRecipe(thisIntent.getStringExtra("title"));
+            populateRecipe(thisIntent.getStringExtra("title"), units);
         }
 
         saveButton.setOnClickListener(v -> {
@@ -175,11 +175,12 @@ public class EditRecipe extends AppCompatActivity {
         return directions;
     }
 
-    public void populateRecipe(String title)//cannot test until ViewRecipe uses real recipes, or sample recipe is stored in db
+    public void populateRecipe(String title, ArrayAdapter<String> units)//cannot test until ViewRecipe uses real recipes, or sample recipe is stored in db
     {
         EditText name;
         EditText amount;
         EditText time;
+        Spinner unitList;
         //get recipe from db
         //for each ingredient, id = ingredient.addIngredient(), findViewById(id).addText
         EditText recipeTitle = (EditText) findViewById(R.id.recipeTitle);
@@ -194,6 +195,8 @@ public class EditRecipe extends AppCompatActivity {
             amount = (EditText) curIng.findViewById(R.id.IngredientAmount);
             amount.setText(ing.getAmt().getAmtStr());
             //figure out how to get the unit used by the current amount, and compare it to spinner values.
+            unitList = (Spinner) curIng.findViewById(R.id.unitList);
+            unitList.setSelection(units.getPosition(ing.getAmt().getUnit()));
             curIng = findViewById(this.addIngredient(findViewById(R.id.IngredientContainer)));
             Log.d("id", "" + curIng.getId());
         }
