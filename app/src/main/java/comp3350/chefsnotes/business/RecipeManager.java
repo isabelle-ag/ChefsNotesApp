@@ -2,6 +2,7 @@ package comp3350.chefsnotes.business;
 
 import java.util.ArrayList;
 
+import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
 import comp3350.chefsnotes.objects.Recipe;
@@ -13,6 +14,10 @@ public class RecipeManager implements IRecipeManager {
 
     public RecipeManager(DBMSTools db) {
         this.db = db;
+    }
+
+    public RecipeManager() {
+        this.db = Services.getRecipePersistence();
     }
 
     public Recipe newRecipe(String name) throws RecipeExistenceException

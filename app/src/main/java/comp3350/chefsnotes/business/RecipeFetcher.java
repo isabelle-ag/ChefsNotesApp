@@ -3,6 +3,7 @@ package comp3350.chefsnotes.business;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.objects.SampleRecipe;
 import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.objects.Recipe;
@@ -13,6 +14,11 @@ public class RecipeFetcher implements IRecipeFetcher{
     public RecipeFetcher(DBMSTools db)
     {
         this.db = db;
+    }
+
+    public RecipeFetcher()
+    {
+        this.db = Services.getRecipePersistence();
     }
 
     public Recipe getRecentRecipe()
