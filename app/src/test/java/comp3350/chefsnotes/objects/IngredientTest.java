@@ -1,7 +1,7 @@
 package comp3350.chefsnotes.objects;
 
 import comp3350.chefsnotes.business.Units;
-import comp3350.chefsnotes.objects.Ingredient;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -78,6 +78,14 @@ public class IngredientTest {
         Ingredient dummy = new Ingredient("Sludge", 100, Units.DASH);
         assertFalse(dummy.equals(testIngredientDecimal));
         assertFalse(dummy.equals(testIngredientFraction));
+    }
+
+    @Test
+    public void testClone(){
+        assertEquals(testIngredientDecimal, testIngredientDecimal.clone());
+        assertFalse(testIngredientDecimal == testIngredientDecimal.clone());
+        assertEquals(testIngredientFraction, testIngredientFraction.clone());
+        assertFalse(testIngredientFraction == testIngredientFraction.clone());
     }
 
 }

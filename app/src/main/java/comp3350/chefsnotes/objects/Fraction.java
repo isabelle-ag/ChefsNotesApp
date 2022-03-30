@@ -1,7 +1,5 @@
 package comp3350.chefsnotes.objects;
 
-import androidx.annotation.NonNull;
-
 import java.util.Locale;
 
 class Fraction extends QuantityNum{
@@ -23,7 +21,6 @@ class Fraction extends QuantityNum{
         this.denominator = denominator / gcd;
     }
 
-    @NonNull
     public String toString()
     {
         if(this.denominator > 1)
@@ -105,6 +102,9 @@ class Fraction extends QuantityNum{
             return gcd(small, big % small);
     }
 
-
+    public Fraction clone()
+    {
+        return new Fraction(this.numerator, this.denominator);
+    }
 
 }

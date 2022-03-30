@@ -1,8 +1,10 @@
 package comp3350.chefsnotes.objects;
 
-import androidx.annotation.NonNull;
+import java.io.Serializable;
 
-public class Ingredient {
+public class Ingredient implements Serializable {
+    private static final long serialVersionUID = 202203171146L;
+
     private String name;
     private Quantity amount;
 
@@ -14,6 +16,12 @@ public class Ingredient {
     public Ingredient(String iName, int numer, int denom, String unit){
         this.name = iName;
         this.amount = new Quantity(numer, denom, unit);
+    }
+
+    private Ingredient(String iName, Quantity quant)
+    {
+        this.name = iName;
+        this.amount = quant;
     }
 
     public String getName(){
@@ -48,7 +56,6 @@ public class Ingredient {
     }
 
     @Override
-    @NonNull
     public String toString(){
         String result = "";
         result = amount.toString() + " " + this.name;
@@ -69,5 +76,10 @@ public class Ingredient {
     public int hashCode()
     {
         return this.amount.hashCode() * this.name.hashCode();
+    }
+
+    public Ingredient clone()
+    {
+        return new Ingredient(this.name, this.amount.clone());
     }
 }

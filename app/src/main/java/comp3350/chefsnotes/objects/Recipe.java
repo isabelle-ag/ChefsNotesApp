@@ -1,5 +1,6 @@
 package comp3350.chefsnotes.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 // DO NOT CREATE THIS CLASS EXPLICITLY
@@ -9,16 +10,34 @@ import java.util.ArrayList;
 // to the comp3350.chefsnotes.persistance.DBMSTools.java interface file to understand
 // how to use a DBMS to perform operations on a Recipe.
 
-public class Recipe {
+public class Recipe implements Serializable {
+    private static final long serialVersionUID = 202203171213L;
     
     private String title;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Direction> directions;
+    private ArrayList<String> tags;
     
     public Recipe(String t){
         title = t;
         ingredients = new ArrayList<Ingredient>();
         directions = new ArrayList<Direction>();
+        tags = new ArrayList<String>();
+    }
+
+    public void addTag(String tag)
+    {
+        tags.add(tag);
+    }
+
+    public void removeTag(String tag)
+    {
+        tags.remove(tag);
+    }
+
+    public ArrayList<String> getTags()
+    {
+        return tags;
     }
 
     public int ingredientCount(){
@@ -177,59 +196,6 @@ public class Recipe {
         return result;
     }
 
-    // names the direction "Direction <num>" by default
-    // returns new direction's number, -1 on failure
-    public int addDirection(String txt){
-        int result = -1;
-
-        boolean test = this.directions.add(new Direction(txt, ""));
-
-        if(test == true){
-            result = this.directions.size()-1;
-        }
-
-        return result;
-    }
-
-    // addDirection with all fields
-    public int addDirection(String txt, String n, int t){
-        int result = -1;
-
-        boolean test = this.directions.add(new Direction(txt, n, t));
-
-        if(test == true){
-            result = this.directions.size()-1;
-        }
-
-        return result;
-    }
-
-    // addDirection with time field
-    public int addDirection(String txt, int t){
-        int result = -1;
-
-        boolean test = this.directions.add(new Direction(txt, "Direction "+this.directions.size(), t));
-
-        if(test == true){
-            result = this.directions.size()-1;
-        }
-
-        return result;
-    }
-
-    // addDirection but with a direction name
-    public int addDirection(String txt, String n){
-        int result = -1;
-
-        boolean test = this.directions.add(new Direction(txt, n));
-
-        if(test == true){
-            result = this.directions.size()-1;
-        }
-
-        return result;
-    }
-
     // returns array of all directions
     public Direction[] getDirections(){
         Direction[] result = this.directions.toArray(new Direction[0]);
@@ -279,30 +245,36 @@ public class Recipe {
         return result;
     }
 
-    // attempts to move a comp3350.chefsnotes.objects.Direction from its current position to a new one.
-    // position corresponds to index of comp3350.chefsnotes.objects.Direction in the array returned
+    // attempts to move a Direction from its current position to a new one.
+    // position corresponds to index of Direction in the array returned
     // from directionList()
     // reorders Directions. Target direction is moved to the new number,
     // and all other Directions are shifted linearly.
     // 0 < newNum < directionCount
-    // returns false if the comp3350.chefsnotes.objects.Direction DNE or the number is out of bounds
+    // returns false if the Direction DNE or the number is out of bounds
     public boolean moveDirection(int oldNum, int newNum){
         boolean result = true;
         Direction tmp = null;
 
-        // try to remove the comp3350.chefsnotes.objects.Direction
+        // try to remove the Direction
         try{
             tmp = this.directions.remove(oldNum);
         } catch (IndexOutOfBoundsException ioobe){
-            System.out.println("That comp3350.chefsnotes.objects.Direction number does not exist.");
+            System.out.println("That Direction number does not exist.");
             tmp = null;
             result = false;
         }
 
-        // try to add the comp3350.chefsnotes.objects.Direction
+        // try to add the Direction
         if(tmp != null){
             try{
                 this.directions.add(newNum, tmp);
+                try { // successful add. check name if a number needing change
+                    if (Integer.parseInt(Character.toString(tmp.getName().charAt(tmp.getName().length() - 1))) == oldNum) {
+                        tmp.setName("Direction " + newNum);
+                    }
+                } catch (NumberFormatException nfe){
+                }
             } catch (IndexOutOfBoundsException ioobe){ // return it to old position on failure
                 System.out.println("That target location is out of bounds.");
                 this.directions.add(oldNum, tmp);
@@ -329,6 +301,25 @@ public class Recipe {
         return result;
     }
 
+    public Recipe clone()
+    {
+        Recipe out = new Recipe(this.title);
+        for (Ingredient i: this.ingredients)
+        {
+            out.ingredients.add(i.clone());
+        }
+        for (Direction d: this.directions)
+        {
+            out.directions.add(d.clone());
+        }
+        return out;
+    }
+
+    public Recipe duplicateRecipe(String dupName){
+        Recipe out = this.clone();
+        out._setTitle(dupName);
+        return out;
+    }
 
 }
 

@@ -35,14 +35,14 @@ public class RecipeTest {
         assertEquals(example.ingredientCount(),prevCount+1);
 
         prevCount = example.ingredientCount();
-        assertTrue(example.addIngredient("Sprinkles",3,4,Units.CUP));
+        assertTrue(example.addIngredient("Sprinkles",3,4, Units.CUP));
         assertEquals(example.ingredientCount(), prevCount+1);
 
         prevCount = example.directionCount(); // count is highest index+1
-        assertEquals(example.addDirection("Set to cool for 20 minutes",20),prevCount); // returns index
+        assertEquals(example.addDirection(new Direction("Set to cool for 20 minutes",20)),prevCount); // returns index
 
         prevCount = example.directionCount();
-        assertEquals(example.addDirection("Serve and enjoy!","Final step"),prevCount);
+        assertEquals(example.addDirection(new Direction("Serve and enjoy!","Final step")),prevCount);
     }
 
     @Test
@@ -63,6 +63,21 @@ public class RecipeTest {
         assertTrue(example.deleteIngredient(prevCount-1));
         assertEquals(example.ingredientCount(),prevCount-1);
 
+    }
+
+    @Test
+    public void testClone() {
+        Recipe exampleClone = example.clone();
+        assertEquals(example , exampleClone);
+        assertFalse(example == exampleClone);
+    }
+
+    @Test
+    public void testTags() {
+        example.addTag("foo");
+        assertTrue(example.getTags().contains("foo"));
+        example.removeTag("foo");
+        assertFalse(example.getTags().contains("foo"));
     }
 
 }

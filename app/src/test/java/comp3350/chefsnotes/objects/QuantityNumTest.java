@@ -123,5 +123,16 @@ public class QuantityNumTest {
 
     }
 
+    @Test
+    public void testClone() {
+        Decimal d = new Decimal(0.5);
+        Fraction f = new Fraction(8, 3);
+
+        assertEquals(d, d.clone());
+        assertFalse(d == d.clone());
+        assertEquals(f, f.clone());
+        assertFalse(d == d.clone());
+
+    }
 
 }
