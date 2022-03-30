@@ -43,7 +43,7 @@ public class RecipePersistence implements DBMSTools{
     @Override
     public Recipe[] getAllRecipes() {
         ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-        Recipe[] result = null;
+        Recipe[] result = new Recipe[];
 
         try (final Connection c = connection()) {   // establish conexion
             // create statement and query
@@ -67,7 +67,7 @@ public class RecipePersistence implements DBMSTools{
     @Override
     public String[] getRecipeNames() {
         ArrayList<String> recipes = new ArrayList<String>();
-        String[] result = null;
+        String[] result = new String[];
 
         try (final Connection c = connection()) {   // establish conexion
             // create statement and query
