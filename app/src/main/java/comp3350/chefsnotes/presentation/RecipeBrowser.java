@@ -54,7 +54,7 @@ public class RecipeBrowser extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-                populateRecipes(s.toString());
+                populateRecipes(s.toString().trim());
             }
 
             @Override
