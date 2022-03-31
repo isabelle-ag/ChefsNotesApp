@@ -63,10 +63,7 @@ public class EditRecipe extends AppCompatActivity {
                 try {
                     System.out.println("Saving " + title + "...");
                     recipeManager.saveButton(title, ingredients, directions);
-                    //Not sure if we need this yet so leaving here
-//                    Intent i = new Intent(this, ViewRecipe.class);
-//                    i.putExtra("recipeKey",title);
-//                    startActivity(i);
+                    System.out.println("Saving succeeded!");
                 }
                 catch(RecipeExistenceException e) {
                     System.out.println("Saving failed!");
@@ -191,27 +188,31 @@ public class EditRecipe extends AppCompatActivity {
         Recipe populator = recipeFetcher.getRecipeByName(title);//use to populate fields
         ViewGroup curIng = findViewById(R.id.Ingredient);
         ViewGroup curDir = findViewById(R.id.Direction);
-        for(Ingredient ing:populator.getIngredients())
-        {
-            name = (EditText) curIng.findViewById(R.id.IngredientName);
-            name.setText(ing.getName());
-            amount = (EditText) curIng.findViewById(R.id.IngredientAmount);
-            amount.setText(ing.getAmt().getAmtStr());
-            //figure out how to get the unit used by the current amount, and compare it to spinner values.
-            unitList = (Spinner) curIng.findViewById(R.id.unitList);
-            unitList.setSelection(units.getPosition(ing.getAmt().getUnit()));
-            curIng = findViewById(this.addIngredient(findViewById(R.id.IngredientContainer)));
-            Log.d("id", "" + curIng.getId());
+        if(populator.getIngredients() != null){
+            for(Ingredient ing:populator.getIngredients())
+            {
+                name = (EditText) curIng.findViewById(R.id.IngredientName);
+                name.setText(ing.getName());
+                amount = (EditText) curIng.findViewById(R.id.IngredientAmount);
+                amount.setText(ing.getAmt().getAmtStr());
+                //figure out how to get the unit used by the current amount, and compare it to spinner values.
+                unitList = (Spinner) curIng.findViewById(R.id.unitList);
+                unitList.setSelection(units.getPosition(ing.getAmt().getUnit()));
+                curIng = findViewById(this.addIngredient(findViewById(R.id.IngredientContainer)));
+                Log.d("id", "" + curIng.getId());
+            }
         }
-        for(Direction dir:populator.getDirections())
-        {
-            name = (EditText) curDir.findViewById(R.id.DirectionName);
-            name.setText(dir.getName());
-            time = (EditText) curDir.findViewById(R.id.TimeEstimate);
-            time.setText(dir.getTime() + "");//Java is dumb
-            EditText contents = (EditText) curDir.findViewById(R.id.textbox);
-            contents.setText(dir.getText());
-            curDir = findViewById(this.addDirection(findViewById(R.id.DirectionContainer)));
+        if(populator.getDirections() != null) {
+            for(Direction dir:populator.getDirections())
+            {
+                name = (EditText) curDir.findViewById(R.id.DirectionName);
+                name.setText(dir.getName());
+                time = (EditText) curDir.findViewById(R.id.TimeEstimate);
+                time.setText(dir.getTime() + "");//Java is dumb
+                EditText contents = (EditText) curDir.findViewById(R.id.textbox);
+                contents.setText(dir.getText());
+                curDir = findViewById(this.addDirection(findViewById(R.id.DirectionContainer)));
+            }
         }
     }
 
