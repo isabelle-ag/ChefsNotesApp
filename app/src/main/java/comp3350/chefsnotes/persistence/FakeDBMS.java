@@ -192,12 +192,20 @@ public class FakeDBMS implements DBMSTools{
                 newOne = oldOne.duplicateRecipe(newName);
             }
             else {
-                newName = this.duplicateRecipe(recipe, newName + "-copy");
+                String name = newName+"-copy";
+                while(getRecipe(name) != null){
+                    name+="-copy";
+                }
+                newName = this.duplicateRecipe(recipe, name);
                 newOne = oldOne.duplicateRecipe(newName);
             }
         }
         else{
-            newOne = oldOne.duplicateRecipe(oldOne.getTitle() + "-copy");
+            String name = oldOne.getTitle()+"-copy";
+            while(getRecipe(name) != null){
+                name+="-copy";
+            }
+            newOne = oldOne.duplicateRecipe(name);
         }
         this._addRecipe(newOne);
 
