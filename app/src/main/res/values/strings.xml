@@ -20,4 +20,6 @@
     <string name="search_by_recipe_name">Search by recipe name</string>
     <string name="toggle_filter_text">Click a tag to toggle it as a search filter</string>
     <string name="browse_recipes">Browse Recipes</string>
+    <string name="current_recipe">Current Recipe</string>
+    <string name="new_recipe">New Recipe</string>
 </resources>
