@@ -114,7 +114,18 @@ public class EditRecipe extends AppCompatActivity {
 
             if(!ingredientName.equals("") && !ingredientCount.equals("") && !ingredientUnit.equals(""))
             {
-                current = new Ingredient(ingredientName, Double.parseDouble(ingredientCount), ingredientUnit);
+                if(ingredientCount.contains("/") || ingredientCount.contains("\\")) {
+                    if(ingredientCount.contains("\\")) {
+                        ingredientCount.replace("\\", "/");
+                    }
+                    int numer = Integer.parseInt(ingredientCount.substring(0, ingredientCount.indexOf("/")));
+                    int denom = Integer.parseInt(ingredientCount.substring(ingredientCount.indexOf("/")+1, ingredientCount.length()));
+
+                    current = new Ingredient(ingredientName, numer, denom, ingredientUnit);
+                }
+                else {
+                    current = new Ingredient(ingredientName, Double.parseDouble(ingredientCount), ingredientUnit);
+                }
                 ingredients.add(current);
             }
             else
