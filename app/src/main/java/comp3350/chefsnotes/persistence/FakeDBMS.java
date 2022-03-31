@@ -185,6 +185,9 @@ public class FakeDBMS implements DBMSTools{
     }
 
     public String duplicateRecipe(String recipe, String newName){
+        if(getRecipe(recipe)== null){
+            return null;
+        }
         Recipe oldOne = this.getRecipe(recipe);
         Recipe newOne;
         if(newName!=null){
