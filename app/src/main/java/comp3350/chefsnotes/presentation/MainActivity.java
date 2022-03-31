@@ -36,35 +36,14 @@ public class MainActivity extends AppCompatActivity {
         copyDatabaseToDevice();
         // instantiate databases
         Services.getTagPersistence(DB_MODE);
-        TagDBMSTools tagdb= Services.getTagPersistence(DB_MODE);
         DBMSTools dbSetup = Services.getRecipePersistence(DB_MODE);
         Recipe sample = new SampleRecipe();
-        if(dbSetup.getRecipe(sample.getTitle()) == null){
+        if (dbSetup.getRecipe(sample.getTitle()) == null) {
             dbSetup.createRecipe(sample.getTitle());
             dbSetup.commitChanges(sample);
         }
 
-        if(tagdb.tagList().length == 0){
-            try {
-                tagdb.addTag("African");
-                tagdb.addTag("American");
-                tagdb.addTag("Asian");
-                tagdb.addTag("Chinese");
-                tagdb.addTag("Fusion");
-                tagdb.addTag("German");
-                tagdb.addTag("Greek");
-                tagdb.addTag("Mexican");
-                tagdb.addTag("South American");
-                tagdb.addTag("Ukrainian");
-                tagdb.addTag("Keto");
-                tagdb.addTag("Pescatarian");
-                tagdb.addTag("Vegan");
-                tagdb.addTag("Vegetarian");
-
-            } catch (TagExistenceException e) {
-                e.printStackTrace();
-            }
-        }
+        createTags();
     }
 
     public void makeRecipe(View view) {
@@ -136,5 +115,29 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
+    private void createTags() {
+        TagDBMSTools tagdb = Services.getTagPersistence();
+        if (tagdb.tagList().length == 0) {
+            try {
+                tagdb.addTag("African");
+                tagdb.addTag("American");
+                tagdb.addTag("Asian");
+                tagdb.addTag("Chinese");
+                tagdb.addTag("Fusion");
+                tagdb.addTag("German");
+                tagdb.addTag("Greek");
+                tagdb.addTag("Mexican");
+                tagdb.addTag("South American");
+                tagdb.addTag("Ukrainian");
+                tagdb.addTag("Keto");
+                tagdb.addTag("Pescatarian");
+                tagdb.addTag("Vegan");
+                tagdb.addTag("Vegetarian");
 
+            } catch (TagExistenceException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }
