@@ -116,41 +116,49 @@ public class EditRecipe extends AppCompatActivity {
 
     private void save(View v){
         String title = getTitle(v);
+        Intent thisIntent = getIntent();
         ArrayList<Ingredient> ingredients = getIngredients(v);
         ArrayList<Direction> directions = getDirections(v);
 
-        Intent thisIntent = getIntent();
         // if editing an old recipe
-        if (thisIntent.getStringExtra("title") != null) {
+        if(thisIntent.getStringExtra("title") != null) {
             try {
                 System.out.println("Saving changes to " + thisIntent.getStringExtra("title") + "...");
                 Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions);
-                System.out.println("Renaming " + thisIntent.getStringExtra("title") + "...");
-                recipeManager.renameRecipe(r, title);
+
+                if(!thisIntent.getStringExtra("title").equals(title)) {
+                    System.out.println("Renaming " + thisIntent.getStringExtra("title") + "...");
+                    recipeManager.renameRecipe(r, title);
+                }
+
                 System.out.println("Saving Success!");
                 Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
-                i.putExtra("recipeKey", title);
+                i.putExtra("recipeKey",title);
                 startActivity(i);
-            } catch (RecipeExistenceException e) {
+            }
+            catch(RecipeExistenceException e) {
                 System.out.println("Saving failed!");
                 System.out.println(e);
             }
         }
-
         // if creating new recipe
-        else if (ingredients != null && directions != null) {
+        else if(ingredients != null && directions != null)
+        {
             try {
                 System.out.println("Saving " + title + "...");
                 recipeManager.saveButton(title, ingredients, directions);
                 System.out.println("Saving succeeded!");
                 Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
-                i.putExtra("recipeKey", title);
+                i.putExtra("recipeKey",title);
                 startActivity(i);
-            } catch (RecipeExistenceException e) {
+            }
+            catch(RecipeExistenceException e) {
                 System.out.println("Saving failed!");
                 System.out.println(e);
             }
-        } else {
+        }
+        else
+        {
             System.out.println("Abort save, null field found.");
         }
     }
