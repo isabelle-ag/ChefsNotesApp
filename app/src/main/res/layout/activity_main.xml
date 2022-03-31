@@ -19,7 +19,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="25dp"
             android:fontFamily="serif"
             android:gravity="bottom|center_horizontal"
             android:paddingBottom="20dp"
@@ -36,7 +36,6 @@
             android:layout_width="210dp"
             android:layout_height="400dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
             android:contentDescription="@string/logo"
             android:scaleX="2"
             android:scaleY="2"
@@ -93,5 +92,14 @@
         </androidx.gridlayout.widget.GridLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_bottom" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
