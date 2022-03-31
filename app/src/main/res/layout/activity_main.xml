@@ -37,7 +37,7 @@
             android:contentDescription="@string/logo"
             android:scaleX="2"
             android:scaleY="2"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/chefsnotes_logo" />
 
         <androidx.gridlayout.widget.GridLayout
             android:layout_width="match_parent"
