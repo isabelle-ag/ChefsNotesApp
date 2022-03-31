@@ -84,7 +84,6 @@ public class RecipeBrowser extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        //populateTags();
         populateRecipes("");
     }
 
