@@ -58,6 +58,16 @@ public class Recipe implements Serializable {
         this.title = newTitle;
     }
 
+    public void clearIngredients()
+    {
+        this.ingredients = new ArrayList<Ingredient>();
+    }
+
+    public void clearDirections()
+    {
+        this.directions = new ArrayList<Direction>();
+    }
+
     public void addIngredient(Ingredient i) {
         this.ingredients.add(i);
     }
