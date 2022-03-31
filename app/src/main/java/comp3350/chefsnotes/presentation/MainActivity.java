@@ -4,6 +4,7 @@ package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Main;
@@ -140,4 +142,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
 }

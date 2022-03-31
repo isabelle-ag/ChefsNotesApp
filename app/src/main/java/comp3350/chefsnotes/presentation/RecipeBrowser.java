@@ -165,5 +165,12 @@ public class RecipeBrowser extends AppCompatActivity {
         tags.setReferencedIds(idList);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(RecipeBrowser.this, MainActivity.class);
+        Log.d("CDA", "onBackPressed Called");
+        startActivity(i);
+    }
+
 
 }

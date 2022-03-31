@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -53,51 +54,8 @@ public class EditRecipe extends AppCompatActivity {
             populateRecipe(thisIntent.getStringExtra("title"), units);
         }
 
-        saveButton.setOnClickListener(v -> {
-            String title = getTitle(v);
-            ArrayList<Ingredient> ingredients = getIngredients(v);
-            ArrayList<Direction> directions = getDirections(v);
 
-            // if editing an old recipe
-            if(thisIntent.getStringExtra("title") != null) {
-                try {
-                    System.out.println("Saving changes to " + thisIntent.getStringExtra("title") + "...");
-                    Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions);
-                    System.out.println("Renaming " + thisIntent.getStringExtra("title") + "...");
-                    recipeManager.renameRecipe(r, title);
-                    System.out.println("Saving Success!");
-                    Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
-                    i.putExtra("recipeKey",title);
-                    startActivity(i);
-                }
-                catch(RecipeExistenceException e) {
-                    System.out.println("Saving failed!");
-                    System.out.println(e);
-                }
-            }
-
-            // if creating new recipe
-            else if(ingredients != null && directions != null)
-            {
-                try {
-                    System.out.println("Saving " + title + "...");
-                    recipeManager.saveButton(title, ingredients, directions);
-                    System.out.println("Saving succeeded!");
-                    Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
-                    i.putExtra("recipeKey",title);
-                    startActivity(i);
-                }
-                catch(RecipeExistenceException e) {
-                    System.out.println("Saving failed!");
-                    System.out.println(e);
-                }
-            }
-            else
-            {
-                System.out.println("Abort save, null field found.");
-            }
-        });
-
+        saveButton.setOnClickListener(this::save);
         addInstructionButton.setOnClickListener(this::addDirection);
         addIngredientButton.setOnClickListener(this::addIngredient);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
@@ -154,6 +112,47 @@ public class EditRecipe extends AppCompatActivity {
         }
 
         return ingredients;
+    }
+
+    private void save(View v){
+        String title = getTitle(v);
+        ArrayList<Ingredient> ingredients = getIngredients(v);
+        ArrayList<Direction> directions = getDirections(v);
+
+        Intent thisIntent = getIntent();
+        // if editing an old recipe
+        if (thisIntent.getStringExtra("title") != null) {
+            try {
+                System.out.println("Saving changes to " + thisIntent.getStringExtra("title") + "...");
+                Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions);
+                System.out.println("Renaming " + thisIntent.getStringExtra("title") + "...");
+                recipeManager.renameRecipe(r, title);
+                System.out.println("Saving Success!");
+                Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
+                i.putExtra("recipeKey", title);
+                startActivity(i);
+            } catch (RecipeExistenceException e) {
+                System.out.println("Saving failed!");
+                System.out.println(e);
+            }
+        }
+
+        // if creating new recipe
+        else if (ingredients != null && directions != null) {
+            try {
+                System.out.println("Saving " + title + "...");
+                recipeManager.saveButton(title, ingredients, directions);
+                System.out.println("Saving succeeded!");
+                Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
+                i.putExtra("recipeKey", title);
+                startActivity(i);
+            } catch (RecipeExistenceException e) {
+                System.out.println("Saving failed!");
+                System.out.println(e);
+            }
+        } else {
+            System.out.println("Abort save, null field found.");
+        }
     }
 
     //put retrieval methods in separate class?
@@ -281,5 +280,21 @@ public class EditRecipe extends AppCompatActivity {
     {
         LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.IngredientContainer);
         ingredientContainer.removeView((View) view.getParent().getParent());
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent thisIntent = getIntent();
+        Intent i;
+        // if editing an old recipe
+        if (thisIntent.getStringExtra("title") != null) {
+            i = new Intent(EditRecipe.this, ViewRecipe.class);
+        }
+        else {
+            i = new Intent(EditRecipe.this, RecipeBrowser.class);
+        }
+        Log.d("CDA", "onBackPressed Called");
+        startActivity(i);
     }
 }

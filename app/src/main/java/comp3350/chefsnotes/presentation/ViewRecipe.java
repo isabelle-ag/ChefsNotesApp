@@ -121,6 +121,13 @@ public class ViewRecipe extends AppCompatActivity {
         ((TextView)findViewById(R.id.recipeName)).setText(error);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(ViewRecipe.this, RecipeBrowser.class);
+        Log.d("CDA", "onBackPressed Called");
+        startActivity(i);
+    }
+
 
 
 
