@@ -335,5 +335,9 @@ public class Recipe implements Serializable {
         return out;
     }
 
+    @Override
+    public String toString(){
+        return this.title;
+    }
 }
 

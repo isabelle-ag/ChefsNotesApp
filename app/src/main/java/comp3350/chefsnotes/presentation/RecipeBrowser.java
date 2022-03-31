@@ -1,52 +1,33 @@
 package comp3350.chefsnotes.presentation;
 import androidx.appcompat.app.AppCompatActivity;
-
-//import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.helper.widget.Flow;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
-
 import android.content.Intent;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.WindowMetrics;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.ToggleButton;
-
-import androidx.constraintlayout.helper.widget.Flow;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
+import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.ITagHandler;
 import comp3350.chefsnotes.business.RecipeFetcher;
-import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.business.TagHandler;
-import comp3350.chefsnotes.objects.TagExistenceException;
-import comp3350.chefsnotes.persistence.DBMSTools;
-import comp3350.chefsnotes.persistence.FakeTagDB;
-import comp3350.chefsnotes.persistence.TagDBMSTools;
-import comp3350.chefsnotes.persistence.TagPersistence;
 
 
 public class RecipeBrowser extends AppCompatActivity {
-    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
-    private RecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
-
-
+    private IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
+    private ITagHandler tagHandler = new TagHandler(Services.getTagPersistence());
 
 
     @Override
@@ -85,33 +66,23 @@ public class RecipeBrowser extends AppCompatActivity {
     }
 
     private void setFilterCondition(View v){
-
+//TODO
     }
 
 
     private void populateRecipes(String searchTerm){
-        String[] recipeList;
 
         ListView searchResults = (ListView) findViewById(R.id.results);
-        if (searchTerm == "") {
-            recipeList = recipeFetcher.getAllRecipeNames();
-        }
-        else {
-            recipeList = recipeFetcher.getRecipesNamesByText(searchTerm);
-        }
-
+        String[] recipeList = recipeFetcher.getRecipeNamesByText(searchTerm);
 
         ArrayAdapter<String> rAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, recipeList);
         searchResults.setAdapter(rAdapter);
-        searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                String recipeName = (String) parent.getItemAtPosition(position);
-                Intent i = new Intent(RecipeBrowser.this, ViewRecipe.class);
-                i.putExtra("recipeKey",recipeName);
-                startActivity(i);
-            }
+        searchResults.setOnItemClickListener((parent, v, position, id) -> {
+            String recipeName = (String) parent.getItemAtPosition(position);
+            Intent i = new Intent(RecipeBrowser.this, ViewRecipe.class);
+            i.putExtra("recipeKey",recipeName);
+            startActivity(i);
         });
     }
 
@@ -121,7 +92,7 @@ public class RecipeBrowser extends AppCompatActivity {
         Flow tags = findViewById(R.id.filterTagLayout);
         ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.tagConstraint);
 
-        String[] tagList = tagDB.tagList();
+        String[] tagList = tagHandler.fetchTags();
 
         int [] idList = new int[tagList.length];
         int i=0;

@@ -74,11 +74,8 @@ public class RecipeFetcher implements IRecipeFetcher{
         return out.toArray(new Recipe[0]);
     }
 
-    public String[] getRecipesNamesByText(String searchTerm){
-        return  db.searchRecipeNames(searchTerm);
+    public String[] getRecipeNamesByText(String name){
+        return  db.searchRecipeNames(name);
     }
 
-    public String[] getAllRecipeNames(){
-        return db.getRecipeNames();
-    }
 }
