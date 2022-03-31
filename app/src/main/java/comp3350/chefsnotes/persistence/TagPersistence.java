@@ -50,6 +50,8 @@ public class TagPersistence implements TagDBMSTools{
             } catch (final SQLException e) {
                 System.out.println("Unable to insert the Tag.");
             }
+        } else {
+            throw new TagExistenceException("That tag already exists.");
         }
 
         return result;
@@ -77,6 +79,8 @@ public class TagPersistence implements TagDBMSTools{
             } catch (final SQLException e) {
                 System.out.println("Unable to delete the Tag.");
             }
+        } else {
+            throw new TagExistenceException("That tag does not exist.");
         }
 
         return result;
