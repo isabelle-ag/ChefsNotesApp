@@ -63,18 +63,25 @@ public class RecipeManager implements IRecipeManager {
         }
     }
 
-    public void saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions) throws RecipeExistenceException
+    public Recipe saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions) throws RecipeExistenceException
     {
-        Recipe myRecipe = new Recipe(name);
-        this.newRecipe(name);
+        if(db.getRecipe(name) == null) {
+            this.newRecipe(name);
+        }
+        Recipe myRecipe = db.getRecipe(name);
+
+
+        myRecipe.clearIngredients();
         for(Ingredient i:ingredients) {
             myRecipe.addIngredient(i);
         }
+        myRecipe.clearDirections();
         for (Direction d:directions) {
             myRecipe.addDirection(d);
         }
         System.out.println(myRecipe.ingredientList().toString());
         db.commitChanges(myRecipe);
+        return myRecipe;
     }
 
 }

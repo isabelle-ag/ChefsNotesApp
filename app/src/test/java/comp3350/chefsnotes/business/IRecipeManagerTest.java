@@ -37,8 +37,6 @@ public class IRecipeManagerTest {
         catch (RecipeExistenceException e){fail();};
         Recipe R1 = db.getRecipe("test1");
         assertEquals(myRecipe, R1);
-
-        assertThrows(RecipeExistenceException.class, () -> manager.newRecipe("test1"));
     }
 
     @Test
