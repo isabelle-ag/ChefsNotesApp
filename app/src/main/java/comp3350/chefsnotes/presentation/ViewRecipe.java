@@ -11,7 +11,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
+import comp3350.chefsnotes.business.IRecipeManager;
 import comp3350.chefsnotes.business.RecipeFetcher;
+import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.objects.Recipe;
 
 
@@ -83,9 +85,11 @@ public class ViewRecipe extends AppCompatActivity {
     }
     private void copyRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
+        IRecipeManager manager = new RecipeManager(Services.getRecipePersistence());
         String title;
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
-        title = Services.getRecipePersistence().duplicateRecipe(recipe.getTitle(), null);
+
+        title = manager.copyRecipe(recipe, null).getTitle();
         switchActivityIntent.putExtra("title", title);
         startActivity(switchActivityIntent);
     }

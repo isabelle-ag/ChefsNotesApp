@@ -84,4 +84,13 @@ public class RecipeManager implements IRecipeManager {
         return myRecipe;
     }
 
+    public Recipe copyRecipe(Recipe R, String copyName)
+    {
+        String oldName = R.getTitle();
+        System.out.println(oldName);
+        System.out.println(copyName);
+        String newName = db.duplicateRecipe(oldName, copyName);
+        System.out.println(newName);
+        return db.getRecipe(newName);
+    }
 }
