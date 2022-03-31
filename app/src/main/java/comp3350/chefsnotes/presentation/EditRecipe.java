@@ -63,6 +63,10 @@ public class EditRecipe extends AppCompatActivity {
                 try {
                     System.out.println("Saving " + title + "...");
                     recipeManager.saveButton(title, ingredients, directions);
+                    //Not sure if we need this yet so leaving here
+//                    Intent i = new Intent(this, ViewRecipe.class);
+//                    i.putExtra("recipeKey",title);
+//                    startActivity(i);
                 }
                 catch(RecipeExistenceException e) {
                     System.out.println("Saving failed!");
