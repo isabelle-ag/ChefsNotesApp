@@ -132,12 +132,6 @@ public class EditRecipe extends AppCompatActivity {
                 }
                 ingredients.add(current);
             }
-            else
-            {
-                // Create some kind of UI error here for empty field
-                System.out.println("Cannot Save ingredient! (Empty Field)");
-                return null;
-            }
         }
 
         return ingredients;
@@ -178,12 +172,6 @@ public class EditRecipe extends AppCompatActivity {
                 }
                 current = new Direction(instructions, instructionName, Integer.parseInt(timeEstimate));
                 directions.add(current);
-            }
-            else
-            {
-                // Create some kind of UI warning about empty field
-                System.out.println("Cannot Save instruction!");
-                return null;
             }
         }
 
