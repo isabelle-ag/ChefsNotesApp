@@ -22,4 +22,6 @@
     <string name="browse_recipes">Browse Recipes</string>
     <string name="current_recipe">Current Recipe</string>
     <string name="new_recipe">New Recipe</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="recipe_name">Recipe Name</string>
 </resources>

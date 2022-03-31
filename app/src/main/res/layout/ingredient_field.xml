@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/IngredientField"
-    android:layout_width="550dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#00FFFFFF"
     android:orientation="vertical"
+    android:scaleX="1"
+    android:scaleY="1"
     tools:showIn="@layout/recipe_editor">
 
     <androidx.cardview.widget.CardView
@@ -24,9 +26,9 @@
             android:layout_height="58dp"
             android:layout_marginBottom="30dp"
             android:autofillHints=""
+            android:digits="0,1,2,3,4,5,6,7,8,9,/,."
             android:ems="10"
             android:imeOptions="actionDone"
-            android:digits="0,1,2,3,4,5,6,7,8,9,/,."
             android:maxWidth="75dp"
             android:maxLines="1"
             android:textAlignment="center"
@@ -66,11 +68,11 @@
             android:contentDescription="@string/delete_button"
             android:onClick="removeIngredient"
             android:padding="2dp"
-            android:scaleX=".8"
-            android:scaleY=".8"
+            android:scaleX="1"
+            android:scaleY="1"
             android:translationX="430dp"
             android:translationY="10dp"
-            app:srcCompat="@drawable/delete_ico" />
+            app:srcCompat="@drawable/delete_button" />
 
     </androidx.cardview.widget.CardView>
 

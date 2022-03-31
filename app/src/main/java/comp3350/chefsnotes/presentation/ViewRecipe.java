@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
+import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.objects.Recipe;
 
@@ -21,7 +22,7 @@ import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
 
-    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
+    private IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
 
 

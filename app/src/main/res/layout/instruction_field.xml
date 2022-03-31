@@ -5,12 +5,13 @@
     android:id="@+id/DirectionField"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     android:orientation="vertical"
     tools:showIn="@layout/recipe_editor">
 
     <RelativeLayout
         android:id="@+id/Direction"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageButton
@@ -22,17 +23,13 @@
             android:layout_marginTop="45dp"
             android:layout_toEndOf="@+id/textbox"
             android:background="#00FFFFFF"
-            android:scaleX=".8"
-            android:scaleY=".8"
-            app:srcCompat="@drawable/delete_ico"
+            app:srcCompat="@drawable/delete_button"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
             android:id="@+id/DirectionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="9dp"
             android:backgroundTint="#000000"
             android:ems="10"
             android:hint="Direction Title"
@@ -49,15 +46,14 @@
             android:hint="Direction"
             android:imeOptions="actionDone"
             android:inputType="textMultiLine"
-            android:minLines="3" />
+            android:minLines="3"
+            android:paddingStart="5dp" />
 
         <EditText
             android:id="@+id/TimeEstimate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="104dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginStart="80dp"
             android:layout_toEndOf="@+id/DirectionName"
             android:backgroundTint="#000000"
             android:hint="Time For Step (mins)"

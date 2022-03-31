@@ -250,7 +250,8 @@ public class EditRecipe extends AppCompatActivity {
         LinearLayout instructionContainer = findViewById(R.id.DirectionContainer);
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
         instructionContainer.addView(child);
-        child.setId(1000000 + child.getId() + instructionContainer.getChildCount());
+        //child.setId(1000000 + child.getId() + instructionContainer.getChildCount());
+        child.setId(View.generateViewId());
 
         View deleteDirectionButton = child.findViewById(R.id.DirectionDeleteButton);
         deleteDirectionButton.setOnClickListener(this::removeDirection);
@@ -263,7 +264,8 @@ public class EditRecipe extends AppCompatActivity {
         LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
         View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
         ingredientContainer.addView(child);
-        child.setId(1000000 + child.getId() + ingredientContainer.getChildCount());//set a unique id for the new child because Android Studio is too dumb to.
+        //child.setId(1000000 + child.getId() + ingredientContainer.getChildCount());//set a unique id for the new child because Android Studio is too dumb to.
+        child.setId(View.generateViewId());
 
         View deleteIngredientButton = child.findViewById(R.id.IngredientDeleteButton);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
@@ -305,4 +307,5 @@ public class EditRecipe extends AppCompatActivity {
         Log.d("CDA", "onBackPressed Called");
         startActivity(i);
     }
+
 }

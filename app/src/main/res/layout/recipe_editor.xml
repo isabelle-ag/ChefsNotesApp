@@ -4,46 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3375CEDA">
+    android:background="#FFFFFF">
 
     <ImageButton
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_margin="20dp"
         android:adjustViewBounds="true"
         android:background="#00000000"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
+        android:contentDescription="@string/save_recipe"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/button_press"
-        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
-        tools:padding="3dp" />
+        app:srcCompat="@drawable/savebutton_selector"
+        tools:background="#FFFFFF"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <ScrollView
         android:id="@+id/MainView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
         android:clickable="true"
         android:translationY="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true">
 
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:translationY="25dp">
+            android:stretchColumns="*">
 
             <TableRow
                 android:id="@+id/TitleField"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center|center_vertical"
                 android:orientation="vertical">
 
                 <EditText
@@ -54,7 +53,8 @@
                     android:breakStrategy="simple"
                     android:clickable="true"
                     android:ems="10"
-                    android:hint="Recipe Name"
+                    android:focusable="true"
+                    android:hint="@string/recipe_name"
                     android:inputType="textShortMessage|textLongMessage|none|textMultiLine"
                     android:longClickable="true"
                     android:minHeight="48dp"
@@ -65,25 +65,34 @@
             </TableRow>
 
             <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/IngredientHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/ingredients"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="34sp" />
+
+                <ImageButton
+                    android:id="@+id/AddIngredientButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="#00FFFFFF"
+                    android:contentDescription="@string/add_ingredient"
+                    android:onClick="addIngredient"
+                    android:padding="10dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@drawable/add_item" />
 
-                    <TextView
-                        android:id="@+id/IngredientHeader"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Ingredients"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="34sp"
-                        android:translationY="50dp" />
-                </LinearLayout>
             </TableRow>
 
             <TableRow
@@ -92,28 +101,9 @@
 
                 <include
                     layout="@layout/ingredient_field"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#00FFFFFF" />
-
-                <LinearLayout
-                    android:id="@+id/IngredientContainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/AddIngredientButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#00FFFFFF"
-                    android:contentDescription="@string/add_ingredient"
-                    android:onClick="addIngredient"
-                    android:padding="2dp"
-                    android:translationX="-50dp"
-                    app:srcCompat="@drawable/add_icon" />
 
             </TableRow>
 
@@ -122,22 +112,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <LinearLayout
+                    android:id="@+id/IngredientContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/InstructionHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Directions"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="34sp" />
                 </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/InstructionHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/directions"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="34sp" />
+
+                <ImageButton
+                    android:id="@+id/AddDirectionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="#00FFFFFF"
+                    android:onClick="addDirection"
+                    android:padding="10dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@drawable/add_item"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:contentDescription="Add Direction" />
 
             </TableRow>
 
@@ -145,26 +156,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/DirectionContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <include layout="@layout/instruction_field" />
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/AddDirectionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/Directions"
-                    android:background="#00FFFFFF"
-                    android:onClick="addDirection"
-                    android:padding="2dp"
-                    android:translationX="-50dp"
-                    app:srcCompat="@drawable/add_icon"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                <include layout="@layout/instruction_field" />
 
             </TableRow>
 
