@@ -125,7 +125,7 @@ public class RecipePersistence implements DBMSTools{
 
         result = builder.toArray(new String[0]);
 
-        return new String[0];
+        return result;
     }
 
     @Override
