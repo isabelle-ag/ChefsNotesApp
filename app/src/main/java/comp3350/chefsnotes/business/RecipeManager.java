@@ -63,7 +63,7 @@ public class RecipeManager implements IRecipeManager {
         }
     }
 
-    public void saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions) throws RecipeExistenceException
+    public Recipe saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions) throws RecipeExistenceException
     {
         if(db.getRecipe(name) == null) {
             this.newRecipe(name);
@@ -77,6 +77,7 @@ public class RecipeManager implements IRecipeManager {
         }
         System.out.println(myRecipe.ingredientList().toString());
         db.commitChanges(myRecipe);
+        return myRecipe;
     }
 
 }
