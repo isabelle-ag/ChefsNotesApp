@@ -56,7 +56,17 @@ public class ViewRecipe extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        recipe = recipeFetcher.getRecipeByName("Fairy Pie");
+
+        String recipeName = "";
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            recipeName = extras.getString("recipeKey");
+            recipe = recipeFetcher.getRecipeByName(recipeName);
+        }
+        else{
+            recipe = recipeFetcher.getRecentRecipe();
+        }
+
         if(recipe != null) {
             fillViewer();
         }
