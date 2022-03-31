@@ -33,6 +33,7 @@
             android:id="@+id/copy_button"
             android:layout_width="103dp"
             android:layout_height="58dp"
+            android:contentDescription='"Duplicate Recipe"'
             android:translationX="450dp"
             android:translationY="-17dp"
             app:srcCompat="?attr/actionModeCopyDrawable"
@@ -69,26 +70,17 @@
             android:id="@+id/ingredientListView"
             android:layout_width="wrap_content"
             android:layout_height="250dp"
-            android:choiceMode="singleChoice"
             android:divider="@android:color/black"
             android:dividerHeight="-15sp"
             tools:ignore="DuplicateSpeakableTextCheck">
 
         </ListView>
 
-        <ImageView
-            android:id="@+id/recipePicture"
-            android:layout_width="280dp"
-            android:layout_height="250dp"
-            android:layout_marginLeft="290dp"
-            android:layout_marginTop="-395dp"
-            android:layout_marginBottom="180dp"
-            app:srcCompat="@drawable/fairy_pie" />
-        <!--   251dp marginTop for in line with ingredients     -->
-        android:rotation="0"
-        android:rotationX="0"
-        android:rotationY="0"
-        app:srcCompat="@drawable/fairy_pie" />
+<!--        &lt;!&ndash;   251dp marginTop for in line with ingredients     &ndash;&gt;-->
+<!--        android:rotation="0"-->
+<!--        android:rotationX="0"-->
+<!--        android:rotationY="0"-->
+<!--        app:srcCompat="@drawable/fairy_pie" />-->
 
         <View
             android:id="@+id/divider"
@@ -114,7 +106,6 @@
             android:id="@+id/directionListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"
             android:dividerHeight="15sp">
 

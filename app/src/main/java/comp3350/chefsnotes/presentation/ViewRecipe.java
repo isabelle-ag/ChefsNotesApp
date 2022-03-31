@@ -9,20 +9,18 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-
-
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.objects.Recipe;
-import comp3350.chefsnotes.persistence.DBMSTools;
-import comp3350.chefsnotes.persistence.FakeDBMS;
+
 
 import android.widget.ArrayAdapter;
 
 import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
+
     private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
 
@@ -38,19 +36,37 @@ public class ViewRecipe extends AppCompatActivity {
         editButton.setOnClickListener(this::editRecipe);
         copyButton.setOnClickListener(this::copyRecipe);
 
-        recipe = recipeFetcher.getRecipeByName("Fairy Pie");
+        String recipeName = "";
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            recipeName = extras.getString("recipeKey");
+        }
+
+        recipe = recipeFetcher.getRecipeByName(recipeName);
+
         if(recipe != null) {
             fillViewer();
         }
         else{
             errorScreen();
         }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        recipe = recipeFetcher.getRecipeByName("Fairy Pie");
+
+        String recipeName = "";
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            recipeName = extras.getString("recipeKey");
+            recipe = recipeFetcher.getRecipeByName(recipeName);
+        }
+        else{
+            recipe = recipeFetcher.getRecentRecipe();
+        }
+
         if(recipe != null) {
             fillViewer();
         }
@@ -97,14 +113,19 @@ public class ViewRecipe extends AppCompatActivity {
         dirView.setAdapter(dirAdapter);
 
         ((TextView)findViewById(R.id.totalTimeView)).setText(time);
-
-
     }
 
     private void errorScreen(){
         String error = "There are no recipes at the moment.";
 
         ((TextView)findViewById(R.id.recipeName)).setText(error);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(ViewRecipe.this, RecipeBrowser.class);
+        Log.d("CDA", "onBackPressed Called");
+        startActivity(i);
     }
 
 
