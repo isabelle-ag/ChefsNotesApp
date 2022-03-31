@@ -65,8 +65,10 @@ public class RecipeManager implements IRecipeManager {
 
     public void saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions) throws RecipeExistenceException
     {
-        Recipe myRecipe = new Recipe(name);
-        this.newRecipe(name);
+        if(db.getRecipe(name) == null) {
+            this.newRecipe(name);
+        }
+        Recipe myRecipe = db.getRecipe(name);
         for(Ingredient i:ingredients) {
             myRecipe.addIngredient(i);
         }
