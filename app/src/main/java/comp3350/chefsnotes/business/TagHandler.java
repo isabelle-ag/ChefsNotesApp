@@ -26,8 +26,6 @@ public class TagHandler implements ITagHandler{
     @Override
     public void removeTagFromRecipe(Recipe r, String tag) throws TagExistenceException {
         r.removeTag(tag);
-        tdb.removeTag(tag);
-
     }
 
     @Override
