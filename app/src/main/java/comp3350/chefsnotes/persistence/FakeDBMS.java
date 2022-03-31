@@ -174,6 +174,7 @@ public class FakeDBMS implements DBMSTools{
 
             if (target != null) {
                 boolean tryDelete = deleteRecipe(modified.getTitle()); // delete old version
+                System.out.println(tryDelete);
                 if (tryDelete) {
                     result = _addRecipe(modified);              // save new version
                 }
@@ -183,12 +184,17 @@ public class FakeDBMS implements DBMSTools{
         return result;
     }
 
-    // needs implementation
     public String duplicateRecipe(String recipe, String newName){
         Recipe oldOne = this.getRecipe(recipe);
         Recipe newOne;
-        if(newName!=null && !(newName.equalsIgnoreCase(oldOne.getTitle()))){
-            newOne = oldOne.duplicateRecipe(newName);
+        if(newName!=null){
+            if(getRecipe(newName) == null) {
+                newOne = oldOne.duplicateRecipe(newName);
+            }
+            else {
+                newName = this.duplicateRecipe(recipe, newName + "-copy");
+                newOne = oldOne.duplicateRecipe(newName);
+            }
         }
         else{
             newOne = oldOne.duplicateRecipe(oldOne.getTitle() + "-copy");

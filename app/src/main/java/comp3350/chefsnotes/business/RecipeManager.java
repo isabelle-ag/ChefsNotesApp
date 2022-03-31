@@ -2,6 +2,7 @@ package comp3350.chefsnotes.business;
 
 import java.util.ArrayList;
 
+import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
 import comp3350.chefsnotes.objects.Recipe;
@@ -15,11 +16,15 @@ public class RecipeManager implements IRecipeManager {
         this.db = db;
     }
 
+    public RecipeManager() {
+        this.db = Services.getRecipePersistence();
+    }
+
     public Recipe newRecipe(String name) throws RecipeExistenceException
     {
         if(db.getRecipe(name) != null)
         {
-            throw new RecipeExistenceException("recipe names must be unique, and '%s' already exists".format(name));
+            //throw new RecipeExistenceException("recipe names must be unique, and '%s' already exists".format(name));
         }
         else
         {
@@ -60,13 +65,15 @@ public class RecipeManager implements IRecipeManager {
 
     public void saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions) throws RecipeExistenceException
     {
-        Recipe myRecipe = this.newRecipe(name);
+        Recipe myRecipe = new Recipe(name);
+        this.newRecipe(name);
         for(Ingredient i:ingredients) {
             myRecipe.addIngredient(i);
         }
         for (Direction d:directions) {
             myRecipe.addDirection(d);
         }
+        System.out.println(myRecipe.ingredientList().toString());
         db.commitChanges(myRecipe);
     }
 
