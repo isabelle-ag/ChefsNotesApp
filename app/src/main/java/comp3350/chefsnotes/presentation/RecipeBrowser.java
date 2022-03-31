@@ -65,7 +65,15 @@ public class RecipeBrowser extends AppCompatActivity {
         populateTags();
         populateRecipes("");
 
-        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        populateTags();
+        populateRecipes("");
+    }
 
     private void setFilterCondition(View v){
 
