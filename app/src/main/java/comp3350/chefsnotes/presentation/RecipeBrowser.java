@@ -32,6 +32,8 @@ import androidx.constraintlayout.helper.widget.Flow;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.ITagHandler;
+import comp3350.chefsnotes.business.RecipeFetcher;
+import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.business.TagHandler;
 import comp3350.chefsnotes.objects.TagExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
@@ -41,8 +43,8 @@ import comp3350.chefsnotes.persistence.TagPersistence;
 
 
 public class RecipeBrowser extends AppCompatActivity {
-    DBMSTools db;
-    TagDBMSTools tagDB;
+    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
+    private RecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
 
 
 
@@ -51,11 +53,6 @@ public class RecipeBrowser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_browser);
-
-        db = Services.getRecipePersistence();
-        tagDB = Services.getTagPersistence();
-
-
 
         EditText searchBox = (EditText) findViewById(R.id.searchRecipeName);
 
@@ -97,10 +94,10 @@ public class RecipeBrowser extends AppCompatActivity {
 
         ListView searchResults = (ListView) findViewById(R.id.results);
         if (searchTerm == "") {
-            recipeList = db.getRecipeNames();
+            recipeList = recipeFetcher.getAllRecipeNames();
         }
         else {
-            recipeList = db.searchRecipeNames(searchTerm);
+            recipeList = recipeFetcher.getRecipesNamesByText(searchTerm);
         }
 
 
