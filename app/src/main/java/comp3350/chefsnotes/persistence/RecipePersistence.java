@@ -111,8 +111,20 @@ public class RecipePersistence implements DBMSTools{
         return result;
     }
 
-    @Override // IMPLEMENT
+    @Override
     public String[] searchRecipeNames(String partial) {
+        Recipe[] allRecipes = getAllRecipes();
+        String[] result = new String[0];
+        ArrayList<String> builder = new ArrayList<String>();
+
+        for(Recipe curr : allRecipes){
+            if(curr.getTitle().contains(partial)){
+                builder.add(curr.getTitle());
+            }
+        }
+
+        result = builder.toArray(new String[0]);
+
         return new String[0];
     }
 
@@ -223,9 +235,38 @@ public class RecipePersistence implements DBMSTools{
         return result;
     }
 
-    @Override // IMPLEMENT
+    @Override
     public String duplicateRecipe(String recipe, String newName) {
-        return null;
+        String result = "";
+
+        Recipe oldOne = getRecipe(recipe);
+        Recipe newOne;
+        if(oldOne != null){    // ensure Recipe exists
+            if(newName!=null){
+                if(getRecipe(newName) == null) {
+                    newOne = oldOne.duplicateRecipe(newName);
+                }
+                else {
+                    String name = newName+"-copy";
+                    while(getRecipe(name) != null){
+                        name+="-copy";
+                    }
+                    newName = this.duplicateRecipe(recipe, name);
+                    newOne = oldOne.duplicateRecipe(newName);
+                }
+            }
+            else{
+                String name = oldOne.getTitle()+"-copy";
+                while(getRecipe(name) != null){
+                    name+="-copy";
+                }
+                newOne = oldOne.duplicateRecipe(name);
+            }
+            insertRecipe(newOne.getTitle(), newOne); // insert with full object
+            result = newOne.getTitle(); // document return name
+        }
+
+        return result;
     }
 
     private String nameFromResultSet(ResultSet rs) throws SQLException {

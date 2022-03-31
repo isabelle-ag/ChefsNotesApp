@@ -312,6 +312,10 @@ public class Recipe implements Serializable {
         {
             out.directions.add(d.clone());
         }
+        for (String s: this.tags)
+        {
+            out.tags.add(s);
+        }
         return out;
     }
 
