@@ -95,9 +95,9 @@ public class FakeDBMS implements DBMSTools{
         ArrayList<String> searches = new ArrayList<String>();
 
         if(partial != null) {
-            for (Recipe curr : recipes) {
-                if (curr.getTitle().toLowerCase().contains(partial.toLowerCase())) {
-                    searches.add(curr.getTitle());
+            for (String name : getRecipeNames()) {
+                if (name.toLowerCase().contains(partial.toLowerCase())) {
+                    searches.add(name);
                 }
             }
         }
