@@ -69,9 +69,13 @@ public class RecipeManager implements IRecipeManager {
             this.newRecipe(name);
         }
         Recipe myRecipe = db.getRecipe(name);
+
+
+        myRecipe.clearIngredients();
         for(Ingredient i:ingredients) {
             myRecipe.addIngredient(i);
         }
+        myRecipe.clearDirections();
         for (Direction d:directions) {
             myRecipe.addDirection(d);
         }
