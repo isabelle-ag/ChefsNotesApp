@@ -155,8 +155,14 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/DirectionContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <include layout="@layout/instruction_field" />
+                    <include layout="@layout/instruction_field" />
+                </LinearLayout>
 
             </TableRow>
 

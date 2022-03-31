@@ -65,17 +65,6 @@
             tools:ignore="SpeakableTextPresentCheck"
             tools:imeOptions="actionDone" />
 
-        <Space
-            android:id="@+id/AddDirectionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Directions"
-            android:layout_marginTop="50dp"
-            android:onClick="addInstruction"
-            android:translationX="25dp"
-            android:translationY="10dp"
-            tools:ignore="SpeakableTextPresentCheck" />
-
     </RelativeLayout>
 
 </TableRow>
