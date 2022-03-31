@@ -53,6 +53,17 @@ public class ViewRecipe extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recipe = recipeFetcher.getRecipeByName("Fairy Pie");
+        if(recipe != null) {
+            fillViewer();
+        }
+        else{
+            errorScreen();
+        }
+    }
 
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
