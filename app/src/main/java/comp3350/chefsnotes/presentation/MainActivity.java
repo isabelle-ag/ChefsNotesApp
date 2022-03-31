@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import java.io.File;
@@ -20,7 +21,9 @@ import comp3350.chefsnotes.application.Main;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.SampleRecipe;
+import comp3350.chefsnotes.objects.TagExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
+import comp3350.chefsnotes.persistence.TagDBMSTools;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,11 +36,34 @@ public class MainActivity extends AppCompatActivity {
         copyDatabaseToDevice();
         // instantiate databases
         Services.getTagPersistence(DB_MODE);
+        TagDBMSTools tagdb= Services.getTagPersistence(DB_MODE);
         DBMSTools dbSetup = Services.getRecipePersistence(DB_MODE);
         Recipe sample = new SampleRecipe();
         if(dbSetup.getRecipe(sample.getTitle()) == null){
             dbSetup.createRecipe(sample.getTitle());
             dbSetup.commitChanges(sample);
+        }
+
+        if(tagdb.tagList().length == 0){
+            try {
+                tagdb.addTag("African");
+                tagdb.addTag("American");
+                tagdb.addTag("Asian");
+                tagdb.addTag("Chinese");
+                tagdb.addTag("Fusion");
+                tagdb.addTag("German");
+                tagdb.addTag("Greek");
+                tagdb.addTag("Mexican");
+                tagdb.addTag("South American");
+                tagdb.addTag("Ukrainian");
+                tagdb.addTag("Keto");
+                tagdb.addTag("Pescatarian");
+                tagdb.addTag("Vegan");
+                tagdb.addTag("Vegetarian");
+
+            } catch (TagExistenceException e) {
+                e.printStackTrace();
+            }
         }
     }
 

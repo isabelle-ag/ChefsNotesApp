@@ -1,16 +1,24 @@
 package comp3350.chefsnotes.presentation;
 import androidx.appcompat.app.AppCompatActivity;
 
+//import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.WindowMetrics;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -19,7 +27,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import org.w3c.dom.Text;
+import androidx.constraintlayout.helper.widget.Flow;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
@@ -36,6 +44,9 @@ public class RecipeBrowser extends AppCompatActivity {
     DBMSTools db;
     TagDBMSTools tagDB;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +54,8 @@ public class RecipeBrowser extends AppCompatActivity {
 
         db = Services.getRecipePersistence();
         tagDB = Services.getTagPersistence();
+
+
 
         EditText searchBox = (EditText) findViewById(R.id.searchRecipeName);
 
@@ -100,20 +113,14 @@ public class RecipeBrowser extends AppCompatActivity {
 
 
     private void populateTags(){
-        LinearLayout tags = findViewById(R.id.filterTagLayout);
 
-        try {
-            tagDB.addTag("Asian");
-            tagDB.addTag("American");
-            tagDB.addTag("Fusion");
-            tagDB.addTag("Vegan");
-            tagDB.addTag("Mexican");
-        } catch (TagExistenceException e) {
-            e.printStackTrace();
-        }
-
+        Flow tags = findViewById(R.id.filterTagLayout);
+        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.tagConstraint);
 
         String[] tagList = tagDB.tagList();
+
+        int [] idList = new int[tagList.length];
+        int i=0;
 
         for (String s : tagList) {
 
@@ -126,7 +133,6 @@ public class RecipeBrowser extends AppCompatActivity {
             b.setMinimumHeight(20);
             b.setMinWidth(50);
             b.setMinimumWidth(50);
-            b.setMaxWidth(150);
             b.setPadding(10, 5, 10, 5);
             b.setAllCaps(false);
 
@@ -143,9 +149,13 @@ public class RecipeBrowser extends AppCompatActivity {
             params.setMarginEnd(8);
             b.setLayoutParams(params);
 
+            parent.addView(b);
             tags.addView(b);
+            idList[i] = b.getId();
+            i++;
             b.setOnClickListener(v -> setFilterCondition(v));
         }
+        tags.setReferencedIds(idList);
     }
 
 
