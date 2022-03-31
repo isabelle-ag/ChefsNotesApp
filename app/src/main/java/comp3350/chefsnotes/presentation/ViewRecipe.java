@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
 
-    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
+    private final RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
 
 
@@ -101,13 +101,13 @@ public class ViewRecipe extends AppCompatActivity {
         ((TextView)findViewById(R.id.recipeName)).setText(title);
 
         //Ingredient List
-        ArrayAdapter<String> ingAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> ingAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, ingredients);
         ListView ingView = (ListView) findViewById(R.id.ingredientListView);
         ingView.setAdapter(ingAdapter);
 
         //Direction List
-        ArrayAdapter<String> dirAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dirAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, directions);
         ListView dirView = (ListView) findViewById(R.id.directionListView);
         dirView.setAdapter(dirAdapter);

@@ -31,11 +31,6 @@ public class RecipeFetcher implements IRecipeFetcher{
         return allRecipes[(allRecipes.length-1)];
     }
 
-    public Recipe getRecentRecipe(String s){
-        Recipe recipe = new SampleRecipe();
-        return recipe;
-    }
-
     public Recipe[] filterRecipesByTags(String[] included, String[] excluded)
     {
         return this.filterRecipesByTags(included, excluded, db.getAllRecipes());
@@ -78,4 +73,9 @@ public class RecipeFetcher implements IRecipeFetcher{
         }
         return out.toArray(new Recipe[0]);
     }
+
+    public String[] getRecipeNamesByText(String name){
+        return  db.searchRecipeNames(name);
+    }
+
 }
