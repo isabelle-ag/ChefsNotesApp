@@ -23,6 +23,7 @@ public class RecipeFetcher implements IRecipeFetcher{
 
     public Recipe getRecentRecipe()
     {
+        //TODO use proper db impl for this
         Recipe[] allRecipes = db.getAllRecipes();
         if(allRecipes.length < 1)
         {

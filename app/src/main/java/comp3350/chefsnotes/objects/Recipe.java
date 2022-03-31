@@ -101,13 +101,7 @@ public class Recipe implements Serializable {
     // returns array of all Ingredients in recipe
     // returns null if none exists
     public Ingredient[] getIngredients(){
-        Ingredient[] result = null;
-        
-        if(this.ingredients.size() > 0){
-            result = this.ingredients.toArray(new Ingredient[0]);
-        }
-
-        return result;
+        return this.ingredients.toArray(new Ingredient[0]);
     }
     
     // returns array of all ingredient NAMES in recipe
@@ -208,9 +202,7 @@ public class Recipe implements Serializable {
 
     // returns array of all directions
     public Direction[] getDirections(){
-        Direction[] result = this.directions.toArray(new Direction[0]);
-
-        return result;
+        return this.directions.toArray(new Direction[0]);
     }
 
     // returns single direction via step number
