@@ -12,5 +12,6 @@ public interface IRecipeManager {
     void delRecipe(Recipe R) throws RecipeExistenceException;
     void renameRecipe(Recipe R, String newName) throws RecipeExistenceException;
     public Recipe saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions) throws RecipeExistenceException;
+    public Recipe copyRecipe(Recipe R, String copyName);
 
 }
