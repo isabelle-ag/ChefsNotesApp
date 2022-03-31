@@ -64,11 +64,11 @@ public class EditRecipe extends AppCompatActivity {
                     System.out.println("Saving changes to " + thisIntent.getStringExtra("title") + "...");
                     Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions);
 
-                    if(thisIntent.getStringExtra("title") != title) {
+                    if(!thisIntent.getStringExtra("title").equals(title)) {
                         System.out.println("Renaming " + thisIntent.getStringExtra("title") + "...");
                         recipeManager.renameRecipe(r, title);
                     }
-                    
+
                     System.out.println("Saving Success!");
                     Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
                     i.putExtra("recipeKey",title);
