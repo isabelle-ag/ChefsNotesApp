@@ -9,6 +9,7 @@ import comp3350.chefsnotes.objects.TagExistenceException;
 public class TagPersistence implements TagDBMSTools{
 
     private final String dbPath;    // location of db
+    private final String addQry = "INSERT INTO TAGS ";
 
     public TagPersistence(String dbp){
         this.dbPath = dbp;
