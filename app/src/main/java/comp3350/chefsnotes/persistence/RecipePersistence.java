@@ -32,16 +32,16 @@ public class RecipePersistence implements DBMSTools{
     public RecipePersistence(final String dbp){
         this.dbPath = dbp;
         this.recent = "";
-        try{
-            final Connection con = connection();
-        } catch (SQLException sqe) {
-            System.out.println("A problem occurred establishing the connection to the RECIPES table.");
-        }
+//        try{
+//            final Connection con = connection();
+//        } catch (SQLException sqe) {
+//            System.out.println("A problem occurred establishing the connection to the RECIPES table.");
+//        }
 
     }
 
     private Connection connection() throws SQLException{
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";ifexists=true;shutdown=true", "SA", "");
     }
 
     @Override
