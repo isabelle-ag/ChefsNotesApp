@@ -26,13 +26,14 @@
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_button_toggled.xml" value="0.102" />
         <entry key="app/src/main/res/drawable/save_button_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/savebutton_selector.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/spacer.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/tags.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/togglebutton_selector.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_view_recipe.xml" value="0.1" />
         <entry key="app/src/main/res/layout/ingredient_field.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/instruction_field.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/instruction_field.xml" value="0.165" />
         <entry key="app/src/main/res/layout/recipe_browser.xml" value="0.2939346811819596" />
         <entry key="app/src/main/res/layout/recipe_editor.xml" value="0.25" />
         <entry key="app/src/main/res/layout/recipe_search.xml" value="0.25" />
