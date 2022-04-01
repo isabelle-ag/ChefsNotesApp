@@ -147,7 +147,8 @@ public class ViewRecipe extends AppCompatActivity {
         valid = false;
         String error = "Please select a new recipe";
         ((TextView) findViewById(R.id.recipeName)).setText(error);
-        Messages.oops(this, "This is not a valid recipe!");
+        Messages.oops(this,
+                "This is not a valid recipe. Try making a new one or open one from the browser.");
     }
 
     @Override
