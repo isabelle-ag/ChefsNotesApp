@@ -22,12 +22,19 @@
         <entry key="app/src/main/res/drawable-anydpi/save_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-anydpi/save_button_clicked.xml" value="0.224" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/add_item.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/add_item_clicked.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/additem_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/button_press.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/copy_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/delete_item.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/edit_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.286" />
         <entry key="app/src/main/res/drawable/ingredient_list_divider.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_button_toggled.xml" value="0.102" />
+        <entry key="app/src/main/res/drawable/save_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/save_button_clicked.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/save_button_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/savebutton_selector.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/spacer.xml" value="0.1" />
@@ -38,9 +45,9 @@
         <entry key="app/src/main/res/layout/ingredient_field.xml" value="0.335" />
         <entry key="app/src/main/res/layout/instruction_field.xml" value="0.335" />
         <entry key="app/src/main/res/layout/recipe_browser.xml" value="0.2939346811819596" />
-        <entry key="app/src/main/res/layout/recipe_editor.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/recipe_editor.xml" value="0.335" />
         <entry key="app/src/main/res/layout/recipe_search.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/tag_popup.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/tag_popup.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1235" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />

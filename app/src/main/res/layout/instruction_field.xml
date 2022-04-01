@@ -32,12 +32,12 @@
             android:id="@+id/DirectionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
+            android:backgroundTint="@color/main_logo"
             android:ems="10"
             android:hint="@string/direction_title"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            tools:imeOptions="actionDone"
-            android:importantForAutofill="no" />
+            tools:imeOptions="actionDone" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textbox"
@@ -51,7 +51,7 @@
             android:inputType="textMultiLine"
             android:minLines="3"
             android:paddingStart="5dp"
-            android:paddingEnd="5dp"/>
+            android:paddingEnd="5dp" />
 
         <EditText
             android:id="@+id/TimeEstimate"
@@ -59,10 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_toStartOf="@id/DirectionDeleteButton"
-            android:backgroundTint="#000000"
-            android:hint="Time For Step (mins)"
+            android:backgroundTint="@color/main_logo"
+            android:hint="Time"
             android:imeOptions="actionDone"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </RelativeLayout>
 

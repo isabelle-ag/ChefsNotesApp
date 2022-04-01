@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -19,6 +20,8 @@ import comp3350.chefsnotes.objects.Recipe;
 
 
 import android.widget.ArrayAdapter;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Arrays;
 
@@ -38,6 +41,9 @@ public class ViewRecipe extends AppCompatActivity {
 
         editButton.setOnClickListener(this::editRecipe);
         copyButton.setOnClickListener(this::copyRecipe);
+
+        BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
+        navView.setOnItemSelectedListener(this::navigation);
 
         String recipeName = "";
         Bundle extras = getIntent().getExtras();
@@ -131,6 +137,23 @@ public class ViewRecipe extends AppCompatActivity {
         Intent i = new Intent(ViewRecipe.this, RecipeBrowser.class);
         Log.d("CDA", "onBackPressed Called");
         startActivity(i);
+    }
+
+    private boolean navigation(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.new_recipe_button:
+                Intent i = new Intent(ViewRecipe.this, EditRecipe.class);
+                startActivity(i);
+                return true;
+            case R.id.browse_recipe_button:
+                i = new Intent(ViewRecipe.this, RecipeBrowser.class);
+                startActivity(i);
+                return true;
+            case R.id.current_recipe_button:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

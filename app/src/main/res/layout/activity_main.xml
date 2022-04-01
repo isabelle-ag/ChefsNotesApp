@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     tools:context=".presentation.MainActivity">
 
     <LinearLayout
@@ -25,7 +24,6 @@
             android:paddingBottom="20dp"
             android:text="@string/chefsnotes"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#000"
             android:textSize="70sp"
             android:textStyle="italic"
@@ -52,14 +50,13 @@
                 android:id="@+id/CreateRecipeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="225dp"
+                android:minWidth="290dp"
                 android:minHeight="60dip"
                 android:onClick="makeRecipe"
                 android:text="@string/create_recipe"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="24sp"
-                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textStyle="normal"
                 android:typeface="serif" />
 
             <Button
@@ -67,14 +64,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:minWidth="225dp"
+                android:minWidth="290dp"
                 android:minHeight="60dip"
                 android:onClick="browseRecipes"
                 android:text="@string/browse_recipes"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="24sp"
-                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textStyle="normal"
                 android:typeface="serif" />
 
         </LinearLayout>

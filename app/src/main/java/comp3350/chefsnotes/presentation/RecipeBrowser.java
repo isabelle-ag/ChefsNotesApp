@@ -10,12 +10,16 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ToggleButton;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
@@ -36,6 +40,9 @@ public class RecipeBrowser extends AppCompatActivity {
         setContentView(R.layout.recipe_browser);
 
         EditText searchBox = findViewById(R.id.searchRecipeName);
+        BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
+        navView.setOnItemSelectedListener(this::navigation);
+
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -53,10 +60,12 @@ public class RecipeBrowser extends AppCompatActivity {
             }
         });
 
+
         populateTags();
         populateRecipes("");
 
     }
+
 
     @Override
     protected void onResume() {
@@ -69,6 +78,22 @@ public class RecipeBrowser extends AppCompatActivity {
 //TODO
     }
 
+    private boolean navigation(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.new_recipe_button:
+                Intent i = new Intent(RecipeBrowser.this, EditRecipe.class);
+                startActivity(i);
+                return true;
+            case R.id.browse_recipe_button:
+                return true;
+            case R.id.current_recipe_button:
+                i = new Intent(RecipeBrowser.this, ViewRecipe.class);
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     private void populateRecipes(String searchTerm){
 
@@ -85,6 +110,7 @@ public class RecipeBrowser extends AppCompatActivity {
             startActivity(i);
         });
     }
+
 
 
     private void populateTags(){
@@ -108,6 +134,7 @@ public class RecipeBrowser extends AppCompatActivity {
             b.setMinimumHeight(20);
             b.setMinWidth(50);
             b.setMinimumWidth(50);
+            b.setTextSize(12);
             b.setPadding(10, 5, 10, 5);
             b.setAllCaps(false);
 

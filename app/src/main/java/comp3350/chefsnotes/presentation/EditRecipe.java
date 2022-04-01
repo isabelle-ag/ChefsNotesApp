@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -14,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,8 @@ public class EditRecipe extends AppCompatActivity {
         View addInstructionButton = findViewById(R.id.AddDirectionButton);
         View deleteIngredientButton = findViewById(R.id.IngredientDeleteButton);
         View deleteDirectionButton = findViewById(R.id.DirectionDeleteButton);
+        BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
+        navView.setOnItemSelectedListener(this::navigation);
 
         //set dropdown menu to array being used - can be used in the future for filtering units by metric, imperial, etc.
         Spinner ingDrop = findViewById(R.id.unitList);
@@ -310,6 +315,23 @@ public class EditRecipe extends AppCompatActivity {
         }
         Log.d("CDA", "onBackPressed Called");
         startActivity(i);
+    }
+
+    private boolean navigation(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.new_recipe_button:
+                return true;
+            case R.id.browse_recipe_button:
+                Intent i = new Intent(EditRecipe.this, RecipeBrowser.class);
+                startActivity(i);
+                return true;
+            case R.id.current_recipe_button:
+                i = new Intent(EditRecipe.this, ViewRecipe.class);
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
