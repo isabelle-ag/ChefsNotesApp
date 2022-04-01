@@ -16,6 +16,7 @@ public class Quantity implements Serializable {
 
     public Quantity(String unit) {
         this.unit = unit;
+        this.amt = new QuantityNumStub();
     }
 
     public Quantity(int numerator, int denominator, String unit) {
