@@ -57,11 +57,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    public void viewRecipe(View view) {
-        Intent switchActivityIntent = new Intent(this, ViewRecipe.class);
-        startActivity(switchActivityIntent);
-    }
-
     // establishes a directory for the working database
     private void copyDatabaseToDevice() {
         final String DB_PATH = "db";
