@@ -9,8 +9,8 @@ import comp3350.chefsnotes.persistence.TagPersistence;
 import comp3350.chefsnotes.presentation.MainActivity;
 
 public class Services {
-    public static final boolean MODE_FAKE = false;
-    public static final boolean MODE_REAL = true;
+    public static final boolean MODE_FAKE = true;
+    public static final boolean MODE_REAL = false;
 
     private static DBMSTools recipePersistence = null;
     private static TagDBMSTools tagPersistence = null;

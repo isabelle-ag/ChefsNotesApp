@@ -121,6 +121,7 @@ public class EditRecipe extends AppCompatActivity {
         Intent thisIntent = getIntent();
         ArrayList<Ingredient> ingredients = getIngredients(v);
         ArrayList<Direction> directions = getDirections(v);
+        Log.i("You are attempting to save!", "title");
 
         // if editing an old recipe
         if(thisIntent.getStringExtra("title") != null && !title.equals("")) {

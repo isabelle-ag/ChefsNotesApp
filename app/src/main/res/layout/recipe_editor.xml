@@ -19,7 +19,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/savebutton_selector"
         tools:background="#FFFFFF"
-        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        android:focusable="true" />
 
     <ScrollView
         android:id="@+id/MainView"
