@@ -25,7 +25,7 @@ public class TagPersistence implements TagDBMSTools{
     }
 
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";ifexists=true;shutdown=true", "SA", "");
     }
 
     @Override
