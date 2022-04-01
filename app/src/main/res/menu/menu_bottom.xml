@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".res.layout.recipe_browser">
+    <item
+        android:id="@+id/new_recipe_button"
+        android:title="@string/new_recipe"
+        android:icon="@drawable/new_recipe"/>
+    <item
+        android:id="@+id/browse_recipe_button"
+        android:title="@string/browse_recipes"
+        android:icon="@drawable/browse_recipes"/>
+    <item
+        android:id="@+id/current_recipe_button"
+        android:title="@string/current_recipe"
+        android:icon="@drawable/curr_recipe"/>
+</menu>

@@ -20,4 +20,15 @@
     <string name="search_by_recipe_name">Search by recipe name</string>
     <string name="toggle_filter_text">Click a tag to toggle it as a search filter</string>
     <string name="browse_recipes">Browse Recipes</string>
+    <string name="current_recipe">Current Recipe</string>
+    <string name="new_recipe">New Recipe</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="recipe_name">Recipe Name</string>
+    <string name="delete_direction">Delete Direction</string>
+    <string name="direction_title">Direction Title</string>
+    <string name="direction_description">Direction Description</string>
+    <string name="ok">Yes</string>
+    <string name="no">No</string>
+    <string name="confirm_delete">Are you sure you want to delete this recipe?
+        This cannot be undone.</string>
 </resources>

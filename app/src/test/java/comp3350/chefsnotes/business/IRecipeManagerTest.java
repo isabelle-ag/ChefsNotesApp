@@ -34,7 +34,7 @@ public class IRecipeManagerTest {
             myRecipe = manager.newRecipe("test1");
             assertNotNull(myRecipe);
         }
-        catch (RecipeExistenceException e){fail();};
+        catch (RecipeExistenceException e){fail();}
         Recipe R1 = db.getRecipe("test1");
         assertEquals(myRecipe, R1);
     }
@@ -45,13 +45,13 @@ public class IRecipeManagerTest {
         try {
             myRecipe = manager.newRecipe("testDel");
         }
-        catch (RecipeExistenceException e){fail();};
+        catch (RecipeExistenceException e){fail();}
 
         assertNotNull(db.getRecipe("testDel"));
         try {
             manager.delRecipe(myRecipe);
         }
-        catch (RecipeExistenceException e){fail();};
+        catch (RecipeExistenceException e){fail();}
 
         assertNull(db.getRecipe("testDel"));
 
@@ -68,11 +68,11 @@ public class IRecipeManagerTest {
             myRecipe = manager.newRecipe("testName1");
             collision = manager.newRecipe("testNameCol");
         }
-        catch (RecipeExistenceException e){fail();};
+        catch (RecipeExistenceException e){fail();}
         try {
             manager.renameRecipe(myRecipe, "testName2");
         }
-        catch (RecipeExistenceException e){fail();};
+        catch (RecipeExistenceException e){fail();}
 
         assertEquals(myRecipe.getTitle(), "testName2");
         assertEquals(db.getRecipe("testName2"), myRecipe);
@@ -97,7 +97,7 @@ public class IRecipeManagerTest {
         try {
             manager.saveButton("testSave", ingredients, directions, true);
         }
-        catch (RecipeExistenceException e){fail();};
+        catch (RecipeExistenceException e){fail();}
 
         Recipe myRecipe = db.getRecipe("testSave");
         assertNotNull(myRecipe);

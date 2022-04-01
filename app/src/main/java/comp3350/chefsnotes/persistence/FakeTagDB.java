@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import comp3350.chefsnotes.objects.TagExistenceException;
 
 public class FakeTagDB implements TagDBMSTools{
-    private ArrayList<String> tagList;
+    private final ArrayList<String> tagList;
 
     public FakeTagDB(){
         tagList = new ArrayList<String>();

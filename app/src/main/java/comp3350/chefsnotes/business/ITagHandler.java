@@ -5,14 +5,14 @@ import comp3350.chefsnotes.objects.TagExistenceException;
 
 public interface ITagHandler {
 
-    public void addTagToRecipe(Recipe r, String tag);
+    void addTagToRecipe(Recipe r, String tag);
 
-    public void removeTagFromRecipe(Recipe r, String tag);
+    void removeTagFromRecipe(Recipe r, String tag);
 
-    public String[] fetchTags();
+    String[] fetchTags();
 
-    public void createTag(String tag);
+    void createTag(String tag);
 
-    public void deleteTag(String tag) throws TagExistenceException;
+    void deleteTag(String tag) throws TagExistenceException;
 
 }

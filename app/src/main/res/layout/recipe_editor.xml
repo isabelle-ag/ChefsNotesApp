@@ -3,121 +3,153 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#3375CEDA">
+    android:layout_height="match_parent">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
         android:adjustViewBounds="true"
         android:background="#00000000"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
+        android:contentDescription="@string/save_recipe"
+        android:onClick="save"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/button_press"
-        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
-        tools:padding="3dp" />
+        app:srcCompat="@drawable/savebutton_selector" />
+
+    <ImageButton
+        android:id="@+id/delRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/delete_button"
+        android:contentDescription='Delete Recipe'
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/MainView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="55dp"
         android:clickable="true"
-        android:translationY="50dp"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:translationY="25dp">
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:stretchColumns="*">
 
             <TableRow
                 android:id="@+id/TitleField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center|center_vertical"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/recipeTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:autofillHints=""
+                    android:backgroundTint="@color/main_logo"
                     android:breakStrategy="simple"
                     android:clickable="true"
                     android:ems="10"
-                    android:hint="Recipe Name"
-                    android:inputType="textShortMessage|textLongMessage|none|textMultiLine"
-                    android:longClickable="true"
-                    android:minHeight="48dp"
+                    android:focusable="true"
+                    android:hint="@string/recipe_name"
+                    android:inputType="textShortMessage|textLongMessage|none"
                     android:singleLine="true"
                     android:textAlignment="center"
                     android:textIsSelectable="true"
-                    android:textSize="48sp" />
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tagConstraintEdit"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/IngredientHeader"
-                        android:layout_width="wrap_content"
+                    <androidx.constraintlayout.helper.widget.Flow
+                        android:id="@+id/add_recipe_tags"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Ingredients"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="34sp"
-                        android:translationY="50dp" />
-                </LinearLayout>
+                        app:flow_horizontalBias=".1"
+                        app:flow_horizontalGap="10dp"
+                        app:flow_horizontalStyle="packed"
+                        app:flow_verticalAlign="center"
+                        app:flow_verticalGap="10dp"
+                        app:flow_wrapMode="chain"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
-                <LinearLayout
-                    android:id="@+id/IngredientContainer"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/IngredientHeader"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <include
-                        layout="@layout/ingredient_field"
-                        android:layout_width="490dp"
-                        android:layout_height="wrap_content"
-                        android:background="#00FFFFFF" />
-                </LinearLayout>
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="@string/ingredients"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="34sp" />
 
                 <ImageButton
                     android:id="@+id/AddIngredientButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
                     android:background="#00FFFFFF"
                     android:contentDescription="@string/add_ingredient"
                     android:onClick="addIngredient"
-                    android:padding="2dp"
-                    android:translationX="-50dp"
-                    app:srcCompat="@drawable/add_icon" />
+                    android:padding="10dp"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    app:srcCompat="@drawable/additem_selector" />
 
             </TableRow>
 
             <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:id="@+id/IngredientContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/ingredient_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="#00FFFFFF" />
+                </LinearLayout>
 
             </TableRow>
 
@@ -127,21 +159,29 @@
                 android:layout_height="wrap_content">
 
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/InstructionHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_weight="3"
+                    android:text="@string/directions"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="34sp" />
 
-                    <TextView
-                        android:id="@+id/InstructionHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Directions"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="34sp" />
-                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/AddDirectionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="#00FFFFFF"
+                    android:contentDescription="Add Direction"
+                    android:onClick="addDirection"
+                    android:padding="10dp"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    app:srcCompat="@drawable/additem_selector"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
             </TableRow>
 
@@ -153,36 +193,31 @@
                     android:id="@+id/DirectionContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <include layout="@layout/instruction_field" />
                 </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/AddDirectionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/Directions"
-                    android:background="#00FFFFFF"
-                    android:onClick="addDirection"
-                    android:padding="2dp"
-                    android:translationX="-50dp"
-                    app:srcCompat="@drawable/add_icon"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Space
-                    android:id="@+id/Buffer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp" />
-            </TableRow>
+                android:layout_height="wrap_content"
+                android:minHeight="120dp"></TableRow>
 
         </TableLayout>
     </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_bottom" >
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

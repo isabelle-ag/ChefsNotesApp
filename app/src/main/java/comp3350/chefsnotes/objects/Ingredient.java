@@ -6,7 +6,7 @@ public class Ingredient implements Serializable {
     private static final long serialVersionUID = 202203171146L;
 
     private String name;
-    private Quantity amount;
+    private final Quantity amount;
 
     public Ingredient(String iName, double a, String unit){
         this.name = iName;
