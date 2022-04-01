@@ -45,14 +45,7 @@ public class Ingredient implements Serializable {
     }
 
     public String getAmtString(){
-        String ret;
-        if(this.amount == null) {
-            ret = "";
-        }
-        else{
-            ret = this.amount.toString();
-        }
-        return ret;
+        return this.amount.toString();
     }
 
     public void setAmt(double newAmt){
