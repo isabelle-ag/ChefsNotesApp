@@ -126,7 +126,7 @@ public class EditRecipe extends AppCompatActivity {
         if(thisIntent.getStringExtra("title") != null) {
             try {
                 System.out.println("Saving changes to " + thisIntent.getStringExtra("title") + "...");
-                Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions);
+                Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions, false);
 
                 if(!thisIntent.getStringExtra("title").equals(title)) {
                     System.out.println("Renaming " + thisIntent.getStringExtra("title") + "...");
@@ -141,6 +141,7 @@ public class EditRecipe extends AppCompatActivity {
             catch(RecipeExistenceException e) {
                 System.out.println("Saving failed!");
                 System.out.println(e);
+                Messages.oops(this, "Unable to save as recipe name is already in use, choose a different title!");
             }
         }
         // if creating new recipe
@@ -148,7 +149,7 @@ public class EditRecipe extends AppCompatActivity {
         {
             try {
                 System.out.println("Saving " + title + "...");
-                recipeManager.saveButton(title, ingredients, directions);
+                recipeManager.saveButton(title, ingredients, directions, true);
                 System.out.println("Saving succeeded!");
                 Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
                 i.putExtra("recipeKey",title);
@@ -157,11 +158,13 @@ public class EditRecipe extends AppCompatActivity {
             catch(RecipeExistenceException e) {
                 System.out.println("Saving failed!");
                 System.out.println(e);
+                Messages.oops(this, "Unable to save as recipe name is already in use, choose a different title!");
             }
         }
         else
         {
             System.out.println("Abort save, null field found.");
+            Messages.oops(this, "Unable to save, this recipe needs a title!");
         }
     }
 
@@ -198,7 +201,7 @@ public class EditRecipe extends AppCompatActivity {
                 if(instructionName.equals("Name")) {
                     instructionName = "";
                 }
-                current = new Direction(instructions, instructionName, Integer.parseInt(timeEstimate));
+                current = new Direction(instructionName, instructions, Integer.parseInt(timeEstimate));
                 directions.add(current);
             }
         }

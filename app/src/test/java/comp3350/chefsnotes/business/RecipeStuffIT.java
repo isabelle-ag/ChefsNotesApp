@@ -120,7 +120,7 @@ public class RecipeStuffIT {
         assertEquals(0, R1.getIngredients().length);
         assertEquals(0, R1.getDirections().length);
 
-        manager.saveButton(R1.getTitle(), ingredients, directions);
+        manager.saveButton(R1.getTitle(), ingredients, directions, true);
 
         R1 = fetcher.getRecipeByName(R1.getTitle());
 
@@ -135,7 +135,7 @@ public class RecipeStuffIT {
         Recipe R1 = manager.newRecipe("foo");
         R1.addDirection(new Direction("bar"));
 
-        manager.saveButton(R1.getTitle(), new ArrayList<Ingredient>(Arrays.asList(R1.getIngredients())), new ArrayList<Direction>(Arrays.asList(R1.getDirections())));
+        manager.saveButton(R1.getTitle(), new ArrayList<Ingredient>(Arrays.asList(R1.getIngredients())), new ArrayList<Direction>(Arrays.asList(R1.getDirections())), true);
 
         Recipe R2 = manager.copyRecipe(R1, null);
         Recipe R3 = manager.copyRecipe(R1, "baz");
