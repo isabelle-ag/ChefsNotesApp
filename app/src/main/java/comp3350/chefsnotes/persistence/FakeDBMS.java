@@ -68,6 +68,7 @@ public class FakeDBMS implements DBMSTools{
                 Recipe curr = recipes.get(i);
                 if(curr.getTitle().equals(recipeName)){
                     result = curr;
+                    recent = recipeName;
                 }
             }
         }
@@ -127,6 +128,9 @@ public class FakeDBMS implements DBMSTools{
                 removeTest = recipes.remove(location);
                 if (removeTest != null) {
                     result = true;
+                    if(this.recent = recipeName){
+                        this.recent = null;
+                    }
                 }
             }
         }

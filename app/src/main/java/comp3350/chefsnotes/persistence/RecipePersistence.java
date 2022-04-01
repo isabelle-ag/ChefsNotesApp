@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
@@ -30,6 +32,7 @@ public class RecipePersistence implements DBMSTools{
     private final String commitQry = "UPDATE RECIPES SET RECIPEOBJECT = ? WHERE RECIPENAME = ?;";
 
     public RecipePersistence(final String dbp){
+        Logger.getLogger("hsqldb.db").setLevel(Level.WARNING);
         this.dbPath = dbp;
         this.recent = "";
 //        try{
@@ -97,22 +100,25 @@ public class RecipePersistence implements DBMSTools{
     public Recipe getRecipe(String recipeName) {
         Recipe result = null;
 
-        try (final Connection c = connection()) {   // establish conexion
-            // create statement and query
-            final PreparedStatement pst = c.prepareStatement(getObjQry);
-            pst.setString(1, recipeName); // add name
-            final ResultSet rs = pst.executeQuery();  // execute query
+        if(recipeName != null){
+            try (final Connection c = connection()) {   // establish conexion
+                // create statement and query
+                final PreparedStatement pst = c.prepareStatement(getObjQry);
+                pst.setString(1, recipeName); // add name
+                final ResultSet rs = pst.executeQuery();  // execute query
 
-            pst.close();
-            // check if there was a result
-            if (rs.next()) {
-                result = objFromResultSet(rs);
+                pst.close();
+                // check if there was a result
+                if (rs.next()) {
+                    result = objFromResultSet(rs);
+                    this.recent = recipeName;
+                }
+                rs.close();
+
+            } catch (final SQLException e) {
+                System.out.println("Unable to get the Recipe.");
+                System.out.println(e);
             }
-            rs.close();
-
-        } catch (final SQLException e) {
-            System.out.println("Unable to get the Recipe.");
-            System.out.println(e);
         }
 
         return result;
@@ -188,6 +194,9 @@ public class RecipePersistence implements DBMSTools{
                 testOut = getRecipe(recipeName);
                 if(attempt>0 && testOut == null){
                     result = true;
+                    if(recipeName == this.recent){
+                        this.recent = null;
+                    }
                 }
 
             } catch (final SQLException e) {
