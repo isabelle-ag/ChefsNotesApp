@@ -142,7 +142,7 @@ public class EditRecipe extends AppCompatActivity {
             }
         }
         // if creating new recipe
-        else if(ingredients != null && directions != null)
+        else if(title != null)
         {
             try {
                 System.out.println("Saving " + title + "...");
