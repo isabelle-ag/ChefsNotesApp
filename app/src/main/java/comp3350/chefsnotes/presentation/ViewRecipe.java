@@ -1,38 +1,52 @@
 package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.helper.widget.Flow;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.IRecipeManager;
+import comp3350.chefsnotes.business.ITagHandler;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
+import comp3350.chefsnotes.business.TagHandler;
 import comp3350.chefsnotes.objects.Recipe;
 
 
 import android.widget.ArrayAdapter;
+import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
 
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
+    private boolean valid;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        valid = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
 
@@ -49,12 +63,12 @@ public class ViewRecipe extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             recipeName = extras.getString("recipeKey");
+            recipe = recipeFetcher.getRecipeByName(recipeName);
         }
-
-        recipe = recipeFetcher.getRecipeByName(recipeName);
 
         if (recipe != null) {
             fillViewer();
+            populateTags(recipe);
         } else {
             errorScreen();
         }
@@ -83,23 +97,28 @@ public class ViewRecipe extends AppCompatActivity {
 
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
-        Intent switchActivityIntent = new Intent(this, EditRecipe.class);
-        switchActivityIntent.putExtra("title", recipe.getTitle());
-        startActivity(switchActivityIntent);
+        if(valid) {
+            Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+            switchActivityIntent.putExtra("title", recipe.getTitle());
+            startActivity(switchActivityIntent);
+        }
     }
 
     private void copyRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
-        IRecipeManager manager = new RecipeManager(Services.getRecipePersistence());
-        String title;
-        Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        if(valid) {
+            IRecipeManager manager = new RecipeManager(Services.getRecipePersistence());
+            String title;
+            Intent switchActivityIntent = new Intent(this, EditRecipe.class);
 
-        title = manager.copyRecipe(recipe, null).getTitle();
-        switchActivityIntent.putExtra("title", title);
-        startActivity(switchActivityIntent);
+            title = manager.copyRecipe(recipe, null).getTitle();
+            switchActivityIntent.putExtra("title", title);
+            startActivity(switchActivityIntent);
+        }
     }
 
     private void fillViewer() {
+        valid = true;
         String[] directionsTemp = recipe.getDirectionStrings();
         String[] ingredients = recipe.getIngredientStrings();
         String title = recipe.getTitle();
@@ -125,9 +144,10 @@ public class ViewRecipe extends AppCompatActivity {
     }
 
     private void errorScreen() {
-        String error = "There are no recipes at the moment.";
-
+        valid = false;
+        String error = "Please select a new recipe";
         ((TextView) findViewById(R.id.recipeName)).setText(error);
+        Messages.oops(this, "This is not a valid recipe!");
     }
 
     @Override
@@ -151,5 +171,52 @@ public class ViewRecipe extends AppCompatActivity {
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void populateTags(Recipe r){
+        ITagHandler tagHandler = new TagHandler(Services.getTagPersistence(), Services.getRecipePersistence());
+
+        Flow tags = findViewById(R.id.viewTags);
+        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.tagContainerView);
+
+        ArrayList<String> tagList = r.getTags();
+
+        int [] idList = new int[tagList.size()];
+        int i=0;
+
+        for (String s : tagList) {
+
+            ToggleButton b = new ToggleButton(this);
+            b.setTextSize(11);
+            b.setText(s);
+            b.setTextOff(s);
+            b.setTextOn(s);
+            b.setMinHeight(20);
+            b.setMinimumHeight(20);
+            b.setMinWidth(50);
+            b.setMinimumWidth(50);
+            b.setPadding(10, 5, 10, 5);
+            b.setAllCaps(false);
+
+            b.setId(b.generateViewId());
+
+
+            Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
+
+            ViewCompat.setBackground(b, drawable);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMarginStart(8);
+            params.setMarginEnd(8);
+            b.setLayoutParams(params);
+
+            parent.addView(b);
+            tags.addView(b);
+            idList[i] = b.getId();
+            i++;
+
+        }
+        tags.setReferencedIds(idList);
     }
 }

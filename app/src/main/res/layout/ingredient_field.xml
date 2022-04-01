@@ -64,10 +64,13 @@
             android:id="@+id/unitList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/IngredientAmount"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="7dp"
             android:layout_toEndOf="@id/IngredientAmount"
-            android:background="@android:drawable/btn_dropdown"
+            android:background="@drawable/spinner_background"
             android:dropDownWidth="match_parent"
-            android:gravity="end"
             android:spinnerMode="dropdown" />
 
     </RelativeLayout>

@@ -1,32 +1,41 @@
 package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.helper.widget.Flow;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.IRecipeManager;
+import comp3350.chefsnotes.business.ITagHandler;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
+import comp3350.chefsnotes.business.TagHandler;
 import comp3350.chefsnotes.business.Units;
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
@@ -36,11 +45,17 @@ import comp3350.chefsnotes.objects.RecipeExistenceException;
 public class EditRecipe extends AppCompatActivity implements NoticeDialogFragment.NoticeDialogListener {
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
     private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());//refactor to use services natively
+    private final ITagHandler tagHandler = new TagHandler(Services.getTagPersistence(), Services.getRecipePersistence());
+    private ArrayList<String> tags;
+    private ArrayList<String> oldTags;
+    private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_editor);
+        tags = new ArrayList<>();
+        oldTags = new ArrayList<>();
 
         ImageView saveButton = findViewById(R.id.save_button);
         View addIngredientButton = findViewById(R.id.AddIngredientButton);
@@ -62,8 +77,10 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         if(thisIntent.getStringExtra("title") != null)//if a new recipe is being created (blank), Title = null
         {
             populateRecipe(thisIntent.getStringExtra("title"), units);
+            recipe = recipeFetcher.getRecipeByName(thisIntent.getStringExtra("title"));
         }
 
+        populateTags();
 
         saveButton.setOnClickListener(this::save);
         addInstructionButton.setOnClickListener(this::addDirection);
@@ -131,18 +148,20 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         ArrayList<Ingredient> ingredients = getIngredients(v);
         ArrayList<Direction> directions = getDirections(v);
         Log.i("You are attempting to save!", "title");
+        Recipe r;
 
         // if editing an old recipe
         if(thisIntent.getStringExtra("title") != null && !title.equals("")) {
             try {
                 System.out.println("Saving changes to " + thisIntent.getStringExtra("title") + "...");
-                Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions, false);
+                r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions, false);
 
                 if(!thisIntent.getStringExtra("title").equals(title)) {
                     System.out.println("Renaming " + thisIntent.getStringExtra("title") + "...");
                     recipeManager.renameRecipe(r, title);
                 }
-
+                addRecipeTags(r);
+                removeRecipeTags(r);
                 System.out.println("Saving Success!");
                 Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
                 i.putExtra("recipeKey",title);
@@ -159,8 +178,10 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         {
             try {
                 System.out.println("Saving " + title + "...");
-                recipeManager.saveButton(title, ingredients, directions, true);
+                r = recipeManager.saveButton(title, ingredients, directions, true);
                 System.out.println("Saving succeeded!");
+                addRecipeTags(r);
+                removeRecipeTags(r);
                 Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
                 i.putExtra("recipeKey",title);
                 startActivity(i);
@@ -229,11 +250,11 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         //for each ingredient, id = ingredient.addIngredient(), findViewById(id).addText
         EditText recipeTitle = findViewById(R.id.recipeTitle);
         recipeTitle.setText(title);
-        Recipe populator = recipeFetcher.getRecipeByName(title);//use to populate fields
+        Recipe populater = recipeFetcher.getRecipeByName(title);//use to populate fields
         ViewGroup curIng = findViewById(R.id.Ingredient);
         ViewGroup curDir = findViewById(R.id.Direction);
-        if(populator.getIngredients() != null){
-            for(Ingredient ing:populator.getIngredients())
+        if(populater.getIngredients() != null){
+            for(Ingredient ing:populater.getIngredients())
             {
                 name = curIng.findViewById(R.id.IngredientName);
                 name.setText(ing.getName());
@@ -246,8 +267,8 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
                 Log.d("id", "" + curIng.getId());
             }
         }
-        if(populator.getDirections() != null) {
-            for(Direction dir:populator.getDirections())
+        if(populater.getDirections() != null) {
+            for(Direction dir:populater.getDirections())
             {
                 name = curDir.findViewById(R.id.DirectionName);
                 name.setText(dir.getName());
@@ -305,13 +326,21 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
     }
 
     public void deleteRecipe(View view){
-        showNoticeDialog();
+        Intent thisIntent = getIntent();
+        String title = getTitle(view);
+        if(thisIntent.getStringExtra("title") != null && !title.equals("")) {
+            showNoticeDialog();
+        }
+        else{
+            Messages.oops(this,"This recipe doesn't exist!");
+        }
+
     }
 
     private void deleteConfirmed(View v){
-        String name = getTitle(v);
+        Intent thisIntent = getIntent();
         try{
-            recipeManager.delRecipe(recipeFetcher.getRecipeByName(name));
+            recipeManager.delRecipe(recipeFetcher.getRecipeByName(thisIntent.getStringExtra("title")));
         } catch (RecipeExistenceException e) {
             e.printStackTrace();
         }
@@ -367,5 +396,92 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
             return super.onOptionsItemSelected(item);
         }
     }
+
+    private void populateTags(){
+        Flow tags = findViewById(R.id.add_recipe_tags);
+        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.tagConstraintEdit);
+
+        String[] tagList = tagHandler.fetchTags();
+
+        int [] idList = new int[tagList.length];
+        int i=0;
+
+        for (String s : tagList) {
+
+            ToggleButton b = new ToggleButton(this);
+            b.setTextSize(11);
+            b.setText(s);
+            b.setTextOff(s);
+            b.setTextOn(s);
+            b.setMinHeight(20);
+            b.setMinimumHeight(20);
+            b.setMinWidth(50);
+            b.setMinimumWidth(50);
+            b.setPadding(10, 5, 10, 5);
+            b.setAllCaps(false);
+
+            b.setId(b.generateViewId());
+
+            if(recipe != null) {
+                b.setChecked(recipe.hasTag(s));
+            }
+
+            Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
+            ViewCompat.setBackground(b, drawable);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMarginStart(8);
+            params.setMarginEnd(8);
+            b.setLayoutParams(params);
+
+            parent.addView(b);
+            tags.addView(b);
+            idList[i] = b.getId();
+            i++;
+            b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton bv, boolean isChecked) {
+                    if (isChecked) {
+                        addTag(bv.getText().toString());
+                        //tagHandler.addTagToRecipe(recipeFetcher.getRecipeByName(getIntent().getStringExtra("title")), bv.getText().toString());
+                    } else {
+                        removeTag(bv.getText().toString());
+                        //tagHandler.removeTagFromRecipe(recipeFetcher.getRecipeByName(getIntent().getStringExtra("title")), bv.getText().toString());
+                    }
+                }
+            });
+
+        }
+        tags.setReferencedIds(idList);
+    }
+
+    private void addTag(String t){
+        if(!tags.contains(t))   {
+            tags.add(t);
+        }
+    }
+    private void removeTag(String t){
+        if(!oldTags.contains(t)){
+            oldTags.add(t);
+        }
+        if(tags.contains(t)){
+            tags.remove(t);
+        }
+    }
+
+    private void addRecipeTags(Recipe r){
+        for (String s:tags){
+            tagHandler.addTagToRecipe(r, s);
+        }
+    }
+
+    private void removeRecipeTags(Recipe r){
+        for (String s:oldTags){
+            tagHandler.removeTagFromRecipe(r,s);
+        }
+    }
+
 
 }

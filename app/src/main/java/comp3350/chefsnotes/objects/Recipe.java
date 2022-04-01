@@ -32,12 +32,18 @@ public class Recipe implements Serializable {
 
     public void removeTag(String tag)
     {
-        tags.remove(tag);
+        if(tags.contains(tag)) {
+            tags.remove(tag);
+        }
     }
 
     public ArrayList<String> getTags()
     {
         return tags;
+    }
+
+    public boolean hasTag(String tag){
+        return(tags.contains(tag));
     }
 
     public int ingredientCount(){

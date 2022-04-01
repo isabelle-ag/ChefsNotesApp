@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/delete_button"
+        android:contentDescription='Delete Recipe'
         android:scaleX="1.2"
         android:scaleY="1.2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +53,6 @@
                 android:id="@+id/TitleField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
                 android:gravity="center|center_vertical"
                 android:orientation="vertical">
 
@@ -69,12 +69,36 @@
                     android:focusable="true"
                     android:hint="@string/recipe_name"
                     android:inputType="textShortMessage|textLongMessage|none"
-                    android:minHeight="48dp"
                     android:singleLine="true"
                     android:textAlignment="center"
                     android:textIsSelectable="true"
                     android:textSize="40sp"
                     android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tagConstraintEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.helper.widget.Flow
+                        android:id="@+id/add_recipe_tags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:flow_horizontalBias=".1"
+                        app:flow_horizontalGap="10dp"
+                        app:flow_horizontalStyle="packed"
+                        app:flow_verticalAlign="center"
+                        app:flow_verticalGap="10dp"
+                        app:flow_wrapMode="chain"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </TableRow>
 
             <TableRow

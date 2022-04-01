@@ -32,37 +32,20 @@ public class Messages {
     }
 
     public static void oops(Activity owner, String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
+        AlertDialog.Builder builder = new AlertDialog.Builder(owner);
 
-        alertDialog.setTitle("Oh no!");
-        alertDialog.setMessage(message);
+        builder.setTitle("Oh no!");
+        builder.setMessage(message);
 
+       builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
-//    public boolean confirmation(Activity owner, String message){
-//        boolean confirm = false;
-//        AlertDialog.Builder builder = new AlertDialog.Builder(owner);
-//
-//        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                message = true;
-//            }
-//        });
-//        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                // User cancelled the dialog
-//            }
-//        });
-//
-//        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
-//
-//        alertDialog.setTitle("Are you sure?");
-//        alertDialog.setMessage(message);
-//
-//        alertDialog.show();
-//
-//    }
 
 
 }

@@ -27,7 +27,9 @@
         <entry key="app/src/main/res/drawable/additem_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/button_press.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/copy_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/delete_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/delete_item.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/dropdown.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/edit_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.286" />
         <entry key="app/src/main/res/drawable/ingredient_list_divider.xml" value="0.1" />
@@ -38,6 +40,7 @@
         <entry key="app/src/main/res/drawable/save_button_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/savebutton_selector.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/spacer.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/tags.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/togglebutton_selector.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />

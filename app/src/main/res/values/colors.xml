@@ -2,6 +2,7 @@
 <resources>
     <color name="main_logo">#FF35A696</color>
     <color name="secondary_logo">#FF68C0AD</color>
+    <color name="secondary_logo_soft">#C2EEE4</color>
     <color name="secondary">#3E597A</color>
     <color name="secondary_variant">#FFa2acbd</color>
     <color name="teal_700">#FF018786</color>

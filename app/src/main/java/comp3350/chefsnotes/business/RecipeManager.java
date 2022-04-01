@@ -66,8 +66,8 @@ public class RecipeManager implements IRecipeManager {
     public Recipe saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions, boolean isNew) throws RecipeExistenceException
     {
         if(db.getRecipe(name) == null || isNew) {
-            this.newRecipe(name);
-        }
+        this.newRecipe(name);
+    }
         Recipe myRecipe = db.getRecipe(name);
 
 
@@ -82,6 +82,8 @@ public class RecipeManager implements IRecipeManager {
         db.commitChanges(myRecipe);
         return myRecipe;
     }
+
+
 
     public Recipe copyRecipe(Recipe R, String copyName)
     {
