@@ -4,19 +4,20 @@ package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Menu;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Main;
@@ -46,16 +47,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         createTags();
+        BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
+        navView.setOnItemSelectedListener(this::navigation);
     }
 
     public void makeRecipe(View view) {
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
         switchActivityIntent.putExtra("title", (String) null);
-        startActivity(switchActivityIntent);
-    }
-
-    public void viewRecipe(View view) {
-        Intent switchActivityIntent = new Intent(this, ViewRecipe.class);
         startActivity(switchActivityIntent);
     }
 
@@ -140,6 +138,27 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+        }
+    }
+
+    private boolean navigation(MenuItem item){
+        if(item.getItemId() == R.id.new_recipe_button){
+            Intent i = new Intent(MainActivity.this, EditRecipe.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.browse_recipe_button){
+            Intent i = new Intent(MainActivity.this, RecipeBrowser.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.current_recipe_button){
+            Intent i = new Intent(MainActivity.this, ViewRecipe.class);
+            startActivity(i);
+            return true;
+        }
+        else{
+            return super.onOptionsItemSelected(item);
         }
     }
 

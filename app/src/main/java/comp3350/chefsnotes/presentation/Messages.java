@@ -32,11 +32,18 @@ public class Messages {
     }
 
     public static void oops(Activity owner, String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
+        AlertDialog.Builder builder = new AlertDialog.Builder(owner);
 
-        alertDialog.setTitle("Oh no!");
-        alertDialog.setMessage(message);
+        builder.setTitle("Oh no!");
+        builder.setMessage(message);
 
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 

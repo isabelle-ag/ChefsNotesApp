@@ -3,75 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/IngredientField"
-    android:layout_width="550dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#00FFFFFF"
     android:orientation="vertical"
+    android:scaleX="1"
+    android:scaleY="1"
     tools:showIn="@layout/recipe_editor">
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:id="@+id/Ingredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardElevation="0dp">
+        android:layout_weight="2">
 
-
-        <EditText
-            android:id="@+id/IngredientAmount"
-            android:layout_width="50dp"
-            android:layout_height="58dp"
-            android:layout_marginBottom="30dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:imeOptions="actionDone"
-            android:digits="0,1,2,3,4,5,6,7,8,9,/,."
-            android:maxWidth="75dp"
-            android:maxLines="1"
-            android:textAlignment="center"
-            tools:ignore="LabelFor,SpeakableTextPresentCheck" />
-
-        <EditText
-            android:id="@+id/IngredientName"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/ingredient"
-            android:imeOptions="actionDone"
-            android:inputType="textPersonName"
-            android:textAlignment="textStart"
-            android:textSize="20sp"
-            android:translationX="185dp" />
-
-        <Spinner
-            android:id="@+id/unitList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:gravity="end"
-            android:spinnerMode="dropdown"
-            android:textSize="12sp"
-            android:translationX="55dp"
-            android:translationY="5dp"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/IngredientDeleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
             android:background="#00FFFFFF"
-            android:contentDescription="@string/delete_button"
-            android:onClick="removeIngredient"
-            android:padding="2dp"
-            android:scaleX=".8"
-            android:scaleY=".8"
-            android:translationX="430dp"
-            android:translationY="10dp"
-            app:srcCompat="@drawable/delete_ico" />
+            android:contentDescription="@string/delete_direction"
+            app:srcCompat="@drawable/delete_button" />
 
-    </androidx.cardview.widget.CardView>
+        <EditText
+            android:id="@+id/IngredientAmount"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:autofillHints=""
+            android:backgroundTint="@color/main_logo"
+            android:digits="0,1,2,3,4,5,6,7,8,9,/,."
+            android:ems="10"
+            android:hint="#"
+            android:imeOptions="actionDone"
+            android:maxWidth="75dp"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/IngredientName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/unitList"
+            android:autofillHints=""
+            android:backgroundTint="@color/main_logo"
+            android:ems="8"
+            android:hint="@string/ingredient"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:textAlignment="textStart"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/unitList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/IngredientAmount"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="7dp"
+            android:layout_toEndOf="@id/IngredientAmount"
+            android:background="@drawable/spinner_background"
+            android:dropDownWidth="match_parent"
+            android:minWidth="90dp"
+            android:spinnerMode="dropdown"
+            tools:minWidth="90dp" />
+
+    </RelativeLayout>
 
 </TableRow>

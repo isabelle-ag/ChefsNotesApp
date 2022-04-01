@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class FakeDBMS implements DBMSTools{
 
-    private ArrayList<Recipe> recipes;
+    private final ArrayList<Recipe> recipes;
     private String recent;
 
     public FakeDBMS(){

@@ -5,80 +5,65 @@
     android:id="@+id/DirectionField"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     android:orientation="vertical"
     tools:showIn="@layout/recipe_editor">
 
     <RelativeLayout
         android:id="@+id/Direction"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:ignore="UselessParent">
 
         <ImageButton
             android:id="@+id/DirectionDeleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/TimeEstimate"
-            android:layout_marginStart="63dp"
-            android:layout_marginTop="45dp"
-            android:layout_toEndOf="@+id/textbox"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
             android:background="#00FFFFFF"
-            android:scaleX=".8"
-            android:scaleY=".8"
-            app:srcCompat="@drawable/delete_ico"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:contentDescription="@string/delete_direction"
+            app:srcCompat="@drawable/delete_button" />
 
         <EditText
             android:id="@+id/DirectionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="9dp"
-            android:backgroundTint="#000000"
+            android:backgroundTint="@color/main_logo"
             android:ems="10"
-            android:hint="Direction Title"
+            android:hint="@string/direction_title"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
             tools:imeOptions="actionDone" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textbox"
-            android:layout_width="380dp"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/DirectionName"
             android:layout_marginTop="32dp"
             android:background="@android:drawable/editbox_background"
-            android:hint="Direction"
+            android:hint="@string/direction_description"
             android:imeOptions="actionDone"
             android:inputType="textMultiLine"
-            android:minLines="3" />
+            android:minLines="3"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp" />
 
         <EditText
             android:id="@+id/TimeEstimate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="104dp"
-            android:layout_marginTop="9dp"
-            android:layout_toEndOf="@+id/DirectionName"
-            android:backgroundTint="#000000"
-            android:hint="Time For Step (mins)"
+            android:layout_marginEnd="20dp"
+            android:layout_toStartOf="@id/DirectionDeleteButton"
+            android:backgroundTint="@color/main_logo"
+            android:hint="Time"
             android:imeOptions="actionDone"
             android:inputType="number"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:translationX="0dp"
-            tools:ignore="SpeakableTextPresentCheck"
-            tools:imeOptions="actionDone" />
-
-        <Space
-            android:id="@+id/AddDirectionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Directions"
-            android:layout_marginTop="50dp"
-            android:onClick="addInstruction"
-            android:translationX="25dp"
-            android:translationY="10dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </RelativeLayout>
 
