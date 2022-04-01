@@ -14,6 +14,8 @@ import comp3350.chefsnotes.objects.RecipeExistenceException;
 
 public class RecipePersistence implements DBMSTools{
 
+    private String recent;
+
     private final String dbPath;    // location of db
     private final String nameCol = "RECIPENAME";
     private final String objCol = "RECIPEOBJECT";
@@ -29,6 +31,7 @@ public class RecipePersistence implements DBMSTools{
 
     public RecipePersistence(final String dbp){
         this.dbPath = dbp;
+        this.recent = "";
         try{
             final Connection con = connection();
         } catch (SQLException sqe) {
@@ -156,6 +159,7 @@ public class RecipePersistence implements DBMSTools{
                 testOut = getRecipe(recipeName);
                 if(attempt>0 && testOut != null && testOut.getTitle().equals(recipeName)){
                     result = true;
+                    this.recent = recipeName;
                 }
 
             } catch (final SQLException e) {
@@ -212,6 +216,7 @@ public class RecipePersistence implements DBMSTools{
                 testOut = getRecipe(newName);
                 if(attempt>0 && testOut != null && testOut.getTitle().equals(newName)){
                     result = true;
+                    this.recent = newName;
                 }
 
             } catch (final SQLException e) {
@@ -235,6 +240,7 @@ public class RecipePersistence implements DBMSTools{
 
             if(testDelete && insertRecipe(modified.getTitle(), modified) ){ // bias prevents insert
                 result = true;
+                this.recent = modified.getTitle();
             }
         }
         return result;
@@ -272,6 +278,10 @@ public class RecipePersistence implements DBMSTools{
         }
 
         return result;
+    }
+
+    public String lastModified(){
+        return this.recent;
     }
 
     private String nameFromResultSet(ResultSet rs) throws SQLException {
