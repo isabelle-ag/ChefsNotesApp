@@ -40,6 +40,7 @@ import java.util.Arrays;
 public class ViewRecipe extends AppCompatActivity {
 
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
+    private Recipe recipe;
 
 
     @Override
