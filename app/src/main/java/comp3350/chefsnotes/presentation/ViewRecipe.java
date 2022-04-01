@@ -12,6 +12,7 @@ import android.widget.TextView;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.IRecipeFetcher;
+import comp3350.chefsnotes.business.IRecipeManager;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.objects.Recipe;
