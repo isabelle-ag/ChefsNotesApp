@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable-anydpi/addRecipe.xml" value="0.1455" />
         <entry key="app/src/main/res/drawable-anydpi/browse_recipes.xml" value="0.2065" />
         <entry key="app/src/main/res/drawable-anydpi/curr_recipe.xml" value="0.2065" />
+        <entry key="app/src/main/res/drawable-anydpi/delete_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-anydpi/save_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-anydpi/save_button_clicked.xml" value="0.224" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
@@ -33,7 +34,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_view_recipe.xml" value="0.1" />
         <entry key="app/src/main/res/layout/ingredient_field.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/instruction_field.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/instruction_field.xml" value="0.335" />
         <entry key="app/src/main/res/layout/recipe_browser.xml" value="0.2939346811819596" />
         <entry key="app/src/main/res/layout/recipe_editor.xml" value="0.25" />
         <entry key="app/src/main/res/layout/recipe_search.xml" value="0.25" />
