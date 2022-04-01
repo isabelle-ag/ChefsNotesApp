@@ -194,7 +194,7 @@ public class RecipePersistence implements DBMSTools{
                 testOut = getRecipe(recipeName);
                 if(attempt>0 && testOut == null){
                     result = true;
-                    if(recipeName == this.recent){
+                    if(recipeName.equals(this.recent)){
                         this.recent = null;
                     }
                 }
