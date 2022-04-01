@@ -71,7 +71,9 @@
             android:layout_toEndOf="@id/IngredientAmount"
             android:background="@drawable/spinner_background"
             android:dropDownWidth="match_parent"
-            android:spinnerMode="dropdown" />
+            android:minWidth="90dp"
+            android:spinnerMode="dropdown"
+            tools:minWidth="90dp" />
 
     </RelativeLayout>
 
