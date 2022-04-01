@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/drawable/additem_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/button_press.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/copy_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/copy_button_alt.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/delete_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/delete_item.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/dropdown.xml" value="0.1" />
@@ -43,7 +44,7 @@
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/tags.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/togglebutton_selector.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1037037037037037" />
         <entry key="app/src/main/res/layout/activity_view_recipe.xml" value="0.335" />
         <entry key="app/src/main/res/layout/ingredient_field.xml" value="0.335" />
         <entry key="app/src/main/res/layout/instruction_field.xml" value="0.335" />

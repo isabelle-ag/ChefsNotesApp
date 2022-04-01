@@ -196,6 +196,8 @@ public class RecipeBrowser extends AppCompatActivity {
             return true;
         }
         else if(item.getItemId() == R.id.browse_recipe_button){
+            item.setEnabled(true);
+            item.setChecked(true);
             return true;
         }
         else if(item.getItemId() == R.id.current_recipe_button){

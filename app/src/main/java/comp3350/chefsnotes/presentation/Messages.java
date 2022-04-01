@@ -37,7 +37,7 @@ public class Messages {
         builder.setTitle("Oh no!");
         builder.setMessage(message);
 
-       builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
