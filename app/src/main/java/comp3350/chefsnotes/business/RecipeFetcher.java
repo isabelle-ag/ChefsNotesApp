@@ -9,6 +9,7 @@ import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.objects.Recipe;
 
 public class RecipeFetcher implements IRecipeFetcher{
+    private Recipe lastRecipe;
     private final DBMSTools db;
 
     public RecipeFetcher(DBMSTools db)
@@ -76,7 +77,9 @@ public class RecipeFetcher implements IRecipeFetcher{
 
     public Recipe getRecipeByName(String name)
     {
-        return db.getRecipe(name);
+        Recipe get = db.getRecipe(name);
+        lastRecipe = get;
+        return get;
     }
 
     public Recipe[] getRecipesByText(String searchString)
@@ -87,7 +90,12 @@ public class RecipeFetcher implements IRecipeFetcher{
         {
             out.add(db.getRecipe(name));
         }
+
         return out.toArray(new Recipe[0]);
+    }
+
+    public Recipe getLastViewed(){
+        return lastRecipe;
     }
 
     public String[] getRecipeNamesByText(String name){

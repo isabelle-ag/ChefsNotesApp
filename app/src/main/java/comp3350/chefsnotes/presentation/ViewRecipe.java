@@ -40,13 +40,11 @@ import java.util.Arrays;
 public class ViewRecipe extends AppCompatActivity {
 
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
-    private Recipe recipe;
-    //private boolean valid;
+    private Recipe recipe = recipeFetcher.getLastViewed();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //valid = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
 
@@ -85,7 +83,7 @@ public class ViewRecipe extends AppCompatActivity {
             recipeName = extras.getString("recipeKey");
             recipe = recipeFetcher.getRecipeByName(recipeName);
         } else {
-            recipe = recipeFetcher.getRecentRecipe();
+            recipe = recipeFetcher.getLastViewed();
         }
 
         if (recipe != null) {
@@ -97,7 +95,7 @@ public class ViewRecipe extends AppCompatActivity {
 
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
-        //if(valid) {
+
             Intent switchActivityIntent = new Intent(this, EditRecipe.class);
             switchActivityIntent.putExtra("title", recipe.getTitle());
             startActivity(switchActivityIntent);
@@ -168,7 +166,7 @@ public class ViewRecipe extends AppCompatActivity {
             startActivity(i);
             return true;
         } else if (item.getItemId() == R.id.current_recipe_button) {
-            return super.onOptionsItemSelected(item);
+            return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
