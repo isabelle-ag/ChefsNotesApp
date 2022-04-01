@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import comp3350.chefsnotes.objects.TagExistenceException;
 
@@ -21,6 +23,7 @@ public class TagPersistence implements TagDBMSTools{
     private final String getListQry = "SELECT TAGNAME FROM TAGS WHERE 1=1;";
 
     public TagPersistence(String dbp){
+        Logger.getLogger("hsqldb.db").setLevel(Level.WARNING);
         this.dbPath = dbp;
     }
 
