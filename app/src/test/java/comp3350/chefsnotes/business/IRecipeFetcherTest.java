@@ -18,8 +18,8 @@ public class IRecipeFetcherTest {
     static DBMSTools db;
     static IRecipeFetcher fetcher;
 
-    @BeforeClass
-    public static void setup() {
+    @Before
+    public void setup() {
         db = new FakeDBMS();
         db.createRecipe("test1");
         db.createRecipe("test2");
