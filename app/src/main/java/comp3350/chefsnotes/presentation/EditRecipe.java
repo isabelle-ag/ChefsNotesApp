@@ -74,7 +74,7 @@ public class EditRecipe extends AppCompatActivity {
     //put retrieval methods in separate class?
     private ArrayList<Ingredient> getIngredients(View view)
     {
-        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        ArrayList<Ingredient> ingredients = new ArrayList<>(0);
         Ingredient current;
         LinearLayout container = findViewById(R.id.IngredientContainer);
         View currRow;
@@ -123,7 +123,7 @@ public class EditRecipe extends AppCompatActivity {
         ArrayList<Direction> directions = getDirections(v);
 
         // if editing an old recipe
-        if(thisIntent.getStringExtra("title") != null) {
+        if(thisIntent.getStringExtra("title") != null && !title.equals("")) {
             try {
                 System.out.println("Saving changes to " + thisIntent.getStringExtra("title") + "...");
                 Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions);
@@ -144,7 +144,7 @@ public class EditRecipe extends AppCompatActivity {
             }
         }
         // if creating new recipe
-        else if(title != null)
+        else if(!title.equals(""))
         {
             try {
                 System.out.println("Saving " + title + "...");
@@ -168,7 +168,7 @@ public class EditRecipe extends AppCompatActivity {
     //put retrieval methods in separate class?
     private ArrayList<Direction> getDirections(View view)
     {
-        ArrayList<Direction> directions = new ArrayList<>();
+        ArrayList<Direction> directions = new ArrayList<>(0);
         Direction current;
         LinearLayout ingredients = findViewById(R.id.DirectionContainer);
         View currRow;
