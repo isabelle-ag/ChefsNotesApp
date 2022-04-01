@@ -37,7 +37,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="90dp"
-            android:layout_marginBottom="10sp"
+            android:layout_marginBottom="60dp"
             android:gravity="start"
             android:textAlignment="textStart"
             android:textColor="#000000"
@@ -105,12 +105,6 @@
 
         </ListView>
 
-        <!--        &lt;!&ndash;   251dp marginTop for in line with ingredients     &ndash;&gt;-->
-        <!--        android:rotation="0"-->
-        <!--        android:rotationX="0"-->
-        <!--        android:rotationY="0"-->
-        <!--        app:srcCompat="@drawable/fairy_pie" />-->
-
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
@@ -138,15 +132,16 @@
             android:dividerHeight="15sp">
 
         </ListView>
-    </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottom" />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/menu_bottom" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

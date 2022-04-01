@@ -130,13 +130,13 @@ public class ViewRecipe extends AppCompatActivity {
 
         //Ingredient List
         ArrayAdapter<String> ingAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, ingredients);
+                R.layout.list_style, ingredients);
         ListView ingView = findViewById(R.id.ingredientListView);
         ingView.setAdapter(ingAdapter);
 
         //Direction List
         ArrayAdapter<String> dirAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, directions);
+                R.layout.list_style, directions);
         ListView dirView = findViewById(R.id.directionListView);
         dirView.setAdapter(dirAdapter);
 
@@ -167,7 +167,7 @@ public class ViewRecipe extends AppCompatActivity {
             startActivity(i);
             return true;
         } else if (item.getItemId() == R.id.current_recipe_button) {
-            return true;
+            return super.onOptionsItemSelected(item);
         } else {
             return super.onOptionsItemSelected(item);
         }

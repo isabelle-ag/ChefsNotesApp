@@ -102,7 +102,7 @@ public class RecipeBrowser extends AppCompatActivity {
 
 
         ArrayAdapter<String> rAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, recipeList);
+                R.layout.list_style, recipeList);
         searchResults.setAdapter(rAdapter);
         searchResults.setOnItemClickListener((parent, v, position, id) -> {
             String recipeName = (String) parent.getItemAtPosition(position);
