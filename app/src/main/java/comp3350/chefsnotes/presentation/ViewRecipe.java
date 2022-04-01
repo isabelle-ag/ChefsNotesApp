@@ -40,7 +40,6 @@ import java.util.Arrays;
 public class ViewRecipe extends AppCompatActivity {
 
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
-    private Recipe recipe = recipeFetcher.getLastViewed();
 
 
     @Override
@@ -63,6 +62,9 @@ public class ViewRecipe extends AppCompatActivity {
             recipeName = extras.getString("recipeKey");
             recipe = recipeFetcher.getRecipeByName(recipeName);
         }
+        else{
+            recipe = recipeFetcher.getRecentRecipe();
+        }
 
         if (recipe != null) {
             fillViewer();
@@ -83,7 +85,7 @@ public class ViewRecipe extends AppCompatActivity {
             recipeName = extras.getString("recipeKey");
             recipe = recipeFetcher.getRecipeByName(recipeName);
         } else {
-            recipe = recipeFetcher.getLastViewed();
+            recipe = recipeFetcher.getRecentRecipe();
         }
 
         if (recipe != null) {
@@ -143,7 +145,7 @@ public class ViewRecipe extends AppCompatActivity {
 
     private void errorScreen() {
         //valid = false;
-        String error = "Please select a new recipe";
+        String error = "Invalid Recipe. Try making a new one or open one from the browser.";
         ((TextView) findViewById(R.id.recipeName)).setText(error);
        // Messages.oops(this,
        //         "This is not a valid recipe. Try making a new one or open one from the browser.");

@@ -9,7 +9,6 @@ import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.objects.Recipe;
 
 public class RecipeFetcher implements IRecipeFetcher{
-    private Recipe lastRecipe;
     private final DBMSTools db;
 
     public RecipeFetcher(DBMSTools db)
@@ -59,7 +58,7 @@ public class RecipeFetcher implements IRecipeFetcher{
 
         for (Recipe r: searchSpace)
         {
-            //To make tag filtering work, I changed some things, orignals are commented
+            //To make tag filtering work, I changed some things, originals are commented
             boolean good = false; //true
             for (String inclTag:included)
                 for (String tag:r.getTags())
@@ -77,9 +76,7 @@ public class RecipeFetcher implements IRecipeFetcher{
 
     public Recipe getRecipeByName(String name)
     {
-        Recipe get = db.getRecipe(name);
-        lastRecipe = get;
-        return get;
+        return db.getRecipe(name);
     }
 
     public Recipe[] getRecipesByText(String searchString)
@@ -90,12 +87,7 @@ public class RecipeFetcher implements IRecipeFetcher{
         {
             out.add(db.getRecipe(name));
         }
-
         return out.toArray(new Recipe[0]);
-    }
-
-    public Recipe getLastViewed(){
-        return lastRecipe;
     }
 
     public String[] getRecipeNamesByText(String name){
