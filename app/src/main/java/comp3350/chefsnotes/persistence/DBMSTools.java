@@ -10,6 +10,9 @@ public interface DBMSTools{
 
     // ===== comp3350.chefsnotes.objects.Recipe Methods =====
 
+    // returns the title of the most recently modified Recipe
+    String lastModified();
+
     // returns array of all Recipe object
     Recipe[] getAllRecipes();
 
