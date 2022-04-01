@@ -24,6 +24,11 @@ public class Ingredient implements Serializable {
         this.amount = quant;
     }
 
+    public Ingredient(String iName)
+    {
+        this.name = iName;
+    }
+
     public String getName(){
         return this.name;
     }
@@ -39,7 +44,14 @@ public class Ingredient implements Serializable {
     }
 
     public String getAmtString(){
-        return this.amount.toString();
+        String ret;
+        if(this.amount == null) {
+            ret = "";
+        }
+        else{
+            ret = this.amount.toString();
+        }
+        return ret;
     }
 
     public void setAmt(double newAmt){
