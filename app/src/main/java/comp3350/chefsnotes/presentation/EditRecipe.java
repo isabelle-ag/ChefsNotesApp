@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
@@ -37,7 +38,7 @@ public class EditRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_editor);
 
-        ImageButton saveButton = findViewById(R.id.save_button);
+        ImageView saveButton = findViewById(R.id.save_button);
         View addIngredientButton = findViewById(R.id.AddIngredientButton);
         View addInstructionButton = findViewById(R.id.AddDirectionButton);
         View deleteIngredientButton = findViewById(R.id.IngredientDeleteButton);

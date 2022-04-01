@@ -6,23 +6,25 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/save_button_clicked"
+        android:background="#00000000"
         android:clickable="true"
         android:contentDescription="@string/save_recipe"
-        android:focusable="true"
-        android:onClick="save" />
+        android:onClick="save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/savebutton_selector" />
 
     <ScrollView
         android:id="@+id/MainView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="55dp"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,12 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginEnd="10dp"
+            android:stretchColumns="*">
 
             <TableRow
                 android:id="@+id/TitleField"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:gravity="center|center_vertical"
                 android:orientation="vertical">
 
