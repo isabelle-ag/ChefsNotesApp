@@ -79,9 +79,14 @@ public class RecipeManager implements IRecipeManager {
         for (Direction d:directions) {
             myRecipe.addDirection(d);
         }
-        System.out.println(myRecipe.ingredientList().toString());
         db.commitChanges(myRecipe);
         return myRecipe;
     }
 
+    public Recipe copyRecipe(Recipe R, String copyName)
+    {
+        String oldName = R.getTitle();
+        String newName = db.duplicateRecipe(oldName, copyName);
+        return db.getRecipe(newName);
+    }
 }

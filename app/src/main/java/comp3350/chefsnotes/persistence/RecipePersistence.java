@@ -7,11 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
 
 public class RecipePersistence implements DBMSTools{
+
+    private String recent;
 
     private final String dbPath;    // location of db
     private final String nameCol = "RECIPENAME";
@@ -28,6 +31,7 @@ public class RecipePersistence implements DBMSTools{
 
     public RecipePersistence(final String dbp){
         this.dbPath = dbp;
+        this.recent = "";
         try{
             final Connection con = connection();
         } catch (SQLException sqe) {
@@ -95,17 +99,20 @@ public class RecipePersistence implements DBMSTools{
 
         try (final Connection c = connection()) {   // establish conexion
             // create statement and query
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery(getObjQry);
+            final PreparedStatement pst = c.prepareStatement(getObjQry);
+            pst.setString(1, recipeName); // add name
+            final ResultSet rs = pst.executeQuery();  // execute query
+
+            pst.close();
             // check if there was a result
             if (rs.next()) {
                 result = objFromResultSet(rs);
             }
             rs.close();
-            st.close();
 
         } catch (final SQLException e) {
             System.out.println("Unable to get the Recipe.");
+            System.out.println(e);
         }
 
         return result;
@@ -113,13 +120,13 @@ public class RecipePersistence implements DBMSTools{
 
     @Override
     public String[] searchRecipeNames(String partial) {
-        Recipe[] allRecipes = getAllRecipes();
+        String[] allNames = getRecipeNames();
         String[] result = new String[0];
         ArrayList<String> builder = new ArrayList<String>();
 
-        for(Recipe curr : allRecipes){
-            if(curr.getTitle().contains(partial)){
-                builder.add(curr.getTitle());
+        for(String name : allNames){
+            if(name.toLowerCase().contains(partial.toLowerCase())){
+                builder.add(name);
             }
         }
 
@@ -152,9 +159,11 @@ public class RecipePersistence implements DBMSTools{
                 testOut = getRecipe(recipeName);
                 if(attempt>0 && testOut != null && testOut.getTitle().equals(recipeName)){
                     result = true;
+                    this.recent = recipeName;
                 }
 
             } catch (final SQLException e) {
+                System.out.println(e);
                 System.out.println("Unable to insert the Recipe.");
             }
         }
@@ -207,6 +216,7 @@ public class RecipePersistence implements DBMSTools{
                 testOut = getRecipe(newName);
                 if(attempt>0 && testOut != null && testOut.getTitle().equals(newName)){
                     result = true;
+                    this.recent = newName;
                 }
 
             } catch (final SQLException e) {
@@ -230,6 +240,7 @@ public class RecipePersistence implements DBMSTools{
 
             if(testDelete && insertRecipe(modified.getTitle(), modified) ){ // bias prevents insert
                 result = true;
+                this.recent = modified.getTitle();
             }
         }
         return result;
@@ -267,6 +278,10 @@ public class RecipePersistence implements DBMSTools{
         }
 
         return result;
+    }
+
+    public String lastModified(){
+        return this.recent;
     }
 
     private String nameFromResultSet(ResultSet rs) throws SQLException {

@@ -5,12 +5,13 @@ import java.util.ArrayList;
 
 public class FakeDBMS implements DBMSTools{
 
-    ArrayList<Recipe> recipes;
+    private ArrayList<Recipe> recipes;
+    private String recent;
 
     public FakeDBMS(){
-        recipes = new ArrayList<Recipe>();
+        this.recipes = new ArrayList<Recipe>();
+        this.recent = "";
     }
-
 
     // creates Recipe with name recipeName
     // fails if that name is taken
@@ -20,6 +21,7 @@ public class FakeDBMS implements DBMSTools{
 
         if(recipeName != null && getRecipe(recipeName) == null){
             result = recipes.add(new Recipe(recipeName));
+            this.recent = recipeName;
         }
 
         return result;
@@ -33,6 +35,7 @@ public class FakeDBMS implements DBMSTools{
 
         if(newRecipe != null && getRecipe(newRecipe.getTitle()) == null){
             result = recipes.add(newRecipe);
+            this.recent = newRecipe.getTitle();
         }
 
         return result;
@@ -95,9 +98,9 @@ public class FakeDBMS implements DBMSTools{
         ArrayList<String> searches = new ArrayList<String>();
 
         if(partial != null) {
-            for (Recipe curr : recipes) {
-                if (curr.getTitle().toLowerCase().contains(partial.toLowerCase())) {
-                    searches.add(curr.getTitle());
+            for (String name : getRecipeNames()) {
+                if (name.toLowerCase().contains(partial.toLowerCase())) {
+                    searches.add(name);
                 }
             }
         }
@@ -139,16 +142,20 @@ public class FakeDBMS implements DBMSTools{
         Recipe target;
         Recipe test;
 
-        if(recipe.equals(newName)){ // since no change but no need to fail
-            result = true;
-
-        } else if(recipe != null && newName != null) {
-            target = getRecipe(recipe);  // should exist
-            test = getRecipe(newName);       // should not exist
-
-            if (target != null && test == null) {
-                target._setTitle(newName);
+        if(recipe != null) {
+            if (recipe.equals(newName)) { // since no change but no need to fail
                 result = true;
+                this.recent = newName;
+
+            } else if (newName != null) {
+                target = getRecipe(recipe);  // should exist
+                test = getRecipe(newName);       // should not exist
+
+                if (target != null && test == null) {
+                    target._setTitle(newName);
+                    result = true;
+                    this.recent = newName;
+                }
             }
         }
 
@@ -179,6 +186,10 @@ public class FakeDBMS implements DBMSTools{
                     result = _addRecipe(modified);              // save new version
                 }
             }
+        }
+
+        if(result){
+            this.recent = modified.getTitle();
         }
 
         return result;
@@ -216,6 +227,10 @@ public class FakeDBMS implements DBMSTools{
 
 
         return result;
+    }
+
+    public String lastModified(){
+        return this.recent;
     }
 
 

@@ -114,7 +114,17 @@ public class IRecipeManagerTest {
             assertTrue(directions.remove(d));
         }
         assertTrue(directions.isEmpty());
+    }
 
+    @Test
+    public void testCopyRecipe() throws RecipeExistenceException{
+        Recipe R1 = manager.newRecipe("test");
+        R1.addDirection(new Direction("foo"));
 
+        Recipe R2 = manager.copyRecipe(R1, "bar");
+
+        System.out.println(R2);
+
+        assertEquals("foo", R2.getDirections()[0].getText());
     }
 }

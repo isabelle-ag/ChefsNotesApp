@@ -1,7 +1,11 @@
 package comp3350.chefsnotes.objects;
 
 
-public class Direction {
+import java.io.Serializable;
+
+public class Direction implements Serializable {
+    private static final long serialVersionUID = 5109363651430369398L;
+
     private String name;
     private String text;
     private int time;

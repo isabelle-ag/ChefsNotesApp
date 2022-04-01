@@ -24,17 +24,21 @@ public class ITagHandlerTest {
         Recipe r = new SampleRecipe();
         assertEquals(0, handler.fetchTags().length);
         handler.addTagToRecipe(r, "foo");
+        assertEquals(true, r.getTags().contains("foo"));
         assertEquals(1, handler.fetchTags().length);
         assertEquals("foo", handler.fetchTags()[0]);
 
+        handler.removeTagFromRecipe(r, "foo");
         try {
-            handler.removeTagFromRecipe(r, "foo");
-        } catch (TagExistenceException e) {
-            fail("unexpected tagexistence exception");
+            handler.deleteTag("foo");
+        }catch (TagExistenceException e)
+        {
+            fail("unexpected exception");
         }
+
         assertEquals(0, handler.fetchTags().length);
 
-        assertThrows(TagExistenceException.class, () -> handler.removeTagFromRecipe(r, "foo"));
+        assertThrows(TagExistenceException.class, () -> handler.deleteTag("foo"));
     }
 
 }
