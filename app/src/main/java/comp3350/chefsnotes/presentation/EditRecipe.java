@@ -97,51 +97,6 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         return ((EditText) findViewById(R.id.recipeTitle)).getText().toString();
     }
 
-    //put retrieval methods in separate class?
-    private ArrayList<Ingredient> getIngredients(View view)
-    {
-        ArrayList<Ingredient> ingredients = new ArrayList<>(0);
-        Ingredient current;
-        LinearLayout container = findViewById(R.id.IngredientContainer);
-        View currRow;
-
-        for(int i = 0; i < container.getChildCount(); i++)
-        {
-            currRow = container.getChildAt(i);
-
-            String ingredientCount =
-                    ((EditText)currRow.findViewById(R.id.IngredientAmount))
-                            .getText().toString();
-
-            String ingredientName =
-                    ((EditText)currRow.findViewById(R.id.IngredientName))
-                            .getText().toString();
-
-            String ingredientUnit =
-                    ((Spinner)currRow.findViewById(R.id.unitList))
-                            .getSelectedItem().toString();
-
-            if(!ingredientName.equals("") && !ingredientCount.equals("") && !ingredientUnit.equals(""))
-            {
-                if(ingredientCount.contains("/") || ingredientCount.contains("\\")) {
-                    if(ingredientCount.contains("\\")) {
-                        ingredientCount.replace("\\", "/");
-                    }
-                    int numer = Integer.parseInt(ingredientCount.substring(0, ingredientCount.indexOf("/")));
-                    int denom = Integer.parseInt(ingredientCount.substring(ingredientCount.indexOf("/")+1));
-
-                    current = new Ingredient(ingredientName, numer, denom, ingredientUnit);
-                }
-                else {
-                    current = new Ingredient(ingredientName, Double.parseDouble(ingredientCount), ingredientUnit);
-                }
-                ingredients.add(current);
-            }
-        }
-
-        return ingredients;
-    }
-
     private void save(View v){
         String title = getTitle(v);
         Intent thisIntent = getIntent();
@@ -197,6 +152,56 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
             System.out.println("Abort save, null field found.");
             Messages.oops(this, "Unable to save, this recipe needs a title!");
         }
+    }
+
+    //put retrieval methods in separate class?
+    private ArrayList<Ingredient> getIngredients(View view)
+    {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        Ingredient current;
+        LinearLayout container = findViewById(R.id.IngredientContainer);
+        View currRow;
+
+        for(int i = 0; i < container.getChildCount(); i++)
+        {
+            currRow = container.getChildAt(i);
+
+            String ingredientCount =
+                    ((EditText)currRow.findViewById(R.id.IngredientAmount))
+                            .getText().toString();
+
+            String ingredientName =
+                    ((EditText)currRow.findViewById(R.id.IngredientName))
+                            .getText().toString();
+
+            String ingredientUnit =
+                    ((Spinner)currRow.findViewById(R.id.unitList))
+                            .getSelectedItem().toString();
+
+            if(!ingredientName.equals("") && !ingredientCount.equals(""))//remove last two conditions when possible
+            {
+                if(ingredientCount.contains("/") || ingredientCount.contains("\\")) {
+                    if(ingredientCount.contains("\\")) {
+                        ingredientCount.replace("\\", "/");
+                    }
+                    int numer = Integer.parseInt(ingredientCount.substring(0, ingredientCount.indexOf("/")));
+                    int denom = Integer.parseInt(ingredientCount.substring(ingredientCount.indexOf("/")+1, ingredientCount.length()));
+
+                    current = new Ingredient(ingredientName, numer, denom, ingredientUnit);
+                }
+                else {
+                    current = new Ingredient(ingredientName, Double.parseDouble(ingredientCount), ingredientUnit);
+                }
+                ingredients.add(current);
+            }
+            else if(!ingredientName.equals(""))
+            {
+                current = new Ingredient(ingredientName);
+                ingredients.add(current);
+            }
+        }
+
+        return ingredients;
     }
 
     //put retrieval methods in separate class?
@@ -272,9 +277,9 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
             {
                 name = curDir.findViewById(R.id.DirectionName);
                 name.setText(dir.getName());
-                time = curDir.findViewById(R.id.TimeEstimate);
-                time.setText(dir.getTime() + "");//Java is dumb
-                EditText contents = curDir.findViewById(R.id.textbox);
+                time = (EditText) curDir.findViewById(R.id.TimeEstimate);
+                time.setText(dir.getTime() + "");
+                EditText contents = (EditText) curDir.findViewById(R.id.textbox);
                 contents.setText(dir.getText());
                 curDir = findViewById(this.addDirection(findViewById(R.id.DirectionContainer)));
             }
