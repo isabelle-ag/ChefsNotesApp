@@ -162,6 +162,7 @@ public class EditRecipe extends AppCompatActivity {
         else
         {
             System.out.println("Abort save, null field found.");
+            Messages.oops(this, "Unable to save, this recipe needs a title!");
         }
     }
 
