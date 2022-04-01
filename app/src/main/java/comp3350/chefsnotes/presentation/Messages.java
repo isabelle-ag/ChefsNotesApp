@@ -40,5 +40,29 @@ public class Messages {
         alertDialog.show();
     }
 
+//    public boolean confirmation(Activity owner, String message){
+//        boolean confirm = false;
+//        AlertDialog.Builder builder = new AlertDialog.Builder(owner);
+//
+//        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int id) {
+//                message = true;
+//            }
+//        });
+//        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int id) {
+//                // User cancelled the dialog
+//            }
+//        });
+//
+//        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
+//
+//        alertDialog.setTitle("Are you sure?");
+//        alertDialog.setMessage(message);
+//
+//        alertDialog.show();
+//
+//    }
+
 
 }

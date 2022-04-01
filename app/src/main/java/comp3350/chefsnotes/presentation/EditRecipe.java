@@ -1,6 +1,7 @@
 package comp3350.chefsnotes.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ import comp3350.chefsnotes.objects.Ingredient;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
 
-public class EditRecipe extends AppCompatActivity {
+public class EditRecipe extends AppCompatActivity implements NoticeDialogFragment.NoticeDialogListener {
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
     private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());//refactor to use services natively
 
@@ -48,6 +49,7 @@ public class EditRecipe extends AppCompatActivity {
         View deleteDirectionButton = findViewById(R.id.DirectionDeleteButton);
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
+        ImageButton delRecipeButton = findViewById(R.id.delRecipe);
 
         //set dropdown menu to array being used - can be used in the future for filtering units by metric, imperial, etc.
         Spinner ingDrop = findViewById(R.id.unitList);
@@ -68,6 +70,7 @@ public class EditRecipe extends AppCompatActivity {
         addIngredientButton.setOnClickListener(this::addIngredient);
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
         deleteDirectionButton.setOnClickListener(this::removeDirection);
+        delRecipeButton.setOnClickListener(this::deleteRecipe);
 
     }
 
@@ -262,7 +265,6 @@ public class EditRecipe extends AppCompatActivity {
         LinearLayout instructionContainer = findViewById(R.id.DirectionContainer);
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
         instructionContainer.addView(child);
-        //child.setId(1000000 + child.getId() + instructionContainer.getChildCount());
         child.setId(View.generateViewId());
 
         View deleteDirectionButton = child.findViewById(R.id.DirectionDeleteButton);
@@ -276,7 +278,6 @@ public class EditRecipe extends AppCompatActivity {
         LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
         View child = getLayoutInflater().inflate(R.layout.ingredient_field, null);
         ingredientContainer.addView(child);
-        //child.setId(1000000 + child.getId() + ingredientContainer.getChildCount());//set a unique id for the new child because Android Studio is too dumb to.
         child.setId(View.generateViewId());
 
         View deleteIngredientButton = child.findViewById(R.id.IngredientDeleteButton);
@@ -287,7 +288,6 @@ public class EditRecipe extends AppCompatActivity {
         units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ingDrop.setAdapter(units);
 
-        //return id for population?
         return child.getId();
     }
 
@@ -302,6 +302,38 @@ public class EditRecipe extends AppCompatActivity {
     {
         LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
         ingredientContainer.removeView((View) view.getParent().getParent());
+    }
+
+    public void deleteRecipe(View view){
+        showNoticeDialog();
+    }
+
+    private void deleteConfirmed(View v){
+        String name = getTitle(v);
+        try{
+            recipeManager.delRecipe(recipeFetcher.getRecipeByName(name));
+        } catch (RecipeExistenceException e) {
+            e.printStackTrace();
+        }
+        Intent i = new Intent(EditRecipe.this, RecipeBrowser.class);
+        startActivity(i);
+    }
+
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new NoticeDialogFragment();
+        dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        dialog.dismiss();
+        deleteConfirmed(dialog.getView());
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        dialog.dismiss();
     }
 
     @Override
@@ -320,20 +352,19 @@ public class EditRecipe extends AppCompatActivity {
         startActivity(i);
     }
 
-    private boolean navigation(MenuItem item){
-        switch (item.getItemId()) {
-            case R.id.new_recipe_button:
-                return true;
-            case R.id.browse_recipe_button:
-                Intent i = new Intent(EditRecipe.this, RecipeBrowser.class);
-                startActivity(i);
-                return true;
-            case R.id.current_recipe_button:
-                i = new Intent(EditRecipe.this, ViewRecipe.class);
-                startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    private boolean navigation(MenuItem item) {
+        if (item.getItemId() == R.id.new_recipe_button) {
+            return true;
+        } else if (item.getItemId() == R.id.browse_recipe_button) {
+            Intent i = new Intent(EditRecipe.this, RecipeBrowser.class);
+            startActivity(i);
+            return true;
+        } else if (item.getItemId() == R.id.current_recipe_button) {
+            Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
+            startActivity(i);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 

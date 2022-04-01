@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ToggleButton;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
@@ -36,6 +39,8 @@ public class RecipeBrowser extends AppCompatActivity {
         setContentView(R.layout.recipe_browser);
 
         EditText searchBox = (EditText) findViewById(R.id.searchRecipeName);
+        BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
+        navView.setOnItemSelectedListener(this::navigation);
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -138,6 +143,25 @@ public class RecipeBrowser extends AppCompatActivity {
         Intent i = new Intent(RecipeBrowser.this, MainActivity.class);
         Log.d("CDA", "onBackPressed Called");
         startActivity(i);
+    }
+
+    private boolean navigation(MenuItem item){
+        if(item.getItemId() == R.id.new_recipe_button){
+            Intent i = new Intent(RecipeBrowser.this, EditRecipe.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.browse_recipe_button){
+            return true;
+        }
+        else if(item.getItemId() == R.id.current_recipe_button){
+            Intent i = new Intent(RecipeBrowser.this, ViewRecipe.class);
+            startActivity(i);
+            return true;
+        }
+        else{
+            return super.onOptionsItemSelected(item);
+        }
     }
 
 

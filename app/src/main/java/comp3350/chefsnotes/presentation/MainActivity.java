@@ -147,21 +147,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean navigation(MenuItem item){
-        switch (item.getItemId()) {
-            case R.id.new_recipe_button:
-                Intent i = new Intent(MainActivity.this, EditRecipe.class);
-                startActivity(i);
-                return true;
-            case R.id.browse_recipe_button:
-                i = new Intent(MainActivity.this, RecipeBrowser.class);
-                startActivity(i);
-                return true;
-            case R.id.current_recipe_button:
-                i = new Intent(MainActivity.this, ViewRecipe.class);
-                startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if(item.getItemId() == R.id.new_recipe_button){
+            Intent i = new Intent(MainActivity.this, EditRecipe.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.browse_recipe_button){
+            Intent i = new Intent(MainActivity.this, RecipeBrowser.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.current_recipe_button){
+            Intent i = new Intent(MainActivity.this, ViewRecipe.class);
+            startActivity(i);
+            return true;
+        }
+        else{
+            return super.onOptionsItemSelected(item);
         }
     }
 

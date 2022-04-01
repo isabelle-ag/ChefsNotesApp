@@ -27,4 +27,8 @@
     <string name="delete_direction">Delete Direction</string>
     <string name="direction_title">Direction Title</string>
     <string name="direction_description">Direction Description</string>
+    <string name="ok">Yes</string>
+    <string name="no">No</string>
+    <string name="confirm_delete">Are you sure you want to delete this recipe?
+        This cannot be undone.</string>
 </resources>

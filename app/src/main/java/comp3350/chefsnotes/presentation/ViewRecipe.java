@@ -53,10 +53,9 @@ public class ViewRecipe extends AppCompatActivity {
 
         recipe = recipeFetcher.getRecipeByName(recipeName);
 
-        if(recipe != null) {
+        if (recipe != null) {
             fillViewer();
-        }
-        else{
+        } else {
             errorScreen();
         }
 
@@ -71,15 +70,13 @@ public class ViewRecipe extends AppCompatActivity {
         if (extras != null) {
             recipeName = extras.getString("recipeKey");
             recipe = recipeFetcher.getRecipeByName(recipeName);
-        }
-        else{
+        } else {
             recipe = recipeFetcher.getRecentRecipe();
         }
 
-        if(recipe != null) {
+        if (recipe != null) {
             fillViewer();
-        }
-        else{
+        } else {
             errorScreen();
         }
     }
@@ -90,6 +87,7 @@ public class ViewRecipe extends AppCompatActivity {
         switchActivityIntent.putExtra("title", recipe.getTitle());
         startActivity(switchActivityIntent);
     }
+
     private void copyRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
         IRecipeManager manager = new RecipeManager(Services.getRecipePersistence());
@@ -101,7 +99,7 @@ public class ViewRecipe extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    private void fillViewer(){
+    private void fillViewer() {
         String[] directionsTemp = recipe.getDirectionStrings();
         String[] ingredients = recipe.getIngredientStrings();
         String title = recipe.getTitle();
@@ -109,7 +107,7 @@ public class ViewRecipe extends AppCompatActivity {
 
         String[] directions = Arrays.copyOfRange(directionsTemp, 1, directionsTemp.length);
 
-        ((TextView)findViewById(R.id.recipeName)).setText(title);
+        ((TextView) findViewById(R.id.recipeName)).setText(title);
 
         //Ingredient List
         ArrayAdapter<String> ingAdapter = new ArrayAdapter<>(this,
@@ -123,13 +121,13 @@ public class ViewRecipe extends AppCompatActivity {
         ListView dirView = findViewById(R.id.directionListView);
         dirView.setAdapter(dirAdapter);
 
-        ((TextView)findViewById(R.id.totalTimeView)).setText(time);
+        ((TextView) findViewById(R.id.totalTimeView)).setText(time);
     }
 
-    private void errorScreen(){
+    private void errorScreen() {
         String error = "There are no recipes at the moment.";
 
-        ((TextView)findViewById(R.id.recipeName)).setText(error);
+        ((TextView) findViewById(R.id.recipeName)).setText(error);
     }
 
     @Override
@@ -139,24 +137,19 @@ public class ViewRecipe extends AppCompatActivity {
         startActivity(i);
     }
 
-    private boolean navigation(MenuItem item){
-        switch (item.getItemId()) {
-            case R.id.new_recipe_button:
-                Intent i = new Intent(ViewRecipe.this, EditRecipe.class);
-                startActivity(i);
-                return true;
-            case R.id.browse_recipe_button:
-                i = new Intent(ViewRecipe.this, RecipeBrowser.class);
-                startActivity(i);
-                return true;
-            case R.id.current_recipe_button:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    private boolean navigation(MenuItem item) {
+        if (item.getItemId() == R.id.new_recipe_button) {
+            Intent i = new Intent(ViewRecipe.this, EditRecipe.class);
+            startActivity(i);
+            return true;
+        } else if (item.getItemId() == R.id.browse_recipe_button) {
+            Intent i = new Intent(ViewRecipe.this, RecipeBrowser.class);
+            startActivity(i);
+            return true;
+        } else if (item.getItemId() == R.id.current_recipe_button) {
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
-
-
-
-
 }
