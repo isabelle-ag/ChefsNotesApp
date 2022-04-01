@@ -14,6 +14,10 @@ public class Quantity implements Serializable {
         this.unit = unit;
     }
 
+    public Quantity(String unit) {
+        this.unit = unit;
+    }
+
     public Quantity(int numerator, int denominator, String unit) {
         this.amt = new Fraction(numerator, denominator);
         this.unit = unit;
@@ -34,7 +38,12 @@ public class Quantity implements Serializable {
     }
 
     public String getAmtStr() {
-        return this.amt.toString();
+        String ret = "";
+        if(this.amt != null)
+        {
+            ret = this.amt.toString();
+        }
+        return ret;
     }
 
     public double getAmt() {
@@ -52,8 +61,10 @@ public class Quantity implements Serializable {
     public String toString() {
         if(!unit.equals(""))
             return String.format(Locale.CANADA, "%s %s%s", amt.toString(), unit, amt.needPlural() ? "s" : "");
-        else
+        else if(amt != null)
             return String.format(Locale.CANADA, "%s", amt.toString()); //for stuff not measured in units - causes grammatical issues e.g.: 2 onion, but that would be tricky to resolve (consider "X large onion(s), in slices"). Yikes.
+        else
+            return String.format(Locale.CANADA, "");
     }
 
     @Override
