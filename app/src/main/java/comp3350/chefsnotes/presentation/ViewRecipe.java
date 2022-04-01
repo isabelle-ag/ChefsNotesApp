@@ -41,12 +41,12 @@ public class ViewRecipe extends AppCompatActivity {
 
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
-    private boolean valid;
+    //private boolean valid;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        valid = true;
+        //valid = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
 
@@ -97,16 +97,16 @@ public class ViewRecipe extends AppCompatActivity {
 
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
-        if(valid) {
+        //if(valid) {
             Intent switchActivityIntent = new Intent(this, EditRecipe.class);
             switchActivityIntent.putExtra("title", recipe.getTitle());
             startActivity(switchActivityIntent);
-        }
+        //}
     }
 
     private void copyRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
-        if(valid) {
+        //if(valid) {
             IRecipeManager manager = new RecipeManager(Services.getRecipePersistence());
             String title;
             Intent switchActivityIntent = new Intent(this, EditRecipe.class);
@@ -114,11 +114,11 @@ public class ViewRecipe extends AppCompatActivity {
             title = manager.copyRecipe(recipe, null).getTitle();
             switchActivityIntent.putExtra("title", title);
             startActivity(switchActivityIntent);
-        }
+      //  }
     }
 
     private void fillViewer() {
-        valid = true;
+        //valid = true;
         String[] directionsTemp = recipe.getDirectionStrings();
         String[] ingredients = recipe.getIngredientStrings();
         String title = recipe.getTitle();
@@ -144,11 +144,11 @@ public class ViewRecipe extends AppCompatActivity {
     }
 
     private void errorScreen() {
-        valid = false;
+        //valid = false;
         String error = "Please select a new recipe";
         ((TextView) findViewById(R.id.recipeName)).setText(error);
        // Messages.oops(this,
-        //        "This is not a valid recipe. Try making a new one or open one from the browser.");
+       //         "This is not a valid recipe. Try making a new one or open one from the browser.");
     }
 
     @Override
