@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
+import comp3350.chefsnotes.business.IRecipeFetcher;
+import comp3350.chefsnotes.business.IRecipeManager;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.business.Units;
@@ -27,8 +29,8 @@ import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
 
 public class EditRecipe extends AppCompatActivity {
-    private RecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
-    private RecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());//refactor to use services natively
+    private IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
+    private IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());//refactor to use services natively
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

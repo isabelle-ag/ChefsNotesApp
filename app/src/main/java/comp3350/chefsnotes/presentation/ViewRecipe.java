@@ -13,6 +13,7 @@ import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.RecipeFetcher;
+import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.objects.Recipe;
 
 
@@ -22,8 +23,9 @@ import java.util.Arrays;
 
 public class ViewRecipe extends AppCompatActivity {
 
-    private IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
-    private Recipe recipe;
+private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
+
+private Recipe recipe;
 
 
     @Override
@@ -84,9 +86,11 @@ public class ViewRecipe extends AppCompatActivity {
     }
     private void copyRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
+        IRecipeManager manager = new RecipeManager(Services.getRecipePersistence());
         String title;
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
-        title = Services.getRecipePersistence().duplicateRecipe(recipe.getTitle(), null);
+
+        title = manager.copyRecipe(recipe, null).getTitle();
         switchActivityIntent.putExtra("title", title);
         startActivity(switchActivityIntent);
     }
@@ -102,13 +106,13 @@ public class ViewRecipe extends AppCompatActivity {
         ((TextView)findViewById(R.id.recipeName)).setText(title);
 
         //Ingredient List
-        ArrayAdapter<String> ingAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> ingAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, ingredients);
         ListView ingView = (ListView) findViewById(R.id.ingredientListView);
         ingView.setAdapter(ingAdapter);
 
         //Direction List
-        ArrayAdapter<String> dirAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dirAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, directions);
         ListView dirView = (ListView) findViewById(R.id.directionListView);
         dirView.setAdapter(dirAdapter);
