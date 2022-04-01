@@ -27,6 +27,7 @@ public class Ingredient implements Serializable {
     public Ingredient(String iName)
     {
         this.name = iName;
+        this.amount = new Quantity("");
     }
 
     public String getName(){
