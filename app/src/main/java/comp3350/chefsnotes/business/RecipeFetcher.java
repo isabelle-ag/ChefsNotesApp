@@ -23,13 +23,7 @@ public class RecipeFetcher implements IRecipeFetcher{
 
     public Recipe getRecentRecipe()
     {
-        //TODO use proper db impl for this
-        Recipe[] allRecipes = db.getAllRecipes();
-        if(allRecipes.length < 1)
-        {
-            return null;
-        }
-        return allRecipes[(allRecipes.length-1)];
+        return db.getRecipe(db.lastModified());
     }
 
     public Recipe[] filterRecipesByTags(String[] included, String[] excluded)
