@@ -22,9 +22,10 @@ public class RecipeManager implements IRecipeManager {
 
     public Recipe newRecipe(String name) throws RecipeExistenceException
     {
+        System.out.println("Recipe Does not Exist: %s".format(String.valueOf(db.getRecipe(name) != null)));
         if(db.getRecipe(name) != null)
         {
-            //throw new RecipeExistenceException("recipe names must be unique, and '%s' already exists".format(name));
+            throw new RecipeExistenceException("recipe names must be unique, and '%s' already exists".format(name));
         }
         else
         {

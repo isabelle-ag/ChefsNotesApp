@@ -141,6 +141,7 @@ public class EditRecipe extends AppCompatActivity {
             catch(RecipeExistenceException e) {
                 System.out.println("Saving failed!");
                 System.out.println(e);
+                Messages.oops(this, "Unable to save as recipe name is already in use, choose a different title!");
             }
         }
         // if creating new recipe
@@ -157,6 +158,7 @@ public class EditRecipe extends AppCompatActivity {
             catch(RecipeExistenceException e) {
                 System.out.println("Saving failed!");
                 System.out.println(e);
+                Messages.oops(this, "Unable to save as recipe name is already in use, choose a different title!");
             }
         }
         else
