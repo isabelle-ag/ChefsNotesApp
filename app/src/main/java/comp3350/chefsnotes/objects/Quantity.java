@@ -38,7 +38,12 @@ public class Quantity implements Serializable {
     }
 
     public String getAmtStr() {
-        return this.amt.toString();
+        String ret = "";
+        if(this.amt != null)
+        {
+            ret = this.amt.toString();
+        }
+        return ret;
     }
 
     public double getAmt() {

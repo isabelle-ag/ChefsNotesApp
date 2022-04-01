@@ -29,7 +29,7 @@ import comp3350.chefsnotes.persistence.TagDBMSTools;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final boolean DB_MODE = Services.MODE_REAL; // set flag for real/false databases
+    public static final boolean DB_MODE = Services.MODE_FAKE; // set flag for real/false databases
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
