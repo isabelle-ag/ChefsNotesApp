@@ -66,12 +66,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <comp3350.chefsnotes.presentation.FullListView
-            android:id="@+id/results"
+        <ScrollView
+            android:id="@+id/resultContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_column="0"
-            app:layout_row="3" />
+            android:layout_marginTop="20dp"
+            app:layout_column="0">
+
+            <comp3350.chefsnotes.presentation.FullListView
+                android:id="@+id/results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
 
     </androidx.gridlayout.widget.GridLayout>
 
