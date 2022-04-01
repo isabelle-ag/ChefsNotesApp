@@ -27,7 +27,7 @@ import comp3350.chefsnotes.business.TagHandler;
 
 public class RecipeBrowser extends AppCompatActivity {
     private IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
-    private ITagHandler tagHandler = new TagHandler(Services.getTagPersistence());
+    private ITagHandler tagHandler = new TagHandler(Services.getTagPersistence(), Services.getRecipePersistence());
 
 
     @Override
