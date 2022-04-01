@@ -5,23 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/save_button_clicked"
-            android:clickable="true"
-            android:contentDescription="@string/save_recipe"
-            android:focusable="true"
-            android:onClick="save" />
-    </FrameLayout>
+    <ImageButton
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/save_button_clicked"
+        android:clickable="true"
+        android:contentDescription="@string/save_recipe"
+        android:focusable="true"
+        android:onClick="save" />
 
     <ScrollView
         android:id="@+id/MainView"
