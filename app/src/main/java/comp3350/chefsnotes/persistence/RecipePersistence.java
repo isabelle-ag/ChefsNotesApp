@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
@@ -30,6 +32,7 @@ public class RecipePersistence implements DBMSTools{
     private final String commitQry = "UPDATE RECIPES SET RECIPEOBJECT = ? WHERE RECIPENAME = ?;";
 
     public RecipePersistence(final String dbp){
+        Logger.getLogger("hsqldb.db").setLevel(Level.WARNING);
         this.dbPath = dbp;
         this.recent = "";
 //        try{
