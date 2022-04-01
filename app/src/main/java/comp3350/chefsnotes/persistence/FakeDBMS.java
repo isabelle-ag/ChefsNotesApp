@@ -128,7 +128,7 @@ public class FakeDBMS implements DBMSTools{
                 removeTest = recipes.remove(location);
                 if (removeTest != null) {
                     result = true;
-                    if(this.recent = recipeName){
+                    if(this.recent.equals(recipeName)){
                         this.recent = null;
                     }
                 }
