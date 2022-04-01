@@ -4,8 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3375CEDA"
     tools:context=".presentation.ViewRecipe">
+
+    <RelativeLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/copy_button"
+            android:background="@drawable/edit_button"
+            android:contentDescription='"Edit button"' />
+
+        <ImageButton
+            android:id="@+id/copy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/copy_button"
+            android:contentDescription='"Duplicate Recipe"' />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,8 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@id/buttonContainer">
 
         <TextView
             android:id="@+id/recipeName"
@@ -27,27 +53,9 @@
             android:gravity="center_horizontal"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="50sp" />
+            android:textSize="40sp" />
 
-        <ImageButton
-            android:id="@+id/copy_button"
-            android:layout_width="103dp"
-            android:layout_height="58dp"
-            android:contentDescription='"Duplicate Recipe"'
-            android:translationX="450dp"
-            android:translationY="-17dp"
-            app:srcCompat="?attr/actionModeCopyDrawable"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-        <ImageButton
-            android:id="@+id/edit_button"
-            android:layout_width="103dp"
-            android:layout_height="58dp"
-            android:translationX="350dp"
-            android:translationY="-75dp"
-            app:srcCompat="@android:drawable/ic_menu_edit"
-            tools:ignore="SpeakableTextPresentCheck" />
-<!--        has temporary image-->
+        <!--        has temporary image-->
 
         <TextView
             android:id="@+id/totalTimeView"
@@ -76,11 +84,11 @@
 
         </ListView>
 
-<!--        &lt;!&ndash;   251dp marginTop for in line with ingredients     &ndash;&gt;-->
-<!--        android:rotation="0"-->
-<!--        android:rotationX="0"-->
-<!--        android:rotationY="0"-->
-<!--        app:srcCompat="@drawable/fairy_pie" />-->
+        <!--        &lt;!&ndash;   251dp marginTop for in line with ingredients     &ndash;&gt;-->
+        <!--        android:rotation="0"-->
+        <!--        android:rotationX="0"-->
+        <!--        android:rotationY="0"-->
+        <!--        app:srcCompat="@drawable/fairy_pie" />-->
 
         <View
             android:id="@+id/divider"
@@ -89,7 +97,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
-            android:background="#071355" />
+            android:background="@color/secondary" />
 
         <TextView
             android:id="@+id/directions"
