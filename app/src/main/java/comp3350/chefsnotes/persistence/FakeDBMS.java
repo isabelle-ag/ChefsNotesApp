@@ -24,8 +24,6 @@ public class FakeDBMS implements DBMSTools{
             this.recent = recipeName;
         }
 
-        System.out.println(this.recent);
-
         return result;
     }
 
