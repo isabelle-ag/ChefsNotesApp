@@ -16,7 +16,7 @@ public class Recipe implements Serializable {
     private String title;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Direction> directions;
-    private ArrayList<String> tags;
+    private final ArrayList<String> tags;
     
     public Recipe(String t){
         title = t;
@@ -289,11 +289,7 @@ public class Recipe implements Serializable {
 
 
     public boolean equals(Object other){
-        boolean result = false;
-
-        if(this == other){
-            result = true;
-        }
+        boolean result = this == other;
 
         if(other instanceof Recipe){
             Recipe casted = (Recipe) other;

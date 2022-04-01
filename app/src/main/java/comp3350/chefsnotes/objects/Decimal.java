@@ -1,7 +1,7 @@
 package comp3350.chefsnotes.objects;
 
 public class Decimal extends QuantityNum {
-    private static double compareEpsilon = 0.000001d;
+    private static final double compareEpsilon = 0.000001d;
 
     double value;
 

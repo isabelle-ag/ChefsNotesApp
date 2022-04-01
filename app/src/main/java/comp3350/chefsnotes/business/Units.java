@@ -23,14 +23,9 @@ public abstract class Units {
     }
 
     public static boolean isUnit(String test){
-        boolean result = false;
-
-        if(test.equals(ML) || test.equals(L) || test.equals(CUP) || test.equals(FLUID_OUNCE) ||
-            test.equals(TBSP) || test.equals(TSP) || test.equals(DASH) || test.equals(QUART) ||
-                test.equals(GALLON) || test.equals(PINT) || test.equals(PIECE) || test.equals(UNIT) || test.equals(POUNDS) || test.equals(KILOGRAMS) || test.equals(GRAMS) || test.equals(NONE)) {
-            
-            result = true;
-        }
+        boolean result = test.equals(ML) || test.equals(L) || test.equals(CUP) || test.equals(FLUID_OUNCE) ||
+                test.equals(TBSP) || test.equals(TSP) || test.equals(DASH) || test.equals(QUART) ||
+                test.equals(GALLON) || test.equals(PINT) || test.equals(PIECE) || test.equals(UNIT) || test.equals(POUNDS) || test.equals(KILOGRAMS) || test.equals(GRAMS) || test.equals(NONE);
 
         return result;
     }

@@ -10,7 +10,7 @@ import comp3350.chefsnotes.objects.RecipeExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
 
 public class RecipeManager implements IRecipeManager {
-    private DBMSTools db;
+    private final DBMSTools db;
 
     public RecipeManager(DBMSTools db) {
         this.db = db;
@@ -38,7 +38,7 @@ public class RecipeManager implements IRecipeManager {
         String name = R.getTitle();
         if(db.getRecipe(name) == null)
         {
-            throw new RecipeExistenceException("recipe '%s' does not exist".format(name));
+            throw new RecipeExistenceException(String.format(name));
         }
         else
         {
@@ -51,11 +51,11 @@ public class RecipeManager implements IRecipeManager {
         String name = R.getTitle();
         if(db.getRecipe(name) == null)
         {
-            throw new RecipeExistenceException("recipe '%s' has not been saved yet".format(name));
+            throw new RecipeExistenceException(String.format(name));
         }
         if(db.getRecipe(newName) != null)
         {
-            throw new RecipeExistenceException("recipe names must be unique, and '%s' already exists".format(newName));
+            throw new RecipeExistenceException(String.format(newName));
         }
         else
         {

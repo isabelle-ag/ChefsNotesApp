@@ -29,8 +29,8 @@ import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
 
 public class EditRecipe extends AppCompatActivity {
-    private IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
-    private IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());//refactor to use services natively
+    private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
+    private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());//refactor to use services natively
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +102,7 @@ public class EditRecipe extends AppCompatActivity {
                         ingredientCount.replace("\\", "/");
                     }
                     int numer = Integer.parseInt(ingredientCount.substring(0, ingredientCount.indexOf("/")));
-                    int denom = Integer.parseInt(ingredientCount.substring(ingredientCount.indexOf("/")+1, ingredientCount.length()));
+                    int denom = Integer.parseInt(ingredientCount.substring(ingredientCount.indexOf("/")+1));
 
                     current = new Ingredient(ingredientName, numer, denom, ingredientUnit);
                 }
@@ -215,7 +215,7 @@ public class EditRecipe extends AppCompatActivity {
         Spinner unitList;
         //get recipe from db
         //for each ingredient, id = ingredient.addIngredient(), findViewById(id).addText
-        EditText recipeTitle = (EditText) findViewById(R.id.recipeTitle);
+        EditText recipeTitle = findViewById(R.id.recipeTitle);
         recipeTitle.setText(title);
         Recipe populator = recipeFetcher.getRecipeByName(title);//use to populate fields
         ViewGroup curIng = findViewById(R.id.Ingredient);
@@ -223,12 +223,12 @@ public class EditRecipe extends AppCompatActivity {
         if(populator.getIngredients() != null){
             for(Ingredient ing:populator.getIngredients())
             {
-                name = (EditText) curIng.findViewById(R.id.IngredientName);
+                name = curIng.findViewById(R.id.IngredientName);
                 name.setText(ing.getName());
-                amount = (EditText) curIng.findViewById(R.id.IngredientAmount);
+                amount = curIng.findViewById(R.id.IngredientAmount);
                 amount.setText(ing.getAmt().getAmtStr());
                 //figure out how to get the unit used by the current amount, and compare it to spinner values.
-                unitList = (Spinner) curIng.findViewById(R.id.unitList);
+                unitList = curIng.findViewById(R.id.unitList);
                 unitList.setSelection(units.getPosition(ing.getAmt().getUnit()));
                 curIng = findViewById(this.addIngredient(findViewById(R.id.IngredientContainer)));
                 Log.d("id", "" + curIng.getId());
@@ -237,11 +237,11 @@ public class EditRecipe extends AppCompatActivity {
         if(populator.getDirections() != null) {
             for(Direction dir:populator.getDirections())
             {
-                name = (EditText) curDir.findViewById(R.id.DirectionName);
+                name = curDir.findViewById(R.id.DirectionName);
                 name.setText(dir.getName());
-                time = (EditText) curDir.findViewById(R.id.TimeEstimate);
+                time = curDir.findViewById(R.id.TimeEstimate);
                 time.setText(dir.getTime() + "");//Java is dumb
-                EditText contents = (EditText) curDir.findViewById(R.id.textbox);
+                EditText contents = curDir.findViewById(R.id.textbox);
                 contents.setText(dir.getText());
                 curDir = findViewById(this.addDirection(findViewById(R.id.DirectionContainer)));
             }
@@ -285,13 +285,13 @@ public class EditRecipe extends AppCompatActivity {
 
     public void removeDirection(View view)
     {
-        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.DirectionContainer);
+        LinearLayout ingredientContainer = findViewById(R.id.DirectionContainer);
         ingredientContainer.removeView((View) view.getParent().getParent());
     }
 
     public void removeIngredient(View view)
     {
-        LinearLayout ingredientContainer = (LinearLayout) findViewById(R.id.IngredientContainer);
+        LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
         ingredientContainer.removeView((View) view.getParent().getParent());
     }
 

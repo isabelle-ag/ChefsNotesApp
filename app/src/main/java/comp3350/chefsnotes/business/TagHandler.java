@@ -6,7 +6,7 @@ import comp3350.chefsnotes.persistence.TagDBMSTools;
 
 public class TagHandler implements ITagHandler{
 
-    private TagDBMSTools tdb;
+    private final TagDBMSTools tdb;
 
     public TagHandler(TagDBMSTools tdb)
     {
@@ -20,7 +20,7 @@ public class TagHandler implements ITagHandler{
             tdb.addTag(tag);
         }
         catch(TagExistenceException e)
-        {};
+        {}
     }
 
     @Override
@@ -39,7 +39,7 @@ public class TagHandler implements ITagHandler{
             tdb.addTag(tag);
         }
         catch(TagExistenceException e)
-        {};
+        {}
     }
 
     public void deleteTag(String tag) throws TagExistenceException
