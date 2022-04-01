@@ -95,7 +95,7 @@ public class IRecipeManagerTest {
         directions.add(new Direction("dir3", "dir3b", 2));
 
         try {
-            manager.saveButton("testSave", ingredients, directions);
+            manager.saveButton("testSave", ingredients, directions, true);
         }
         catch (RecipeExistenceException e){fail();}
 

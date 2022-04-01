@@ -24,7 +24,7 @@ public class RecipeManager implements IRecipeManager {
     {
         if(db.getRecipe(name) != null)
         {
-            //throw new RecipeExistenceException("recipe names must be unique, and '%s' already exists".format(name));
+            throw new RecipeExistenceException("recipe names must be unique, and '%s' already exists".format(name));
         }
         else
         {
@@ -63,9 +63,9 @@ public class RecipeManager implements IRecipeManager {
         }
     }
 
-    public Recipe saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions) throws RecipeExistenceException
+    public Recipe saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions, boolean isNew) throws RecipeExistenceException
     {
-        if(db.getRecipe(name) == null) {
+        if(db.getRecipe(name) == null || isNew) {
             this.newRecipe(name);
         }
         Recipe myRecipe = db.getRecipe(name);

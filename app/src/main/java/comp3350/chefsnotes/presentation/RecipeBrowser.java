@@ -10,16 +10,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ToggleButton;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
@@ -30,8 +26,8 @@ import comp3350.chefsnotes.business.TagHandler;
 
 
 public class RecipeBrowser extends AppCompatActivity {
-    private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
-    private final ITagHandler tagHandler = new TagHandler(Services.getTagPersistence());
+    private IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
+    private ITagHandler tagHandler = new TagHandler(Services.getTagPersistence(), Services.getRecipePersistence());
 
 
     @Override
@@ -39,10 +35,7 @@ public class RecipeBrowser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_browser);
 
-        EditText searchBox = findViewById(R.id.searchRecipeName);
-        BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
-        navView.setOnItemSelectedListener(this::navigation);
-
+        EditText searchBox = (EditText) findViewById(R.id.searchRecipeName);
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -60,12 +53,10 @@ public class RecipeBrowser extends AppCompatActivity {
             }
         });
 
-
         populateTags();
         populateRecipes("");
 
     }
-
 
     @Override
     protected void onResume() {
@@ -78,26 +69,10 @@ public class RecipeBrowser extends AppCompatActivity {
 //TODO
     }
 
-    private boolean navigation(MenuItem item){
-        switch (item.getItemId()) {
-            case R.id.new_recipe_button:
-                Intent i = new Intent(RecipeBrowser.this, EditRecipe.class);
-                startActivity(i);
-                return true;
-            case R.id.browse_recipe_button:
-                return true;
-            case R.id.current_recipe_button:
-                i = new Intent(RecipeBrowser.this, ViewRecipe.class);
-                startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     private void populateRecipes(String searchTerm){
 
-        ListView searchResults = findViewById(R.id.results);
+        ListView searchResults = (ListView) findViewById(R.id.results);
         String[] recipeList = recipeFetcher.getRecipeNamesByText(searchTerm);
 
         ArrayAdapter<String> rAdapter = new ArrayAdapter<String>(this,
@@ -112,11 +87,10 @@ public class RecipeBrowser extends AppCompatActivity {
     }
 
 
-
     private void populateTags(){
 
         Flow tags = findViewById(R.id.filterTagLayout);
-        ConstraintLayout parent = findViewById(R.id.tagConstraint);
+        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.tagConstraint);
 
         String[] tagList = tagHandler.fetchTags();
 
@@ -134,12 +108,11 @@ public class RecipeBrowser extends AppCompatActivity {
             b.setMinimumHeight(20);
             b.setMinWidth(50);
             b.setMinimumWidth(50);
-            b.setTextSize(12);
             b.setPadding(10, 5, 10, 5);
             b.setAllCaps(false);
 
 
-            b.setId(View.generateViewId());
+            b.setId(b.generateViewId());
 
             Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
             ViewCompat.setBackground(b, drawable);

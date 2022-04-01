@@ -31,5 +31,14 @@ public class Messages {
         alertDialog.show();
     }
 
+    public static void oops(Activity owner, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
+
+        alertDialog.setTitle("Oh no!");
+        alertDialog.setMessage(message);
+
+        alertDialog.show();
+    }
+
 
 }

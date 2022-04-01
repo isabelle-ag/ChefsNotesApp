@@ -9,6 +9,7 @@ import org.junit.Test;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.SampleRecipe;
 import comp3350.chefsnotes.objects.TagExistenceException;
+import comp3350.chefsnotes.persistence.FakeDBMS;
 import comp3350.chefsnotes.persistence.FakeTagDB;
 
 public class ITagHandlerTest {
@@ -16,7 +17,7 @@ public class ITagHandlerTest {
 
     @Before
     public void setup() {
-        handler = new TagHandler(new FakeTagDB());
+        handler = new TagHandler(new FakeTagDB(), new FakeDBMS());
     }
 
     @Test

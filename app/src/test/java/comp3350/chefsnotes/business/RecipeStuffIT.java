@@ -1,5 +1,11 @@
 package comp3350.chefsnotes.business;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
 import comp3350.chefsnotes.objects.Recipe;
@@ -120,7 +125,7 @@ public class RecipeStuffIT {
         assertEquals(0, R1.getIngredients().length);
         assertEquals(0, R1.getDirections().length);
 
-        manager.saveButton(R1.getTitle(), ingredients, directions);
+        manager.saveButton(R1.getTitle(), ingredients, directions, false);
 
         R1 = fetcher.getRecipeByName(R1.getTitle());
 
@@ -135,7 +140,7 @@ public class RecipeStuffIT {
         Recipe R1 = manager.newRecipe("foo");
         R1.addDirection(new Direction("bar"));
 
-        manager.saveButton(R1.getTitle(), new ArrayList<Ingredient>(Arrays.asList(R1.getIngredients())), new ArrayList<Direction>(Arrays.asList(R1.getDirections())));
+        manager.saveButton(R1.getTitle(), new ArrayList<Ingredient>(Arrays.asList(R1.getIngredients())), new ArrayList<Direction>(Arrays.asList(R1.getDirections())), false);
 
         Recipe R2 = manager.copyRecipe(R1, null);
         Recipe R3 = manager.copyRecipe(R1, "baz");
