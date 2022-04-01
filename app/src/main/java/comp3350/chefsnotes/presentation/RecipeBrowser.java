@@ -81,8 +81,6 @@ public class RecipeBrowser extends AppCompatActivity {
         populateRecipes("");
     }
 
-
-
     private void populateRecipes(String searchTerm){
         ListView searchResults = (ListView) findViewById(R.id.results);
         String[] recipeList;
@@ -178,7 +176,7 @@ public class RecipeBrowser extends AppCompatActivity {
 
     private void removeTag(String t){
         if(tagFilters.contains(t)){
-        tagFilters.remove(t);
+            tagFilters.remove(t);
         }
     }
 

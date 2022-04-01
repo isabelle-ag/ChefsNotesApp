@@ -203,7 +203,7 @@ public class ViewRecipe extends AppCompatActivity {
             b.setId(b.generateViewId());
 
 
-            Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
+            Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_button, null);
 
             ViewCompat.setBackground(b, drawable);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

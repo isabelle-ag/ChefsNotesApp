@@ -62,7 +62,7 @@ public class RecipeFetcher implements IRecipeFetcher{
             boolean good = false; //true
             for (String inclTag:included)
                 for (String tag:r.getTags())
-                    if (!tag.equals(inclTag))
+                    if (tag.equals(inclTag))
                         good = true; //false
             for (String exclTag:excluded)
                 for (String tag:r.getTags())
