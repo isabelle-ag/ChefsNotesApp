@@ -111,6 +111,7 @@ public class RecipePersistence implements DBMSTools{
                 // check if there was a result
                 if (rs.next()) {
                     result = objFromResultSet(rs);
+                    this.recent = recipeName;
                 }
                 rs.close();
 
@@ -194,7 +195,7 @@ public class RecipePersistence implements DBMSTools{
                 if(attempt>0 && testOut == null){
                     result = true;
                     if(recipeName == this.recent){
-                        recent = null;
+                        this.recent = null;
                     }
                 }
 
