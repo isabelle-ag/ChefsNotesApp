@@ -13,6 +13,7 @@
         android:layout_margin="20dp"
         android:adjustViewBounds="true"
         android:background="#00000000"
+        android:clickable="true"
         android:contentDescription="@string/save_recipe"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,15 +25,15 @@
         android:id="@+id/MainView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:clickable="true"
-        android:translationY="50dp"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:focusable="true">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
@@ -99,11 +100,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <include
-                    layout="@layout/ingredient_field"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#00FFFFFF" />
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/ingredient_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#00FFFFFF" />
+                </LinearLayout>
 
             </TableRow>
 
@@ -142,19 +149,20 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="#00FFFFFF"
+                    android:contentDescription="Add Direction"
                     android:onClick="addDirection"
                     android:padding="10dp"
                     android:scaleX="1.5"
                     android:scaleY="1.5"
                     app:srcCompat="@drawable/add_item"
-                    tools:ignore="SpeakableTextPresentCheck"
-                    android:contentDescription="Add Direction" />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <LinearLayout
                     android:id="@+id/DirectionContainer"
                     android:layout_width="match_parent"
