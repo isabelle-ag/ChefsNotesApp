@@ -126,7 +126,7 @@ public class EditRecipe extends AppCompatActivity {
         if(thisIntent.getStringExtra("title") != null) {
             try {
                 System.out.println("Saving changes to " + thisIntent.getStringExtra("title") + "...");
-                Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions);
+                Recipe r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions, false);
 
                 if(!thisIntent.getStringExtra("title").equals(title)) {
                     System.out.println("Renaming " + thisIntent.getStringExtra("title") + "...");
@@ -149,7 +149,7 @@ public class EditRecipe extends AppCompatActivity {
         {
             try {
                 System.out.println("Saving " + title + "...");
-                recipeManager.saveButton(title, ingredients, directions);
+                recipeManager.saveButton(title, ingredients, directions, true);
                 System.out.println("Saving succeeded!");
                 Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
                 i.putExtra("recipeKey",title);
