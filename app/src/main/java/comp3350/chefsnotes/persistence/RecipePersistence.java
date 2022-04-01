@@ -100,22 +100,24 @@ public class RecipePersistence implements DBMSTools{
     public Recipe getRecipe(String recipeName) {
         Recipe result = null;
 
-        try (final Connection c = connection()) {   // establish conexion
-            // create statement and query
-            final PreparedStatement pst = c.prepareStatement(getObjQry);
-            pst.setString(1, recipeName); // add name
-            final ResultSet rs = pst.executeQuery();  // execute query
+        if(recipeName != null){
+            try (final Connection c = connection()) {   // establish conexion
+                // create statement and query
+                final PreparedStatement pst = c.prepareStatement(getObjQry);
+                pst.setString(1, recipeName); // add name
+                final ResultSet rs = pst.executeQuery();  // execute query
 
-            pst.close();
-            // check if there was a result
-            if (rs.next()) {
-                result = objFromResultSet(rs);
+                pst.close();
+                // check if there was a result
+                if (rs.next()) {
+                    result = objFromResultSet(rs);
+                }
+                rs.close();
+
+            } catch (final SQLException e) {
+                System.out.println("Unable to get the Recipe.");
+                System.out.println(e);
             }
-            rs.close();
-
-        } catch (final SQLException e) {
-            System.out.println("Unable to get the Recipe.");
-            System.out.println(e);
         }
 
         return result;
@@ -191,6 +193,9 @@ public class RecipePersistence implements DBMSTools{
                 testOut = getRecipe(recipeName);
                 if(attempt>0 && testOut == null){
                     result = true;
+                    if(recipeName == this.recent){
+                        recent = null;
+                    }
                 }
 
             } catch (final SQLException e) {
