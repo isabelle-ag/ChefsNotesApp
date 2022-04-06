@@ -144,7 +144,7 @@ public class Recipe implements Serializable {
         int n = ingArray.length;
         String[] strArray = new String[n];
         for (int i = 0; i < n; i++) {
-            strArray[i] = ingArray[i].getAmtString() + "\t\t\t\t"+ingArray[i].getName();
+            strArray[i] = ingArray[i].toString();
         }
         return strArray;
     }
