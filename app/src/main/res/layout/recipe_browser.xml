@@ -7,8 +7,8 @@
     android:layout_height="match_parent">
 
     <androidx.gridlayout.widget.GridLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,14 +55,17 @@
             <androidx.constraintlayout.helper.widget.Flow
                 android:id="@+id/filterTagLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:flow_horizontalBias=".1"
                 app:flow_horizontalGap="10dp"
                 app:flow_horizontalStyle="packed"
                 app:flow_verticalAlign="center"
                 app:flow_verticalGap="10dp"
                 app:flow_wrapMode="chain"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -70,7 +73,7 @@
             android:id="@+id/resultContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="60dp"
             app:layout_column="0">
 
             <comp3350.chefsnotes.presentation.FullListView

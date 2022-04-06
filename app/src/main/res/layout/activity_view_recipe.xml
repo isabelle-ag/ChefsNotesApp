@@ -99,8 +99,7 @@
             android:id="@+id/ingredientListView"
             android:layout_width="wrap_content"
             android:layout_height="250dp"
-            android:divider="@android:color/black"
-            android:dividerHeight="-15sp"
+            android:divider="@android:color/transparent"
             tools:ignore="DuplicateSpeakableTextCheck">
 
         </ListView>
