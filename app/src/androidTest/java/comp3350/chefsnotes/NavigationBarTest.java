@@ -23,5 +23,5 @@ import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.core.AllOf.allOf;
-public class RecipeCreationTest {
+public class NavigationBarTest {
 }
