@@ -40,13 +40,11 @@ public class RecipeFetcher implements IRecipeFetcher{
         {
             boolean good = true;
             for (String inclTag:included)
-                for (String tag:r.getTags())
-                    if (!tag.equals(inclTag))
-                        good = false;
+                if (!r.hasTag(inclTag))
+                    good = false;
             for (String exclTag:excluded)
-                for (String tag:r.getTags())
-                    if (tag.equals(exclTag))
-                        good = false;
+                if (r.hasTag(exclTag))
+                    good = false;
             if (good)
                 out.add(r);
         }
