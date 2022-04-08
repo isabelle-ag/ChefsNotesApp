@@ -26,6 +26,7 @@ import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.SampleRecipe;
 import comp3350.chefsnotes.objects.TagExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
+import comp3350.chefsnotes.persistence.PhotoDBMSTools;
 import comp3350.chefsnotes.persistence.TagDBMSTools;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         copyDatabaseToDevice();
         // instantiate databases
         Services.getTagPersistence(DB_MODE);
+        createTags();
+
         DBMSTools dbSetup = Services.getRecipePersistence(DB_MODE);
         Recipe sample = new SampleRecipe();
         if (dbSetup.getRecipe(sample.getTitle()) == null) {
@@ -46,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
             dbSetup.commitChanges(sample);
         }
 
-        createTags();
+        Services.getPhotoPersistence(DB_MODE);
+        setupPhotoList();
+
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
     }
@@ -115,6 +120,27 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
+    private boolean navigation(MenuItem item){
+        if(item.getItemId() == R.id.new_recipe_button){
+            Intent i = new Intent(MainActivity.this, EditRecipe.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.browse_recipe_button){
+            Intent i = new Intent(MainActivity.this, RecipeBrowser.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.current_recipe_button){
+            Intent i = new Intent(MainActivity.this, ViewRecipe.class);
+            startActivity(i);
+            return true;
+        }
+        else{
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void createTags() {
         TagDBMSTools tagdb = Services.getTagPersistence();
         if (tagdb.tagList().length == 0) {
@@ -141,25 +167,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean navigation(MenuItem item){
-        if(item.getItemId() == R.id.new_recipe_button){
-            Intent i = new Intent(MainActivity.this, EditRecipe.class);
-            startActivity(i);
-            return true;
-        }
-        else if(item.getItemId() == R.id.browse_recipe_button){
-            Intent i = new Intent(MainActivity.this, RecipeBrowser.class);
-            startActivity(i);
-            return true;
-        }
-        else if(item.getItemId() == R.id.current_recipe_button){
-            Intent i = new Intent(MainActivity.this, ViewRecipe.class);
-            startActivity(i);
-            return true;
-        }
-        else{
-            return super.onOptionsItemSelected(item);
-        }
+    private void setupPhotoList(){
+        PhotoDBMSTools photodb = Services.getPhotoPersistence();
+
     }
 
 }
