@@ -35,44 +35,24 @@ public class RecipeFetcher implements IRecipeFetcher{
     public Recipe[] filterRecipesByTags(String[] included, String[] excluded, Recipe[] searchSpace)
     {
         ArrayList<Recipe> out = new ArrayList<Recipe>();
-
+//The booleans below have all been switched in order to get tags working - this is an or operation!
         for (Recipe r: searchSpace)
         {
-            boolean good = true;
+            boolean good = false;
             for (String inclTag:included)
                 for (String tag:r.getTags())
                     if (!tag.equals(inclTag))
-                        good = false;
+                        good = true;
             for (String exclTag:excluded)
                 for (String tag:r.getTags())
                     if (tag.equals(exclTag))
-                        good = false;
+                        good = true;
             if (good)
                 out.add(r);
         }
         return out.toArray(new Recipe[0]);
     }
 
-    public String[] filterRecipeNamesByTags(String[] included, String[] excluded, Recipe[] searchSpace) {
-        ArrayList<String> out = new ArrayList<>();
-
-        for (Recipe r: searchSpace)
-        {
-            //To make tag filtering work, I changed some things, originals are commented
-            boolean good = false; //true
-            for (String inclTag:included)
-                for (String tag:r.getTags())
-                    if (tag.equals(inclTag))
-                        good = true; //false
-            for (String exclTag:excluded)
-                for (String tag:r.getTags())
-                    if (tag.equals(exclTag))
-                        good = true; //false
-            if (good)
-                out.add(r.getTitle());
-        }
-        return out.toArray(new String[0]);
-    }
 
     public Recipe getRecipeByName(String name)
     {
@@ -90,8 +70,6 @@ public class RecipeFetcher implements IRecipeFetcher{
         return out.toArray(new Recipe[0]);
     }
 
-    public String[] getRecipeNamesByText(String name){
-        return  db.searchRecipeNames(name);
-    }
-
+    //TODO
+    public Recipe[] getRecipeByIngredients(String ingredients){return getRecipesByText(ingredients);}
 }

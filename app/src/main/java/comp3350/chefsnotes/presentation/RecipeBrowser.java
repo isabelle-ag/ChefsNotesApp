@@ -25,6 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
@@ -32,6 +33,7 @@ import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.ITagHandler;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.TagHandler;
+import comp3350.chefsnotes.objects.Recipe;
 
 
 public class RecipeBrowser extends AppCompatActivity {
@@ -93,50 +95,52 @@ public class RecipeBrowser extends AppCompatActivity {
         //If ingredient mode
         if(isChecked) {
             searchDesc.setText(R.string.search_mode_ing);
-            //TODO: get recipes by ingredients in recipe fetcher
         }
         else{
             searchDesc.setText(R.string.search_mode_name);
         }
+        populateRecipes(searchTerm);
     }
 
-    private void populateRecipes(String searchTerm){
+    private void populateRecipes(String searchTerm) {
         ListView searchResults = (ListView) findViewById(R.id.results);
-        String[] recipeList;
-        String[] exTagArray = new String[0];
-        TextView searchDesc = (TextView) findViewById(R.id.searchDesc);
-        //If ingredient mode
-        if(ingMode.isChecked()) {
-            //TODO: get recipes by ingredients in recipe fetcher
+        Recipe[] recipes;
+        Recipe[] searchSpace;
+        String[] incTags = new String[0];
+        String[] exTags = new String[0];
+        boolean isIngMode = ingMode.isChecked();
+
+        if (tagFilters.size() > 0) {
+            incTags = new String[tagFilters.size()];
+            incTags = tagFilters.toArray(incTags);
         }
-        else{
+        if (excludedTags.size() > 0) {
+            exTags = new String[excludedTags.size()];
+            exTags = excludedTags.toArray(exTags);
         }
 
-        if(tagFilters.size() > 0){
-            String[] incTagArray = new String[tagFilters.size()];
-            incTagArray = tagFilters.toArray(incTagArray);
-            if(excludedTags.size()>0) {
-                exTagArray = new String[excludedTags.size()];
-                exTagArray = excludedTags.toArray(exTagArray);
-            }
-            recipeList = recipeFetcher.filterRecipeNamesByTags(incTagArray, exTagArray, recipeFetcher.getRecipesByText(searchTerm));
-        }
-        else{
-            recipeList = recipeFetcher.getRecipeNamesByText(searchTerm);
+        if (isIngMode) {
+            searchSpace = recipeFetcher.getRecipeByIngredients(searchTerm);
+        } else {
+            searchSpace = recipeFetcher.getRecipesByText(searchTerm);
         }
 
+        recipes = recipeFetcher.filterRecipesByTags(incTags, exTags, searchSpace);
+        //TEMPORARY until tags is fully functional:
+        if(incTags.length == 0){
+            recipes = searchSpace;
+        }
 
-        ArrayAdapter<String> rAdapter = new ArrayAdapter<String>(this,
-                R.layout.list_style, recipeList);
+        ArrayAdapter<Recipe> rAdapter = new ArrayAdapter<Recipe>(this,
+                R.layout.list_style, recipes);
         searchResults.setAdapter(rAdapter);
         searchResults.setOnItemClickListener((parent, v, position, id) -> {
-            String recipeName = (String) parent.getItemAtPosition(position);
+            String selected = (String) parent.getItemAtPosition(position);
             Intent i = new Intent(RecipeBrowser.this, ViewRecipe.class);
-            i.putExtra("recipeKey",recipeName);
+            i.putExtra("recipeKey", selected);
             startActivity(i);
         });
     }
-
 
     private void populateTags() {
 

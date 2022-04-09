@@ -98,11 +98,9 @@ public class ViewRecipe extends AppCompatActivity {
 
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
-
             Intent switchActivityIntent = new Intent(this, EditRecipe.class);
             switchActivityIntent.putExtra("title", recipe.getTitle());
             startActivity(switchActivityIntent);
-        //}
     }
 
     private void copyRecipe(View view) {

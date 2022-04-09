@@ -8,7 +8,8 @@ public interface IRecipeFetcher {
     Recipe getRecipeByName(String name);
     Recipe[] filterRecipesByTags(String[] included, String[] excluded);
     Recipe[] filterRecipesByTags(String[] included, String[] excluded, Recipe[] searchSpace);
-    String[] filterRecipeNamesByTags(String[] included, String[] excluded, Recipe[] searchSpace);
+   // String[] filterRecipeNamesByTags(String[] included, String[] excluded, Recipe[] searchSpace);
     Recipe[] getRecipesByText(String name);
-    String[] getRecipeNamesByText(String name);
+   // String[] getRecipeNamesByText(String name);
+    Recipe[] getRecipeByIngredients(String ingredients);
 }
