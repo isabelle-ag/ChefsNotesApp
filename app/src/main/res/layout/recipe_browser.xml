@@ -42,6 +42,7 @@
 
             <TextView
                 android:id="@+id/textView"
+                style="@style/Theme.Chefsnotes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -90,12 +91,14 @@
 
         <TextView
             android:id="@+id/searchDesc"
-            android:layout_width="wrap_content"
+            style="@style/Theme.Chefsnotes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginBottom="5dp"
-            android:text="@string/toggle_filter_text"
+            android:text="@string/search_mode_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000000"
             app:layout_column="0"
             app:layout_row="1" />
 

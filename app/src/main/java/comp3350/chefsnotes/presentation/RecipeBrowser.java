@@ -55,6 +55,9 @@ public class RecipeBrowser extends AppCompatActivity {
         ingMode = (SwitchCompat) findViewById(R.id.searchToggle);
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
+        ingMode.setOnCheckedChangeListener(this::toggleHint);
+        ingMode.setChecked(true);
+        ingMode.setChecked(false);
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -85,6 +88,18 @@ public class RecipeBrowser extends AppCompatActivity {
         populateRecipes("");
     }
 
+    protected void toggleHint(CompoundButton c, boolean isChecked){
+        TextView searchDesc = (TextView) findViewById(R.id.searchDesc);
+        //If ingredient mode
+        if(isChecked) {
+            searchDesc.setText(R.string.search_mode_ing);
+            //TODO: get recipes by ingredients in recipe fetcher
+        }
+        else{
+            searchDesc.setText(R.string.search_mode_name);
+        }
+    }
+
     private void populateRecipes(String searchTerm){
         ListView searchResults = (ListView) findViewById(R.id.results);
         String[] recipeList;
@@ -92,11 +107,9 @@ public class RecipeBrowser extends AppCompatActivity {
         TextView searchDesc = (TextView) findViewById(R.id.searchDesc);
         //If ingredient mode
         if(ingMode.isChecked()) {
-            searchDesc.setText("Separate multiple ingredients by semi-colons");
             //TODO: get recipes by ingredients in recipe fetcher
         }
         else{
-            searchDesc.setText("Search for any part of a recipe name");
         }
 
         if(tagFilters.size() > 0){
