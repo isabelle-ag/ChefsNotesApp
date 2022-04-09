@@ -135,9 +135,9 @@ public class RecipeBrowser extends AppCompatActivity {
                 R.layout.list_style, recipes);
         searchResults.setAdapter(rAdapter);
         searchResults.setOnItemClickListener((parent, v, position, id) -> {
-            String selected = (String) parent.getItemAtPosition(position);
+            Recipe selected = (Recipe) parent.getItemAtPosition(position);
             Intent i = new Intent(RecipeBrowser.this, ViewRecipe.class);
-            i.putExtra("recipeKey", selected);
+            i.putExtra("recipeKey", selected.toString());
             startActivity(i);
         });
     }
