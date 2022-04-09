@@ -7,19 +7,19 @@
     android:layout_height="match_parent">
 
     <androidx.gridlayout.widget.GridLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:columnCount="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:orientation="horizontal">
 
         <EditText
             android:id="@+id/searchRecipeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/main_logo"
-            android:hint="@string/search_by_recipe_name"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Search by..."
             android:importantForAutofill="no"
             android:includeFontPadding="true"
             android:inputType="textFilter"
@@ -32,8 +32,64 @@
             <requestFocus />
         </EditText>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            app:layout_column="0"
+            app:layout_gravity="end"
+            app:layout_row="0">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/recipe_name"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/searchToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:paddingBottom="5dp"
+                android:scaleX=".9"
+                android:scaleY=".9"
+                app:layout_constraintStart_toEndOf="@id/textView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:thumbTint="@color/switch_thumb_selector"
+                app:trackTint="@color/switch_track_selector" />
+
+            <TextView
+                android:id="@+id/ingToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/ingredients"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/searchToggle"
+                tools:textAlignment="center" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="3dp"
+            android:background="@color/main_logo"
+            app:layout_column="0" />
+
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/searchDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -71,7 +127,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:layout_column="0">
+            app:layout_column="0"
+            app:layout_row="3">
 
             <comp3350.chefsnotes.presentation.FullListView
                 android:id="@+id/results"

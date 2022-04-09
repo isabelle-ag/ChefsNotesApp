@@ -1,5 +1,6 @@
 package comp3350.chefsnotes.presentation;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.core.content.res.ResourcesCompat;
@@ -17,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,6 +40,7 @@ public class RecipeBrowser extends AppCompatActivity {
     private ArrayList<String> tagFilters;
     private ArrayList<String> excludedTags;
     private String searchTerm;
+    private SwitchCompat ingMode;
 
 
     @Override
@@ -49,6 +52,7 @@ public class RecipeBrowser extends AppCompatActivity {
         searchTerm = "";
 
         EditText searchBox = (EditText) findViewById(R.id.searchRecipeName);
+        ingMode = (SwitchCompat) findViewById(R.id.searchToggle);
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
 
@@ -85,6 +89,16 @@ public class RecipeBrowser extends AppCompatActivity {
         ListView searchResults = (ListView) findViewById(R.id.results);
         String[] recipeList;
         String[] exTagArray = new String[0];
+        TextView searchDesc = (TextView) findViewById(R.id.searchDesc);
+        //If ingredient mode
+        if(ingMode.isChecked()) {
+            searchDesc.setText("Separate multiple ingredients by semi-colons");
+            //TODO: get recipes by ingredients in recipe fetcher
+        }
+        else{
+            searchDesc.setText("Search for any part of a recipe name");
+        }
+
         if(tagFilters.size() > 0){
             String[] incTagArray = new String[tagFilters.size()];
             incTagArray = tagFilters.toArray(incTagArray);

@@ -42,6 +42,8 @@
         <entry key="app/src/main/res/drawable/savebutton_selector.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/spacer.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/switch_thumb_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/switch_track_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/tags.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/togglebutton_selector.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1037037037037037" />
@@ -49,7 +51,7 @@
         <entry key="app/src/main/res/layout/ingredient_field.xml" value="0.335" />
         <entry key="app/src/main/res/layout/instruction_field.xml" value="0.335" />
         <entry key="app/src/main/res/layout/list_style.xml" value="0.11500641299700727" />
-        <entry key="app/src/main/res/layout/recipe_browser.xml" value="0.2939346811819596" />
+        <entry key="app/src/main/res/layout/recipe_browser.xml" value="0.335" />
         <entry key="app/src/main/res/layout/recipe_editor.xml" value="0.335" />
         <entry key="app/src/main/res/layout/recipe_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/tag_popup.xml" value="0.25" />
@@ -61,5 +63,12 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="/Library/Java/JavaVirtualMachine/jdk.1.7.0_79.jdk/Contents/Home" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1744186046511628" />
+      </ProjectState>
+    </option>
   </component>
 </project>
