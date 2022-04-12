@@ -3,6 +3,9 @@ package comp3350.chefsnotes.objects;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import comp3350.chefsnotes.application.Services;
+import comp3350.chefsnotes.persistence.PhotoList;
+
 // DO NOT CREATE THIS CLASS EXPLICITLY
 // methods with names that begin with "_" should only be called by the DBMS
 // instances of will be created and managed
@@ -16,7 +19,8 @@ public class Recipe implements Serializable {
     private String title;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Direction> directions;
-    private final ArrayList<String> tags;
+    private ArrayList<String> tags;
+    private ArrayList<String> photos;   // list of pathnames
     
     public Recipe(String t){
         title = t;
@@ -291,7 +295,38 @@ public class Recipe implements Serializable {
         }
 
         return result;
-    } 
+    }
+
+    public boolean addPhoto(String pathname){
+        boolean result = false;
+
+        if(!this.photos.contains(pathname)){
+            this.photos.add(pathname);                   // add to recipe
+            PhotoList pl = Services.getPhotoList(); // fetch list
+            pl.addReference(pathname);              // add reference (creates if needed)
+            result = true;
+        }
+
+        return result;
+    }
+
+    public boolean removePhoto(String pathname){
+        boolean result = false;
+
+        if(this.photos.contains(pathname)){
+            this.photos.remove(pathname);                // remove from recipe
+            PhotoList pl = Services.getPhotoList(); // fetch list
+            if(pl.removeReference(pathname)) {      // remove reference (deletes if necessary)
+                result = true;
+            }
+        }
+
+        return result;
+    }
+
+    public String[] getPhotos(){
+        return this.photos.toArray(new String[0]);
+    }
 
 
     public boolean equals(Object other){
@@ -320,6 +355,11 @@ public class Recipe implements Serializable {
         {
             out.tags.add(s);
         }
+
+        for(String curr : this.photos){
+            out.addPhoto(curr);  // adds photo to recipe, adds reference to db
+        }
+
         return out;
     }
 
@@ -333,5 +373,16 @@ public class Recipe implements Serializable {
     public String toString(){
         return this.title;
     }
+
+    // this is a destructor-style method for Recipe. Does housekeeping on photos,
+    // removing a reference from each one in the tracker list. Please call this
+    // before abandoning a Recipe object.
+    public void onDelete(){
+        PhotoList pl = Services.getPhotoList();
+        for(String curr : photos){
+            pl.removeReference(curr);   // remove a reference
+        }
+    }
+
 }
 
