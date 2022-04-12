@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.objects.Ingredient;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.persistence.FakeDBMS;
@@ -86,6 +87,28 @@ public class IRecipeFetcherTest {
         assertTrue(fetched.contains(db.getRecipe("foo")));
         assertFalse(fetched.contains(db.getRecipe("barfoo")));
         assertFalse(fetched.contains(db.getRecipe("bar")));
+
+    }
+
+
+    @Test
+    public void testGetRecipesByIngredient() {
+        Recipe foo = db.getRecipe("foo");
+        Recipe barfoo = db.getRecipe("barfoo");
+        Recipe bar = db.getRecipe("bar");
+
+        assertEquals(0, fetcher.getRecipesByIngredient("foo").length);
+
+
+        foo.addIngredient(new Ingredient("foo"));
+
+        assertEquals(1, fetcher.getRecipesByIngredient("foo").length);
+
+        barfoo.addIngredient(new Ingredient("foo"));
+        barfoo.addIngredient(new Ingredient("bar"));
+
+        assertEquals(2, fetcher.getRecipesByIngredient("foo").length);
+        assertEquals(1, fetcher.getRecipesByIngredient("bar").length);
 
 
     }

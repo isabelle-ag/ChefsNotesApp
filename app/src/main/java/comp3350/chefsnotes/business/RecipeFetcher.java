@@ -92,4 +92,17 @@ public class RecipeFetcher implements IRecipeFetcher{
         return  db.searchRecipeNames(name);
     }
 
+    public Recipe[] getRecipesByIngredient(String ing)
+    {
+        ArrayList<Recipe> out = new ArrayList<Recipe>();
+        Recipe[] recipes = db.getAllRecipes();
+        for (Recipe r:recipes)
+        {
+            if(r.getIngredient(ing) != null)
+            {
+                out.add(r);
+            }
+        }
+        return out.toArray(new Recipe[0]);
+    }
 }
