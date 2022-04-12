@@ -17,6 +17,10 @@ public class PhotoList {
         photodb = Services.getPhotoPersistence();
     }
 
+    // used to set up the PhotoList. Not for new photos from Recipe.
+    // REQUIRED FOR MainActivity.onCreate() operations -- only way to add a photo
+    // with a preexisting count of references.
+    // DOES NOT ACCESS DATABASE
     public boolean addPhoto(Photo newPhoto){
         boolean result = false;
 
@@ -28,22 +32,43 @@ public class PhotoList {
         return result;
     }
 
-    // perhaps adds a photo that dne ?
-    public boolean addReference(String photoname){
+    // called by Recipe.addPhoto() and Recipe.clone()
+    // if the photo does not exist, it is created with refCount = 1
+    // reflects the change in the database
+    // all operations succeed.
+    public void addReference(String photoname){
+        int ind = photos.indexOf(new Photo(photoname, 0));
+
+        if(ind != -1){ // photo exists, add a reference
+            Photo target = photos.get(ind);
+            target.addReference();
+            photodb.setReference(target.getPathname(),target.getRefCount());    // make change in db
+
+        } else { // photo dne, create with refCount 1
+            photos.add(new Photo(photoname, 1)); // add photo to list
+            photodb.addPhoto(photoname);            // add photo to db
+
+        }
+
+    }
+
+    // called by Recipe.removePhoto() and Recipe.onDelete()
+    public boolean removeReference(String photoname){
         boolean result = false;
         int ind = photos.indexOf(new Photo(photoname, 0));
 
         if(ind != -1){
             Photo target = photos.get(ind);
-            target.addReference();
+            target.removeReference();
+            if(target.getRefCount() == 0){ // last reference, delete it
+                photos.remove(ind);             // remove from list
+                photodb.removePhoto(photoname); // remove from db
+
+            } else { // just change reference
+                photodb.setReference(photoname, target.getRefCount());
+            }
             result = true;
         }
-
-        return result;
-    }
-
-    public boolean removeReference(String photoname){
-        boolean result = false;
 
         return result;
     }
