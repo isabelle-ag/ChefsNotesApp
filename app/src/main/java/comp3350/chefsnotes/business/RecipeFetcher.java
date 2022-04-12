@@ -2,6 +2,7 @@ package comp3350.chefsnotes.business;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.objects.SampleRecipe;
@@ -92,4 +93,22 @@ public class RecipeFetcher implements IRecipeFetcher{
         return  db.searchRecipeNames(name);
     }
 
+    public Recipe[] getRecipesByIngredient(String ing)
+    {
+        ArrayList<Recipe> out = new ArrayList<Recipe>();
+        Recipe[] recipes = db.getAllRecipes();
+        for (Recipe r:recipes)
+        {
+            String[] ingNames = r.getIngredientStrings();
+            for (String name: ingNames)
+            {
+                if (name.toLowerCase().contains(ing.toLowerCase()))
+                {
+                    out.add(r);
+                    break;
+                }
+            }
+        }
+        return out.toArray(new Recipe[0]);
+    }
 }
