@@ -1,5 +1,6 @@
 package comp3350.chefsnotes.persistence;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -111,6 +112,11 @@ public class PhotoPersistence implements PhotoDBMSTools{
                 System.out.println("Unable to delete the Photo.");
             }
         }
+
+        if(result){ // successful removal needs deletion
+            new File(pathname).delete();
+        }
+
         return result;
     }
 
