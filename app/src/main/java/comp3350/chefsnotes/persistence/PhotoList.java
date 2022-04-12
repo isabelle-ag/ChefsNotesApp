@@ -41,8 +41,8 @@ public class PhotoList {
 
         if(ind != -1){ // photo exists, add a reference
             Photo target = photos.get(ind);
-            target.addReference();
-            photodb.setReference(target.getPathname(),target.getRefCount());    // make change in db
+            int newct = target.addReference();
+            photodb.setReference(photoname,newct);    // make change in db
 
         } else { // photo dne, create with refCount 1
             photos.add(new Photo(photoname, 1)); // add photo to list
@@ -59,13 +59,13 @@ public class PhotoList {
 
         if(ind != -1){
             Photo target = photos.get(ind);
-            target.removeReference();
-            if(target.getRefCount() == 0){ // last reference, delete it
+            int newct = target.removeReference();
+            if(newct == 0){ // last reference, delete it
                 photos.remove(ind);             // remove from list
                 photodb.removePhoto(photoname); // remove from db
 
             } else { // just change reference
-                photodb.setReference(photoname, target.getRefCount());
+                photodb.setReference(photoname, newct);
             }
             result = true;
         }

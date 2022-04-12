@@ -301,7 +301,7 @@ public class Recipe implements Serializable {
         boolean result = false;
 
         if(!this.photos.contains(pathname)){
-            this.photos.add(pathname);                   // add to recipe
+            this.photos.add(pathname);              // add to recipe
             PhotoList pl = Services.getPhotoList(); // fetch list
             pl.addReference(pathname);              // add reference (creates if needed)
             result = true;
@@ -314,7 +314,7 @@ public class Recipe implements Serializable {
         boolean result = false;
 
         if(this.photos.contains(pathname)){
-            this.photos.remove(pathname);                // remove from recipe
+            this.photos.remove(pathname);           // remove from recipe
             PhotoList pl = Services.getPhotoList(); // fetch list
             if(pl.removeReference(pathname)) {      // remove reference (deletes if necessary)
                 result = true;
