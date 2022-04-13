@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.1388888888888889" />
+        <entry key="..\:/Android-Studio/chefsnotes/app/src/main/res/layout/ingredient_field.xml" value="0.15780141843971632" />
+        <entry key="..\:/Android-Studio/chefsnotes/app/src/main/res/layout/ingredient_list.xml" value="0.1519756838905775" />
+        <entry key="..\:/Android-Studio/chefsnotes/app/src/main/res/layout/instruction_field.xml" value="0.15780141843971632" />
+        <entry key="..\:/Android-Studio/chefsnotes/app/src/main/res/layout/recipe_editor.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/erane/StudioProjects/COMP3350/app/src/main/res/layout/activity_main.xml" value="0.10333333333333333" />
+        <entry key="..\:/Users/erane/StudioProjects/COMP3350/app/src/main/res/layout/ingredient_field.xml" value="0.264" />
+        <entry key="..\:/Users/erane/StudioProjects/COMP3350/app/src/main/res/layout/instruction_field.xml" value="0.264" />
+        <entry key="..\:/Users/erane/StudioProjects/COMP3350/app/src/main/res/layout/recipe_editor.xml" value="0.264" />
+        <entry key="..\:/Users/erane/StudioProjects/chefsnotes/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23" />
+        <entry key="..\:/Users/erane/StudioProjects/chefsnotes/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/erane/StudioProjects/chefsnotes/app/src/main/res/layout/ingredient_field.xml" value="0.253125" />
+        <entry key="..\:/Users/erane/StudioProjects/chefsnotes/app/src/main/res/layout/recipe_editor.xml" value="0.264" />
+        <entry key="..\:/Users/erane/StudioProjects/chefsnotes/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.125" />
+        <entry key="..\:/Users/erane/StudioProjects/chefsnotes/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.125" />
+        <entry key="app/src/main/res/drawable-anydpi/addRecipe.xml" value="0.1455" />
+        <entry key="app/src/main/res/drawable-anydpi/browse_recipes.xml" value="0.2065" />
+        <entry key="app/src/main/res/drawable-anydpi/curr_recipe.xml" value="0.2065" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/button_press.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.286" />
+        <entry key="app/src/main/res/drawable/ingredient_list_divider.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_button_toggled.xml" value="0.102" />
+        <entry key="app/src/main/res/drawable/spacer.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/tags.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/togglebutton_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_view_recipe.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/ingredient_field.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/instruction_field.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/recipe_browser.xml" value="0.2939346811819596" />
+        <entry key="app/src/main/res/layout/recipe_editor.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/recipe_search.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/tag_popup.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1235" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="/Library/Java/JavaVirtualMachine/jdk.1.7.0_79.jdk/Contents/Home" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
