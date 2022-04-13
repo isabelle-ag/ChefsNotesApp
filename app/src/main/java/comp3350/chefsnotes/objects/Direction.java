@@ -20,7 +20,7 @@ public class Direction implements Serializable {
         this("", txt, t);
     }
 
-    public Direction(String txt, String n){
+    public Direction(String n, String txt){
         this(n, txt, 0);
     }
 

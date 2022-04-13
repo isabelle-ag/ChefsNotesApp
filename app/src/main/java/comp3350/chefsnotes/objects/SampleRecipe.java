@@ -21,11 +21,11 @@ public class SampleRecipe extends Recipe{
         this.addIngredient("Semisweet Chocolate Chips", 2, Units.CUP);
         this.addIngredient("Chopped Walnuts", 1, Units.CUP);
 
-        this.addDirection(new Direction("Preheat oven to 350 degrees F (175 degrees C).", "Preheat", 15));
-        this.addDirection(new Direction("Cream together the butter, white sugar, and brown sugar until smooth. Beat in the eggs one at a time, then stir in the vanilla.", "Mix Batter"));
-        this.addDirection(new Direction("Dissolve baking soda in hot water. Add to batter along with salt. Stir in flour, chocolate chips, and nuts. Drop by large spoonfuls onto ungreased pans.",
-                "Add solids"));
-        this.addDirection(new Direction("Bake for about 10 minutes in the preheated oven, or until edges are nicely browned.", "Bake cookies!", 10));
+        this.addDirection(new Direction("Preheat", "Preheat oven to 350 degrees F (175 degrees C).", 15));
+        this.addDirection(new Direction("Mix Batter", "Cream together the butter, white sugar, and brown sugar until smooth. Beat in the eggs one at a time, then stir in the vanilla."));
+        this.addDirection(new Direction("Add solids","Dissolve baking soda in hot water. " +
+                "Add to batter along with salt. Stir in flour, chocolate chips, and nuts. Drop by large spoonfuls onto ungreased pans."));
+        this.addDirection(new Direction("Bake cookies!", "Bake for about 10 minutes in the preheated oven, or until edges are nicely browned.", 10));
     }
 
 }
