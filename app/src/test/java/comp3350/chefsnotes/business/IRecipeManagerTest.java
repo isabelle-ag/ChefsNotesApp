@@ -127,8 +127,6 @@ public class IRecipeManagerTest {
 
         Recipe R2 = manager.copyRecipe(R1, "bar");
 
-        System.out.println(R2);
-
         assertEquals("foo", R2.getDirections()[0].getText());
     }
 

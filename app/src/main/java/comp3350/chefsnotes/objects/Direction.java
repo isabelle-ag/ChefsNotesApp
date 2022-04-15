@@ -10,23 +10,21 @@ public class Direction implements Serializable {
     private String text;
     private int time;
 
-    public Direction(String n, String txt, int t){
+    public Direction(String txt, String n, int t){
         this.name = n;
         this.text = txt;
         this.time = t;
     }
 
     public Direction(String txt, int t){
-        this("", txt, t);
+        this(txt, "", t);
     }
 
     public Direction(String txt, String n){
-        this(n, txt, 0);
+        this(txt, n, 0);
     }
 
-    public Direction(String txt){
-        this("", txt, 0);
-    }
+    public Direction(String txt){this(txt, "", 0);}
 
     public String getName(){
         return this.name;
@@ -72,12 +70,27 @@ public class Direction implements Serializable {
         return this.name.hashCode() * 10000 + this.text.hashCode() * 100 + this.time;
     }
     @Override
-    public String toString() {
-        return String.format("%s: %s - %d min", name, text, time);
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        if(!this.name.equals("")) {
+            builder.append(name);
+            builder.append(": ");
+        }
+
+        builder.append(text);
+
+        if(this.time > 0)
+        {
+            builder.append(" - ");
+            builder.append(time);
+            builder.append(" min");
+        }
+        return builder.toString();
     }
 
     public Direction clone()
     {
-        return new Direction(this.name, this.text, this.time);
+        return new Direction(this.text, this.name, this.time);
     }
 }

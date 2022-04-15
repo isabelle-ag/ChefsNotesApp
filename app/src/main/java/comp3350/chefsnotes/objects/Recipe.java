@@ -384,7 +384,41 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString(){
-        return this.title;
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.title);
+        builder.append("\n");
+        if(this.tags.size() > 0)
+        {
+            builder.append("Recipe tags: ");
+            for (String tag : this.tags)
+            {
+                builder.append(tag);
+                builder.append(", ");
+            }
+            builder.delete(builder.length()-2, builder.length());
+            builder.append("\n");
+        }
+
+        if(this.ingredients.size() > 0) {
+            builder.append("\nIngredients:\n");
+            for (Ingredient i : this.ingredients) {
+                builder.append(i.toString());
+                builder.append("\n");
+            }
+        }
+        if(this.directions.size()>0)
+        {
+            builder.append("\nDirections:\n");
+            for (Direction d : this.directions) {
+                builder.append(d.toString());
+                builder.append("\n");
+            }
+        }
+
+        builder.append(this.notes);
+        builder.append("\n");
+
+        return builder.toString();
     }
 
     // this is a destructor-style method for Recipe. Does housekeeping on photos,
