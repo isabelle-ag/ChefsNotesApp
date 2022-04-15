@@ -5,8 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import static org.mockito.Mockito.*;
 
 import comp3350.chefsnotes.objects.Direction;
 import comp3350.chefsnotes.objects.Ingredient;
@@ -14,6 +17,7 @@ import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.persistence.FakeDBMS;
+
 
 public class IRecipeManagerTest {
 
@@ -126,5 +130,21 @@ public class IRecipeManagerTest {
         System.out.println(R2);
 
         assertEquals("foo", R2.getDirections()[0].getText());
+    }
+
+
+    @Test
+    public void testNoteStuff()
+    {
+        db = Mockito.mock(DBMSTools.class);
+        manager = new RecipeManager(db);
+        Recipe R = new Recipe("foo");
+
+        manager.updateNotes(R, "bar");
+        verify(db).commitChanges(R);
+
+        String notes = manager.loadNotes(R);
+
+        assertEquals("bar", notes);
     }
 }
