@@ -13,5 +13,7 @@ public interface IRecipeManager {
     void renameRecipe(Recipe R, String newName) throws RecipeExistenceException;
     public Recipe saveButton(String name, ArrayList<Ingredient> ingredients, ArrayList<Direction> directions, boolean isNew) throws RecipeExistenceException;
     public Recipe copyRecipe(Recipe R, String copyName);
-
+    public void updateNotes(Recipe R, String notes);
+    public String loadNotes(Recipe R);
 }
+
