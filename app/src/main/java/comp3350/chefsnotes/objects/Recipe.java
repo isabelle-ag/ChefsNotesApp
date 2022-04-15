@@ -414,6 +414,10 @@ public class Recipe implements Serializable {
                 builder.append("\n");
             }
         }
+
+        builder.append(this.notes);
+        builder.append("\n");
+
         return builder.toString();
     }
 
