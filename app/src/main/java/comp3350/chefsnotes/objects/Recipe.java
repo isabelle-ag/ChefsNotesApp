@@ -363,6 +363,8 @@ public class Recipe implements Serializable {
             out.addPhoto(curr);  // adds photo to recipe, adds reference to db
         }
 
+        out.notes = this.notes;
+
         return out;
     }
 
