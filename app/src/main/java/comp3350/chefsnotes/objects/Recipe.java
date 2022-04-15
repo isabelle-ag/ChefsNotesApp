@@ -27,6 +27,7 @@ public class Recipe implements Serializable {
         ingredients = new ArrayList<Ingredient>();
         directions = new ArrayList<Direction>();
         tags = new ArrayList<String>();
+        photos = new ArrayList<String>();
     }
 
     public void addTag(String tag)
