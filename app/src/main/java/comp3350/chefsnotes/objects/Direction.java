@@ -91,6 +91,6 @@ public class Direction implements Serializable {
 
     public Direction clone()
     {
-        return new Direction(this.name, this.text, this.time);
+        return new Direction(this.text, this.name, this.time);
     }
 }
