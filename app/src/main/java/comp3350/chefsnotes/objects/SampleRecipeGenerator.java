@@ -30,6 +30,8 @@ public class SampleRecipeGenerator {
 
         result.addTag("Sweet");
 
+        result.setNotes("Try with peanut butter chips!\n");
+
         return result;
     }
 
@@ -54,6 +56,8 @@ public class SampleRecipeGenerator {
 
         result.addTag("Savory");
         result.addTag("Greek");
+
+        result.setNotes("Try blending for a smoother soup.\n\nDon't forget hotpads next time!\n");
 
         return result;
     }
@@ -85,6 +89,8 @@ public class SampleRecipeGenerator {
 
         result.addTag("Indian");
         result.addTag("Spicy");
+
+        result.setNotes("Use cayenne if out of chili powder.\n\nCook rice as normal.\n");
 
         return result;
     }
