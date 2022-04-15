@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import comp3350.chefsnotes.objects.Recipe;
-import comp3350.chefsnotes.objects.SampleRecipe;
+import comp3350.chefsnotes.objects.RecipeExample;
 import comp3350.chefsnotes.objects.TagExistenceException;
 import comp3350.chefsnotes.persistence.FakeDBMS;
 import comp3350.chefsnotes.persistence.FakeTagDB;
@@ -22,7 +22,7 @@ public class ITagHandlerTest {
 
     @Test
     public void testEmAll() {
-        Recipe r = new SampleRecipe();
+        Recipe r = new RecipeExample();
         assertEquals(0, handler.fetchTags().length);
         handler.addTagToRecipe(r, "foo");
         assertEquals(true, r.getTags().contains("foo"));

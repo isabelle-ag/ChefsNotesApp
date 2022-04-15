@@ -10,7 +10,6 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,7 +23,7 @@ import comp3350.chefsnotes.application.Main;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.objects.Photo;
 import comp3350.chefsnotes.objects.Recipe;
-import comp3350.chefsnotes.objects.SampleRecipe;
+import comp3350.chefsnotes.objects.SampleRecipeGenerator;
 import comp3350.chefsnotes.objects.TagExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.persistence.PhotoDBMSTools;
@@ -45,10 +44,15 @@ public class MainActivity extends AppCompatActivity {
         createTags();
 
         DBMSTools dbSetup = Services.getRecipePersistence(DB_MODE);
-        Recipe sample = new SampleRecipe();
-        if (dbSetup.getRecipe(sample.getTitle()) == null) {
-            dbSetup.createRecipe(sample.getTitle());
-            dbSetup.commitChanges(sample);
+        if (dbSetup.getAllRecipes().length == 0) {
+            Recipe[] samples = SampleRecipeGenerator.sampleList();
+            for (Recipe curr : samples) {
+                boolean insert = dbSetup.createRecipe(curr.getTitle());
+                if(insert){
+                    dbSetup.commitChanges(curr);
+                }
+            }
+
         }
 
         Services.getPhotoPersistence(DB_MODE);
@@ -154,11 +158,13 @@ public class MainActivity extends AppCompatActivity {
                 tagdb.addTag("Fusion");
                 tagdb.addTag("German");
                 tagdb.addTag("Greek");
+                tagdb.addTag("Indian");
                 tagdb.addTag("Mexican");
                 tagdb.addTag("South American");
                 tagdb.addTag("Ukrainian");
                 tagdb.addTag("Keto");
                 tagdb.addTag("Pescatarian");
+                tagdb.addTag("Savory");
                 tagdb.addTag("Spicy");
                 tagdb.addTag("Sweet");
                 tagdb.addTag("Vegan");
