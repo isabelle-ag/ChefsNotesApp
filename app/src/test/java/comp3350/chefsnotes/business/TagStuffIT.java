@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import comp3350.chefsnotes.objects.Recipe;
+import comp3350.chefsnotes.objects.RecipeExample;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
-import comp3350.chefsnotes.objects.SampleRecipe;
 import comp3350.chefsnotes.objects.TagExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.persistence.RecipePersistence;
@@ -41,7 +41,7 @@ public class TagStuffIT {
     //shamelessly copypasted from my unit tests
     @Test
     public void testTagHandler() {
-        Recipe r = new SampleRecipe();
+        Recipe r = new RecipeExample();
         assertEquals(0, handler.fetchTags().length);
         handler.addTagToRecipe(r, "foo");
         assertEquals(true, r.getTags().contains("foo"));
