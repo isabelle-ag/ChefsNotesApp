@@ -15,19 +15,21 @@ import comp3350.chefsnotes.persistence.PhotoList;
 
 public class Recipe implements Serializable {
     private static final long serialVersionUID = 202203171213L;
-    
+
     private String title;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Direction> directions;
     private ArrayList<String> tags;
     private ArrayList<String> photos;   // list of pathnames
-    
+    private String notes;
+
     public Recipe(String t){
         title = t;
         ingredients = new ArrayList<Ingredient>();
         directions = new ArrayList<Direction>();
         tags = new ArrayList<String>();
         photos = new ArrayList<String>();
+        notes = "";
     }
 
     public void addTag(String tag)
@@ -83,12 +85,12 @@ public class Recipe implements Serializable {
         this.ingredients.add(i);
     }
 
-    // adds the ingredient specified as a decimal. 
-    // Fails if amount <= 0. 
+    // adds the ingredient specified as a decimal.
+    // Fails if amount <= 0.
     // returns true on success, false on failure
     public boolean addIngredient(String newIng, double amount, String unit){
         boolean result = false;
-        
+
         if(amount > 0){
             result = this.ingredients.add(new Ingredient(newIng, amount, unit));
         }
@@ -96,8 +98,8 @@ public class Recipe implements Serializable {
         return result;
     }
 
-    // adds the ingredient specified as a fraction. 
-    // Fails if amount <= 0. 
+    // adds the ingredient specified as a fraction.
+    // Fails if amount <= 0.
     // returns true on success, false on failure
     public boolean addIngredient(String newIng, int numer, int denom, String unit){
         boolean result = false;
@@ -114,7 +116,7 @@ public class Recipe implements Serializable {
     public Ingredient[] getIngredients(){
         return this.ingredients.toArray(new Ingredient[0]);
     }
-    
+
     // returns array of all ingredient NAMES in recipe
     public String[] ingredientList(){
         String[] result = new String[this.ingredients.size()];
@@ -220,8 +222,8 @@ public class Recipe implements Serializable {
     // returns null if out of bounds
     public Direction getDirection(int dnum) throws IndexOutOfBoundsException{
         Direction result = null;
-        
-        result = this.directions.get(dnum); // can throw exception        
+
+        result = this.directions.get(dnum); // can throw exception
 
         return result;
     }
@@ -248,8 +250,8 @@ public class Recipe implements Serializable {
     public boolean deleteDirection(int dnum) throws IndexOutOfBoundsException{
         boolean result = true;
         Object test = null;
-        
-        test = this.directions.remove(dnum); // can throw exception    
+
+        test = this.directions.remove(dnum); // can throw exception
 
         if(test == null){
             result = false;
@@ -368,6 +370,16 @@ public class Recipe implements Serializable {
         Recipe out = this.clone();
         out._setTitle(dupName);
         return out;
+    }
+
+    public void setNotes(String notes)
+    {
+        this.notes = notes;
+    }
+
+    public String getNotes()
+    {
+        return this.notes;
     }
 
     @Override
