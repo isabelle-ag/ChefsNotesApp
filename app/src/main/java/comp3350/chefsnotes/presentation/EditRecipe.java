@@ -238,7 +238,7 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
                 if(instructionName.equals("Name")) {
                     instructionName = "";
                 }
-                current = new Direction(instructionName, instructions, Integer.parseInt(timeEstimate));
+                current = new Direction(instructions, instructionName, Integer.parseInt(timeEstimate));
                 directions.add(current);
             }
         }
