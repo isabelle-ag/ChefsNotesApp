@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,8 +66,6 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
         ImageButton delRecipeButton = findViewById(R.id.delRecipe);
-        EditText ingredientField = (EditText) findViewById(R.id.IngredientName);
-        ingredientField.setFilters(new InputFilter[] { filter });
         //set dropdown menu to array being used - can be used in the future for filtering units by metric, imperial, etc.
         Spinner ingDrop = findViewById(R.id.unitList);
         ArrayAdapter<String> units = new ArrayAdapter<String>(EditRecipe.this, android.R.layout.simple_spinner_item, Units.unitList());
