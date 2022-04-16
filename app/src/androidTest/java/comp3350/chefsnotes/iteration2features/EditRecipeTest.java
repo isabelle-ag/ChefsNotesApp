@@ -5,6 +5,8 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import android.content.Intent;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -33,13 +35,14 @@ import comp3350.chefsnotes.objects.RecipeExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
 import comp3350.chefsnotes.persistence.RecipePersistence;
 import comp3350.chefsnotes.presentation.RecipeBrowser;
+import comp3350.chefsnotes.presentation.ViewRecipe;
 import comp3350.chefsnotes.utils.TestUtils;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class EditRecipeTest {
     @Rule
-    public ActivityTestRule<RecipeBrowser> activityRule = new ActivityTestRule<>(RecipeBrowser.class);
+    public ActivityTestRule<ViewRecipe> activityRule = new ActivityTestRule<>(ViewRecipe.class);
 
     private IRecipeManager manager;
     private IRecipeFetcher fetcher;
@@ -51,12 +54,30 @@ public class EditRecipeTest {
     //shamelessly copied from the sample project
     @Before
     public void setUp() throws IOException, RecipeExistenceException {
+        ArrayList<Ingredient> ings = new ArrayList<Ingredient>();
+        ArrayList<Direction> dirs = new ArrayList<Direction>();
         example = new RecipeExample();
+
+        ings.addAll(Arrays.asList(example.getIngredients()));
+        dirs.addAll(Arrays.asList(example.getDirections()));
+
+
         this.tempDB = TestUtils.copyDB();
         final DBMSTools persistence = new RecipePersistence(this.tempDB.getAbsolutePath().replace(".script", ""));
         this.manager = new RecipeManager(persistence);
         this.fetcher = new RecipeFetcher(persistence);
-        this.manager.saveButton(example.getTitle(), (ArrayList<Ingredient>) Arrays.asList(example.getIngredients()), (ArrayList<Direction>) Arrays.asList(example.getDirections()), true);
+        try
+        {
+            this.manager.saveButton(example.getTitle(), ings, dirs, true);
+        }
+        catch (RecipeExistenceException e)
+        {
+        }
+
+        //launch recipe viewer with testrecipe
+        Intent myIntent = new Intent();
+        myIntent.putExtra("title", testName);
+        activityRule.launchActivity(myIntent);
     }
 
     @Test
