@@ -91,4 +91,15 @@ public class RecipeManager implements IRecipeManager {
         String newName = db.duplicateRecipe(oldName, copyName);
         return db.getRecipe(newName);
     }
+
+    public void updateNotes(Recipe R, String notes)
+    {
+        R.setNotes(notes);
+        db.commitChanges(R);
+    }
+
+    public String loadNotes(Recipe R)
+    {
+        return R.getNotes();
+    }
 }

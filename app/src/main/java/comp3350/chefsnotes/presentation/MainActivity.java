@@ -10,7 +10,6 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,10 +21,13 @@ import java.io.InputStreamReader;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Main;
 import comp3350.chefsnotes.application.Services;
+import comp3350.chefsnotes.objects.Photo;
 import comp3350.chefsnotes.objects.Recipe;
-import comp3350.chefsnotes.objects.SampleRecipe;
+import comp3350.chefsnotes.objects.SampleRecipeGenerator;
 import comp3350.chefsnotes.objects.TagExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
+import comp3350.chefsnotes.persistence.PhotoDBMSTools;
+import comp3350.chefsnotes.persistence.PhotoList;
 import comp3350.chefsnotes.persistence.TagDBMSTools;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,14 +41,23 @@ public class MainActivity extends AppCompatActivity {
         copyDatabaseToDevice();
         // instantiate databases
         Services.getTagPersistence(DB_MODE);
+        createTags();
+
         DBMSTools dbSetup = Services.getRecipePersistence(DB_MODE);
-        Recipe sample = new SampleRecipe();
-        if (dbSetup.getRecipe(sample.getTitle()) == null) {
-            dbSetup.createRecipe(sample.getTitle());
-            dbSetup.commitChanges(sample);
+        if (dbSetup.getAllRecipes().length == 0) {
+            Recipe[] samples = SampleRecipeGenerator.sampleList();
+            for (Recipe curr : samples) {
+                boolean insert = dbSetup.createRecipe(curr.getTitle());
+                if(insert){
+                    dbSetup.commitChanges(curr);
+                }
+            }
+
         }
 
-        createTags();
+        Services.getPhotoPersistence(DB_MODE);
+        setupPhotoList();
+
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
     }
@@ -115,32 +126,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    private void createTags() {
-        TagDBMSTools tagdb = Services.getTagPersistence();
-        if (tagdb.tagList().length == 0) {
-            try {
-                tagdb.addTag("African");
-                tagdb.addTag("American");
-                tagdb.addTag("Asian");
-                tagdb.addTag("Chinese");
-                tagdb.addTag("Fusion");
-                tagdb.addTag("German");
-                tagdb.addTag("Greek");
-                tagdb.addTag("Mexican");
-                tagdb.addTag("South American");
-                tagdb.addTag("Ukrainian");
-                tagdb.addTag("Keto");
-                tagdb.addTag("Pescatarian");
-                tagdb.addTag("Vegan");
-                tagdb.addTag("Vegetarian");
-
-            } catch (TagExistenceException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
     private boolean navigation(MenuItem item){
         if(item.getItemId() == R.id.new_recipe_button){
             Intent i = new Intent(MainActivity.this, EditRecipe.class);
@@ -159,6 +144,46 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void createTags() {
+        TagDBMSTools tagdb = Services.getTagPersistence();
+        if (tagdb.tagList().length == 0) {
+            try {
+                tagdb.addTag("African");
+                tagdb.addTag("American");
+                tagdb.addTag("Asian");
+                tagdb.addTag("Chinese");
+                tagdb.addTag("Fusion");
+                tagdb.addTag("German");
+                tagdb.addTag("Greek");
+                tagdb.addTag("Indian");
+                tagdb.addTag("Mexican");
+                tagdb.addTag("South American");
+                tagdb.addTag("Ukrainian");
+                tagdb.addTag("Keto");
+                tagdb.addTag("Pescatarian");
+                tagdb.addTag("Savory");
+                tagdb.addTag("Spicy");
+                tagdb.addTag("Sweet");
+                tagdb.addTag("Vegan");
+                tagdb.addTag("Vegetarian");
+
+            } catch (TagExistenceException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private void setupPhotoList(){
+        PhotoDBMSTools photodb = Services.getPhotoPersistence();
+        PhotoList pl = Services.getPhotoList();
+        Photo[] stored = photodb.getAllPhotos();
+
+        for(Photo i : stored){
+            assert pl.addPhoto(i); // should be no failures.
         }
     }
 
