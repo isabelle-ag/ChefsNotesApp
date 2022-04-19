@@ -12,7 +12,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -23,9 +22,7 @@ import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
@@ -126,10 +123,10 @@ public class RecipeBrowser extends AppCompatActivity {
         }
 
         recipes = recipeFetcher.filterRecipesByTags(incTags, exTags, searchSpace);
-        //TEMPORARY until tags is fully functional:
-        if(incTags.length == 0){
-            recipes = searchSpace;
-        }
+//        //TEMPORARY until tags is fully functional:
+//        if(incTags.length == 0){
+//            recipes = searchSpace;
+//        }
 
         ArrayAdapter<Recipe> rAdapter = new ArrayAdapter<Recipe>(this,
                 R.layout.list_style, recipes);
