@@ -130,14 +130,14 @@ public class ViewRecipe extends AppCompatActivity {
         //Ingredient List
         ArrayAdapter<String> ingAdapter = new ArrayAdapter<>(this,
                 R.layout.list_style, ingredients);
-        ListView ingView = findViewById(R.id.ingredientListView);
-        ingView.setAdapter(ingAdapter);
+       // ListView ingView = findViewById(R.id.ingredientListView);
+        ((ListView)findViewById(R.id.ingredientListView)).setAdapter(ingAdapter);
 
         //Direction List
         ArrayAdapter<String> dirAdapter = new ArrayAdapter<>(this,
                 R.layout.list_style, directions);
-        ListView dirView = findViewById(R.id.directionListView);
-        dirView.setAdapter(dirAdapter);
+        //ListView dirView = findViewById(R.id.directionListView);
+        ((ListView)findViewById(R.id.directionListView)).setAdapter(dirAdapter);
 
         ((TextView) findViewById(R.id.totalTimeView)).setText(time);
     }

@@ -42,4 +42,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def nav_version = "2.3.5"
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.+'
+    androidTestImplementation (group: 'com.android.support.test.espresso', name: 'espresso-core', version: '3.0.2') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation ('com.android.support.test:rules:1.0.2'){
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }

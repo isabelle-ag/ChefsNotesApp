@@ -2,6 +2,7 @@ package comp3350.chefsnotes.business;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.objects.SampleRecipe;
@@ -35,24 +36,42 @@ public class RecipeFetcher implements IRecipeFetcher{
     public Recipe[] filterRecipesByTags(String[] included, String[] excluded, Recipe[] searchSpace)
     {
         ArrayList<Recipe> out = new ArrayList<Recipe>();
-//The booleans below have all been switched in order to get tags working - this is an or operation!
+
         for (Recipe r: searchSpace)
         {
-            boolean good = false;
+            boolean good = true;
             for (String inclTag:included)
-                for (String tag:r.getTags())
-                    if (!tag.equals(inclTag))
-                        good = true;
+                if (!r.hasTag(inclTag))
+                    good = false;
             for (String exclTag:excluded)
-                for (String tag:r.getTags())
-                    if (tag.equals(exclTag))
-                        good = true;
+                if (r.hasTag(exclTag))
+                    good = false;
             if (good)
                 out.add(r);
         }
         return out.toArray(new Recipe[0]);
     }
 
+    public String[] filterRecipeNamesByTags(String[] included, String[] excluded, Recipe[] searchSpace) {
+        ArrayList<String> out = new ArrayList<>();
+
+        for (Recipe r: searchSpace)
+        {
+            //To make tag filtering work, I changed some things, originals are commented
+            boolean good = false; //true
+            for (String inclTag:included)
+                for (String tag:r.getTags())
+                    if (tag.equals(inclTag))
+                        good = true; //false
+            for (String exclTag:excluded)
+                for (String tag:r.getTags())
+                    if (tag.equals(exclTag))
+                        good = true; //false
+            if (good)
+                out.add(r.getTitle());
+        }
+        return out.toArray(new String[0]);
+    }
 
     public Recipe getRecipeByName(String name)
     {
@@ -70,6 +89,26 @@ public class RecipeFetcher implements IRecipeFetcher{
         return out.toArray(new Recipe[0]);
     }
 
-    //TODO
-    public Recipe[] getRecipeByIngredients(String ingredients){return getRecipesByText(ingredients);}
+    public String[] getRecipeNamesByText(String name){
+        return  db.searchRecipeNames(name);
+    }
+
+    public Recipe[] getRecipesByIngredient(String ing)
+    {
+        ArrayList<Recipe> out = new ArrayList<Recipe>();
+        Recipe[] recipes = db.getAllRecipes();
+        for (Recipe r:recipes)
+        {
+            String[] ingNames = r.getIngredientStrings();
+            for (String name: ingNames)
+            {
+                if (name.toLowerCase().contains(ing.toLowerCase()))
+                {
+                    out.add(r);
+                    break;
+                }
+            }
+        }
+        return out.toArray(new Recipe[0]);
+    }
 }
