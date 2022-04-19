@@ -120,7 +120,7 @@ public class RecipeBrowser extends AppCompatActivity {
         }
 
         if (isIngMode) {
-            searchSpace = recipeFetcher.getRecipeByIngredients(searchTerm);
+            searchSpace = recipeFetcher.getRecipesByIngredient(searchTerm);
         } else {
             searchSpace = recipeFetcher.getRecipesByText(searchTerm);
         }
