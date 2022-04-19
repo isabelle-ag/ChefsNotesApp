@@ -112,8 +112,8 @@ public class IRecipeFetcherTest {
 
         bar.addIngredient(new Ingredient("bar"));
         bar.addIngredient(new Ingredient("foobar"));
-        assertEquals(1, fetcher.getRecipesByIngredient("bar;foobar").length);
-
-
+        bar.addIngredient(new Ingredient("barfoo"));
+        assertEquals(1, fetcher.getRecipesByIngredient("bar;foobar;barfoo").length);
+        assertEquals(6, fetcher.getRecipesByIngredient("").length);
     }
 }

@@ -97,9 +97,6 @@ public class RecipeFetcher implements IRecipeFetcher{
 
     public Recipe[] getRecipesByIngredient(String ing)
     {
-//        if(ing.trim().length() == 0){
-//
-//        }
         String[] ingArray = ing.trim().split("\\s*;\\s*");
         int ingSize = ingArray.length;
         int fakeItems = 0;
@@ -108,7 +105,6 @@ public class RecipeFetcher implements IRecipeFetcher{
                 fakeItems++;
             }
         }
-        //Log.d("TAG", "fakeItems: "+fakeItems+"\nArray Size: "+ingSize);
         if(fakeItems == ingSize){
             return getRecipesByText("");
         }
