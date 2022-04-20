@@ -57,10 +57,10 @@ public class ViewRecipe extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
 
-        String recipeName = "";
+        //String recipeName = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            recipeName = extras.getString("recipeKey");
+            String recipeName = extras.getString("recipeKey");
             recipe = recipeFetcher.getRecipeByName(recipeName);
         }
         else{
@@ -98,11 +98,9 @@ public class ViewRecipe extends AppCompatActivity {
 
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
-
             Intent switchActivityIntent = new Intent(this, EditRecipe.class);
             switchActivityIntent.putExtra("title", recipe.getTitle());
             startActivity(switchActivityIntent);
-        //}
     }
 
     private void copyRecipe(View view) {
@@ -119,7 +117,6 @@ public class ViewRecipe extends AppCompatActivity {
     }
 
     private void fillViewer() {
-        //valid = true;
         String[] directionsTemp = recipe.getDirectionStrings();
         String[] ingredients = recipe.getIngredientStrings();
         String title = recipe.getTitle();

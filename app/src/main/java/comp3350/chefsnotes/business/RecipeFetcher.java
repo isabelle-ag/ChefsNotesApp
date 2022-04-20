@@ -1,5 +1,7 @@
 package comp3350.chefsnotes.business;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.application.Services;
@@ -49,27 +51,6 @@ public class RecipeFetcher implements IRecipeFetcher{
         return out.toArray(new Recipe[0]);
     }
 
-    public String[] filterRecipeNamesByTags(String[] included, String[] excluded, Recipe[] searchSpace) {
-        ArrayList<String> out = new ArrayList<>();
-
-        for (Recipe r: searchSpace)
-        {
-            //To make tag filtering work, I changed some things, originals are commented
-            boolean good = false; //true
-            for (String inclTag:included)
-                for (String tag:r.getTags())
-                    if (tag.equals(inclTag))
-                        good = true; //false
-            for (String exclTag:excluded)
-                for (String tag:r.getTags())
-                    if (tag.equals(exclTag))
-                        good = true; //false
-            if (good)
-                out.add(r.getTitle());
-        }
-        return out.toArray(new String[0]);
-    }
-
     public Recipe getRecipeByName(String name)
     {
         return db.getRecipe(name);
@@ -92,20 +73,37 @@ public class RecipeFetcher implements IRecipeFetcher{
 
     public Recipe[] getRecipesByIngredient(String ing)
     {
+        String[] ingArray = ing.trim().split("\\s*;\\s*");
+        int ingSize = ingArray.length;
+        int fakeItems = 0;
+        for(String item : ingArray) {
+            if (item.replaceAll(" ","").isEmpty()) {
+                fakeItems++;
+            }
+        }
+        if(fakeItems == ingSize){
+            return getRecipesByText("");
+        }
         ArrayList<Recipe> out = new ArrayList<Recipe>();
         Recipe[] recipes = db.getAllRecipes();
         for (Recipe r:recipes)
         {
-            String[] ingNames = r.getIngredientStrings();
-            for (String name: ingNames)
-            {
-                if (name.toLowerCase().contains(ing.toLowerCase()))
-                {
+            String[] ingNames = r.ingredientList();
+            int matches = 0;
+            for (String ingredient : ingArray) {
+                for (String name: ingNames) {
+                    if (name.trim().equalsIgnoreCase(ingredient)) {
+                        matches++;
+                        break;
+                    }
+                }
+                if(matches == (ingSize-fakeItems)){
                     out.add(r);
-                    break;
                 }
             }
         }
+
         return out.toArray(new Recipe[0]);
     }
+
 }
