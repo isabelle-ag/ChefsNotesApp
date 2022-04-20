@@ -55,7 +55,6 @@ public class RecipeBrowser extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
         ingMode.setOnCheckedChangeListener(this::toggleHint);
-        ingMode.setChecked(true);
         ingMode.setChecked(false);
 
         searchBox.addTextChangedListener(new TextWatcher() {
@@ -83,11 +82,11 @@ public class RecipeBrowser extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         populateRecipes("");
     }
 
     protected void toggleHint(CompoundButton c, boolean isChecked){
+
         TextView searchDesc = (TextView) findViewById(R.id.searchDesc);
         //If ingredient mode
         if(isChecked) {
@@ -105,7 +104,6 @@ public class RecipeBrowser extends AppCompatActivity {
         Recipe[] searchSpace;
         String[] incTags = new String[0];
         String[] exTags = new String[0];
-        boolean isIngMode = ingMode.isChecked();
 
         if (tagFilters.size() > 0) {
             incTags = new String[tagFilters.size()];
@@ -116,17 +114,13 @@ public class RecipeBrowser extends AppCompatActivity {
             exTags = excludedTags.toArray(exTags);
         }
 
-        if (isIngMode) {
+        if (ingMode.isChecked()) {
             searchSpace = recipeFetcher.getRecipesByIngredient(searchTerm);
         } else {
             searchSpace = recipeFetcher.getRecipesByText(searchTerm);
         }
 
         recipes = recipeFetcher.filterRecipesByTags(incTags, exTags, searchSpace);
-//        //TEMPORARY until tags is fully functional:
-//        if(incTags.length == 0){
-//            recipes = searchSpace;
-//        }
 
         ArrayAdapter<Recipe> rAdapter = new ArrayAdapter<Recipe>(this,
                 R.layout.list_style, recipes);

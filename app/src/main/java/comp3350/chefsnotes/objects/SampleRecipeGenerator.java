@@ -49,8 +49,8 @@ public class SampleRecipeGenerator {
         result.addIngredient("Cream",250,Units.ML);
         result.addIngredient("Parmesan Cheese",1,2,Units.CUP);
 
-        result.addDirection(new Direction("Saute Aromatics","heat a non-reactive pot over medium heat. Melt in 4 Tbsp butter then sautee onions until softened and golden (10-12 min). Add minced garlic and saute another minute.",10));
-        result.addDirection(new Direction("Make Soup Base","stir in crushed tomatoes with their juice, your chicken stock, chopped basil, sugar and black pepper. Bring to a boil then reduce heat, partially cover and simmer 10 minutes.",10));
+        result.addDirection(new Direction("Heat a non-reactive pot over medium heat. Melt in 4 Tbsp butter then sautee onions until softened and golden (10-12 min). Add minced garlic and saute another minute.","Saute Aromatics",10));
+        result.addDirection(new Direction("Stir in crushed tomatoes with their juice, your chicken stock, chopped basil, sugar and black pepper. Bring to a boil then reduce heat, partially cover and simmer 10 minutes.","Make Soup Base",10));
         result.addDirection(new Direction("Stir in the cream.","Add Cream"));
         result.addDirection(new Direction("Garnish with parmesan, more basil, and 3 whistles. Serve.","Serve and Garnish"));
 
@@ -65,7 +65,7 @@ public class SampleRecipeGenerator {
     private static Recipe butterChicken(){
         Recipe result = new Recipe("Indian Butter Chicken");
 
-        result.addIngredient("Plain Yogourt",1,2,Units.CUP);
+        result.addIngredient("Plain Yoghurt",1,2,Units.CUP);
         result.addIngredient("Lemon Juice",1,Units.TBSP);
         result.addIngredient("Turmeric", 1, Units.TSP);
         result.addIngredient("Garam Masala",2,Units.TSP);
@@ -80,11 +80,11 @@ public class SampleRecipeGenerator {
         result.addIngredient("Sugar",1,Units.TBSP);
         result.addIngredient("Salt",5,4,Units.TSP);
 
-        result.addDirection(new Direction("for an extra smooth sauce, combine the Marinade ingredients (except the chicken) in a food processor and blend until smooth. (I do not do this)","Optional Blitz"));
-        result.addDirection(new Direction("Marinade","Combine the Marinade ingredients with the chicken in a bowl. Cover and refrigerate overnight, or up to 24 hours (minimum 3 hrs).",180));
-        result.addDirection(new Direction("Cook Chicken","Heat the butter over high heat in a large fry pan. Take the chicken out of the Marinade but do not wipe or shake off the marinade from the chicken (but don't pour the Marinade left in the bowl into the fry pan)."));
+        result.addDirection(new Direction("For an extra smooth sauce, combine the Marinade ingredients (except the chicken) in a food processor and blend until smooth. (I do not do this)","Optional Blitz"));
+        result.addDirection(new Direction("Combine the Marinade ingredients with the chicken in a bowl. Cover and refrigerate overnight, or up to 24 hours (minimum 3 hrs).","Marinade",180));
+        result.addDirection(new Direction("Heat the butter over high heat in a large fry pan. Take the chicken out of the Marinade but do not wipe or shake off the marinade from the chicken (but don't pour the Marinade left in the bowl into the fry pan).", "Cook Chicken"));
         result.addDirection(new Direction("Place chicken in the fry pan and cook for around 3 minutes, or until the chicken is white all over (it doesn't really brown because of the Marinade).",3));
-        result.addDirection(new Direction("Sauce","Add the tomato paste, cream, sugar and salt. Also add any remaining marinade left in the bowl. Turn down to low and simmer for 20 minutes. Do a taste test to see if it needs more salt.",20));
+        result.addDirection(new Direction("Add the tomato paste, cream, sugar and salt. Also add any remaining marinade left in the bowl. Turn down to low and simmer for 20 minutes. Do a taste test to see if it needs more salt.","Sauce",20));
         result.addDirection(new Direction("Garnish with coriander/cilantro leaves if using. Serve with basmati rice and naan bread."));
 
         result.addTag("Indian");
