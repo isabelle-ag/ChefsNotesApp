@@ -39,7 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            app:srcCompat="@drawable/share_button" />
+            android:clickable="true"
+            app:srcCompat="@drawable/share_button"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
     </RelativeLayout>
 
     <LinearLayout
