@@ -50,7 +50,7 @@ public class Decimal extends QuantityNum {
 
     @Override
     public boolean needPlural() {
-        return this.value != 1;
+        return !(this.equals(new Decimal(1)));
     }
 
     @Override
