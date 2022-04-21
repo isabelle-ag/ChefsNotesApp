@@ -1,5 +1,6 @@
 package comp3350.chefsnotes.presentation;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.core.content.res.ResourcesCompat;
@@ -11,17 +12,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
@@ -30,6 +30,7 @@ import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.ITagHandler;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.TagHandler;
+import comp3350.chefsnotes.objects.Recipe;
 
 
 public class RecipeBrowser extends AppCompatActivity {
@@ -38,6 +39,7 @@ public class RecipeBrowser extends AppCompatActivity {
     private ArrayList<String> tagFilters;
     private ArrayList<String> excludedTags;
     private String searchTerm;
+    private SwitchCompat ingMode;
 
 
     @Override
@@ -49,8 +51,11 @@ public class RecipeBrowser extends AppCompatActivity {
         searchTerm = "";
 
         EditText searchBox = (EditText) findViewById(R.id.searchRecipeName);
+        ingMode = (SwitchCompat) findViewById(R.id.searchToggle);
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
+        ingMode.setOnCheckedChangeListener(this::toggleHint);
+        ingMode.setChecked(false);
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,39 +82,56 @@ public class RecipeBrowser extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         populateRecipes("");
     }
 
-    private void populateRecipes(String searchTerm){
-        ListView searchResults = (ListView) findViewById(R.id.results);
-        String[] recipeList;
-        String[] exTagArray = new String[0];
-        if(tagFilters.size() > 0){
-            String[] incTagArray = new String[tagFilters.size()];
-            incTagArray = tagFilters.toArray(incTagArray);
-            if(excludedTags.size()>0) {
-                exTagArray = new String[excludedTags.size()];
-                exTagArray = excludedTags.toArray(exTagArray);
-            }
-            recipeList = recipeFetcher.filterRecipeNamesByTags(incTagArray, exTagArray, recipeFetcher.getRecipesByText(searchTerm));
+    protected void toggleHint(CompoundButton c, boolean isChecked){
+
+        TextView searchDesc = (TextView) findViewById(R.id.searchDesc);
+        //If ingredient mode
+        if(isChecked) {
+            searchDesc.setText(R.string.search_mode_ing);
         }
         else{
-            recipeList = recipeFetcher.getRecipeNamesByText(searchTerm);
+            searchDesc.setText(R.string.search_mode_name);
+        }
+        populateRecipes(searchTerm);
+    }
+
+    private void populateRecipes(String searchTerm) {
+        ListView searchResults = (ListView) findViewById(R.id.results);
+        Recipe[] recipes;
+        Recipe[] searchSpace;
+        String[] incTags = new String[0];
+        String[] exTags = new String[0];
+
+        if (tagFilters.size() > 0) {
+            incTags = new String[tagFilters.size()];
+            incTags = tagFilters.toArray(incTags);
+        }
+        if (excludedTags.size() > 0) {
+            exTags = new String[excludedTags.size()];
+            exTags = excludedTags.toArray(exTags);
         }
 
+        if (ingMode.isChecked()) {
+            searchSpace = recipeFetcher.getRecipesByIngredient(searchTerm);
+        } else {
+            searchSpace = recipeFetcher.getRecipesByText(searchTerm);
+        }
 
-        ArrayAdapter<String> rAdapter = new ArrayAdapter<String>(this,
-                R.layout.list_style, recipeList);
+        recipes = recipeFetcher.filterRecipesByTags(incTags, exTags, searchSpace);
+
+        ArrayAdapter<Recipe> rAdapter = new ArrayAdapter<Recipe>(this,
+                R.layout.list_style, recipes);
         searchResults.setAdapter(rAdapter);
         searchResults.setOnItemClickListener((parent, v, position, id) -> {
-            String recipeName = (String) parent.getItemAtPosition(position);
+            Recipe selected = (Recipe) parent.getItemAtPosition(position);
             Intent i = new Intent(RecipeBrowser.this, ViewRecipe.class);
-            i.putExtra("recipeKey",recipeName);
+            i.putExtra("recipeKey", selected.toString());
             startActivity(i);
         });
     }
-
 
     private void populateTags() {
 

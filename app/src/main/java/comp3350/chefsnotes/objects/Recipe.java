@@ -1,5 +1,7 @@
 package comp3350.chefsnotes.objects;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -387,7 +389,11 @@ public class Recipe implements Serializable {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
+        return(this.title);
+    }
+
+    public String stringExport(){
         StringBuilder builder = new StringBuilder();
         builder.append(this.title);
         builder.append("\n");
