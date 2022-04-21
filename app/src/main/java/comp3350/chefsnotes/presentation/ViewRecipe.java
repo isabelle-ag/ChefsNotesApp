@@ -7,7 +7,10 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ClipboardManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,9 +54,11 @@ public class ViewRecipe extends AppCompatActivity {
 
         ImageButton editButton = findViewById(R.id.edit_button);
         ImageButton copyButton = findViewById(R.id.copy_button);
+        ImageView shareButton = findViewById(R.id.share_button);
 
         editButton.setOnClickListener(this::editRecipe);
         copyButton.setOnClickListener(this::copyRecipe);
+        shareButton.setOnClickListener(this::exportRecipe);
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
@@ -114,6 +120,11 @@ public class ViewRecipe extends AppCompatActivity {
             switchActivityIntent.putExtra("title", title);
             startActivity(switchActivityIntent);
       //  }
+    }
+
+    private void exportRecipe(View view) {
+        ClipboardManager clipManager = (ClipboardManager)getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);;
+        clipManager.setPrimaryClip(ClipData.newPlainText(null, recipe.stringExport()));
     }
 
     private void fillViewer() {
