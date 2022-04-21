@@ -10,7 +10,6 @@ import androidx.fragment.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +25,6 @@ import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
@@ -221,7 +219,7 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
                             .getText().toString();
 
             String instructions =
-                    ((EditText)currRow.findViewById(R.id.textbox))
+                    ((EditText)currRow.findViewById(R.id.InstructionBox))
                             .getText().toString();
 
             String timeEstimate =
@@ -279,7 +277,7 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
                 name.setText(dir.getName());
                 time = (EditText) curDir.findViewById(R.id.TimeEstimate);
                 time.setText(dir.getTime() + "");
-                EditText contents = (EditText) curDir.findViewById(R.id.textbox);
+                EditText contents = (EditText) curDir.findViewById(R.id.InstructionBox);
                 contents.setText(dir.getText());
                 curDir = findViewById(this.addDirection(findViewById(R.id.DirectionContainer)));
             }

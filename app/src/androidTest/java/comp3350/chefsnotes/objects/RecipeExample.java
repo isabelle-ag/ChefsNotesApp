@@ -4,7 +4,7 @@ import comp3350.chefsnotes.business.Units;
 
 public class RecipeExample extends Recipe {
     public RecipeExample(){
-        super("Chocolate Chip Cookies");
+        super("#3350TEST");
         this.setup();
     }
 

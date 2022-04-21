@@ -12,7 +12,6 @@ import comp3350.chefsnotes.iteration2features.TagFilteringTest;
 import comp3350.chefsnotes.iteration3features.IngredientBrowsingTest;
 import comp3350.chefsnotes.iteration3features.PhotosAndNotesTest;
 import comp3350.chefsnotes.iteration3features.RecipeExportingTest;
-import comp3350.chefsnotes.iteration3features.ServingSizeTest;
 
 @RunWith(Suite.class)
 
@@ -25,7 +24,6 @@ import comp3350.chefsnotes.iteration3features.ServingSizeTest;
         RecipeExportingTest.class,
         RecipeTaggingTest.class,
         RecipeViewerTest.class,
-        ServingSizeTest.class,
         TagFilteringTest.class
 })
 public class AllAcceptanceTests {

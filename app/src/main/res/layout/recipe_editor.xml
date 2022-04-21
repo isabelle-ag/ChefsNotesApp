@@ -202,9 +202,10 @@
             </TableRow>
 
             <TableRow
+                android:id="@+id/buffer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="120dp"></TableRow>
+                android:minHeight="500dp"></TableRow>
 
         </TableLayout>
     </ScrollView>

@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         copyDatabaseToDevice();
         // instantiate databases
         Services.getTagPersistence(DB_MODE);
+
         createTags();
 
         DBMSTools dbSetup = Services.getRecipePersistence(DB_MODE);
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                     dbSetup.commitChanges(curr);
                 }
             }
-
         }
 
         Services.getPhotoPersistence(DB_MODE);
