@@ -28,11 +28,18 @@
             android:id="@+id/copy_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/share_button"
             android:background="@drawable/copy_button"
             android:contentDescription='"Duplicate Recipe"' />
+
+        <ImageView
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:srcCompat="@drawable/share_button" />
     </RelativeLayout>
 
     <LinearLayout
