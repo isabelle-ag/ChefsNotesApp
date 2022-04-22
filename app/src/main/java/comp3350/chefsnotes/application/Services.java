@@ -13,7 +13,7 @@ import comp3350.chefsnotes.persistence.TagPersistence;
 import comp3350.chefsnotes.presentation.MainActivity;
 
 public class Services {
-    public static final boolean MODE_FAKE = true;
+    public static final boolean MODE_FAKE = true; //basically equivalent to c defines - DB_MODE in mainactivity is set to one of these, which controls if the hsqldb db or fake implementations are used
     public static final boolean MODE_REAL = false;
 
     private static DBMSTools recipePersistence = null;

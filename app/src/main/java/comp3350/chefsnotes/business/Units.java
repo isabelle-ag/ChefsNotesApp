@@ -1,6 +1,6 @@
 package comp3350.chefsnotes.business;
 
-public abstract class Units {
+public abstract class Units { //this is intentionally not an Enum. doing it like this was easier for us to work with.
     public static final String NONE = "";
     public static final String ML = "mL";
     public static final String L = "L";
