@@ -223,8 +223,10 @@ public class RecipePersistence implements DBMSTools{
 
                 // verify success
                 testOut = getRecipe(newName);
-                if(attempt>0 && testOut != null && testOut.getTitle().equals(newName)){
+                if(attempt>0 && testOut != null){
                     result = true;
+                    testOut._setTitle(newName);
+                    this.commitChanges(testOut);
                     this.recent = newName;
                 }
 
