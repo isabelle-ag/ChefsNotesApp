@@ -98,6 +98,7 @@ public class RecipeStuffIT {
         manager.renameRecipe(R1, "baz");
         assertNull(fetcher.getRecipeByName("foobar"));
         assertNotNull(fetcher.getRecipeByName("baz"));
+        assertEquals("baz", fetcher.getRecipeByName("baz").getTitle());
     }
 
 
