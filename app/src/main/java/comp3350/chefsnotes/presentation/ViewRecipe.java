@@ -1,6 +1,8 @@
 package comp3350.chefsnotes.presentation;
 
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -57,7 +59,6 @@ public class ViewRecipe extends AppCompatActivity {
     private Recipe recipe;
     private ActivityResultLauncher<Intent> launcher;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,10 +75,26 @@ public class ViewRecipe extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
 
-        ImageView recipeImg = findViewById(R.id.recipe_photo);
-        recipeImg.setOnClickListener(this::uploadPhoto);
 
-        Bundle extras = getIntent().getExtras();
+        ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+                new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri uri) {
+                        // Handle the returned Uri
+                    }
+                });
+
+
+        ImageView recipeImg = findViewById(R.id.recipe_photo);
+        recipeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGetContent.launch("image/*");
+            }
+        });
+
+
+    Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String recipeName = extras.getString("recipeKey");
             recipe = recipeFetcher.getRecipeByName(recipeName);
@@ -133,10 +150,21 @@ public class ViewRecipe extends AppCompatActivity {
     }
 
     private void uploadPhoto(View v) {
-        IPhotoManager manager = new PhotoManager();
-        manager.getPhoto();
+//        Intent viewGallery = new Intent(Intent.ACTION_PICK);
+//        viewGallery.setType("image/*");
+//        getPhoto.launch(viewGallery);
 
-//        activityResultLauncher.launch(viewGallery);
+        ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+                new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri uri) {
+                        // Handle the returned Uri
+                    }
+                });
+
+    }
+
+    private void getPhoto(){
 
     }
 

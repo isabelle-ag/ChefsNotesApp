@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 tagdb.addTag("American");
                 tagdb.addTag("Asian");
                 tagdb.addTag("Chinese");
+                tagdb.addTag("French");
                 tagdb.addTag("Fusion");
                 tagdb.addTag("German");
                 tagdb.addTag("Greek");
