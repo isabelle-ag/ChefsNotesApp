@@ -16,9 +16,6 @@ public class RecipeManager implements IRecipeManager {
         this.db = db;
     }
 
-    public RecipeManager() {
-        this.db = Services.getRecipePersistence();
-    }
 
     public Recipe newRecipe(String name) throws RecipeExistenceException
     {
@@ -49,6 +46,7 @@ public class RecipeManager implements IRecipeManager {
     public void renameRecipe(Recipe R, String newName) throws RecipeExistenceException
     {
         String name = R.getTitle();
+        Recipe r = (db.getRecipe(name));
         if(db.getRecipe(name) == null)
         {
             throw new RecipeExistenceException(String.format(name));
