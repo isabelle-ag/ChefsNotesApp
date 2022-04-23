@@ -31,7 +31,6 @@
             android:layout_alignParentBottom="true"
             android:layout_toStartOf="@id/share_button"
             android:background="@drawable/copy_button"
-<<<<<<< HEAD
             android:contentDescription='"Duplicate Recipe"' />
 
         <ImageView
@@ -43,9 +42,6 @@
             android:clickable="true"
             app:srcCompat="@drawable/share_button"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-=======
-            android:contentDescription='@string/duplicate_recipe' />
->>>>>>> 6b261a060a692d3e2347117bf12d36832514aee0
     </RelativeLayout>
 
     <LinearLayout

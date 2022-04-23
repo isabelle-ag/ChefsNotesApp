@@ -137,11 +137,13 @@ public class ViewRecipe extends AppCompatActivity {
         manager.getPhoto();
 
 //        activityResultLauncher.launch(viewGallery);
+
     }
 
     private void exportRecipe(View view) {
         ClipboardManager clipManager = (ClipboardManager)getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);;
         clipManager.setPrimaryClip(ClipData.newPlainText(null, recipe.stringExport()));
+
     }
 
     private void fillViewer() {
