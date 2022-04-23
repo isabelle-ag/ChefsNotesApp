@@ -16,9 +16,6 @@ public class RecipeManager implements IRecipeManager {
         this.db = db;
     }
 
-    public RecipeManager() {
-        this.db = Services.getRecipePersistence();
-    }
 
     public Recipe newRecipe(String name) throws RecipeExistenceException
     {
