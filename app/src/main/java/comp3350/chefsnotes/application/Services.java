@@ -77,7 +77,7 @@ public class Services {
     // really only for use by Recipe.java to add/remove references
     public static synchronized PhotoList getPhotoList(){
         if(photoList == null){
-            photoList = new PhotoList();
+            photoList = new PhotoList(Services.getPhotoPersistence());
         }
         return photoList;
     }
