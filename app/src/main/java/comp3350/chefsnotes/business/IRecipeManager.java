@@ -15,5 +15,6 @@ public interface IRecipeManager {
     public Recipe copyRecipe(Recipe R, String copyName);
     public void updateNotes(Recipe R, String notes);
     public String loadNotes(Recipe R);
+    public void addPhoto(Recipe R, String pathname);
 }
 

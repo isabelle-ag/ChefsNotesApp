@@ -99,4 +99,6 @@ public class RecipeManager implements IRecipeManager {
     {
         return R.getNotes();
     }
+
+    public void addPhoto(Recipe R, String pathname){ R.addPhoto(pathname); }
 }

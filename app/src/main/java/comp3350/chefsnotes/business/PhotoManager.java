@@ -30,22 +30,23 @@ public class PhotoManager implements IPhotoManager{
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getFilesDir();
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+        //File storageDir = getFilesDir();
+//        File image = File.createTempFile(
+//                imageFileName,  /* prefix */
+//                ".jpg",         /* suffix */
+//                storageDir      /* directory */
+//        );
 
         // Save a file: path for use with ACTION_VIEW intents
-        String currentPhotoPath = image.getAbsolutePath();
-        return image;
+//        String currentPhotoPath = image.getAbsolutePath();
+//        return image;
+        return null;
     }
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        //if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
             try {
@@ -55,18 +56,18 @@ public class PhotoManager implements IPhotoManager{
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "comp3350.chefsnotes.android.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
+//                Uri photoURI = FileProvider.getUriForFile(this,
+//                        "comp3350.chefsnotes.android.fileprovider",
+//                        photoFile);
+              //  takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                //startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+
         }
     }
 
 
-    private File getExternalFilesDir(String directoryPictures) {
-    }
+//    private File getExternalFilesDir(String directoryPictures) {
+//    }
 
 
     //Intent viewGallery = new Intent(Intent.ACTION_PICK);
@@ -87,12 +88,12 @@ public class PhotoManager implements IPhotoManager{
 //        viewGallery.setAction(Intent.ACTION_GET_CONTENT);
 //        startActivityForResult(viewGallery, GALLERY_IMAGE);
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if (requestCode == PICK_IMAGE) {
-            //TODO: action
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data)
+//    {
+//        if (requestCode == PICK_IMAGE) {
+//            //
+//        }
+//    }
 
 }

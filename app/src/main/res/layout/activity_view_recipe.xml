@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewRecipeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ViewRecipe">
@@ -115,17 +116,13 @@
                 android:paddingBottom="5dp"
                 tools:ignore="DuplicateSpeakableTextCheck"></ListView>
 
-            <ImageView
-                android:id="@+id/recipe_photo"
+            <include
+                android:id="@+id/included_photo"
+                layout="@layout/photo_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:clickable="true"
-                android:contentDescription="@string/camera_button"
-                android:focusable="true"
-                android:maxHeight="250dp"
-                app:srcCompat="@drawable/camera" />
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1" />
 
         </LinearLayout>
 

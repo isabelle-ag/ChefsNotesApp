@@ -53,11 +53,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ViewRecipe extends AppCompatActivity {
+public class ViewRecipe extends PhotoActivity {
 
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
-    private ActivityResultLauncher<Intent> launcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,31 +66,15 @@ public class ViewRecipe extends AppCompatActivity {
         ImageButton editButton = findViewById(R.id.edit_button);
         ImageButton copyButton = findViewById(R.id.copy_button);
         ImageView shareButton = findViewById(R.id.share_button);
+        View incl = findViewById(R.id.included_photo);
 
         editButton.setOnClickListener(this::editRecipe);
         copyButton.setOnClickListener(this::copyRecipe);
         shareButton.setOnClickListener(this::exportRecipe);
+        incl.setOnClickListener(super::choosePic);
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
-
-
-        ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>() {
-                    @Override
-                    public void onActivityResult(Uri uri) {
-                        // Handle the returned Uri
-                    }
-                });
-
-
-        ImageView recipeImg = findViewById(R.id.recipe_photo);
-        recipeImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGetContent.launch("image/*");
-            }
-        });
 
 
     Bundle extras = getIntent().getExtras();
@@ -149,24 +132,24 @@ public class ViewRecipe extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    private void uploadPhoto(View v) {
-//        Intent viewGallery = new Intent(Intent.ACTION_PICK);
-//        viewGallery.setType("image/*");
-//        getPhoto.launch(viewGallery);
+//    private void uploadPhoto(View v) {
+////        Intent viewGallery = new Intent(Intent.ACTION_PICK);
+////        viewGallery.setType("image/*");
+////        getPhoto.launch(viewGallery);
+//
+//        ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+//                new ActivityResultCallback<Uri>() {
+//                    @Override
+//                    public void onActivityResult(Uri uri) {
+//                        // Handle the returned Uri
+//                    }
+//                });
 
-        ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>() {
-                    @Override
-                    public void onActivityResult(Uri uri) {
-                        // Handle the returned Uri
-                    }
-                });
-
-    }
-
-    private void getPhoto(){
-
-    }
+//    }
+//
+//    private void getPhoto(){
+//
+//    }
 
     private void exportRecipe(View view) {
         ClipboardManager clipManager = (ClipboardManager)getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);;
