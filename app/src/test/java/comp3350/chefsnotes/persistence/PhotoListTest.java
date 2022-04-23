@@ -43,10 +43,12 @@ public class PhotoListTest {
         plist.addReference(name1);
         assertEquals(p1.getRefCount(), 3);
         verify(pdb).setReference(name1,3);
+        verify(pdb,times(0)).addPhoto(name1);
 
         plist.removeReference(name1);
         assertEquals(p1.getRefCount(),2);
         verify(pdb).setReference(name1, 2);
+        verify(pdb,times(0)).removePhoto(name1);
 
         plist.addReference(name2);
         verify(pdb).addPhoto(name2);

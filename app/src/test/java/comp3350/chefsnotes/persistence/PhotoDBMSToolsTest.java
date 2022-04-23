@@ -37,5 +37,15 @@ public class PhotoDBMSToolsTest {
         assertEquals(1,testOut.length);
     }
 
+    @Test
+    public void testSetReference(){
+        String name1 = "unlikely474747474747";
+        pdb.addPhoto(name1);
+        pdb.setReference(name1,20);
+
+        Photo[] testOut = pdb.getAllPhotos();
+        assertEquals(20,testOut[0].getRefCount());
+    }
+
 
 }

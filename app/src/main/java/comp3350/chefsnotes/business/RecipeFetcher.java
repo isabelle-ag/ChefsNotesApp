@@ -16,11 +16,6 @@ public class RecipeFetcher implements IRecipeFetcher{
         this.db = db;
     }
 
-    public RecipeFetcher()
-    {
-        this.db = Services.getRecipePersistence();
-    }
-
     public Recipe getRecentRecipe()
     {
         return db.getRecipe(db.lastModified());
@@ -66,11 +61,7 @@ public class RecipeFetcher implements IRecipeFetcher{
         }
         return out.toArray(new Recipe[0]);
     }
-
-    public String[] getRecipeNamesByText(String name){
-        return  db.searchRecipeNames(name);
-    }
-
+    
     public Recipe[] getRecipesByIngredient(String ing)
     {
         String[] ingArray = ing.trim().split("\\s*;\\s*");

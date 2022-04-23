@@ -20,15 +20,15 @@ public abstract class Units { //this is intentionally not an Enum. doing it like
     public static final String KILOGRAMS = "kg";
 
     public static String[] unitList(){
-        return new String[] {NONE, ML, L, FLUID_OUNCE, DASH, TSP, TBSP, CUP, PINT, QUART, GALLON, PIECE, UNIT, POUNDS, GRAMS, KILOGRAMS};
+        return new String[] {NONE, ML, L, FLUID_OUNCE, DASH, TSP, TBSP, CUP, PINT, QUART, GALLON, PIECE, OUNCE, UNIT, POUNDS, GRAMS, KILOGRAMS};
     }
 
     public static boolean isUnit(String test){
-        boolean result = test.equals(ML) || test.equals(L) || test.equals(CUP) || test.equals(FLUID_OUNCE) ||
-                test.equals(TBSP) || test.equals(TSP) || test.equals(DASH) || test.equals(QUART) ||
-                test.equals(GALLON) || test.equals(PINT) || test.equals(PIECE) || test.equals(UNIT) || test.equals(OUNCE) ||
-                test.equals(POUNDS) || test.equals(KILOGRAMS) || test.equals(GRAMS) || test.equals(NONE);
-
+        boolean result = false;
+        for(String u : Units.unitList()) {
+            if (test.equals(u))
+                result = true;
+        }
         return result;
     }
 }
