@@ -10,8 +10,8 @@ import comp3350.chefsnotes.objects.QuantityNumTest;
 
 @Suite.SuiteClasses({
         DBMSToolsTest.class,
-        PhotoDBMSToolsTest.class//,
-        //PhotoListTest.class,
+        PhotoDBMSToolsTest.class,
+        PhotoListTest.class//,
         //TagDBMSToolsTest.class
 })
 
