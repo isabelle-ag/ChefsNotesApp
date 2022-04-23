@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/delete_button"
-        android:contentDescription='Delete Recipe'
+        android:contentDescription='@string/delete_recipe'
         android:scaleX="1.2"
         android:scaleY="1.2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,16 +77,16 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/tagConstraintEdit"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <androidx.constraintlayout.helper.widget.Flow
                         android:id="@+id/add_recipe_tags"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:flow_horizontalBias=".1"
                         app:flow_horizontalGap="10dp"
@@ -97,6 +97,56 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/add_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Tag" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/add_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/add_outlined" />
+
+                    <ImageView
+                        android:id="@+id/delete_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:clickable="true"
+                        android:contentDescription="@string/delete_photo"
+                        android:focusable="true"
+                        app:srcCompat="@drawable/remove" />
+
+                    <ImageView
+                        android:id="@+id/edit_camera_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:clickable="true"
+                        android:contentDescription="@string/camera_button"
+                        android:focusable="true"
+                        android:maxHeight="200dp"
+                        app:srcCompat="@drawable/camera" />
+                </FrameLayout>
 
             </TableRow>
 
@@ -175,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="#00FFFFFF"
-                    android:contentDescription="Add Direction"
+                    android:contentDescription="@string/add_direction"
                     android:onClick="addDirection"
                     android:padding="10dp"
                     android:scaleX="1"

@@ -22,7 +22,7 @@
             android:layout_alignParentBottom="true"
             android:layout_toStartOf="@+id/copy_button"
             android:background="@drawable/edit_button"
-            android:contentDescription='"Edit button"' />
+            android:contentDescription='@string/edit' />
 
         <ImageButton
             android:id="@+id/copy_button"
@@ -32,7 +32,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="5dp"
             android:background="@drawable/copy_button"
-            android:contentDescription='"Duplicate Recipe"' />
+            android:contentDescription='@string/duplicate_recipe' />
     </RelativeLayout>
 
     <LinearLayout
@@ -53,8 +53,6 @@
             android:textAlignment="textStart"
             android:textColor="#000000"
             android:textSize="40sp" />
-
-        <!--        has temporary image-->
 
         <TextView
             android:id="@+id/totalTimeView"
@@ -93,16 +91,34 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/ingredientListView"
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
-            android:divider="@android:color/black"
-            android:dividerHeight="-10sp"
-            android:paddingBottom="5dp"
-            tools:ignore="DuplicateSpeakableTextCheck">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        </ListView>
+            <ListView
+                android:id="@+id/ingredientListView"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_weight="1"
+                android:divider="@android:color/black"
+                android:dividerHeight="-10sp"
+                android:paddingBottom="5dp"
+                tools:ignore="DuplicateSpeakableTextCheck"></ListView>
+
+            <ImageView
+                android:id="@+id/recipe_photo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:contentDescription="@string/camera_button"
+                android:focusable="true"
+                android:maxHeight="250dp"
+                app:srcCompat="@drawable/camera" />
+
+        </LinearLayout>
 
         <View
             android:id="@+id/divider"

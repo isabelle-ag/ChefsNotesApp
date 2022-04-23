@@ -1,5 +1,6 @@
 package comp3350.chefsnotes.presentation;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -7,17 +8,24 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import comp3350.chefsnotes.BuildConfig;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.IRecipeFetcher;
@@ -26,6 +34,8 @@ import comp3350.chefsnotes.business.ITagHandler;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.business.TagHandler;
+import comp3350.chefsnotes.business.IPhotoManager;
+import comp3350.chefsnotes.business.PhotoManager;
 import comp3350.chefsnotes.objects.Recipe;
 
 
@@ -41,6 +51,7 @@ public class ViewRecipe extends AppCompatActivity {
 
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
+    private ActivityResultLauncher<Intent> launcher;
 
 
     @Override
@@ -57,13 +68,14 @@ public class ViewRecipe extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
 
-        //String recipeName = "";
+        ImageView recipeImg = findViewById(R.id.recipe_photo);
+        recipeImg.setOnClickListener(this::uploadPhoto);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String recipeName = extras.getString("recipeKey");
             recipe = recipeFetcher.getRecipeByName(recipeName);
-        }
-        else{
+        } else {
             recipe = recipeFetcher.getRecentRecipe();
         }
 
@@ -98,22 +110,27 @@ public class ViewRecipe extends AppCompatActivity {
 
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
-            Intent switchActivityIntent = new Intent(this, EditRecipe.class);
-            switchActivityIntent.putExtra("title", recipe.getTitle());
-            startActivity(switchActivityIntent);
+        Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        switchActivityIntent.putExtra("title", recipe.getTitle());
+        startActivity(switchActivityIntent);
     }
 
     private void copyRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
-        //if(valid) {
-            IRecipeManager manager = new RecipeManager(Services.getRecipePersistence());
-            String title;
-            Intent switchActivityIntent = new Intent(this, EditRecipe.class);
+        IRecipeManager manager = new RecipeManager(Services.getRecipePersistence());
+        String title;
+        Intent switchActivityIntent = new Intent(this, EditRecipe.class);
 
-            title = manager.copyRecipe(recipe, null).getTitle();
-            switchActivityIntent.putExtra("title", title);
-            startActivity(switchActivityIntent);
-      //  }
+        title = manager.copyRecipe(recipe, null).getTitle();
+        switchActivityIntent.putExtra("title", title);
+        startActivity(switchActivityIntent);
+    }
+
+    private void uploadPhoto(View v) {
+        IPhotoManager manager = new PhotoManager();
+        manager.getPhoto();
+
+//        activityResultLauncher.launch(viewGallery);
     }
 
     private void fillViewer() {
@@ -129,14 +146,14 @@ public class ViewRecipe extends AppCompatActivity {
         //Ingredient List
         ArrayAdapter<String> ingAdapter = new ArrayAdapter<>(this,
                 R.layout.list_style, ingredients);
-       // ListView ingView = findViewById(R.id.ingredientListView);
-        ((ListView)findViewById(R.id.ingredientListView)).setAdapter(ingAdapter);
+        // ListView ingView = findViewById(R.id.ingredientListView);
+        ((ListView) findViewById(R.id.ingredientListView)).setAdapter(ingAdapter);
 
         //Direction List
         ArrayAdapter<String> dirAdapter = new ArrayAdapter<>(this,
                 R.layout.list_style, directions);
         //ListView dirView = findViewById(R.id.directionListView);
-        ((ListView)findViewById(R.id.directionListView)).setAdapter(dirAdapter);
+        ((ListView) findViewById(R.id.directionListView)).setAdapter(dirAdapter);
 
         ((TextView) findViewById(R.id.totalTimeView)).setText(time);
     }
@@ -145,8 +162,8 @@ public class ViewRecipe extends AppCompatActivity {
         //valid = false;
         String error = "Invalid Recipe. Try making a new one or open one from the browser.";
         ((TextView) findViewById(R.id.recipeName)).setText(error);
-       // Messages.oops(this,
-       //         "This is not a valid recipe. Try making a new one or open one from the browser.");
+        // Messages.oops(this,
+        //         "This is not a valid recipe. Try making a new one or open one from the browser.");
     }
 
     @Override
@@ -172,7 +189,7 @@ public class ViewRecipe extends AppCompatActivity {
         }
     }
 
-    private void populateTags(Recipe r){
+    private void populateTags(Recipe r) {
         ITagHandler tagHandler = new TagHandler(Services.getTagPersistence(), Services.getRecipePersistence());
 
         Flow tags = findViewById(R.id.viewTags);
@@ -180,8 +197,8 @@ public class ViewRecipe extends AppCompatActivity {
 
         ArrayList<String> tagList = r.getTags();
 
-        int [] idList = new int[tagList.size()];
-        int i=0;
+        int[] idList = new int[tagList.size()];
+        int i = 0;
 
         for (String s : tagList) {
 
@@ -218,4 +235,6 @@ public class ViewRecipe extends AppCompatActivity {
         }
         tags.setReferencedIds(idList);
     }
+
 }
+
