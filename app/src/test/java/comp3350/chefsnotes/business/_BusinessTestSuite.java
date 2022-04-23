@@ -9,7 +9,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         IRecipeManagerTest.class,
         IRecipeFetcherTest.class,
-        ITagHandlerTest.class
+        ITagHandlerTest.class,
+        UnitsTest.class
 })
 
 public class _BusinessTestSuite {
