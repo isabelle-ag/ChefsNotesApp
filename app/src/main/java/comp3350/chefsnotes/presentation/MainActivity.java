@@ -7,9 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.FileUtils;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -26,6 +30,10 @@ import java.io.InputStreamReader;
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Main;
 import comp3350.chefsnotes.application.Services;
+import comp3350.chefsnotes.business.IRecipeFetcher;
+import comp3350.chefsnotes.business.IRecipeManager;
+import comp3350.chefsnotes.business.RecipeFetcher;
+import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.objects.Photo;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.SampleRecipeGenerator;
@@ -203,15 +211,48 @@ public class MainActivity extends AppCompatActivity {
         String chikn2 = "raw-chicken-flickr-202204231127-48806391192_f3b61da1af_b.jpg";
         String whistle3 = "tomato-soup-cooking-classy-202204231120-AOvVaw0KCApx7gWKVnelSKFQ1O09.jpg";
 
-        try{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                FileUtils.copy(new FileInputStream(dir+cookie1), new FileOutputStream(dest+cookie1));
+        String[] allImgs = {cookie1, cookie2, chikn1, chikn2, whistle3};
+        FileOutputStream fileOutputStream;
+        for(String name : allImgs) {
+            Bitmap bmap;
+            try {
+            File file = new File(dir+name);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                ImageDecoder.Source source = ImageDecoder.createSource(file);
+                bmap = ImageDecoder.decodeBitmap(source);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            else{
+                Uri uri = Uri.fromFile(file);
+                bmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
+            }
+                fileOutputStream = this.openFileOutput(name, Context.MODE_PRIVATE);
+                bmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
+                fileOutputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
+            IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
+            Recipe recipe = recipeFetcher.getRecipeByName("Chocolate Chip Cookies");
+            recipeManager.addPhoto(recipe, (dest+cookie1));
+            recipeManager.addPhoto(recipe, (dest+cookie2));
+
+            recipe = recipeFetcher.getRecipeByName("Indian Butter Chicken");
+            recipeManager.addPhoto(recipe, (dest+chikn1));
+            recipeManager.addPhoto(recipe, (dest+chikn2));
+
+            recipe = recipeFetcher.getRecipeByName("Tomato Soup");
+            recipeManager.addPhoto(recipe, (dest+whistle3));
         }
+//        try{
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                FileUtils.copy(new FileInputStream(dir+cookie1), new FileOutputStream(dest+cookie1));
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 

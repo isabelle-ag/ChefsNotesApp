@@ -2,6 +2,7 @@ package comp3350.chefsnotes.presentation;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
@@ -9,10 +10,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ToggleButton;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -20,6 +24,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -169,6 +174,31 @@ public class PhotoActivity extends AppCompatActivity  {
     public void setRecipe(Recipe r){ this.recipe = r;}
 
     public void delPhoto(View v){
+        confirmDel();
+    }
+
+    private void confirmDel(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete this photo?");
+
+// Set up the buttons
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                delete();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void delete(){
         String[] photos = recipeManager.getPhotos(recipe);
         String path = photos[currImg];
         recipeManager.delPhoto(recipe, path);

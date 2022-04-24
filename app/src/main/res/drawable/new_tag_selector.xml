@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/rounded_button_toggled"
+    <item android:drawable="@drawable/new_tag_toggled"
         android:state_pressed="true" />
-    <item android:drawable="@drawable/rounded_button"
+    <item android:drawable="@drawable/new_tag"
         android:state_pressed="false"
         />
 </selector>
