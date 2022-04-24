@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/recipe_photo"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/remove" />
+        app:srcCompat="@drawable/del_img_selector" />
 
     <ImageButton
         android:id="@+id/add_photo"
@@ -27,7 +27,7 @@
         android:backgroundTint="#00000000"
         android:contentDescription="Add Photo"
         android:padding="0dp"
-        android:src="@drawable/add_outlined"
+        android:src="@drawable/add_img_selector"
         app:layout_constraintBottom_toTopOf="@id/prev_photo"
         app:layout_constraintEnd_toStartOf="@+id/recipe_photo"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:contentDescription='Left Arrow'
         android:focusable="true"
         android:minHeight="200dp"
-        android:src="@drawable/arrow_left"
+        android:src="@drawable/left_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/recipe_photo"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
         android:clickable="true"
         android:contentDescription='Right Arrow'
         android:focusable="true"
-        android:src="@drawable/arrow_right"
+        android:src="@drawable/right_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/recipe_photo"

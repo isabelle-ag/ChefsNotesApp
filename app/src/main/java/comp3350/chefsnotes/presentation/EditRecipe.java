@@ -540,8 +540,6 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                 break;
             }
         }
-//        ((ToggleButton) findViewById(delTagId)).setChecked(false);
-//        ((ToggleButton) findViewById(newTagId)).setChecked(false);
     }
 
     private void createTag(){

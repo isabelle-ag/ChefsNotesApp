@@ -84,6 +84,12 @@ public class PhotoActivity extends AppCompatActivity  {
 
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        currImg = 0;
+    }
+
     public void choosePic(View v){
         String[] photos = recipeManager.getPhotos(recipe);
         if(photos.length != 0){
@@ -128,7 +134,7 @@ public class PhotoActivity extends AppCompatActivity  {
 
     protected void lastImg(View v){
         String[] photos = recipeManager.getPhotos(recipe);
-        if(photos.length == 0 || photos.length == 1){
+        if(photos.length < 2){
             return;
         }
         if (currImg == 0){
@@ -140,7 +146,7 @@ public class PhotoActivity extends AppCompatActivity  {
 
     protected void nextImg(View v){
         String[] photos = recipeManager.getPhotos(recipe);
-        if(photos.length == 0 || photos.length == 1){
+        if(photos.length < 2){
             return;
         }
         if (currImg == photos.length-1){

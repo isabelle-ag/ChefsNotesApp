@@ -8,20 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.ImageDecoder;
-import android.net.Uri;
-import android.os.Build;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.FileUtils;
-import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -204,28 +198,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void getDefaultPhotos(){
         String dest = getFilesDir().toString() + File.separatorChar;
-        String dir = "src/main/assets/defaultphotos/";
-        String cookie1 = "cookies-crocker-202204231114-087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg";
-        String cookie2 = "raw-cookie-dough-chocolatecoveredkatie-202204231124-AOvVaw0XGMWtUd.jpg";
-        String chikn1 = "butter-chicken-cafedelite-202204231118-0CAwQjRxqFwoTCLC3q.jpg";
-        String chikn2 = "raw-chicken-flickr-202204231127-48806391192_f3b61da1af_b.jpg";
-        String whistle3 = "tomato-soup-cooking-classy-202204231120-AOvVaw0KCApx7gWKVnelSKFQ1O09.jpg";
+        String coStr = "cookies.jpg";
+        String co2Str = "cookie_dough.jpg";
+        String ch1Str = "butter_chicken.jpg";
+        String ch2Str = "chicken.jpg";
+        String whistle = "tomato_soup.jpg";
+        int cookie1 = R.drawable.cookies;
+        int cookie2 = R.drawable.cookie_dough;
+        int chikn1 = R.drawable.butter_chicken;
+        int chikn2 = R.drawable.chicken;
+        int whistle3 = R.drawable.tomato_soup;
 
-        String[] allImgs = {cookie1, cookie2, chikn1, chikn2, whistle3};
+        String[] allNames = {coStr, co2Str, ch1Str, ch2Str, whistle};
+        int[] allImgs = {cookie1, cookie2, chikn1, chikn2, whistle3};
         FileOutputStream fileOutputStream;
-        for(String name : allImgs) {
-            Bitmap bmap;
+        int i = 0;
+        for(int id : allImgs) {
+            Bitmap bmap = BitmapFactory.decodeResource(getResources(), id);;
             try {
-            File file = new File(dir+name);
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-                ImageDecoder.Source source = ImageDecoder.createSource(file);
-                bmap = ImageDecoder.decodeBitmap(source);
-            }
-            else{
-                Uri uri = Uri.fromFile(file);
-                bmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
-            }
-                fileOutputStream = this.openFileOutput(name, Context.MODE_PRIVATE);
+                fileOutputStream = this.openFileOutput(allNames[i], Context.MODE_PRIVATE);
+                i++;
                 bmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
                 fileOutputStream.close();
             } catch (Exception e) {
@@ -234,25 +226,16 @@ public class MainActivity extends AppCompatActivity {
             IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
             IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
             Recipe recipe = recipeFetcher.getRecipeByName("Chocolate Chip Cookies");
-            recipeManager.addPhoto(recipe, (dest+cookie1));
-            recipeManager.addPhoto(recipe, (dest+cookie2));
+            recipeManager.addPhoto(recipe, (dest+coStr));
+            recipeManager.addPhoto(recipe, (dest+co2Str));
 
             recipe = recipeFetcher.getRecipeByName("Indian Butter Chicken");
-            recipeManager.addPhoto(recipe, (dest+chikn1));
-            recipeManager.addPhoto(recipe, (dest+chikn2));
+            recipeManager.addPhoto(recipe, (dest+ch1Str));
+            recipeManager.addPhoto(recipe, (dest+ch2Str));
 
             recipe = recipeFetcher.getRecipeByName("Tomato Soup");
-            recipeManager.addPhoto(recipe, (dest+whistle3));
+            recipeManager.addPhoto(recipe, (dest+whistle));
         }
-//        try{
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//                FileUtils.copy(new FileInputStream(dir+cookie1), new FileOutputStream(dest+cookie1));
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
 
