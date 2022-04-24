@@ -41,7 +41,6 @@ import comp3350.chefsnotes.objects.Recipe;
 
 public class PhotoActivity extends AppCompatActivity  {
     private ActivityResultLauncher<String> mGetContent;
-    private Uri uri;
     private Recipe recipe;
     private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
 
@@ -62,29 +61,23 @@ public class PhotoActivity extends AppCompatActivity  {
                                 e.printStackTrace();
                             }
                             String name = saveBMap(bmap);
-                            setUri(uri);
-                            go(name);
+                            go(name, uri);
                         }
                     }
                 });
 
     }
 
-    public void choosePic(View v, Recipe r){
+    public void choosePic(Recipe r){
         this.recipe = r;
         mGetContent.launch("image/*");
     }
 
-    private void setUri(Uri uri){
-        this.uri = uri;
-    }
-
-    private void go(String name){
+    private void go(String name, Uri uri){
         ImageView img = (ImageView) findViewById(R.id.recipe_photo);
         img.setImageURI(uri);
         String path = File.separatorChar + name;
         path = getFilesDir() + path;
-        Log.e("PHOTOS", "go: path: "+path );
         if(path != null) {
             recipeManager.addPhoto(recipe, path);
         }
@@ -92,7 +85,6 @@ public class PhotoActivity extends AppCompatActivity  {
 
     private String saveBMap(Bitmap bmap) {
     String name = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg";
-    Log.e("TAG", "File name: " + name);
 
     FileOutputStream fileOutputStream;
     try {

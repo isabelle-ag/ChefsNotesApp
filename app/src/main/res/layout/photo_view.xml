@@ -1,23 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:foregroundGravity="center_horizontal">
 
+    <ImageButton
+        android:id="@+id/prev_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/recipe_photo"
+        android:background="#00FFFFFF"
+        android:clickable="true"
+        android:contentDescription='Left Arrow'
+        android:focusable="true"
+        app:srcCompat="@drawable/arrow_left" />
+
     <ImageView
         android:id="@+id/recipe_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_toEndOf="@id/prev_photo"
         android:adjustViewBounds="true"
         android:backgroundTint="#00FFFFFF"
         android:clickable="true"
         android:contentDescription="@string/camera_button"
         android:focusable="true"
         android:foregroundGravity="center"
+        android:maxWidth="250dp"
         android:maxHeight="250dp"
+        android:minWidth="250dp"
         android:src="@drawable/camera" />
 
-</FrameLayout>
+    <ImageButton
+        android:id="@+id/next_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/recipe_photo"
+        android:layout_toEndOf="@id/recipe_photo"
+        android:background="#00000000"
+        android:clickable="true"
+        android:contentDescription='Right Arrow'
+        android:focusable="true"
+        app:srcCompat="@drawable/arrow_right" />
+
+</RelativeLayout>

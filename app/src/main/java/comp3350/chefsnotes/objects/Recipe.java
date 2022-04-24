@@ -1,7 +1,4 @@
 package comp3350.chefsnotes.objects;
-
-import android.util.Log;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -306,19 +303,13 @@ public class Recipe implements Serializable {
 
     public boolean addPhoto(String pathname){
         boolean result = false;
-        Log.e("PHOTOS", "Path in Recipe.addPhoto: "+pathname);
 
         if(!this.photos.contains(pathname)){
             this.photos.add(pathname);              // add to recipe
             PhotoList pl = Services.getPhotoList(); // fetch list
             pl.addReference(pathname);              // add reference (creates if needed)
             result = true;
-            Log.e("PHOTOS", photos.get(0));
-            String[] test = photos.toArray(new String[0]);
-            Log.e("PHOTOS", "To array: "+test[0]);
         }
-        Log.e("PHOTOS", "AddPhoto result: "+result);
-
         return result;
     }
 
@@ -337,10 +328,6 @@ public class Recipe implements Serializable {
     }
 
     public String[] getPhotos(){
-
-        for (String s : photos){
-            Log.e("PHOTOS", "getPhotos: photostring: " + s);
-        }
         return this.photos.toArray(new String[0]);
     }
 

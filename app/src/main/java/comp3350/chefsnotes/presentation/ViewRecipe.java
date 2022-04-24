@@ -57,6 +57,7 @@ public class ViewRecipe extends PhotoActivity {
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
     private Recipe recipe;
+    private int currImg;
 
 
     @Override
@@ -64,25 +65,21 @@ public class ViewRecipe extends PhotoActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
 
+        currImg = 0;
+
         ImageButton editButton = findViewById(R.id.edit_button);
         ImageButton copyButton = findViewById(R.id.copy_button);
         ImageView shareButton = findViewById(R.id.share_button);
         ImageView recipeImg = (ImageView) findViewById(R.id.recipe_photo);
+        ImageButton prevButton = findViewById(R.id.prev_photo);
+        ImageButton nextButton = findViewById(R.id.next_photo);
 
         editButton.setOnClickListener(this::editRecipe);
         copyButton.setOnClickListener(this::copyRecipe);
         shareButton.setOnClickListener(this::exportRecipe);
         recipeImg.setOnClickListener(this::pickImage);
-//        recipeImg.setOnClickListener(new OnClickListener() {
-//            public void onClick(View v) {
-//                ViewRecipe.super.choosePic(v);
-//                Uri uri = ViewRecipe.super.getUri();
-//                recipeImg.setImageURI(uri);
-//                Log.e("PHOTO", "URI: "+uri);
-//                String path = ViewRecipe.super.getPath();
-//                //recipeManager.addPhoto(recipe, path);
-//            }
-//        });
+        prevButton.setOnClickListener(this::lastImg);
+        nextButton.setOnClickListener(this::nextImg);
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
@@ -105,9 +102,6 @@ public class ViewRecipe extends PhotoActivity {
 
     }
 
-    private void setImage(Uri uri){
-
-    }
 
     @Override
     protected void onStop() {
@@ -119,6 +113,7 @@ public class ViewRecipe extends PhotoActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        currImg = 0;
 
         String recipeName = "";
         Bundle extras = getIntent().getExtras();
@@ -166,15 +161,12 @@ public class ViewRecipe extends PhotoActivity {
         String title = recipe.getTitle();
         String time = directionsTemp[0];
         String[] photos = recipeManager.getPhotos(recipe);
-        if(photos != null && photos.length >0) {
-            Uri imgUri = Uri.parse(photos[0]);
-            Log.e("PHOTOS", "fillViewer: URI from file: "+imgUri);
-            ImageView recipePhotos = (ImageView) findViewById(R.id.recipe_photo);
-            recipePhotos.setImageURI(imgUri);
-        }
-        else{
-            Log.e("PHOTOS", "fillViewer: No images found");
-        }
+        setImg();
+//        if(photos != null && photos.length >0) {
+//            Uri imgUri = Uri.parse(photos[currImg]);
+//            ImageView recipePhotos = (ImageView) findViewById(R.id.recipe_photo);
+//            recipePhotos.setImageURI(imgUri);
+//        }
 
         String[] directions = Arrays.copyOfRange(directionsTemp, 1, directionsTemp.length);
 
@@ -277,12 +269,45 @@ public class ViewRecipe extends PhotoActivity {
     }
 
     private void pickImage(View v){
-        ViewRecipe.super.choosePic(v, recipe);
-//        ImageView recipeImg = (ImageView) findViewById(R.id.recipe_photo);
-//        String path = ViewRecipe.super.getPath();
-//        if(path != null) {
-//            recipeManager.addPhoto(recipe, path);
-//        }
+        ViewRecipe.super.choosePic(recipe);
+    }
+
+    private void lastImg(View v){
+        String[] photos = recipeManager.getPhotos(recipe);
+        if(photos.length == 0){
+            return;
+        }
+        if (currImg == 0){
+            currImg = photos.length;
+        }
+        currImg = currImg -1;
+        setImg();
+    }
+
+    private void nextImg(View v){
+        String[] photos = recipeManager.getPhotos(recipe);
+        if(photos.length == 0){
+            return;
+        }
+        if (currImg == photos.length-1){
+            currImg = 0;
+        }
+        else {
+            currImg = currImg + 1;
+        }
+        setImg();
+    }
+
+    private void setImg(){
+        String[] photos = recipeManager.getPhotos(recipe);
+        if(photos != null && photos.length > currImg) {
+            Uri imgUri = Uri.parse(photos[currImg]);
+            ImageView recipePhotos = (ImageView) findViewById(R.id.recipe_photo);
+            recipePhotos.setImageURI(imgUri);
+        }
+        else{
+            Log.e("PHOTOS", "uhoh...");
+        }
     }
 
 }
