@@ -1,37 +1,37 @@
 ```
-                              ┌────────────────────────────────────────────────────────────────┬┬────────────────────────────┬────────────────────────────┐
-                              │                                                                ││                            │                            │
-                              │    ┌─► Messages ◄─────────────── MainActivity     FullListView ││  Presentation Layer        │                            │
-                              │    │                                                           ││  (presentation package)    │  DSOs                      │
-                              │    │                                   │                       ││                            │  (objects package)         │
-                              │    ├─► NoticeDialogFragment            │                       ││                            │                            │
-                              │    │                                   │                       ││                            ├────────────────────────────┤
-                              │    │    ┌───────────────────┬──────────┴────────┐              ││                            │                            │
-                              │    │    │                   │                   │              ││                            │  Decimal                   │
-                              │    │    ▼                   ▼                   ▼              ││                            │                            │
-                              │                                                                ││                            │  Direction                 │
-                              │   EditRecipe ◄─────── ViewRecipe ◄─────── RecipeBrowser        ││                            │                            │
-                              │                                                                ││                            │  Fraction                  │
-                              └────────────────────────────────────────────────────────────────┴┴────────────────────────────┤                            │
-                                                                                                                             │  Ingredient                │
-                                     │  │                   │                  │  │                                          │                            │
-             ┌───────────────────────┤  └───────────────────┼──────────────────┘  │                                          │  Quantity                  │
-             │                       │                      │                     │                                          │                            │
-             ├────────────────────── │ ─────────────────────┤                     │                                          │  QuantityNum               │
-             │                       │                      │                     │                                          │                            │
-             ▼                       │                      │                     │                                          │  Recipe                    │
-┌────────────────────────────────────┴──────────────────────┴─────────────────────┴────────────┬┬────────────────────────────┤                            │
-│                                                                                              ││                            │  RecipeExistenceException  │
-│       IPhotoManager             IRecipeManager      IRecipeFetcher      ITagHandler          ││  Business Layer            │                            │
-│                                                                                              ││  (business package)        │  SampleRecipeGenerator     │
-│          │    ▲                     │  ▲                │  ▲               │  ▲              ││                            │                            │
-│          │    │                     │  │                │  │               │  │              ││                            │  TagExistenceException     │
-│          ▼    │                     ▼  │                ▼  │               ▼  │              ││                            │                            │
-│                                                                                              ││                            │  Photo                     │
-│       PhotoManager              RecipeManager       RecipeFetcher       TagHandler           ││                            │                            │
+┌──────────────────────────────────────────────────────────────────────────────────────────────┬┬────────────────────────────┬────────────────────────────┐
 │                                                                                              ││                            │                            │
+│                                  ┌─► Messages ◄─────────────── MainActivity     FullListView ││  Presentation Layer        │                            │
+│                                  │                                                           ││  (presentation package)    │  DSOs                      │
+│                                  │                                   │                       ││                            │  (objects package)         │
+│                                  ├─► NoticeDialogFragment            │                       ││                            │                            │
+│                                  │                                   │                       ││                            ├────────────────────────────┤
+│                                  │    ┌───────────────────┬──────────┴────────┐              ││                            │                            │
+│                                  │    │                   │                   │              ││                            │  Decimal                   │
+│                ┌──────────────── │ ── ▼ ──────────────┐   ▼                   ▼              ││                            │                            │
+│                ▼                                      ▼                                      ││                            │  Direction                 │
+│          PhotoActivity  ◄────►  EditRecipe ◄─────── ViewRecipe ◄─────── RecipeBrowser        ││                            │                            │
+│                                                                                              ││                            │  Fraction                  │
 └──────────────────────────────────────────────────────────────────────────────────────────────┴┴────────────────────────────┤                            │
-                                                                                                                             │                            │
+                                                                                                                             │  Ingredient                │
+                  │                  │  │                   │                  │  │                                          │                            │
+                  │                  │  └───────────────────┼──────────────────┘  │                                          │  Quantity                  │
+                  │                  │                      │                     │                                          │                            │
+                  │                  │                      │                     │                                          │  QuantityNum               │
+                  │                  │                      │                     │                                          │                            │
+                  │                  ▼                      ▼                     │                                          │  Recipe                    │
+                  │           ┌───────────────────────────────────────────────────┴────────────┬┬────────────────────────────┤                            │
+                  │           │                                                                ││                            │  RecipeExistenceException  │
+                  │           │   IRecipeManager      IRecipeFetcher      ITagHandler          ││  Business Layer            │                            │
+             ┌────┘           │                                                                ││  (business package)        │  SampleRecipeGenerator     │
+             │                │       │  ▲                │  ▲               │  ▲              ││                            │                            │
+             │                │       │  │                │  │               │  │              ││                            │  TagExistenceException     │
+             │                │       ▼  │                ▼  │               ▼  │              ││                            │                            │
+             │                │                                                                ││                            │  Photo                     │
+             │                │   RecipeManager       RecipeFetcher       TagHandler           ││                            │                            │
+             │                │                                                                ││                            │                            │
+             │                └────────────────────────────────────────────────────────────────┴┴────────────────────────────┤                            │
+             │                                                                                                               │                            │
              │                        │                   │                   │                                              │                            │
              │                        │                   │                   │                                              │                            │
              │                        ├───────────────────┘                   │                                              │                            │
@@ -40,10 +40,10 @@
              │                        ▼                                       ▼                                              │                            │
              ▼                                                                                                               │                            │
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┬┬────────────────────────────┤                            │
-│                                                                                              ││                            │                            │
-│   PhotoDBMSTools──────┐         DBMSTools                              TagDBMSTools          ││  Persistence Layer         │                            │
-│       ▲               ▼                                                                      ││  (persistence package)     │                            │
-│       │           PhotoList         ▲                                       ▲                ││                            │                            │
+│         PhotoList                                                                            ││                            │                            │
+│                 │               DBMSTools                              TagDBMSTools          ││  Persistence Layer         │                            │
+│ PhotoDBMSTools◄─┘                                                                            ││  (persistence package)     │                            │
+│       ▲                             ▲                                       ▲                ││                            │                            │
 │       │                             │                                       │                ││                            │                            │
 │       ├─────────────┐              ┌┴──────────────┐                 ┌──────┴────┐           ││                            │                            │
 │       │             │              ▼               ▼                 ▼           ▼           ││                            │                            │
