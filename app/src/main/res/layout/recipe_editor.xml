@@ -102,53 +102,27 @@
             </TableRow>
 
             <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="50dp"
+                android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/add_tag"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/button"
+                    android:layout_width="197dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton_selector"
                     android:text="New Tag" />
             </TableRow>
 
             <TableRow
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/add_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/add_outlined" />
-
-                    <ImageView
-                        android:id="@+id/delete_photo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="50dp"
-                        android:clickable="true"
-                        android:contentDescription="@string/delete_photo"
-                        android:focusable="true"
-                        app:srcCompat="@drawable/remove" />
-
-                    <ImageView
-                        android:id="@+id/edit_camera_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:adjustViewBounds="true"
-                        android:clickable="true"
-                        android:contentDescription="@string/camera_button"
-                        android:focusable="true"
-                        android:maxHeight="200dp"
-                        app:srcCompat="@drawable/camera" />
-                </FrameLayout>
-
+                <include
+                    layout="@layout/photo_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
             </TableRow>
 
             <TableRow

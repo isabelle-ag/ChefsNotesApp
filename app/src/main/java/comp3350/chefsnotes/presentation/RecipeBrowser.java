@@ -1,10 +1,14 @@
 package comp3350.chefsnotes.presentation;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
+
+import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,7 +16,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,6 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -41,7 +48,6 @@ public class RecipeBrowser extends AppCompatActivity {
     private String searchTerm;
     private SwitchCompat ingMode;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +62,8 @@ public class RecipeBrowser extends AppCompatActivity {
         navView.setOnItemSelectedListener(this::navigation);
         ingMode.setOnCheckedChangeListener(this::toggleHint);
         ingMode.setChecked(false);
+
+        navView.setSelectedItemId(R.id.browse_recipe_button);
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -210,13 +218,17 @@ public class RecipeBrowser extends AppCompatActivity {
     }
 
     private boolean navigation(MenuItem item){
-        if(item.getItemId() == R.id.new_recipe_button){
+        if(item.getItemId() == R.id.home_button){
+            Intent i = new Intent(RecipeBrowser.this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.new_recipe_button){
             Intent i = new Intent(RecipeBrowser.this, EditRecipe.class);
             startActivity(i);
             return true;
         }
         else if(item.getItemId() == R.id.browse_recipe_button){
-            item.setEnabled(true);
             item.setChecked(true);
             return true;
         }
@@ -226,8 +238,11 @@ public class RecipeBrowser extends AppCompatActivity {
             return true;
         }
         else{
-            return super.onOptionsItemSelected(item);
+            return false;
         }
+//        else{
+//            return super.onOptionsItemSelected(item);
+//        }
     }
 
 

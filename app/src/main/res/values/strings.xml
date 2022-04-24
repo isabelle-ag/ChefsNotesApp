@@ -39,4 +39,5 @@
     <string name="duplicate_recipe">Duplicate Recipe</string>
     <string name="edit">Edit</string>
     <string name="delete_photo">Delete Photo</string>
+    <string name="home_page">Home</string>
 </resources>

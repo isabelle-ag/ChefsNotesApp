@@ -1,15 +1,9 @@
 package comp3350.chefsnotes.presentation;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.DialogFragment;
-
 
 import android.content.ClipData;
 import android.content.Context;
@@ -24,8 +18,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,15 +49,13 @@ public class ViewRecipe extends PhotoActivity {
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
     private Recipe recipe;
-    private int currImg;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
-
-        currImg = 0;
+        super.refresh();
 
         ImageButton editButton = findViewById(R.id.edit_button);
         ImageButton copyButton = findViewById(R.id.copy_button);
@@ -73,19 +63,25 @@ public class ViewRecipe extends PhotoActivity {
         ImageView recipeImg = (ImageView) findViewById(R.id.recipe_photo);
         ImageButton prevButton = findViewById(R.id.prev_photo);
         ImageButton nextButton = findViewById(R.id.next_photo);
+        ImageButton addPhoto = findViewById(R.id.add_photo);
+
+        View delPhoto = findViewById(R.id.delete_photo);
+        delPhoto.setVisibility(View.INVISIBLE);
 
         editButton.setOnClickListener(this::editRecipe);
         copyButton.setOnClickListener(this::copyRecipe);
         shareButton.setOnClickListener(this::exportRecipe);
-        recipeImg.setOnClickListener(this::pickImage);
-        prevButton.setOnClickListener(this::lastImg);
-        nextButton.setOnClickListener(this::nextImg);
+        recipeImg.setOnClickListener(super::choosePic);
+        prevButton.setOnClickListener(super::lastImg);
+        nextButton.setOnClickListener(super::nextImg);
+        addPhoto.setOnClickListener(super::addPic);
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
+        navView.setSelectedItemId(R.id.current_recipe_button);
 
 
-    Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String recipeName = extras.getString("recipeKey");
             recipe = recipeFetcher.getRecipeByName(recipeName);
@@ -94,6 +90,7 @@ public class ViewRecipe extends PhotoActivity {
         }
 
         if (recipe != null) {
+            super.setRecipe(recipe);
             fillViewer();
             populateTags(recipe);
         } else {
@@ -113,7 +110,7 @@ public class ViewRecipe extends PhotoActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        currImg = 0;
+        super.refresh();
 
         String recipeName = "";
         Bundle extras = getIntent().getExtras();
@@ -134,7 +131,7 @@ public class ViewRecipe extends PhotoActivity {
     private void editRecipe(View view) {
         //perform action to populate recipe - must be added somewhere
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
-        switchActivityIntent.putExtra("title", recipe.getTitle());
+        switchActivityIntent.putExtra("recipeKey", recipe.getTitle());
         startActivity(switchActivityIntent);
     }
 
@@ -145,7 +142,7 @@ public class ViewRecipe extends PhotoActivity {
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
 
         title = manager.copyRecipe(recipe, null).getTitle();
-        switchActivityIntent.putExtra("title", title);
+        switchActivityIntent.putExtra("recipeKey", title);
         startActivity(switchActivityIntent);
     }
 
@@ -160,13 +157,7 @@ public class ViewRecipe extends PhotoActivity {
         String[] ingredients = recipe.getIngredientStrings();
         String title = recipe.getTitle();
         String time = directionsTemp[0];
-        String[] photos = recipeManager.getPhotos(recipe);
-        setImg();
-//        if(photos != null && photos.length >0) {
-//            Uri imgUri = Uri.parse(photos[currImg]);
-//            ImageView recipePhotos = (ImageView) findViewById(R.id.recipe_photo);
-//            recipePhotos.setImageURI(imgUri);
-//        }
+        super.setImg();
 
         String[] directions = Arrays.copyOfRange(directionsTemp, 1, directionsTemp.length);
 
@@ -206,7 +197,12 @@ public class ViewRecipe extends PhotoActivity {
     }
 
     private boolean navigation(MenuItem item) {
-        if (item.getItemId() == R.id.new_recipe_button) {
+        if(item.getItemId() == R.id.home_button){
+            Intent i = new Intent(ViewRecipe.this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else if (item.getItemId() == R.id.new_recipe_button) {
             Intent i = new Intent(ViewRecipe.this, EditRecipe.class);
             startActivity(i);
             return true;
@@ -215,6 +211,7 @@ public class ViewRecipe extends PhotoActivity {
             startActivity(i);
             return true;
         } else if (item.getItemId() == R.id.current_recipe_button) {
+            item.setChecked(true);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -268,47 +265,13 @@ public class ViewRecipe extends PhotoActivity {
         tags.setReferencedIds(idList);
     }
 
-    private void pickImage(View v){
-        ViewRecipe.super.choosePic(recipe);
-    }
 
-    private void lastImg(View v){
-        String[] photos = recipeManager.getPhotos(recipe);
-        if(photos.length == 0){
-            return;
-        }
-        if (currImg == 0){
-            currImg = photos.length;
-        }
-        currImg = currImg -1;
-        setImg();
-    }
-
-    private void nextImg(View v){
-        String[] photos = recipeManager.getPhotos(recipe);
-        if(photos.length == 0){
-            return;
-        }
-        if (currImg == photos.length-1){
-            currImg = 0;
-        }
-        else {
-            currImg = currImg + 1;
-        }
-        setImg();
-    }
-
-    private void setImg(){
-        String[] photos = recipeManager.getPhotos(recipe);
-        if(photos != null && photos.length > currImg) {
-            Uri imgUri = Uri.parse(photos[currImg]);
-            ImageView recipePhotos = (ImageView) findViewById(R.id.recipe_photo);
-            recipePhotos.setImageURI(imgUri);
-        }
-        else{
-            Log.e("PHOTOS", "uhoh...");
-        }
-    }
+//    private void lastImg(View v){
+//
+//    }
+//    private void nextImg(View v){
+//
+//    }
 
 }
 

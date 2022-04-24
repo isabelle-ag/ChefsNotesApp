@@ -39,6 +39,7 @@ public class RecipeManager implements IRecipeManager {
         }
         else
         {
+            R.onDelete();
             db.deleteRecipe(name);
         }
     }
@@ -107,4 +108,6 @@ public class RecipeManager implements IRecipeManager {
     public String[] getPhotos(Recipe R){
         return R.getPhotos();
     }
+
+    public void delPhoto(Recipe R, String pathname){R.removePhoto(pathname);}
 }

@@ -112,7 +112,6 @@
                 android:layout_height="250dp"
                 android:layout_weight="0.5"
                 android:divider="@android:color/black"
-                android:dividerHeight="-10sp"
                 android:paddingBottom="5dp"
                 tools:ignore="DuplicateSpeakableTextCheck"></ListView>
 
@@ -125,10 +124,11 @@
                 <include
                     android:id="@+id/included_photo"
                     layout="@layout/photo_view"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_weight="1.5" />
+                    android:layout_weight="1.5"
+                    android:foregroundGravity="center_horizontal" />
 
                 <EditText
                     android:id="@+id/Notes"

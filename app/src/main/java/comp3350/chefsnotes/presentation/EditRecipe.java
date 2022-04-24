@@ -42,7 +42,7 @@ import comp3350.chefsnotes.objects.Ingredient;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.RecipeExistenceException;
 
-public class EditRecipe extends AppCompatActivity implements NoticeDialogFragment.NoticeDialogListener {
+public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.NoticeDialogListener {
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());//refactor to use services natively
     private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());//refactor to use services natively
     private final ITagHandler tagHandler = new TagHandler(Services.getTagPersistence(), Services.getRecipePersistence());
@@ -64,7 +64,18 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         View deleteDirectionButton = findViewById(R.id.DirectionDeleteButton);
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
+        navView.setSelectedItemId(R.id.new_recipe_button);
         ImageButton delRecipeButton = findViewById(R.id.delRecipe);
+        ImageView recipeImg = (ImageView) findViewById(R.id.recipe_photo);
+        ImageButton prevButton = findViewById(R.id.prev_photo);
+        ImageButton nextButton = findViewById(R.id.next_photo);
+        ImageButton addPhoto = findViewById(R.id.add_photo);
+        ImageButton delPhoto = findViewById(R.id.delete_photo);
+        recipeImg.setOnClickListener(super::choosePic);
+        prevButton.setOnClickListener(super::lastImg);
+        nextButton.setOnClickListener(super::nextImg);
+        delPhoto.setOnClickListener(super::delPhoto);
+        addPhoto.setOnClickListener(super::addPic);
 
         //set dropdown menu to array being used - can be used in the future for filtering units by metric, imperial, etc.
         Spinner ingDrop = findViewById(R.id.unitList);
@@ -74,10 +85,11 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
 
         Intent thisIntent = getIntent();
 
-        if(thisIntent.getStringExtra("title") != null)//if a new recipe is being created (blank), Title = null
+        if(thisIntent.getStringExtra("recipeKey") != null)//if a new recipe is being created (blank), Title = null
         {
-            populateRecipe(thisIntent.getStringExtra("title"), units);
-            recipe = recipeFetcher.getRecipeByName(thisIntent.getStringExtra("title"));
+            recipe = recipeFetcher.getRecipeByName(thisIntent.getStringExtra("recipeKey"));
+            super.setRecipe(recipe);
+            populateRecipe(recipe.getTitle(), units);
         }
 
         populateTags();
@@ -106,13 +118,13 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         Recipe r;
 
         // if editing an old recipe
-        if(thisIntent.getStringExtra("title") != null && !title.equals("")) {
+        if(thisIntent.getStringExtra("recipeKey") != null && !title.equals("")) {
             try {
-                System.out.println("Saving changes to " + thisIntent.getStringExtra("title") + "...");
-                r = recipeManager.saveButton(thisIntent.getStringExtra("title"), ingredients, directions, false);
+                System.out.println("Saving changes to " + thisIntent.getStringExtra("recipeKey") + "...");
+                r = recipeManager.saveButton(thisIntent.getStringExtra("recipeKey"), ingredients, directions, false);
 
-                if(!thisIntent.getStringExtra("title").equals(title)) {
-                    System.out.println("Renaming " + thisIntent.getStringExtra("title") + "...");
+                if(!thisIntent.getStringExtra("recipeKey").equals(title)) {
+                    System.out.println("Renaming " + thisIntent.getStringExtra("recipeKey") + "...");
                     recipeManager.renameRecipe(r, title);
                 }
                 addRecipeTags(r);
@@ -251,6 +263,7 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         EditText amount;
         EditText time;
         Spinner unitList;
+        super.setImg();
         //get recipe from db
         //for each ingredient, id = ingredient.addIngredient(), findViewById(id).addText
         EditText recipeTitle = findViewById(R.id.recipeTitle);
@@ -333,7 +346,7 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
     public void deleteRecipe(View view){
         Intent thisIntent = getIntent();
         String title = getTitle(view);
-        if(thisIntent.getStringExtra("title") != null && !title.equals("")) {
+        if(thisIntent.getStringExtra("recipeKey") != null && !title.equals("")) {
             showNoticeDialog();
         }
         else{
@@ -345,7 +358,7 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
     private void deleteConfirmed(View v){
         Intent thisIntent = getIntent();
         try{
-            recipeManager.delRecipe(recipeFetcher.getRecipeByName(thisIntent.getStringExtra("title")));
+            recipeManager.delRecipe(recipeFetcher.getRecipeByName(thisIntent.getStringExtra("recipeKey")));
         } catch (RecipeExistenceException e) {
             e.printStackTrace();
         }
@@ -376,7 +389,7 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
         Intent thisIntent = getIntent();
         Intent i;
         // if editing an old recipe
-        if (thisIntent.getStringExtra("title") != null) {
+        if (thisIntent.getStringExtra("recipeKey") != null) {
             i = new Intent(EditRecipe.this, ViewRecipe.class);
         }
         else {
@@ -387,7 +400,12 @@ public class EditRecipe extends AppCompatActivity implements NoticeDialogFragmen
     }
 
     private boolean navigation(MenuItem item) {
-        if (item.getItemId() == R.id.new_recipe_button) {
+        if(item.getItemId() == R.id.home_button){
+            Intent i = new Intent(EditRecipe.this, MainActivity.class);
+            startActivity(i);
+            return true;
+        } else if (item.getItemId() == R.id.new_recipe_button) {
+            item.setChecked(true);
             return true;
         } else if (item.getItemId() == R.id.browse_recipe_button) {
             Intent i = new Intent(EditRecipe.this, RecipeBrowser.class);

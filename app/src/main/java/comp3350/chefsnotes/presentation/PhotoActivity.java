@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -43,11 +44,13 @@ public class PhotoActivity extends AppCompatActivity  {
     private ActivityResultLauncher<String> mGetContent;
     private Recipe recipe;
     private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
+    private int currImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_view);
+        currImg = 0;
 
         mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
                 new ActivityResultCallback<Uri>() {
@@ -68,10 +71,20 @@ public class PhotoActivity extends AppCompatActivity  {
 
     }
 
-    public void choosePic(Recipe r){
-        this.recipe = r;
+    public void choosePic(View v){
+        String[] photos = recipeManager.getPhotos(recipe);
+        if(photos.length != 0){
+            return;
+        }
+        else {
+            mGetContent.launch("image/*");
+        }
+    }
+
+    public void addPic(View v){
         mGetContent.launch("image/*");
     }
+
 
     private void go(String name, Uri uri){
         ImageView img = (ImageView) findViewById(R.id.recipe_photo);
@@ -80,6 +93,9 @@ public class PhotoActivity extends AppCompatActivity  {
         path = getFilesDir() + path;
         if(path != null) {
             recipeManager.addPhoto(recipe, path);
+            String[] photos = recipeManager.getPhotos(recipe);
+            currImg = photos.length-1;
+            setImg();
         }
     }
 
@@ -96,6 +112,74 @@ public class PhotoActivity extends AppCompatActivity  {
     }
     return name;
 }
+
+    protected void lastImg(View v){
+        String[] photos = recipeManager.getPhotos(recipe);
+        if(photos.length == 0 || photos.length == 1){
+            return;
+        }
+        if (currImg == 0){
+            currImg = photos.length;
+        }
+        currImg--;
+        setImg();
+    }
+
+    protected void nextImg(View v){
+        String[] photos = recipeManager.getPhotos(recipe);
+        if(photos.length == 0 || photos.length == 1){
+            return;
+        }
+        if (currImg == photos.length-1){
+            currImg = 0;
+        }
+        else {
+            currImg++;
+        }
+        setImg();
+    }
+
+    public void setImg(){
+        String[] photos = recipeManager.getPhotos(recipe);
+        ImageView recipePhotos = (ImageView) findViewById(R.id.recipe_photo);
+        if(photos.length > currImg) {
+            Uri imgUri = Uri.parse(photos[currImg]);
+            recipePhotos.setImageURI(imgUri);
+            recipePhotos.setClickable(false);
+        }
+        else if (photos.length == 0){
+            recipePhotos.setImageResource(R.drawable.camera);
+            recipePhotos.setClickable(true);
+            currImg = 0;
+        }
+        else{
+            currImg = 0;
+            setImg();
+        }
+    }
+
+    public void setRecipe(Recipe r){ this.recipe = r;}
+
+    public void delPhoto(View v){
+        String[] photos = recipeManager.getPhotos(recipe);
+        String path = photos[currImg];
+        recipeManager.delPhoto(recipe, path);
+        photos = recipeManager.getPhotos(recipe);
+        if(photos.length == 0){
+            setImg();
+        }
+        else if(currImg == 0){
+            currImg = photos.length -1;
+        }
+        else{
+            currImg--;
+        }
+        setImg();
+    }
+
+    public void refresh(){
+        currImg = 0;
+    }
 
 
 

@@ -60,11 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
+        navView.setSelectedItemId(R.id.home_button);
     }
 
     public void makeRecipe(View view) {
         Intent switchActivityIntent = new Intent(this, EditRecipe.class);
-        switchActivityIntent.putExtra("title", (String) null);
+        switchActivityIntent.putExtra("recipeKey", (String) null);
         startActivity(switchActivityIntent);
     }
 
@@ -127,7 +128,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean navigation(MenuItem item){
-        if(item.getItemId() == R.id.new_recipe_button){
+        if(item.getItemId() == R.id.home_button){
+            item.setChecked(true);
+            return true;
+        }
+        else if(item.getItemId() == R.id.new_recipe_button){
             Intent i = new Intent(MainActivity.this, EditRecipe.class);
             startActivity(i);
             return true;
