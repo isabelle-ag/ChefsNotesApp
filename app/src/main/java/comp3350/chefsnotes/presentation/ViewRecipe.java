@@ -109,6 +109,13 @@ public class ViewRecipe extends PhotoActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        TextView notes = findViewById(R.id.Notes);
+        recipeManager.updateNotes(recipe, notes.getText().toString());
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -181,6 +188,9 @@ public class ViewRecipe extends PhotoActivity {
         ((ListView) findViewById(R.id.directionListView)).setAdapter(dirAdapter);
 
         ((TextView) findViewById(R.id.totalTimeView)).setText(time);
+
+        TextView notes = findViewById(R.id.Notes);
+        notes.setText(recipeManager.loadNotes(recipe));
     }
 
     private void errorScreen() {
