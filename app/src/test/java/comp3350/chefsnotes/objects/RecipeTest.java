@@ -80,6 +80,30 @@ public class RecipeTest {
         assertFalse(example.getTags().contains("foo"));
     }
 
+    @Test
+    public void testStringExport() {
+        assertEquals("Chocolate Chip Cookies\n" +
+                "\n" +
+                "Ingredients:\n" +
+                "1 cup Butter\n" +
+                "1 cup White Sugar\n" +
+                "1 cup Brown Sugar\n" +
+                "2 Egg\n" +
+                "2 tsps Vanilla Extract\n" +
+                "1 tsp Baking Soda\n" +
+                "2 tsps Hot Water\n" +
+                "1/2 tsp Salt\n" +
+                "3 cups Flour\n" +
+                "2 cups Semisweet Chocolate Chips\n" +
+                "1 cup Chopped Walnuts\n" +
+                "\n" +
+                "Directions:\n" +
+                "Preheat: Preheat oven to 350 degrees F (175 degrees C). - 15 min\n" +
+                "Mix Batter: Cream together the butter, white sugar, and brown sugar until smooth. Beat in the eggs one at a time, then stir in the vanilla.\n" +
+                "Add solids: Dissolve baking soda in hot water. Add to batter along with salt. Stir in flour, chocolate chips, and nuts. Drop by large spoonfuls onto ungreased pans.\n" +
+                "Bake cookies!: Bake for about 10 minutes in the preheated oven, or until edges are nicely browned. - 10 min\n\n", example.stringExport());
+    }
+
 }
 
 

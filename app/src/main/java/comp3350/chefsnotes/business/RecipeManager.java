@@ -47,6 +47,7 @@ public class RecipeManager implements IRecipeManager {
     public void renameRecipe(Recipe R, String newName) throws RecipeExistenceException
     {
         String name = R.getTitle();
+        Recipe r = (db.getRecipe(name));
         if(db.getRecipe(name) == null)
         {
             throw new RecipeExistenceException(String.format(name));
