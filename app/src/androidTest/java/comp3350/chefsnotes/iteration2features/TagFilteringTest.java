@@ -3,6 +3,7 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -86,9 +87,16 @@ public class TagFilteringTest {
     }
 
     @Test
-    public void testTagFilter()
+    public void testTagFilterAppear()
     {
         onView(withText("African")).perform(click());//change to custom tag?
         onData(anything()).inAdapterView(withId(R.id.results)).check(matches(withText("ඞඞඞඞ")));
+    }
+
+    @Test
+    public void testTagFilterHide()
+    {
+        onView(withText("Asian")).perform(click());//change to custom tag?
+        onView(withText("ඞඞඞඞ")).check(doesNotExist());
     }
 }
