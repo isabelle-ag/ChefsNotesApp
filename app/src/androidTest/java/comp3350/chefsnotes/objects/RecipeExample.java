@@ -2,7 +2,7 @@ package comp3350.chefsnotes.objects;
 
 import comp3350.chefsnotes.business.Units;
 
-public class RecipeExample extends Recipe{
+public class RecipeExample extends Recipe {
     public RecipeExample(){
         super("#3350TEST");
         this.setup();

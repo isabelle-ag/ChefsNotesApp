@@ -72,4 +72,9 @@ public class PhotoList {
 
         return result;
     }
+
+    public boolean isEmpty()
+    {
+        return this.photos.isEmpty();
+    }
 }
