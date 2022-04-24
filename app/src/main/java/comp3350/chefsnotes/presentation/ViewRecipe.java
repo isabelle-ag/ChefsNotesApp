@@ -103,8 +103,10 @@ public class ViewRecipe extends PhotoActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        TextView notes = findViewById(R.id.Notes);
-        recipeManager.updateNotes(recipe, notes.getText().toString());
+        if(this.recipe != null) {
+            TextView notes = findViewById(R.id.Notes);
+            recipeManager.updateNotes(recipe, notes.getText().toString());
+        }
     }
 
     @Override

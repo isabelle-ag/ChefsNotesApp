@@ -8,14 +8,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/chefsnotes_logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.Chefsnotes">
         <activity
             android:name=".presentation.ViewRecipe"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
@@ -25,16 +26,13 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.HOME" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
+                <category android:name="android.intent.category.MAIN" />
             </intent-filter>
         </activity>
         <activity
             android:name=".presentation.EditRecipe"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
@@ -42,7 +40,10 @@
         <activity
             android:name=".presentation.RecipeBrowser"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <provider
