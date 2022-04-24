@@ -100,7 +100,6 @@
             app:layout_column="0"
             app:layout_row="1" />
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tagConstraint"
             android:layout_width="match_parent"
@@ -126,7 +125,7 @@
         <ScrollView
             android:id="@+id/resultContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300sp"
             android:layout_marginTop="20dp"
             app:layout_column="0"
             app:layout_row="3">
@@ -134,8 +133,17 @@
             <comp3350.chefsnotes.presentation.FullListView
                 android:id="@+id/results"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp" />
         </ScrollView>
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="100dp"
+            android:background="?android:attr/listDivider" />
+
 
     </androidx.gridlayout.widget.GridLayout>
 

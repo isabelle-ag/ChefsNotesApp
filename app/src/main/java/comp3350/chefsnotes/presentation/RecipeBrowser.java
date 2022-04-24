@@ -102,7 +102,7 @@ public class RecipeBrowser extends AppCompatActivity {
         //If ingredient mode
         if(isChecked) {
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Searching by ingredients.",
+                    "Searching by ingredients",
                     Toast.LENGTH_SHORT);
             toast.show();
             searchDesc.setText(R.string.search_mode_ing);
