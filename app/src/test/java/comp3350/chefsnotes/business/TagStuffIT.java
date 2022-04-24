@@ -44,20 +44,20 @@ public class TagStuffIT {
         Recipe r = new RecipeExample();
         assertEquals(0, handler.fetchTags().length);
         handler.addTagToRecipe(r, "foo");
-        assertEquals(true, r.getTags().contains("foo"));
+        assertEquals(true, r.getTags().contains("Foo"));
         assertEquals(1, handler.fetchTags().length);
-        assertEquals("foo", handler.fetchTags()[0]);
+        assertEquals("Foo", handler.fetchTags()[0]);
 
         handler.removeTagFromRecipe(r, "foo");
         try {
-            handler.deleteTag("foo");
+            handler.deleteTag("Foo");
         } catch (TagExistenceException e) {
             fail("unexpected exception");
         }
 
         assertEquals(0, handler.fetchTags().length);
 
-        assertThrows(TagExistenceException.class, () -> handler.deleteTag("foo"));
+        assertThrows(TagExistenceException.class, () -> handler.deleteTag("Foo"));
     }
 
     @Test

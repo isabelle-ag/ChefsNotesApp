@@ -1,5 +1,7 @@
 package comp3350.chefsnotes.business;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.TagExistenceException;
@@ -19,14 +21,16 @@ public class TagHandler implements ITagHandler{
 
     @Override
     public void addTagToRecipe(Recipe r, String tag) {
-        r.addTag(tag);
+        String tagName = WordUtils.capitalizeFully(tag);
+        r.addTag(tagName);
         db.commitChanges(r);
         createTag(tag);
     }
 
     @Override
     public void removeTagFromRecipe(Recipe r, String tag){
-        r.removeTag(tag);
+        String tagName = WordUtils.capitalizeFully(tag);
+        r.removeTag(tagName);
         db.commitChanges(r);
     }
     
@@ -37,8 +41,9 @@ public class TagHandler implements ITagHandler{
 
     public boolean createTag(String tag)
     {
+        String tagName = WordUtils.capitalizeFully(tag);
         try {
-            tdb.addTag(tag);
+            tdb.addTag(tagName);
             return true;
         }
         catch(TagExistenceException e)
@@ -47,13 +52,14 @@ public class TagHandler implements ITagHandler{
 
     public boolean deleteTag(String tag) throws TagExistenceException
     {
+        String tagName = WordUtils.capitalizeFully(tag);
         boolean success = false;
-        String[] inc = {tag};
+        String[] inc = {tagName};
         String[] ex = new String[0];
         IRecipeFetcher fetcher = new RecipeFetcher(Services.getRecipePersistence());
         Recipe[] recipes = fetcher.filterRecipesByTags(inc, ex, fetcher.getRecipesByText(""));
         if(recipes.length == 0) {
-            tdb.removeTag(tag);
+            tdb.removeTag(tagName);
             success = true;
         }
         return success;

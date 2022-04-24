@@ -30,6 +30,8 @@ import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -644,6 +646,7 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String tagName = input.getText().toString().trim();
+                tagName = WordUtils.capitalizeFully(tagName);
                 Button bv = findViewById(newTagId);
                 if(!(tagName.isEmpty()) && tagHandler.createTag(tagName)) {
                     Toast toast = Toast.makeText(getApplicationContext(),
@@ -654,6 +657,11 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                     Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
                     ViewCompat.setBackground(b, drawable);
                     addToFlow(b);
+                }
+                else{
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Tag "+tagName+" already exists.",
+                            Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -683,17 +691,26 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String tagName = input.getText().toString().trim();
+                tagName = WordUtils.capitalizeFully(tagName);
                 Button bv = findViewById(delTagId);
                 if(tagName.isEmpty()){
                     return;
                 }
                 try {
-                    tagHandler.deleteTag(tagName);
-                    delTagList(tagName);
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "Tag "+tagName+" deleted.",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
+                    boolean success = tagHandler.deleteTag(tagName);
+                    if(success) {
+                        delTagList(tagName);
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Tag " + tagName + " deleted.",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else{
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Delete Failed. Tag " + tagName + " is still being used by some recipes!",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 } catch (TagExistenceException e) {
                 }
                // bv.setChecked(false);
