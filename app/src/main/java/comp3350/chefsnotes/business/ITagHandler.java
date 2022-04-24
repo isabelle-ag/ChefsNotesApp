@@ -13,6 +13,6 @@ public interface ITagHandler {
 
     void createTag(String tag);
 
-    void deleteTag(String tag) throws TagExistenceException;
+    boolean deleteTag(String tag) throws TagExistenceException;
 
 }

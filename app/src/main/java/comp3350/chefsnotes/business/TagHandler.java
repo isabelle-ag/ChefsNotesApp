@@ -1,5 +1,6 @@
 package comp3350.chefsnotes.business;
 
+import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.objects.Recipe;
 import comp3350.chefsnotes.objects.TagExistenceException;
 import comp3350.chefsnotes.persistence.DBMSTools;
@@ -43,8 +44,17 @@ public class TagHandler implements ITagHandler{
         {};
     }
 
-    public void deleteTag(String tag) throws TagExistenceException
+    public boolean deleteTag(String tag) throws TagExistenceException
     {
-        tdb.removeTag(tag);
+        boolean success = false;
+        String[] inc = {tag};
+        String[] ex = new String[0];
+        IRecipeFetcher fetcher = new RecipeFetcher(Services.getRecipePersistence());
+        Recipe[] recipes = fetcher.filterRecipesByTags(inc, ex, fetcher.getRecipesByText(""));
+        if(recipes.length == 0) {
+            tdb.removeTag(tag);
+            success = true;
+        }
+        return success;
     }
 }
