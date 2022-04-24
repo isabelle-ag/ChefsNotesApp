@@ -24,6 +24,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,8 +41,6 @@ import comp3350.chefsnotes.business.ITagHandler;
 import comp3350.chefsnotes.business.RecipeFetcher;
 import comp3350.chefsnotes.business.RecipeManager;
 import comp3350.chefsnotes.business.TagHandler;
-import comp3350.chefsnotes.business.IPhotoManager;
-import comp3350.chefsnotes.business.PhotoManager;
 import comp3350.chefsnotes.objects.Recipe;
 
 
@@ -56,6 +55,7 @@ import java.util.Arrays;
 public class ViewRecipe extends PhotoActivity {
 
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
+    private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
     private Recipe recipe;
 
 
@@ -67,12 +67,21 @@ public class ViewRecipe extends PhotoActivity {
         ImageButton editButton = findViewById(R.id.edit_button);
         ImageButton copyButton = findViewById(R.id.copy_button);
         ImageView shareButton = findViewById(R.id.share_button);
-        View incl = findViewById(R.id.included_photo);
+        ImageView recipeImg = (ImageView) findViewById(R.id.recipe_photo);
 
         editButton.setOnClickListener(this::editRecipe);
         copyButton.setOnClickListener(this::copyRecipe);
         shareButton.setOnClickListener(this::exportRecipe);
-        incl.setOnClickListener(super::choosePic);
+        recipeImg.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                ViewRecipe.super.choosePic(v);
+                Uri uri = ViewRecipe.super.getUri();
+                recipeImg.setImageURI(uri);
+                Log.e("PHOTO", "URI: "+uri);
+                String path = ViewRecipe.super.getPath();
+                //recipeManager.addPhoto(recipe, path);
+            }
+        });
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
@@ -92,6 +101,10 @@ public class ViewRecipe extends PhotoActivity {
         } else {
             errorScreen();
         }
+
+    }
+
+    private void setImage(Uri uri){
 
     }
 
@@ -133,25 +146,6 @@ public class ViewRecipe extends PhotoActivity {
         startActivity(switchActivityIntent);
     }
 
-//    private void uploadPhoto(View v) {
-////        Intent viewGallery = new Intent(Intent.ACTION_PICK);
-////        viewGallery.setType("image/*");
-////        getPhoto.launch(viewGallery);
-//
-//        ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-//                new ActivityResultCallback<Uri>() {
-//                    @Override
-//                    public void onActivityResult(Uri uri) {
-//                        // Handle the returned Uri
-//                    }
-//                });
-
-//    }
-//
-//    private void getPhoto(){
-//
-//    }
-
     private void exportRecipe(View view) {
         ClipboardManager clipManager = (ClipboardManager)getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);;
         clipManager.setPrimaryClip(ClipData.newPlainText(null, recipe.stringExport()));
@@ -163,6 +157,12 @@ public class ViewRecipe extends PhotoActivity {
         String[] ingredients = recipe.getIngredientStrings();
         String title = recipe.getTitle();
         String time = directionsTemp[0];
+        String[] photos = recipe.getPhotos();
+//        if(photos.length >0) {
+//            Uri imgUri = Uri.parse(photos[0]);
+//            ImageView recipePhotos = (ImageView) findViewById(R.id.recipe_photo);
+//            recipePhotos.setImageURI(imgUri);
+//        }
 
         String[] directions = Arrays.copyOfRange(directionsTemp, 1, directionsTemp.length);
 

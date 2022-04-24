@@ -101,4 +101,8 @@ public class RecipeManager implements IRecipeManager {
     }
 
     public void addPhoto(Recipe R, String pathname){ R.addPhoto(pathname); }
+
+    public String[] getPhotos(Recipe R){
+        return R.getPhotos();
+    }
 }
