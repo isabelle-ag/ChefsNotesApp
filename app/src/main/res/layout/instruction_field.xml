@@ -40,7 +40,7 @@
             tools:imeOptions="actionDone" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/InstructionBox"
+            android:id="@+id/textbox"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/DirectionName"

@@ -1,5 +1,4 @@
 package comp3350.chefsnotes.iteration1features;
-import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -7,10 +6,7 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withChild;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
@@ -21,21 +17,11 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
@@ -127,7 +113,7 @@ public class RecipeCreationTest {
 
         onView(allOf(withId(R.id.TimeEstimate), isDisplayed())).perform(replaceText("3"), ViewActions.closeSoftKeyboard());
 
-        onView(allOf(withId(R.id.InstructionBox),isDisplayed())).perform(replaceText("3 Whistle"), ViewActions.closeSoftKeyboard());
+        onView(allOf(withId(R.id.textbox),isDisplayed())).perform(replaceText("3 Whistle"), ViewActions.closeSoftKeyboard());
 
         onView(allOf(withId(R.id.save_button), withContentDescription("Save Recipe"), isDisplayed())).perform(click());
 

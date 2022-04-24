@@ -1,5 +1,6 @@
 package comp3350.chefsnotes.iteration2features;
 
+import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
@@ -12,6 +13,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasSibling;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.CoreMatchers.allOf;
@@ -70,7 +72,6 @@ public class EditRecipeTest {
     private final String testName = "Chocolate Chip Cookies";
     private Recipe example;
 
-    //shamelessly copied from the sample project
     @Before
     public void setUp(){
         example = new RecipeExample();
@@ -79,7 +80,7 @@ public class EditRecipeTest {
 
         for (String r: recs) {
             System.out.println("RECIPE: " + r);
-            if (r.equals("#3350TEST")) {
+            if (r.equals("#3350TEST") || r.equals("ඞඞඞඞ")) {
                 recipes.deleteRecipe(r);
             }
         }
@@ -113,7 +114,8 @@ public class EditRecipeTest {
         onView(withText(example.getIngredientStrings()[0])).check(matches(isDisplayed()));
         //delete ingredient and save
         onView(withId(R.id.edit_button)).perform(click());
-        onView(allOf(withId(R.id.IngredientDeleteButton), hasSibling(withText("Butter")))).perform(click());
+        closeSoftKeyboard();
+        onView(allOf(withId(R.id.IngredientDeleteButton), hasSibling(withText("Butter")))).perform(scrollTo(), click());
         onView(withId(R.id.save_button)).perform(click());
         //pressBack();
         onView(withText(example.getIngredientStrings()[0])).check(doesNotExist());
@@ -140,13 +142,15 @@ public class EditRecipeTest {
     {
         onView(withId(R.id.browse_recipe_button)).perform(click());
         onView(withId(R.id.searchRecipeName)).perform(typeText("#3350TEST"));
+        onView(allOf(withText("#3350TEST"), withParent(withId(R.id.results)))).check(matches(isDisplayed()));
         onData(anything()).atPosition(0).perform(click());
         //delete
         onView(withId(R.id.edit_button)).perform(click());
         onView(withId(R.id.delRecipe)).perform(click());
+        onView(withText("Yes")).perform(click());
         //pressBack();
         onView(withId(R.id.searchRecipeName)).perform(typeText("#3350TEST"));
-        onView(withText("#3350TEST")).check(doesNotExist());
+        onView(allOf(withText("#3350TEST"), withParent(withId(R.id.results)))).check(doesNotExist());
     }
 
 
