@@ -50,20 +50,21 @@ public class PhotoActivity extends AppCompatActivity  {
                 new ActivityResultCallback<Uri>() {
                     @Override
                     public void onActivityResult(Uri uri) {
-                        Log.e("IMPORTANT", "Have I made it into on result?");
                         Bitmap bmap = null;
-                        try {
-                            bmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        if(uri != null) {
+                            try {
+                                bmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            String name = saveBMap(bmap);
+                            String path = File.separatorChar + name;
+                            path = getFilesDir() + path;
+                            Log.e("PHOTOS", "Im here");
+                            setUri(uri);
+                            setPath(path);
+                            Log.e("PHOTOS", "NOW here");
                         }
-                        String name = saveBMap(bmap);
-                        String path = File.separatorChar+name;
-                        path = getFilesDir() + path;
-                        Log.e("PHOTOS", "Im here");
-                        setUri(uri);
-                        setPath(path);
-                        Log.e("PHOTOS", "NOW here");
                     }
                 });
 
