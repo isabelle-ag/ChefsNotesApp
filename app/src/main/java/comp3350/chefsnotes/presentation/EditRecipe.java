@@ -53,6 +53,8 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
     private ArrayList<String> tags;
     private ArrayList<String> oldTags;
     private Recipe recipe;
+    private int[] idList;
+    private int newTagId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -421,47 +423,25 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
         }
     }
 
-    private void populateTags(){
+    private void populateTags() {
         Flow tags = findViewById(R.id.add_recipe_tags);
         ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.tagConstraintEdit);
 
-        String[] currList = tagHandler.fetchTags();
-        String[] tagList = Arrays.copyOf(currList, currList.length+1);
-        tagList[currList.length] = "New tag";
+        String newTag = "Create New Tag";
+        String[] tagList = tagHandler.fetchTags();
+//        String[] tagList = Arrays.copyOf(currList, currList.length+1);
+//        tagList[currList.length] = newTag;
 
-
-        int [] idList = new int[tagList.length];
-        int i=0;
+        idList = new int[tagList.length+1];
+        int i = 0;
 
         for (String s : tagList) {
 
-            ToggleButton b = new ToggleButton(this);
-            b.setTextSize(11);
-            b.setText(s);
-            b.setTextOff(s);
-            b.setTextOn(s);
-            b.setMinHeight(20);
-            b.setMinimumHeight(20);
-            b.setMinWidth(50);
-            b.setMinimumWidth(50);
-            b.setPadding(10, 5, 10, 5);
-            b.setAllCaps(false);
+            ToggleButton b = addTagView(s);
 
-            b.setId(b.generateViewId());
-
-            if(recipe != null) {
+            if (recipe != null) {
                 b.setChecked(recipe.hasTag(s));
             }
-
-            Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
-            ViewCompat.setBackground(b, drawable);
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMarginStart(8);
-            params.setMarginEnd(8);
-            b.setLayoutParams(params);
 
             parent.addView(b);
             tags.addView(b);
@@ -471,22 +451,47 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                 @Override
                 public void onCheckedChanged(CompoundButton bv, boolean isChecked) {
                     String tagName = bv.getText().toString();
-                    if(tagName.equals("New tag")){
-                        createTag();
-                        bv.setChecked(false);
-                    }
-                    else {
-                        if (isChecked) {
-                            addTag(tagName);
+                    if (isChecked) {
+                        addTag(tagName);
                             //tagHandler.addTagToRecipe(recipeFetcher.getRecipeByName(getIntent().getStringExtra("title")), bv.getText().toString());
-                        } else {
-                            removeTag(tagName);
+                    } else {
+                        removeTag(tagName);
                             //tagHandler.removeTagFromRecipe(recipeFetcher.getRecipeByName(getIntent().getStringExtra("title")), bv.getText().toString());
-                        }
                     }
                 }
             });
         }
+        ToggleButton b = addTagView(newTag);
+        parent.addView(b);
+        tags.addView(b);
+        idList[i] = b.getId();
+        newTagId = b.getId();
+        i++;
+        b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton bv, boolean isChecked) {
+                createTag();
+                bv.setChecked(false);
+            }
+        });
+
+        tags.setReferencedIds(idList);
+    }
+
+    private void addToFlow(ToggleButton b){
+        Flow tags = findViewById(R.id.add_recipe_tags);
+        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.tagConstraintEdit);
+        ToggleButton newTag = (ToggleButton) findViewById(newTagId);
+        tags.removeView(newTag);
+        parent.removeView(newTag);
+        parent.addView(b);
+        tags.addView(b);
+        parent.addView(newTag);
+        tags.addView(newTag);
+        int[] tempID = Arrays.copyOf(idList, idList.length+1);
+        idList = Arrays.copyOf(tempID, tempID.length);
+        idList[idList.length-2] = b.getId();
+        idList[idList.length-1] = newTagId;
         tags.setReferencedIds(idList);
     }
 
@@ -505,10 +510,10 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String tagName = input.getText().toString();
-                tagHandler.createTag(tagName);
-                Flow tags = findViewById(R.id.add_recipe_tags);
-
-                //populateTags();
+                if(tagHandler.createTag(tagName)) {
+                    ToggleButton b = addTagView(tagName);
+                    addToFlow(b);
+                }
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -521,6 +526,30 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
         builder.show();
     }
 
+    private ToggleButton addTagView(String s){
+        ToggleButton b = new ToggleButton(this);
+        b.setTextSize(11);
+        b.setText(s);
+        b.setTextOff(s);
+        b.setTextOn(s);
+        b.setMinHeight(20);
+        b.setMinimumHeight(20);
+        b.setMinWidth(50);
+        b.setMinimumWidth(50);
+        b.setPadding(10, 5, 10, 5);
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
+        ViewCompat.setBackground(b, drawable);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMarginStart(8);
+        params.setMarginEnd(8);
+        b.setLayoutParams(params);
+        b.setAllCaps(false);
+        b.setId(b.generateViewId());
+        return b;
+    }
     private void addTag(String t){
         if(!tags.contains(t))   {
             tags.add(t);

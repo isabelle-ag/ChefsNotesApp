@@ -34,13 +34,14 @@ public class TagHandler implements ITagHandler{
         return tdb.tagList();
     }
 
-    public void createTag(String tag)
+    public boolean createTag(String tag)
     {
         try {
             tdb.addTag(tag);
+            return true;
         }
         catch(TagExistenceException e)
-        {};
+        {return false;}
     }
 
     public void deleteTag(String tag) throws TagExistenceException

@@ -102,23 +102,6 @@
             </TableRow>
 
             <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ToggleButton
-                    android:id="@+id/button"
-                    android:layout_width="20sp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/togglebutton_selector"
-                    android:maxWidth="10sp"
-                    android:minWidth="5sp"
-                    android:minHeight="24sp"
-                    android:text="New Tag"
-                    android:textOff="New Tag"
-                    android:textOn="New Tag" />
-            </TableRow>
-
-            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="5sp">

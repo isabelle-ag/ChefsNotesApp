@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -59,7 +61,13 @@ public class PhotoActivity extends AppCompatActivity  {
                         Bitmap bmap = null;
                         if(uri != null) {
                             try {
-                                bmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
+                                if(Build.VERSION.SDK_INT < 28) {
+                                    bmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
+                                }
+                                else{
+                                    ImageDecoder.Source source = ImageDecoder.createSource(getApplicationContext().getContentResolver(), uri);
+                                    bmap = ImageDecoder.decodeBitmap(source);
+                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
