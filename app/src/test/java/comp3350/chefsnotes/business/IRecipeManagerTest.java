@@ -41,6 +41,8 @@ public class IRecipeManagerTest {
         catch (RecipeExistenceException e){fail();}
         Recipe R1 = db.getRecipe("test1");
         assertEquals(myRecipe, R1);
+        assertThrows(RecipeExistenceException.class, () -> manager.newRecipe("test1"));
+
     }
 
     @Test
@@ -83,6 +85,7 @@ public class IRecipeManagerTest {
 
         Recipe finalMyRecipe = myRecipe;
         assertThrows(RecipeExistenceException.class, () -> manager.renameRecipe(finalMyRecipe, "testNameCol"));
+
 
     }
 
@@ -144,5 +147,16 @@ public class IRecipeManagerTest {
         String notes = manager.loadNotes(R);
 
         assertEquals("bar", notes);
+    }
+
+    @Test
+    public void testASingleException()
+    {
+        db = Mockito.mock(DBMSTools.class);
+        manager = new RecipeManager(db);
+        Recipe R = new Recipe("foo");
+        when(db.getRecipe("ERROR")).thenReturn(null);
+
+        assertThrows(RecipeExistenceException.class, () -> manager.renameRecipe(new Recipe("ERROR"), "WILLERROR"));
     }
 }

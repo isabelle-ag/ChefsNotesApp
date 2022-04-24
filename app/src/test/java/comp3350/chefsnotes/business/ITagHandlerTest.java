@@ -40,6 +40,9 @@ public class ITagHandlerTest {
         assertEquals(0, handler.fetchTags().length);
 
         assertThrows(TagExistenceException.class, () -> handler.deleteTag("foo"));
+
+        handler.addTagToRecipe(r, "1111");
+        handler.addTagToRecipe(r, "1111");
     }
 
 }
