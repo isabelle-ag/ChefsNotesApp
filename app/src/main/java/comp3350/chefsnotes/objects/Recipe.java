@@ -1,7 +1,4 @@
 package comp3350.chefsnotes.objects;
-
-import android.util.Log;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -313,7 +310,6 @@ public class Recipe implements Serializable {
             pl.addReference(pathname);              // add reference (creates if needed)
             result = true;
         }
-
         return result;
     }
 

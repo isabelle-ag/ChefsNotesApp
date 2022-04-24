@@ -11,7 +11,7 @@ public interface ITagHandler {
 
     String[] fetchTags();
 
-    void createTag(String tag);
+    boolean createTag(String tag);
 
     boolean deleteTag(String tag) throws TagExistenceException;
 

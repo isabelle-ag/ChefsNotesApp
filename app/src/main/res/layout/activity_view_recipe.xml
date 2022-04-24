@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewRecipeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ViewRecipe">
@@ -22,7 +23,7 @@
             android:layout_alignParentBottom="true"
             android:layout_toStartOf="@+id/copy_button"
             android:background="@drawable/edit_button"
-            android:contentDescription='"Edit button"' />
+            android:contentDescription='@string/edit' />
 
         <ImageButton
             android:id="@+id/copy_button"
@@ -63,8 +64,6 @@
             android:textColor="#000000"
             android:textSize="40sp" />
 
-        <!--        has temporary image-->
-
         <TextView
             android:id="@+id/totalTimeView"
             android:layout_width="match_parent"
@@ -102,16 +101,45 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/ingredientListView"
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
-            android:divider="@android:color/black"
-            android:dividerHeight="-10sp"
-            android:paddingBottom="5dp"
-            tools:ignore="DuplicateSpeakableTextCheck">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        </ListView>
+            <ListView
+                android:id="@+id/ingredientListView"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_weight="0.5"
+                android:divider="@android:color/black"
+                android:paddingBottom="5dp"
+                tools:ignore="DuplicateSpeakableTextCheck"></ListView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/included_photo"
+                    layout="@layout/photo_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0sp"
+                    android:layout_weight="1.5" />
+
+                <EditText
+                    android:id="@+id/Notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Add Notes"
+                    android:inputType="textLongMessage|textMultiLine" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <View
             android:id="@+id/divider"
