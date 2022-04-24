@@ -58,6 +58,7 @@ public class ViewRecipe extends PhotoActivity {
     private final IRecipeFetcher recipeFetcher = new RecipeFetcher(Services.getRecipePersistence());
     private Recipe recipe;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

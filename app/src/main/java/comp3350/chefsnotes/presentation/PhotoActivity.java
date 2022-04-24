@@ -73,11 +73,13 @@ public class PhotoActivity extends AppCompatActivity  {
                             Bitmap myBitmap= loadImageBitmap(name);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             myBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                            Glide.with(recipeImg)
-                                    .load(myBitmap)
-                                    .dontTransform()
-                                    .into(recipeImg);
-                            //recipeImg.setImageBitmap(newBmap);
+//                            Glide.with(recipeImg)
+//                                    .load(myBitmap)
+//                                    .dontTransform()
+//                                    .into(recipeImg);
+                            recipeImg.setImageURI(uri);
+                            ViewRecipe view = new ViewRecipe();
+                            //view.setUri(uri);
                         }
                         else{
                             Log.e("Set View", "Trying to set recipeImg");
