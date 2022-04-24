@@ -518,9 +518,7 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
     private void populateTags() {
         Flow tags = findViewById(R.id.add_recipe_tags);
         ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.tagConstraintEdit);
-
-        String newTag = "Create New Tag";
-        String delTag = "Delete Existing Tag";
+        
         String[] tagList = tagHandler.fetchTags();
 
         idList = new int[tagList.length];
@@ -581,7 +579,7 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
             params.setMarginStart(9);
             params.setMarginEnd(9);
             b.setLayoutParams(params);
-            b.setAllCaps(true);
+            b.setAllCaps(false);
             b.setId(b.generateViewId());
             Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.new_tag_selector, null);
             ViewCompat.setBackground(b, drawable);
