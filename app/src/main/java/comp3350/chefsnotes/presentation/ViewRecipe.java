@@ -197,12 +197,8 @@ public class ViewRecipe extends PhotoActivity {
     }
 
     private boolean navigation(MenuItem item) {
-        if(item.getItemId() == R.id.home_button){
-            Intent i = new Intent(ViewRecipe.this, MainActivity.class);
-            startActivity(i);
-            return true;
-        }
-        else if (item.getItemId() == R.id.new_recipe_button) {
+
+        if (item.getItemId() == R.id.new_recipe_button) {
             Intent i = new Intent(ViewRecipe.this, EditRecipe.class);
             startActivity(i);
             return true;

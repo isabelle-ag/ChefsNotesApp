@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,6 +33,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.application.Main;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.ITagHandler;
@@ -218,12 +220,7 @@ public class RecipeBrowser extends AppCompatActivity {
     }
 
     private boolean navigation(MenuItem item){
-        if(item.getItemId() == R.id.home_button){
-            Intent i = new Intent(RecipeBrowser.this, MainActivity.class);
-            startActivity(i);
-            return true;
-        }
-        else if(item.getItemId() == R.id.new_recipe_button){
+        if(item.getItemId() == R.id.new_recipe_button){
             Intent i = new Intent(RecipeBrowser.this, EditRecipe.class);
             startActivity(i);
             return true;

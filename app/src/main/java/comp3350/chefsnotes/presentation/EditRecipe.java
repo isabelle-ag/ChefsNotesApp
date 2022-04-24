@@ -400,11 +400,8 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
     }
 
     private boolean navigation(MenuItem item) {
-        if(item.getItemId() == R.id.home_button){
-            Intent i = new Intent(EditRecipe.this, MainActivity.class);
-            startActivity(i);
-            return true;
-        } else if (item.getItemId() == R.id.new_recipe_button) {
+
+       if (item.getItemId() == R.id.new_recipe_button) {
             item.setChecked(true);
             return true;
         } else if (item.getItemId() == R.id.browse_recipe_button) {
