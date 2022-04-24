@@ -7,13 +7,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.FileUtils;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -43,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         Services.getTagPersistence(DB_MODE);
         createTags();
 
+        Services.getPhotoPersistence(DB_MODE);
+        setupPhotoList();
+
         DBMSTools dbSetup = Services.getRecipePersistence(DB_MODE);
         if (dbSetup.getAllRecipes().length == 0) {
             Recipe[] samples = SampleRecipeGenerator.sampleList();
@@ -52,11 +60,9 @@ public class MainActivity extends AppCompatActivity {
                     dbSetup.commitChanges(curr);
                 }
             }
-
+            getDefaultPhotos();
         }
 
-        Services.getPhotoPersistence(DB_MODE);
-        setupPhotoList();
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
@@ -187,5 +193,26 @@ public class MainActivity extends AppCompatActivity {
             assert pl.addPhoto(i); // should be no failures.
         }
     }
+
+    private void getDefaultPhotos(){
+        String dest = getFilesDir().toString() + File.separatorChar;
+        String dir = "src/main/assets/defaultphotos/";
+        String cookie1 = "cookies-crocker-202204231114-087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg";
+        String cookie2 = "raw-cookie-dough-chocolatecoveredkatie-202204231124-AOvVaw0XGMWtUd.jpg";
+        String chikn1 = "butter-chicken-cafedelite-202204231118-0CAwQjRxqFwoTCLC3q.jpg";
+        String chikn2 = "raw-chicken-flickr-202204231127-48806391192_f3b61da1af_b.jpg";
+        String whistle3 = "tomato-soup-cooking-classy-202204231120-AOvVaw0KCApx7gWKVnelSKFQ1O09.jpg";
+
+        try{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                FileUtils.copy(new FileInputStream(dir+cookie1), new FileOutputStream(dest+cookie1));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
