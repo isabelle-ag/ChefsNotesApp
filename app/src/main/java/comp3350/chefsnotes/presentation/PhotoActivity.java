@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -77,6 +78,10 @@ public class PhotoActivity extends AppCompatActivity  {
                                 e.printStackTrace();
                             }
                             String name = saveBMap(bmap);
+                            Toast toast = Toast.makeText(getApplicationContext(),
+                                    "Photo added.",
+                                    Toast.LENGTH_SHORT);
+                            toast.show();
                             go(name, uri);
                         }
                     }
@@ -185,7 +190,7 @@ public class PhotoActivity extends AppCompatActivity  {
 
     private void confirmDel(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete this photo?");
+        builder.setTitle("Delete this photo? This is immediate and irreversible.");
 
 // Set up the buttons
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -208,6 +213,10 @@ public class PhotoActivity extends AppCompatActivity  {
         String[] photos = recipeManager.getPhotos(recipe);
         String path = photos[currImg];
         recipeManager.delPhoto(recipe, path);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Photo deleted.",
+                Toast.LENGTH_SHORT);
+        toast.show();
         photos = recipeManager.getPhotos(recipe);
         if(photos.length == 0){
             setImg();

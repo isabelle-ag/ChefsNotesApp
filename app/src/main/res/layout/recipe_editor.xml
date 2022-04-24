@@ -115,6 +115,7 @@
                         android:id="@+id/manage_tags"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8sp"
                         app:flow_horizontalBias=".1"
                         app:flow_horizontalGap="20dp"
                         app:flow_horizontalStyle="spread"

@@ -115,4 +115,8 @@ public class RecipeManager implements IRecipeManager {
     public void delPhoto(Recipe R, String pathname){
         boolean result = R.removePhoto(pathname);
         db.commitChanges(R);}
+
+    public boolean moveDirection(Recipe R, int oldIndex, int newIndex){
+        return(R.moveDirection(oldIndex, newIndex));
+    }
 }

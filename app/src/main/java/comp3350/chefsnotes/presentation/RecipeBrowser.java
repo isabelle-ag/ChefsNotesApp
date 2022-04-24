@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
@@ -100,9 +101,17 @@ public class RecipeBrowser extends AppCompatActivity {
         TextView searchDesc = (TextView) findViewById(R.id.searchDesc);
         //If ingredient mode
         if(isChecked) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Searching by ingredients.",
+                    Toast.LENGTH_SHORT);
+            toast.show();
             searchDesc.setText(R.string.search_mode_ing);
         }
         else{
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Searching by recipe name",
+                    Toast.LENGTH_SHORT);
+            toast.show();
             searchDesc.setText(R.string.search_mode_name);
         }
         populateRecipes(searchTerm);

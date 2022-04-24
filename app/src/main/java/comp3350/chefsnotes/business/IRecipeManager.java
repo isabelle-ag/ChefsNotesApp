@@ -18,5 +18,6 @@ public interface IRecipeManager {
     public void addPhoto(Recipe R, String pathname);
     public String[] getPhotos(Recipe R);
     public void delPhoto(Recipe R, String pathname);
+    public boolean moveDirection(Recipe R, int oldIndex, int newIndex);
 }
 

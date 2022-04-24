@@ -25,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -56,8 +57,8 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
     private ArrayList<String> oldTags;
     private Recipe recipe;
     private int[] idList;
-    private int newTagId;
-    private int delTagId;
+    int newTagId;
+    int delTagId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,8 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
         nextButton.setOnClickListener(super::nextImg);
         delPhoto.setOnClickListener(super::delPhoto);
         addPhoto.setOnClickListener(super::addPic);
+        ImageView dirUp = findViewById(R.id.directionUp);
+        ImageView dirDown = findViewById(R.id.directionDown);
 
         //set dropdown menu to array being used - can be used in the future for filtering units by metric, imperial, etc.
         Spinner ingDrop = findViewById(R.id.unitList);
@@ -109,6 +112,8 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
         deleteIngredientButton.setOnClickListener(this::removeIngredient);
         deleteDirectionButton.setOnClickListener(this::removeDirection);
         delRecipeButton.setOnClickListener(this::deleteRecipe);
+        dirUp.setOnClickListener(this::moveUp);
+        dirDown.setOnClickListener(this::moveDown);
 
     }
 
@@ -139,6 +144,10 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                 addRecipeTags(r);
                 removeRecipeTags(r);
                 System.out.println("Saving Success!");
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Recipe "+title+" saved.",
+                        Toast.LENGTH_SHORT);
+                toast.show();
                 Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
                 i.putExtra("recipeKey",title);
                 startActivity(i);
@@ -158,6 +167,10 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                 System.out.println("Saving succeeded!");
                 addRecipeTags(r);
                 removeRecipeTags(r);
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Recipe "+title+" saved.",
+                        Toast.LENGTH_SHORT);
+                toast.show();
                 Intent i = new Intent(EditRecipe.this, ViewRecipe.class);
                 i.putExtra("recipeKey",title);
                 startActivity(i);
@@ -266,7 +279,7 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
         return directions;
     }
 
-    public void populateRecipe(String title, ArrayAdapter<String> units)//cannot test until ViewRecipe uses real recipes, or sample recipe is stored in db
+    public void populateRecipe(String title, ArrayAdapter<String> units)
     {
         EditText name;
         EditText amount;
@@ -350,6 +363,62 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
     {
         LinearLayout ingredientContainer = findViewById(R.id.IngredientContainer);
         ingredientContainer.removeView((View) view.getParent().getParent());
+    }
+
+    private void populateIndex(int currI, int newI, View v){
+        EditText title;
+        EditText time;
+        EditText contents;
+        String dirTitle;
+        String dirTime;
+        String dirContents;
+
+        LinearLayout instructionContainer = findViewById(R.id.DirectionContainer);
+        ViewGroup curDir = (ViewGroup) v.getParent().getParent();
+
+        title = curDir.findViewById(R.id.DirectionName);
+        dirTitle = title.getText().toString();
+        time = (EditText) curDir.findViewById(R.id.TimeEstimate);
+        dirTime = time.getText().toString();
+        contents = curDir.findViewById(R.id.textbox);
+        dirContents = contents.getText().toString();
+
+        recipeManager.moveDirection(recipe, currI, newI);
+        instructionContainer.removeView((View) v.getParent().getParent());
+        View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
+        instructionContainer.addView(child, newI);
+        child.setId(View.generateViewId());
+        curDir = (ViewGroup) child;
+
+        View deleteDirectionButton = child.findViewById(R.id.DirectionDeleteButton);
+        deleteDirectionButton.setOnClickListener(this::removeDirection);
+
+        title = curDir.findViewById(R.id.DirectionName);
+        title.setText(dirTitle);
+        time = (EditText) curDir.findViewById(R.id.TimeEstimate);
+        time.setText(dirTime);
+        contents = (EditText) curDir.findViewById(R.id.textbox);
+        contents.setText(dirContents);
+    }
+
+    public void moveDown(View v){
+        LinearLayout instructionContainer = findViewById(R.id.DirectionContainer);
+        int index = instructionContainer.indexOfChild((View)v.getParent().getParent());
+        ViewGroup directions = (ViewGroup) instructionContainer;
+        int total = directions.getChildCount();
+        Log.e("MOVE", "moveDown: total child views:"+total );
+        Log.e("MOVE", "moveDown: this index:"+index );
+        if(index+1<total){
+            populateIndex(index, index+1, v);
+        }
+    }
+
+    public void moveUp(View v){
+        LinearLayout instructionContainer = findViewById(R.id.DirectionContainer);
+        int index = instructionContainer.indexOfChild((View)v.getParent().getParent());
+        if(index>0){
+            populateIndex(index, index-1, v);
+        }
     }
 
     public void deleteRecipe(View view){
@@ -559,21 +628,20 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                 String tagName = input.getText().toString().trim();
                 Button bv = findViewById(newTagId);
                 if(!(tagName.isEmpty()) && tagHandler.createTag(tagName)) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Tag "+tagName+" created.",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
                     ToggleButton b = addTagView(tagName);
                     Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
                     ViewCompat.setBackground(b, drawable);
                     addToFlow(b);
                 }
-//                bv.setChecked(false);
-//                ((ToggleButton)findViewById(delTagId)).setChecked(false);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                ToggleButton bv = findViewById(newTagId);
-//                bv.setChecked(false);
-//                ((ToggleButton)findViewById(delTagId)).setChecked(false);
                 dialog.dismiss();
             }
         });
@@ -599,14 +667,15 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                 String tagName = input.getText().toString().trim();
                 Button bv = findViewById(delTagId);
                 if(tagName.isEmpty()){
-                    Log.e("Delete Tag", "onClick: empty string" );
-//                    ((ToggleButton)findViewById(delTagId)).setChecked(false);
-//                    ((ToggleButton)findViewById(newTagId)).setChecked(false);
                     return;
                 }
                 try {
                     tagHandler.deleteTag(tagName);
                     delTagList(tagName);
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Tag "+tagName+" deleted.",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
                 } catch (TagExistenceException e) {
                 }
                // bv.setChecked(false);
