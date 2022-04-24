@@ -1,5 +1,6 @@
 package comp3350.chefsnotes.presentation;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -7,9 +8,11 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +30,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
@@ -421,7 +425,10 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
         Flow tags = findViewById(R.id.add_recipe_tags);
         ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.tagConstraintEdit);
 
-        String[] tagList = tagHandler.fetchTags();
+        String[] currList = tagHandler.fetchTags();
+        String[] tagList = Arrays.copyOf(currList, currList.length+1);
+        tagList[currList.length] = "New tag";
+
 
         int [] idList = new int[tagList.length];
         int i=0;
@@ -463,18 +470,55 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
             b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton bv, boolean isChecked) {
-                    if (isChecked) {
-                        addTag(bv.getText().toString());
-                        //tagHandler.addTagToRecipe(recipeFetcher.getRecipeByName(getIntent().getStringExtra("title")), bv.getText().toString());
-                    } else {
-                        removeTag(bv.getText().toString());
-                        //tagHandler.removeTagFromRecipe(recipeFetcher.getRecipeByName(getIntent().getStringExtra("title")), bv.getText().toString());
+                    String tagName = bv.getText().toString();
+                    if(tagName.equals("New tag")){
+                        createTag();
+                        bv.setChecked(false);
+                    }
+                    else {
+                        if (isChecked) {
+                            addTag(tagName);
+                            //tagHandler.addTagToRecipe(recipeFetcher.getRecipeByName(getIntent().getStringExtra("title")), bv.getText().toString());
+                        } else {
+                            removeTag(tagName);
+                            //tagHandler.removeTagFromRecipe(recipeFetcher.getRecipeByName(getIntent().getStringExtra("title")), bv.getText().toString());
+                        }
                     }
                 }
             });
-
         }
         tags.setReferencedIds(idList);
+    }
+
+    private void createTag(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Tag Name");
+
+// Set up the input
+        final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String tagName = input.getText().toString();
+                tagHandler.createTag(tagName);
+                Flow tags = findViewById(R.id.add_recipe_tags);
+
+                //populateTags();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     private void addTag(String t){
