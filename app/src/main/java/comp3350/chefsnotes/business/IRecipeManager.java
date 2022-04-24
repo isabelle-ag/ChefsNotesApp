@@ -16,5 +16,6 @@ public interface IRecipeManager {
     public void updateNotes(Recipe R, String notes);
     public String loadNotes(Recipe R);
     public void addPhoto(Recipe R, String pathname);
+    public String[] getPhotos(Recipe R);
 }
 

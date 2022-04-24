@@ -72,16 +72,17 @@ public class ViewRecipe extends PhotoActivity {
         editButton.setOnClickListener(this::editRecipe);
         copyButton.setOnClickListener(this::copyRecipe);
         shareButton.setOnClickListener(this::exportRecipe);
-        recipeImg.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                ViewRecipe.super.choosePic(v);
-                Uri uri = ViewRecipe.super.getUri();
-                recipeImg.setImageURI(uri);
-                Log.e("PHOTO", "URI: "+uri);
-                String path = ViewRecipe.super.getPath();
-                //recipeManager.addPhoto(recipe, path);
-            }
-        });
+        recipeImg.setOnClickListener(this::pickImage);
+//        recipeImg.setOnClickListener(new OnClickListener() {
+//            public void onClick(View v) {
+//                ViewRecipe.super.choosePic(v);
+//                Uri uri = ViewRecipe.super.getUri();
+//                recipeImg.setImageURI(uri);
+//                Log.e("PHOTO", "URI: "+uri);
+//                String path = ViewRecipe.super.getPath();
+//                //recipeManager.addPhoto(recipe, path);
+//            }
+//        });
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         navView.setOnItemSelectedListener(this::navigation);
@@ -164,12 +165,16 @@ public class ViewRecipe extends PhotoActivity {
         String[] ingredients = recipe.getIngredientStrings();
         String title = recipe.getTitle();
         String time = directionsTemp[0];
-        String[] photos = recipe.getPhotos();
-//        if(photos.length >0) {
-//            Uri imgUri = Uri.parse(photos[0]);
-//            ImageView recipePhotos = (ImageView) findViewById(R.id.recipe_photo);
-//            recipePhotos.setImageURI(imgUri);
-//        }
+        String[] photos = recipeManager.getPhotos(recipe);
+        if(photos != null && photos.length >0) {
+            Uri imgUri = Uri.parse(photos[0]);
+            Log.e("PHOTOS", "fillViewer: URI from file: "+imgUri);
+            ImageView recipePhotos = (ImageView) findViewById(R.id.recipe_photo);
+            recipePhotos.setImageURI(imgUri);
+        }
+        else{
+            Log.e("PHOTOS", "fillViewer: No images found");
+        }
 
         String[] directions = Arrays.copyOfRange(directionsTemp, 1, directionsTemp.length);
 
@@ -269,6 +274,15 @@ public class ViewRecipe extends PhotoActivity {
 
         }
         tags.setReferencedIds(idList);
+    }
+
+    private void pickImage(View v){
+        ViewRecipe.super.choosePic(v, recipe);
+//        ImageView recipeImg = (ImageView) findViewById(R.id.recipe_photo);
+//        String path = ViewRecipe.super.getPath();
+//        if(path != null) {
+//            recipeManager.addPhoto(recipe, path);
+//        }
     }
 
 }

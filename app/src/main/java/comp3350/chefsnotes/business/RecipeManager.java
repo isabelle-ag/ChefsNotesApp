@@ -1,5 +1,7 @@
 package comp3350.chefsnotes.business;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.application.Services;
@@ -103,6 +105,15 @@ public class RecipeManager implements IRecipeManager {
     public void addPhoto(Recipe R, String pathname){ R.addPhoto(pathname); }
 
     public String[] getPhotos(Recipe R){
-        return R.getPhotos();
+        String[] photos = R.getPhotos();
+        if(photos.length >0) {
+            for(String s : photos) {
+                Log.e("PHOTOS", "getPhotos: photostring: " + s);
+            }
+        }
+        else{
+            Log.e("PHOTOS", "getPhotos:empty ");
+        }
+        return photos;
     }
 }

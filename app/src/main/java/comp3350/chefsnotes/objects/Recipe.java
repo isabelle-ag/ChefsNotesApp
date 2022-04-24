@@ -313,6 +313,7 @@ public class Recipe implements Serializable {
             pl.addReference(pathname);              // add reference (creates if needed)
             result = true;
         }
+        Log.e("PHOTOS", "AddPhoto result: "+result);
 
         return result;
     }
@@ -332,6 +333,9 @@ public class Recipe implements Serializable {
     }
 
     public String[] getPhotos(){
+        for (String s : photos){
+            Log.e("PHOTOS", "getPhotos: photostring: " + s);
+        }
         return this.photos.toArray(new String[0]);
     }
 
