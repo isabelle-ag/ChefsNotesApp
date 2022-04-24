@@ -24,14 +24,14 @@ public class ITagHandlerTest {
     public void testEmAll() {
         Recipe r = new RecipeExample();
         assertEquals(0, handler.fetchTags().length);
-        handler.addTagToRecipe(r, "foo");
-        assertEquals(true, r.getTags().contains("foo"));
+        handler.addTagToRecipe(r, "Foo");
+        assertEquals(true, r.getTags().contains("Foo"));
         assertEquals(1, handler.fetchTags().length);
-        assertEquals("foo", handler.fetchTags()[0]);
+        assertEquals("Foo", handler.fetchTags()[0]);
 
-        handler.removeTagFromRecipe(r, "foo");
+        handler.removeTagFromRecipe(r, "Foo");
         try {
-            handler.deleteTag("foo");
+            handler.deleteTag("Foo");
         }catch (TagExistenceException e)
         {
             fail("unexpected exception");
@@ -39,7 +39,7 @@ public class ITagHandlerTest {
 
         assertEquals(0, handler.fetchTags().length);
 
-        assertThrows(TagExistenceException.class, () -> handler.deleteTag("foo"));
+        assertThrows(TagExistenceException.class, () -> handler.deleteTag("Foo"));
 
         handler.addTagToRecipe(r, "1111");
         handler.addTagToRecipe(r, "1111");

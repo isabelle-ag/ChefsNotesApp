@@ -75,9 +75,9 @@ public class RecipeTest {
     @Test
     public void testTags() {
         example.addTag("foo");
-        assertTrue(example.getTags().contains("foo"));
+        assertTrue(example.getTags().contains("Foo"));
         example.removeTag("foo");
-        assertFalse(example.getTags().contains("foo"));
+        assertFalse(example.getTags().contains("Foo"));
     }
 
     @Test

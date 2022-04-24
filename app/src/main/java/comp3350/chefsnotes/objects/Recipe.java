@@ -1,4 +1,6 @@
 package comp3350.chefsnotes.objects;
+import org.apache.commons.lang3.text.WordUtils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -33,15 +35,17 @@ public class Recipe implements Serializable {
 
     public void addTag(String tag)
     {
-        if(!tags.contains(tag)) {
-            tags.add(tag);
+        String tagName = WordUtils.capitalizeFully(tag);
+        if(!tags.contains(tagName)) {
+            tags.add(tagName);
         }
     }
 
     public void removeTag(String tag)
     {
-        if(tags.contains(tag)) {
-            tags.remove(tag);
+        String tagName = WordUtils.capitalizeFully(tag);
+        if(tags.contains(tagName)) {
+            tags.remove(tagName);
         }
     }
 
@@ -51,7 +55,8 @@ public class Recipe implements Serializable {
     }
 
     public boolean hasTag(String tag){
-        return(tags.contains(tag));
+        String tagName = WordUtils.capitalizeFully(tag);
+        return(tags.contains(tagName));
     }
 
     public int ingredientCount(){
