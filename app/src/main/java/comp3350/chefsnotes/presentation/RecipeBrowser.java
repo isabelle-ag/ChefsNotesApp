@@ -1,30 +1,40 @@
 package comp3350.chefsnotes.presentation;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
+
+import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.R;
+import comp3350.chefsnotes.application.Main;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.ITagHandler;
@@ -41,7 +51,6 @@ public class RecipeBrowser extends AppCompatActivity {
     private String searchTerm;
     private SwitchCompat ingMode;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +65,8 @@ public class RecipeBrowser extends AppCompatActivity {
         navView.setOnItemSelectedListener(this::navigation);
         ingMode.setOnCheckedChangeListener(this::toggleHint);
         ingMode.setChecked(false);
+
+        navView.setSelectedItemId(R.id.browse_recipe_button);
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -90,9 +101,17 @@ public class RecipeBrowser extends AppCompatActivity {
         TextView searchDesc = (TextView) findViewById(R.id.searchDesc);
         //If ingredient mode
         if(isChecked) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Searching by ingredients.",
+                    Toast.LENGTH_SHORT);
+            toast.show();
             searchDesc.setText(R.string.search_mode_ing);
         }
         else{
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Searching by recipe name",
+                    Toast.LENGTH_SHORT);
+            toast.show();
             searchDesc.setText(R.string.search_mode_name);
         }
         populateRecipes(searchTerm);
@@ -216,7 +235,6 @@ public class RecipeBrowser extends AppCompatActivity {
             return true;
         }
         else if(item.getItemId() == R.id.browse_recipe_button){
-            item.setEnabled(true);
             item.setChecked(true);
             return true;
         }
@@ -226,8 +244,11 @@ public class RecipeBrowser extends AppCompatActivity {
             return true;
         }
         else{
-            return super.onOptionsItemSelected(item);
+            return false;
         }
+//        else{
+//            return super.onOptionsItemSelected(item);
+//        }
     }
 
 

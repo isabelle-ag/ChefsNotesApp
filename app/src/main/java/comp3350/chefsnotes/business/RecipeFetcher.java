@@ -2,6 +2,8 @@ package comp3350.chefsnotes.business;
 
 import android.util.Log;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.application.Services;
@@ -29,6 +31,13 @@ public class RecipeFetcher implements IRecipeFetcher{
 
     public Recipe[] filterRecipesByTags(String[] included, String[] excluded, Recipe[] searchSpace)
     {
+        for (int i=0;i<included.length;i++){
+            included[i] = WordUtils.capitalizeFully(included[i]);
+            System.out.println(included[i]);
+        }
+        for (int i=0;i<excluded.length;i++){
+            excluded[i] = WordUtils.capitalizeFully(excluded[i]);
+        }
         ArrayList<Recipe> out = new ArrayList<Recipe>();
 
         for (Recipe r: searchSpace)

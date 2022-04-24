@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         QuantityNumTest.class,
         IngredientTest.class,
-        RecipeTest.class
+        RecipeTest.class,
+        PhotoTest.class
 })
 
 public class _ObjectsTestSuite {

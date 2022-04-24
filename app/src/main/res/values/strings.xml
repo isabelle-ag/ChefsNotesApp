@@ -33,4 +33,11 @@
         This cannot be undone.</string>
     <string name="search_mode_name">Search for any part of a recipe name</string>
     <string name="search_mode_ing">Separate multiple ingredients by semi-colons</string>
+    <string name="camera_button">Camera</string>
+    <string name="delete_recipe">Delete Recipe</string>
+    <string name="add_direction">Add Direction</string>
+    <string name="duplicate_recipe">Duplicate Recipe</string>
+    <string name="edit">Edit</string>
+    <string name="delete_photo">Delete Photo</string>
+    <string name="home_page">Home</string>
 </resources>
