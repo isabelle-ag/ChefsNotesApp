@@ -81,11 +81,11 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
         ImageButton nextButton = findViewById(R.id.next_photo);
         ImageButton addPhoto = findViewById(R.id.add_photo);
         ImageButton delPhoto = findViewById(R.id.delete_photo);
-        recipeImg.setOnClickListener(super::choosePic);
+        recipeImg.setOnClickListener(this::chooseImg);
         prevButton.setOnClickListener(super::lastImg);
         nextButton.setOnClickListener(super::nextImg);
-        delPhoto.setOnClickListener(super::delPhoto);
-        addPhoto.setOnClickListener(super::addPic);
+        delPhoto.setOnClickListener(this::delImg);
+        addPhoto.setOnClickListener(this::plusImg);
         ImageView dirUp = findViewById(R.id.directionUp);
         ImageView dirDown = findViewById(R.id.directionDown);
 
@@ -121,6 +121,24 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
     private String getTitle(View view)
     {
         return ((EditText) findViewById(R.id.recipeTitle)).getText().toString();
+    }
+
+    private void chooseImg(View v){
+        if(getIntent().getStringExtra("recipeKey") == null){
+            Messages.oops(this, "Please save your recipe before adding pictures!");
+        }
+        else{
+            super.choosePic(v);
+        }
+    }
+
+    private void plusImg(View v){
+        if(getIntent().getStringExtra("recipeKey") == null){
+            Messages.oops(this, "Please save your recipe before adding pictures!");
+        }
+        else{
+            super.addPic(v);
+        }
     }
 
     private void save(View v){
@@ -738,6 +756,18 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
     private void removeRecipeTags(Recipe r){
         for (String s:oldTags){
             tagHandler.removeTagFromRecipe(r,s);
+        }
+    }
+
+    private void delImg(View v){
+        if (getIntent().getStringExtra("recipeKey") == null){
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "No photos found",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else{
+            super.delPhoto(v);
         }
     }
 

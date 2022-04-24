@@ -185,7 +185,16 @@ public class PhotoActivity extends AppCompatActivity  {
     public void setRecipe(Recipe r){ this.recipe = r;}
 
     public void delPhoto(View v){
-        confirmDel();
+        String[] photos = recipeManager.getPhotos(recipe);
+        if(photos.length <=0){
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "No photos found",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else{
+            confirmDel();
+        }
     }
 
     private void confirmDel(){
@@ -211,23 +220,23 @@ public class PhotoActivity extends AppCompatActivity  {
 
     private void delete(){
         String[] photos = recipeManager.getPhotos(recipe);
-        String path = photos[currImg];
-        recipeManager.delPhoto(recipe, path);
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "Photo deleted.",
-                Toast.LENGTH_SHORT);
-        toast.show();
-        photos = recipeManager.getPhotos(recipe);
-        if(photos.length == 0){
+        if(photos.length >0) {
+            String path = photos[currImg];
+            recipeManager.delPhoto(recipe, path);
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Photo deleted.",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            photos = recipeManager.getPhotos(recipe);
+            if (photos.length == 0) {
+                setImg();
+            } else if (currImg == 0) {
+                currImg = photos.length - 1;
+            } else {
+                currImg--;
+            }
             setImg();
         }
-        else if(currImg == 0){
-            currImg = photos.length -1;
-        }
-        else{
-            currImg--;
-        }
-        setImg();
     }
 
     public void refresh(){

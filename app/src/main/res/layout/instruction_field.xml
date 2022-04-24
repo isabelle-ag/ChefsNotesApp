@@ -95,11 +95,11 @@
             app:srcCompat="@drawable/down_selector" />
 
         <View
-            android:id="@+id/divider2"
+            android:id="@+id/dividerDir"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_marginBottom="20dp"
-            android:background="@color/main_logo"
+            android:background="#8035A696"
             tools:layout_alignParentBottom="true" />
 
     </RelativeLayout>

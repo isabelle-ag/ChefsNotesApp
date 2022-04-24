@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
+        navView.setSelectedItemId(R.id.browse_recipe_button);
         navView.setOnItemSelectedListener(this::navigation);
     }
 
