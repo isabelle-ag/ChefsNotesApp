@@ -26,7 +26,7 @@
             android:layout_marginEnd="15dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/delete_direction"
-            app:srcCompat="@drawable/delete_button" />
+            app:srcCompat="@drawable/remove_filled" />
 
         <EditText
             android:id="@+id/DirectionName"
@@ -44,7 +44,7 @@
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/DirectionName"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="15dp"
             android:background="@android:drawable/editbox_background"
             android:hint="@string/direction_description"
             android:imeOptions="actionDone"
@@ -64,6 +64,43 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <ImageView
+            android:id="@+id/directionUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="14dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="moveUp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:srcCompat="@drawable/up_selector" />
+
+        <ImageView
+            android:id="@+id/directionDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/directionUp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="14dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="moveDown"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:srcCompat="@drawable/down_selector" />
+
+        <View
+            android:id="@+id/dividerDir"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="20dp"
+            android:background="#8035A696"
+            tools:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 

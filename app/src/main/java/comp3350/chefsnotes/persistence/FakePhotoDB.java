@@ -11,6 +11,11 @@ public class FakePhotoDB implements PhotoDBMSTools{
     private ArrayList<Integer> refs;
     private int length;
 
+    public FakePhotoDB(){
+        photos = new ArrayList<String>();
+        refs = new ArrayList<Integer>();
+    }
+
     @Override
     public Photo[] getAllPhotos() {
         Photo[] result = new Photo[length];

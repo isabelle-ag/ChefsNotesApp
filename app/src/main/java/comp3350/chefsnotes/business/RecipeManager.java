@@ -1,5 +1,7 @@
 package comp3350.chefsnotes.business;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import comp3350.chefsnotes.application.Services;
@@ -39,6 +41,7 @@ public class RecipeManager implements IRecipeManager {
         }
         else
         {
+            R.onDelete();
             db.deleteRecipe(name);
         }
     }
@@ -99,5 +102,21 @@ public class RecipeManager implements IRecipeManager {
     public String loadNotes(Recipe R)
     {
         return R.getNotes();
+    }
+
+    public void addPhoto(Recipe R, String pathname){
+        R.addPhoto(pathname);
+        db.commitChanges(R);}
+
+    public String[] getPhotos(Recipe R){
+        return R.getPhotos();
+    }
+
+    public void delPhoto(Recipe R, String pathname){
+        boolean result = R.removePhoto(pathname);
+        db.commitChanges(R);}
+
+    public boolean moveDirection(Recipe R, int oldIndex, int newIndex){
+        return(R.moveDirection(oldIndex, newIndex));
     }
 }

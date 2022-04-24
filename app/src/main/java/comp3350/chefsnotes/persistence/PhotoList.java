@@ -12,9 +12,9 @@ public class PhotoList {
     private ArrayList<Photo> photos;
     private PhotoDBMSTools photodb;
 
-    public PhotoList(){
+    public PhotoList(PhotoDBMSTools pdb){
         photos = new ArrayList<Photo>();
-        photodb = Services.getPhotoPersistence();
+        photodb = pdb;
     }
 
     // used to set up the PhotoList. Not for new photos from Recipe.
