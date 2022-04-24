@@ -192,9 +192,13 @@ public class MainActivity extends AppCompatActivity {
         PhotoList pl = Services.getPhotoList();
         Photo[] stored = photodb.getAllPhotos();
 
-        for(Photo i : stored){
-            assert pl.addPhoto(i); // should be no failures.
+        if(pl.isEmpty())
+        {
+            for(Photo i : stored){
+                assert pl.addPhoto(i); // should be no failures.
+            }
         }
+
     }
 
     private void getDefaultPhotos(){

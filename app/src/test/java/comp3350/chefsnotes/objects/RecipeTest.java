@@ -9,7 +9,7 @@ import comp3350.chefsnotes.business.Units;
 
 public class RecipeTest {
     private Recipe example;
-    private final String testName = "Chocolate Chip Cookies";
+    private final String testName = "#3350TEST";
 
     @Before
     public void initialize(){
