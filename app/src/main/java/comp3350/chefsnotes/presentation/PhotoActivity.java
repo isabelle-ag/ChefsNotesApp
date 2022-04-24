@@ -42,7 +42,6 @@ import comp3350.chefsnotes.objects.Recipe;
 public class PhotoActivity extends AppCompatActivity  {
     private ActivityResultLauncher<String> mGetContent;
     private Uri uri;
-   // private String path;
     private Recipe recipe;
     private final IRecipeManager recipeManager = new RecipeManager(Services.getRecipePersistence());
 
@@ -91,27 +90,20 @@ public class PhotoActivity extends AppCompatActivity  {
         }
     }
 
+    private String saveBMap(Bitmap bmap) {
+    String name = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg";
+    Log.e("TAG", "File name: " + name);
 
-//    private void setPath(String name) {
-//        String sPath = File.separatorChar + name;
-//        this.path = getFilesDir() + sPath;
-//    }
-
-        private String saveBMap(Bitmap bmap) {
-        String name = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg";
-        Log.e("TAG", "File name: " + name);
-
-        FileOutputStream fileOutputStream;
-        try {
-            fileOutputStream = this.openFileOutput(name, Context.MODE_PRIVATE);
-            bmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
-            fileOutputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return name;
-        //setPath(name);
+    FileOutputStream fileOutputStream;
+    try {
+        fileOutputStream = this.openFileOutput(name, Context.MODE_PRIVATE);
+        bmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
+        fileOutputStream.close();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return name;
+}
 
 
 
