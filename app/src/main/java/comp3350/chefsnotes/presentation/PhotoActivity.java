@@ -56,39 +56,44 @@ public class PhotoActivity extends AppCompatActivity  {
                         //String filename = saveImage(uri);
                         Bitmap bmap = null;
                         try {
-                            bmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
+                            if(uri != null) bmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
                             Log.e("BMAP", "Bitmap has been set");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        String name = saveBMap(bmap);
-                        String path = File.separatorChar+name;
-                        path = getFilesDir() + path;
-                        File imgFile = new  File(path);
-                        //Log.e("mGetContent", "Path name: "+path);
 
-                        if(imgFile.exists()){
-                            //Log.e("mGetContent", "ImgFile exists!! "+path);
-                            //Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                            Bitmap myBitmap= loadImageBitmap(name);
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            myBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        if(uri != null)
+                        {
+                            String name = saveBMap(bmap);
+                            String path = File.separatorChar+name;
+                            path = getFilesDir() + path;
+                            File imgFile = new  File(path);
+                            //Log.e("mGetContent", "Path name: "+path);
+
+                            if(imgFile.exists()){
+                                //Log.e("mGetContent", "ImgFile exists!! "+path);
+                                //Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                                Bitmap myBitmap= loadImageBitmap(name);
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                myBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 //                            Glide.with(recipeImg)
 //                                    .load(myBitmap)
 //                                    .dontTransform()
 //                                    .into(recipeImg);
-                            recipeImg.setImageURI(uri);
-                            ViewRecipe view = new ViewRecipe();
-                            //view.setUri(uri);
-                        }
-                        else{
-                            Log.e("Set View", "Trying to set recipeImg");
-                            recipeImg.setImageBitmap(bmap);
-                        }
+                                recipeImg.setImageURI(uri);
+                                ViewRecipe view = new ViewRecipe();
+                                //view.setUri(uri);
+                            }
+                            else{
+                                Log.e("Set View", "Trying to set recipeImg");
+                                recipeImg.setImageBitmap(bmap);
+                            }
 
 //                        MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
 //                       // Bitmap bitmap = getBitmap();
 //                        recipeImg.setImageResource();
+                        }
+
                     }
                 });
 
