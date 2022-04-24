@@ -25,7 +25,7 @@ In [this test](https://code.cs.umanitoba.ca/winter-2022-a02/group-9/chefsnotes/-
 Acceptance test, untestable
 ===============
 
-In order to format the recipe view in a pleasing way, the strings a user inputs are altered. This made testing what the user sees challenging, as it had to be tested against a reformatted version of the input. Additionally, many of the views were created programmatically, and as a result did not have unique ids. This meant having espresso find these views was challenging. Doing so involved describing the view using other views in its hierarchy, which is often somewhat abstracted in Android Studio.
+In order to format the recipe view in a pleasing way, the strings a user inputs are altered. This made testing what the user sees challenging, as it had to be tested against a reformatted version of the input. Additionally, many of the views were created programmatically, and as a result did not have unique ids. This meant having espresso find these views was challenging. Doing so involved describing the view using other views in its hierarchy, which is often somewhat abstracted in Android Studio. Finally, our "Photos" feature required using an API which takes the user outside of the app, to a file explorer. Unfortunately, Espresso can only issue commands while the app is open, and thus had no control when the file explorer opens. There is also no way to compare the photo that appears in the view to an expected photo, as the data type is not comparable. Thus no acceptance tests could be developed for the "Photos" feature.
 
 Velocity/teamwork
 =================
