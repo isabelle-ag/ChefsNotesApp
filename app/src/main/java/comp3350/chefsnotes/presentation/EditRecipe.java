@@ -405,7 +405,9 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
         contents = curDir.findViewById(R.id.textbox);
         dirContents = contents.getText().toString();
 
-        recipeManager.moveDirection(recipe, currI, newI);
+        if(recipe != null) {
+            recipeManager.moveDirection(recipe, currI, newI);
+        }
         instructionContainer.removeView((View) v.getParent().getParent());
         View child = getLayoutInflater().inflate(R.layout.instruction_field, null);
         instructionContainer.addView(child, newI);
@@ -428,8 +430,6 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
         int index = instructionContainer.indexOfChild((View)v.getParent().getParent());
         ViewGroup directions = (ViewGroup) instructionContainer;
         int total = directions.getChildCount();
-        Log.e("MOVE", "moveDown: total child views:"+total );
-        Log.e("MOVE", "moveDown: this index:"+index );
         if(index+1<total){
             populateIndex(index, index+1, v);
         }
@@ -670,9 +670,17 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                     addToFlow(b);
                 }
                 else{
+                    if(tagName.isEmpty()){
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Please submit a tag name",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    Log.e("Tags", "onClick: empty or existing tag");
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Tag "+tagName+" already exists.",
                             Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });
@@ -705,6 +713,10 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                 tagName = WordUtils.capitalizeFully(tagName);
                 Button bv = findViewById(delTagId);
                 if(tagName.isEmpty()){
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Please write the name of the tag to delete",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
                     return;
                 }
                 try {
@@ -712,7 +724,7 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                     if(success) {
                         delTagList(tagName);
                         Toast toast = Toast.makeText(getApplicationContext(),
-                                "Tag " + tagName + " deleted.",
+                                "Tag " + tagName + " deleted",
                                 Toast.LENGTH_SHORT);
                         toast.show();
                     }
@@ -723,15 +735,16 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                         toast.show();
                     }
                 } catch (TagExistenceException e) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "No tag with the name "+ tagName+" found",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
                 }
-               // bv.setChecked(false);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               // ToggleButton bv = findViewById(delTagId);
-              //  bv.setChecked(false);
                 dialog.dismiss();
             }
         });
