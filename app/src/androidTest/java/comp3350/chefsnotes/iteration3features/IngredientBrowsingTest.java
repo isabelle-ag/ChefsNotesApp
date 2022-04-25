@@ -82,6 +82,7 @@ public class IngredientBrowsingTest {
         }
     }
 
+//  User story met: As a user, I should be able to search recipes for an ingredient
     @Test
     public void testBrowseIngs()
     {

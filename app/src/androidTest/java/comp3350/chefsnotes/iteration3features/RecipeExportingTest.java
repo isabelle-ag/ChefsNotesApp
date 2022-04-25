@@ -86,6 +86,7 @@ public class RecipeExportingTest {
         }
     }
 
+//  User story met: As a user, I should be able to save my recipes outside of the app.
     @Test
     public void testExport()
     {
