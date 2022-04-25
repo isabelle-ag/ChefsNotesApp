@@ -82,7 +82,7 @@ public class RecipeTest {
 
     @Test
     public void testStringExport() {
-        assertEquals("Chocolate Chip Cookies\n" +
+        assertEquals("#3350TEST\n" +
                 "\n" +
                 "Ingredients:\n" +
                 "1 cup Butter\n" +
