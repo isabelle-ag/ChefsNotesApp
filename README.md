@@ -2,7 +2,7 @@
 
 ChefsNotes is a recipe management application, with support for tagging, ingredient search, and exporting to clipboard.
 
-Build in android studio, or install from [prebuilt apk](chefsnotes).apk). Run on an android device with at least API level 23.
+Build in android studio, or install from [prebuilt apk](chefsnotes.apk). Run on an android device with at least API level 23.
 ---
 
 ### Links:
