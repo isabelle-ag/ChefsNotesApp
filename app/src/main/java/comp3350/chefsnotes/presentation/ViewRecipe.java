@@ -37,6 +37,7 @@ import comp3350.chefsnotes.objects.Recipe;
 
 
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -103,8 +104,10 @@ public class ViewRecipe extends PhotoActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        TextView notes = findViewById(R.id.Notes);
-        recipeManager.updateNotes(recipe, notes.getText().toString());
+        if(this.recipe != null) {
+            TextView notes = findViewById(R.id.Notes);
+            recipeManager.updateNotes(recipe, notes.getText().toString());
+        }
     }
 
     @Override
@@ -149,6 +152,10 @@ public class ViewRecipe extends PhotoActivity {
     private void exportRecipe(View view) {
         ClipboardManager clipManager = (ClipboardManager)getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);;
         clipManager.setPrimaryClip(ClipData.newPlainText(null, recipe.stringExport()));
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Recipe saved to clipboard",
+                Toast.LENGTH_SHORT);
+        toast.show();
 
     }
 
