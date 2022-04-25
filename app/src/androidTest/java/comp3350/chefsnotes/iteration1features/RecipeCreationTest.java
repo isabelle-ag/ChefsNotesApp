@@ -2,6 +2,7 @@ package comp3350.chefsnotes.iteration1features;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
@@ -87,11 +88,11 @@ public class RecipeCreationTest {
     {
         onView(withId(R.id.new_recipe_button)).perform(click());
 
-        onView(withId(R.id.recipeTitle)).perform(replaceText("ඞඞඞඞ"));
+        onView(withId(R.id.recipeTitle)).perform(replaceText("ඞඞඞඞ"), closeSoftKeyboard());
 
-        onView(withId(R.id.IngredientName)).perform(typeText("Butter"));
+        onView(withId(R.id.IngredientName)).perform(typeText("Butter"), closeSoftKeyboard());
 
-        onView(withId(R.id.IngredientAmount)).perform(typeText("8"));
+        onView(withId(R.id.IngredientAmount)).perform(typeText("8"), closeSoftKeyboard());
 
         onView(withId(R.id.unitList)).perform(click());
 
@@ -117,7 +118,9 @@ public class RecipeCreationTest {
 
         onView(allOf(withId(R.id.save_button), withContentDescription("Save Recipe"), isDisplayed())).perform(click());
 
-        onView(allOf(withId(android.R.id.text1), withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes"),withParent(withId(R.id.directionListView)),isDisplayed())).check(matches(withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes")));
+        onView(allOf(withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes"), withParent(withId(R.id.directionListView)))).perform(closeSoftKeyboard());
+
+        onView(allOf(withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes"), withParent(withId(R.id.directionListView)),isDisplayed())).check(matches(withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes")));
 
         onView(allOf(withId(R.id.totalTimeView), withText("3 minutes"), isDisplayed())).check(matches(withText("3 minutes")));
 
