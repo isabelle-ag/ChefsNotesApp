@@ -98,6 +98,7 @@ public class RecipeViewerTest {
         onView(allOf(withId(R.id.totalTimeView), isDisplayed())).check(matches(withText(totTime + " minutes")));
     }
 
+//  User story met: As a user, I should be able to view an existing recipe
     @Test
     public void testRecipeMatch() {
         onView(withId(R.id.browse_recipe_button)).perform(click());
@@ -114,5 +115,26 @@ public class RecipeViewerTest {
             onData(anything()).inAdapterView(withId(R.id.directionListView)).atPosition(i - 1).check(matches(withText(example.getDirectionStrings()[i])));
         }
 
+    }
+
+//  User story met: As a user, I should be able to make a copy of one of my previous recipes
+    public void testCopy()
+    {
+        onView(withId(R.id.browse_recipe_button)).perform(click());
+        onView(withId(R.id.searchRecipeName)).perform(typeText("#3350TEST"));
+        onData(anything()).atPosition(0).perform(click());
+        onView(withId(R.id.copy_button)).perform(click());
+        onView(withId(R.id.save_button)).perform(click());
+
+        //check against original recipe's contents
+        for(int i = 0; i < example.ingredientCount(); i++)
+        {
+            onData(anything()).inAdapterView(withId(R.id.ingredientListView)).atPosition(i).check(matches(withText(example.getIngredientStrings()[i])));
+        }
+
+        for(int i = 1; i < example.directionCount() + 1; i++)
+        {
+            onData(anything()).inAdapterView(withId(R.id.directionListView)).atPosition(i - 1).check(matches(withText(example.getDirectionStrings()[i])));
+        }
     }
 }

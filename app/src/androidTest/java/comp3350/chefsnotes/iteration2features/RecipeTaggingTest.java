@@ -92,6 +92,7 @@ public class RecipeTaggingTest {
         }
     }
 
+//  User story met: As a user, I should be able to select from previous tags I have used
     @Test
     public void testBuiltInTags()
     {
@@ -103,6 +104,7 @@ public class RecipeTaggingTest {
         onView(withText("ඞඞඞඞ")).check(matches(isDisplayed()));
     }
 
+//  User story met: As a user, I should be able to add category tags to my Recipes
     @Test
     public void testCustomTags()
     {
@@ -127,7 +129,7 @@ public class RecipeTaggingTest {
 
     }
 
-    //provided by android studio to use more descriptive references to views
+    //provided by android studio to use more descriptive references to views, necessary for refering to popup boxes
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 

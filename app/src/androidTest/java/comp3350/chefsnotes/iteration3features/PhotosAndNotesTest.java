@@ -80,6 +80,7 @@ public class PhotosAndNotesTest {
         }
     }
 
+//  User story met: As a user, I should be able to add (/edit/delete/etc) notes to a recipe
     @Test
     public void testAddNotes()
     {
@@ -94,5 +95,5 @@ public class PhotosAndNotesTest {
 
     }
 
-    //Add photo feature cannot be tested
+    //Add photo feature cannot be tested due to limitations with espresso
 }

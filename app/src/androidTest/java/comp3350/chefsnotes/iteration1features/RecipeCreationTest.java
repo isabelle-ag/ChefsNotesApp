@@ -83,6 +83,7 @@ public class RecipeCreationTest {
         }
     }
 
+//  User story met: As a user, I should be able to add ingredients as a list, with quantities
     @Test
     public void testMakeRecWIng()
     {
@@ -105,6 +106,7 @@ public class RecipeCreationTest {
         onView(allOf(withText("8 Ls Butter"), withParent(withId(R.id.ingredientListView)), isDisplayed())).check(matches(withText("8 Ls Butter")));
     }
 
+//  User story met: As a user, I should be able to create a new recipe, with directions
     @Test
     public void testMakeRecWDir() {
         onView(allOf(withId(R.id.CreateRecipeButton), withText("Create Recipe"), isDisplayed())).perform(click());
