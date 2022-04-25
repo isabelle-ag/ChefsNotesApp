@@ -654,6 +654,17 @@ public class EditRecipe extends PhotoActivity implements NoticeDialogFragment.No
                             Toast.LENGTH_SHORT);
                     toast.show();
                     ToggleButton b = addTagView(tagName);
+                    b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton bv, boolean isChecked) {
+                            String tagName = bv.getText().toString();
+                            if (isChecked) {
+                                addTag(tagName);
+                            } else {
+                                removeTag(tagName);
+                            }
+                        }
+                    });
                     Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.togglebutton_selector, null);
                     ViewCompat.setBackground(b, drawable);
                     addToFlow(b);
