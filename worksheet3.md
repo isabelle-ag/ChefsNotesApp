@@ -30,8 +30,8 @@ In order to format the recipe view in a pleasing way, the strings a user inputs 
 Velocity/teamwork
 =================
 Project Velocity
-Our estimates definitely got better through the course. Initially we had no idea and very little experience with many of the tools we were expected to use. This made us greatly underestimate the time required for various steps, especially for the first iteration.
+Our estimates definitely got better through the course. Initially we had no idea and very little experience with many of the tools we were expected to use. This made us greatly underestimate the time required for various steps, especially for the first iteration. 
 
-Iteration 1: Est 30hrs, Spent: 100hrs40m
-Iteration 2: Est 48hrs, Spent: 56hrs
-Iteration 3: Est ??hrs, Spent: ???hrs
+Iteration 1: Est 30hrs, Spent: 100hrs40m - overshot by 70h40m
+Iteration 2: Est 48hrs, Spent 56hrs - overshot by 8h
+Iteration 3: Est 30h30m, Spent 36h50m - overshot by 6h20m
