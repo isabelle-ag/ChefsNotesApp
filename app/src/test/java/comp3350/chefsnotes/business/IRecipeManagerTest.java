@@ -159,4 +159,28 @@ public class IRecipeManagerTest {
 
         assertThrows(RecipeExistenceException.class, () -> manager.renameRecipe(new Recipe("ERROR"), "WILLERROR"));
     }
+
+    @Test
+    public void testMoveDirection(){
+        db = Mockito.mock(DBMSTools.class);
+        manager = new RecipeManager(db);
+        Recipe R = new Recipe("foo");
+
+        R.addDirection(new Direction("Direction 1"));
+        R.addDirection(new Direction("Direction 2"));
+        manager.moveDirection(R, 1, 0);
+        assertEquals(R.getDirections()[0].toString(), "Direction 2");
+    }
+
+    @Test
+    public void testPhotos(){
+        db = Mockito.mock(DBMSTools.class);
+        manager = new RecipeManager(db);
+        Recipe R = new Recipe("foo");
+        manager.addPhoto(R, "fakepath.jpg");
+        assertEquals(manager.getPhotos(R).length, 1);
+        manager.delPhoto(R, "fakepath.jpg");
+        assertEquals(manager.getPhotos(R).length, 0);
+    }
+
 }
