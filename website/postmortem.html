@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChefsNotes - Postmortem</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link id="stylesheet" rel="stylesheet" href="app.css">
+    <link id="stylesheet" rel="stylesheet" href="foundation-light.css">
+</head>
+<body>
+    <div class="chef-primary extend-right">
+    <div class="grid-container chef-primary">
+    <div class="grid-x grid-padding-x">
+        <div class="small-2 medium-2 cell">
+            <a href="../index.html"><img src="images/ChefsNotes_Logo_Outlined.png" alt="ChefsNotes" width="75" height="75"></a>
+        </div>
+
+        <div class="small-10 medium-8 cell parent">
+        <div class="grid-container">
+        <div class="grid-x grid-padding-x chef-primary">
+            <div class="small-4 large-3 cell">
+                <a href="../index.html">
+                    <p class="navbar-button">About</p>
+                </a>
+            </div>
+            <div class="small-4  large-3 cell">
+                <a href="contributors.html">
+                    <p class="navbar-button">Contributors</p>
+                </a>
+            </div>
+            <div class="small-4 medium-4 large-3 cell">
+                <a href="postmortem.html">
+                    <p class="navbar-button">Analysis</p>
+                </a>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="grid-container fade-in">
+    <div class="grid-x grid-padding-x">
+
+        <div class="bio small-12">
+            <h2 class="h-1">Postmortem</h2>
+            <div class="h-1 v-1">
+                <p>
+                    1. What was the overall architecture of your system (particularly if it is different from the demo system)?
+                    <p class="tab">
+                        Our architecture essentially matched the demo system. This included business, presentation, and persistence layers. Along with extra packages for objects and application services.
+                    </p>
+                </p>
+
+                <p>
+                    2. What went right in the development process? 
+                    <p class="tab">
+                        Group cooperation and conflict presentation were of utmost importance. Any differences were settled immediately, and work was accomplished in a coordinated and communicative manner.
+                    </p>
+                </p>
+
+                <p>
+                    3. What went wrong in the development process?
+                    <p class="tab">
+                        Repeated procrastination, we had a tendency to push back the start of the current workload which resulted in periods of rushing near the end of the iteration.
+                    </p>
+                </p>
+
+                <p>
+                    4. What would you do differently, if you had the chance to start over?
+                    <p class="tab">
+                        We would begin building the core of the project, UI components, and dynamic shared objects during iteration 0. The course is quite short, and iteration 1 gave us little time to begin creating the project core in addition to the first set of features.
+                    </p>
+                </p>
+
+                <p>
+                    5. How large is the project (number of methods, classes, etc)? How much of this is devoted to each major system component? And any other quantifiables (e.g. recorded hours on tasks)?
+                    <p class="tab">
+                        ??? 
+                    </p>
+                </p>
+
+                <p>
+                    6. What took the most time? The least? Any surprises?
+                    <p class="tab">
+                        The most time was spent on developing UI components. This was not overly surprising, we had expected to encounter this as none of us had experience working in Android Studio before beginning this project. UI components are also hefty and require constant tweaking to ensure perfect alignment and spacing.
+                    </p>
+                </p>
+
+                <p>
+                    7. Are there any particular design smells, or brilliant design decisions?
+                    <p class="tab">
+                        A design smell that we would've liked to fix but ended up taking lower priority to new features is the size of the EditRecipe class. It has become quite monolithic in size and we believe it could be refactored into a few smaller classes for readability and maintainability. This is scheduled for a future change.
+                    </p>
+                </p>
+
+                <p>
+                    8. Are there any outstanding bugs?
+                    <p class="tab">
+                        ??? Who knows :)
+                    </p>
+                </p>
+
+                <p>
+                    9. Did any features work better than expected?
+                    <p class="tab">
+                        The recipe browser turned out better than we had initally hoped for, it looks and feels very clean and easy to use.
+                    </p>
+                </p>
+
+                <p>
+                    10. Are you using any technologies other than what was required (e.g. JMock, GUI builders, etc.)?
+                    <p class="tab">
+                        Not for actual development, but we did use a Miro board for brainstorming and planning which turned out very well.
+                        <br>
+                        <a href="https://miro.com/app/board/uXjVOQdtcP4=/?share_link_id=758065342472">Link to the Miro</a>
+                    </p>
+                </p>
+
+                <p>
+                    11. Are you using any specific techniques covered in the course (TDD, pair programming, scrums, etc)?
+                    <p class="tab">
+                        Other than the iteration based 'agile' method, not not really.
+                    </p>
+                </p>
+
+                <p>
+                    12. How did the project change from your inital (iteration 0) vision or stories, or did it work out as predicted?
+                    <p class="tab">
+                        We ended up having to drop some features, most notably the meals/meal planning stuff, which we're kinda bummed about.
+                    </p>
+                </p>
+
+                <p>
+                    13. What did you learn about team or large project development? What will you start doing, keep doing, or stop doing next time?
+                    <p class="tab">
+                        Procrastination leads to more issues than it's worth. We'd love to say that we'll get started on things earlier in the future but honestly, who knows.
+                    </p>
+                </p>
+
+                <p>
+                    14. Can you draw any conclusions from what you've done?
+                    <p class="tab">
+                        There is a lot more work to building a working project than we had initally expected.
+                    </p>
+                </p>
+            </div>
+
+
+        </div>
+
+    </div>
+    </div> 
+</body>
+</html>
