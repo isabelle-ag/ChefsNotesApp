@@ -6,10 +6,13 @@ Build in android studio, or install from [prebuilt apk](app-debug.apk). Run on a
 ---
 
 ### Links:
-[Iteration 1 Worksheet](worksheet1.md)
-[Iteration 2 Worksheet](worksheet2.md)
-[Iteration 3 Worksheet](worksheet3.md)
+[Vision statement](VISION.md)
 
 [Architecture diagram](ARCHITECTURE.md)
 
-[Vision statement](VISION.md)
+
+
+[Iteration 1 Worksheet](worksheet1.md)
+[Iteration 2 Worksheet](worksheet2.md)
+[Iteration 3 Worksheet](worksheet3.md)
+[retropective stuff](retrospective.md)
