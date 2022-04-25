@@ -95,15 +95,15 @@ public class PhotoActivity extends AppCompatActivity  {
         currImg = 0;
     }
 
-    public void choosePic(View v){
-        String[] photos = recipeManager.getPhotos(recipe);
-        if(photos.length != 0){
-            return;
-        }
-        else {
-            mGetContent.launch("image/*");
+    public void choosePic(View v) {
+        if (recipe != null) {
+            String[] photos = recipeManager.getPhotos(recipe);
+            if (photos.length != 0) {
+                return;
+            } else mGetContent.launch("image/*");
         }
     }
+
 
     public void addPic(View v){
         mGetContent.launch("image/*");
@@ -138,29 +138,32 @@ public class PhotoActivity extends AppCompatActivity  {
 }
 
     protected void lastImg(View v){
-        String[] photos = recipeManager.getPhotos(recipe);
-        if(photos.length < 2){
-            return;
+        if(recipe != null) {
+            String[] photos = recipeManager.getPhotos(recipe);
+            if (photos.length < 2) {
+                return;
+            }
+            if (currImg == 0) {
+                currImg = photos.length;
+            }
+            currImg--;
+            setImg();
         }
-        if (currImg == 0){
-            currImg = photos.length;
-        }
-        currImg--;
-        setImg();
     }
 
     protected void nextImg(View v){
-        String[] photos = recipeManager.getPhotos(recipe);
-        if(photos.length < 2){
-            return;
+        if(recipe != null) {
+            String[] photos = recipeManager.getPhotos(recipe);
+            if (photos.length < 2) {
+                return;
+            }
+            if (currImg == photos.length - 1) {
+                currImg = 0;
+            } else {
+                currImg++;
+            }
+            setImg();
         }
-        if (currImg == photos.length-1){
-            currImg = 0;
-        }
-        else {
-            currImg++;
-        }
-        setImg();
     }
 
     public void setImg(){
@@ -185,15 +188,16 @@ public class PhotoActivity extends AppCompatActivity  {
     public void setRecipe(Recipe r){ this.recipe = r;}
 
     public void delPhoto(View v){
-        String[] photos = recipeManager.getPhotos(recipe);
-        if(photos.length <=0){
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "No photos found",
-                    Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        else{
-            confirmDel();
+        if(recipe != null) {
+            String[] photos = recipeManager.getPhotos(recipe);
+            if (photos.length <= 0) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "No photos found",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                confirmDel();
+            }
         }
     }
 
@@ -219,23 +223,25 @@ public class PhotoActivity extends AppCompatActivity  {
     }
 
     private void delete(){
-        String[] photos = recipeManager.getPhotos(recipe);
-        if(photos.length >0) {
-            String path = photos[currImg];
-            recipeManager.delPhoto(recipe, path);
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "Photo deleted.",
-                    Toast.LENGTH_SHORT);
-            toast.show();
-            photos = recipeManager.getPhotos(recipe);
-            if (photos.length == 0) {
+        if(recipe != null) {
+            String[] photos = recipeManager.getPhotos(recipe);
+            if (photos.length > 0) {
+                String path = photos[currImg];
+                recipeManager.delPhoto(recipe, path);
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Photo deleted.",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                photos = recipeManager.getPhotos(recipe);
+                if (photos.length == 0) {
+                    setImg();
+                } else if (currImg == 0) {
+                    currImg = photos.length - 1;
+                } else {
+                    currImg--;
+                }
                 setImg();
-            } else if (currImg == 0) {
-                currImg = photos.length - 1;
-            } else {
-                currImg--;
             }
-            setImg();
         }
     }
 
