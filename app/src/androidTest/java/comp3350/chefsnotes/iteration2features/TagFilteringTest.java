@@ -86,6 +86,7 @@ public class TagFilteringTest {
         }
     }
 
+//  User story met: As a user, I should be able to browse the list of recipes that match a tag of my choice
     @Test
     public void testTagFilterAppear()
     {
@@ -93,6 +94,7 @@ public class TagFilteringTest {
         onData(anything()).inAdapterView(withId(R.id.results)).check(matches(withText("ඞඞඞඞ")));
     }
 
+//  User story met: As a user, I should be able to browse the list of recipes that match a tag of my choice
     @Test
     public void testTagFilterHide()
     {

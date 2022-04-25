@@ -81,6 +81,7 @@ public class RecipeBrowserTest {
         }
     }
 
+//  User story met: As a user, I should be able to look through a list of all my recipes
     @Test
     public void testBrowserList()
     {
@@ -93,6 +94,7 @@ public class RecipeBrowserTest {
         }
     }
 
+//  User story met: As a user, I should be able to find a recipe I have, by name
     @Test
     public void testSearch()
     {

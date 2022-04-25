@@ -1,12 +1,22 @@
 package comp3350.chefsnotes.iteration3features;
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static org.hamcrest.Matchers.anything;
+
+import android.view.KeyEvent;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.uiautomator.UiDevice;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,6 +29,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import comp3350.chefsnotes.R;
 import comp3350.chefsnotes.application.Services;
 import comp3350.chefsnotes.business.IRecipeFetcher;
 import comp3350.chefsnotes.business.IRecipeManager;
@@ -73,5 +84,20 @@ public class RecipeExportingTest {
                 recipes.deleteRecipe(r);
             }
         }
+    }
+
+//  User story met: As a user, I should be able to save my recipes outside of the app.
+    @Test
+    public void testExport()
+    {
+        onView(withId(R.id.browse_recipe_button)).perform(click());
+        onView(withId(R.id.searchRecipeName)).perform(typeText("#3350TEST"));
+        onData(anything()).atPosition(0).perform(click());
+        onView(withId(R.id.share_button)).perform(click());
+        onView(withId(R.id.Notes)).perform(click(), replaceText(""));//ensure notes are selected and empty
+        //to get copy/paste functionality,
+        // adapted from https://stackoverflow.com/questions/62083318/how-to-paste-with-keyboard-in-test-android-studio
+        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).pressKeyCode(KeyEvent.KEYCODE_V, KeyEvent.META_CTRL_MASK);
+        onView(withId(R.id.Notes)).check(matches(withText(example.stringExport())));
     }
 }

@@ -57,7 +57,6 @@ import comp3350.chefsnotes.persistence.RecipePersistence;
 import comp3350.chefsnotes.presentation.MainActivity;
 import comp3350.chefsnotes.presentation.RecipeBrowser;
 import comp3350.chefsnotes.presentation.ViewRecipe;
-import comp3350.chefsnotes.utils.TestUtils;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -105,6 +104,7 @@ public class EditRecipeTest {
         }
     }
 
+//  User story met: As a user, I should be able to edit a recipe I am viewing
     @Test
     public void testAlterIngs()
     {
@@ -121,6 +121,7 @@ public class EditRecipeTest {
         onView(withText(example.getIngredientStrings()[0])).check(doesNotExist());
     }
 
+//  User story met: As a user, I should be able to edit a recipe I am viewing
     @Test
     public void testAlterTitle()
     {
@@ -137,6 +138,7 @@ public class EditRecipeTest {
         onView(withText("ඞඞඞඞ")).check(matches(isDisplayed()));
     }
 
+//  User story met: As a user, I should be able to delete a recipe
     @Test
     public void testDelete()
     {
@@ -152,6 +154,4 @@ public class EditRecipeTest {
         onView(withId(R.id.searchRecipeName)).perform(typeText("#3350TEST"));
         onView(allOf(withText("#3350TEST"), withParent(withId(R.id.results)))).check(doesNotExist());
     }
-
-
 }

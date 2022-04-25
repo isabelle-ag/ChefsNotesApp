@@ -2,6 +2,7 @@ package comp3350.chefsnotes.iteration1features;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
@@ -82,16 +83,17 @@ public class RecipeCreationTest {
         }
     }
 
+//  User story met: As a user, I should be able to add ingredients as a list, with quantities
     @Test
     public void testMakeRecWIng()
     {
         onView(withId(R.id.new_recipe_button)).perform(click());
 
-        onView(withId(R.id.recipeTitle)).perform(replaceText("ඞඞඞඞ"));
+        onView(withId(R.id.recipeTitle)).perform(replaceText("ඞඞඞඞ"), closeSoftKeyboard());
 
-        onView(withId(R.id.IngredientName)).perform(typeText("Butter"));
+        onView(withId(R.id.IngredientName)).perform(typeText("Butter"), closeSoftKeyboard());
 
-        onView(withId(R.id.IngredientAmount)).perform(typeText("8"));
+        onView(withId(R.id.IngredientAmount)).perform(typeText("8"), closeSoftKeyboard());
 
         onView(withId(R.id.unitList)).perform(click());
 
@@ -104,6 +106,7 @@ public class RecipeCreationTest {
         onView(allOf(withText("8 Ls Butter"), withParent(withId(R.id.ingredientListView)), isDisplayed())).check(matches(withText("8 Ls Butter")));
     }
 
+//  User story met: As a user, I should be able to create a new recipe, with directions
     @Test
     public void testMakeRecWDir() {
         onView(allOf(withId(R.id.CreateRecipeButton), withText("Create Recipe"), isDisplayed())).perform(click());
@@ -117,7 +120,9 @@ public class RecipeCreationTest {
 
         onView(allOf(withId(R.id.save_button), withContentDescription("Save Recipe"), isDisplayed())).perform(click());
 
-        onView(allOf(withId(android.R.id.text1), withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes"),withParent(withId(R.id.directionListView)),isDisplayed())).check(matches(withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes")));
+        onView(allOf(withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes"), withParent(withId(R.id.directionListView)))).perform(closeSoftKeyboard());
+
+        onView(allOf(withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes"), withParent(withId(R.id.directionListView)),isDisplayed())).check(matches(withText("Step 1\t\t\t\tWhistle\n3 Whistle\nTime: 3 minutes")));
 
         onView(allOf(withId(R.id.totalTimeView), withText("3 minutes"), isDisplayed())).check(matches(withText("3 minutes")));
 
