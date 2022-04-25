@@ -40,4 +40,8 @@
     <string name="edit">Edit</string>
     <string name="delete_photo">Delete Photo</string>
     <string name="home_page">Home</string>
+    <string name="units">Units</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="search">Search By...</string>
 </resources>
